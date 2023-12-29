@@ -1,0 +1,44 @@
+Host smlt-dts
+  HostName sd-dts01.sd.local
+  User l.grishenkov
+  PasswordAuthentication yes
+  PubKeyAuthentication no
+
+Host smlt-dev
+  HostName sd-dev01.sd.local
+  User l.grishenkov
+  PasswordAuthentication yes
+  PubKeyAuthentication no
+
+Host smlt-tech
+  HostName sd-bdd-tech01.sd.local
+  User l.grishenkov
+  PasswordAuthentication yes
+  PubKeyAuthentication no
+
+Host de-debian-light
+HostName 158.160.7.142
+  User leonide
+  PubKeyAuthentication yes
+  PasswordAuthentication no
+  IdentityFile /Users/leonidgrisenkov/.ssh/keys/id_ed25519
+
+Host de-debian-23
+HostName 158.160.29.53
+  User leonide
+  PubKeyAuthentication yes
+  PasswordAuthentication no
+  IdentityFile /Users/leonidgrisenkov/.ssh/id_rsa
+
+Host de-deb-25
+HostName 158.160.17.21
+  User de-user
+  PubKeyAuthentication yes
+  PasswordAuthentication no
+  IdentityFile /Users/leonidgrisenkov/.ssh/id_rsa
+  
+Host de-yp
+  HostName 158.160.58.52
+  IdentityFile /Users/leonidgrisenkov/Downloads/ssh_private_key.file
+  User yc-user
+  PasswordAuthentication no

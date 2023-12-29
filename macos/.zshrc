@@ -127,3 +127,6 @@ export KUBECONFIG=$HOME/.kube/smlt-bdd-config
 
 # Yandex cloud CLI
 export PATH=$HOME/.yandex-cloud/bin:$PATH
+
+# Aliases
+alias cat="bat --theme=Nord --style=numbers,header"
