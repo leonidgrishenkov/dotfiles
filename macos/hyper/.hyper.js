@@ -24,9 +24,9 @@ module.exports = {
         // terminal text color under BLOCK cursor
         cursorAccentColor: '#000',
         // `'BEAM'` for |, `'UNDERLINE'` for _, `'BLOCK'` for █
-        cursorShape: 'BLOCK',
+        // cursorShape: 'BEAM',
         // set to `true` (without backticks and without quotes) for blinking cursor
-        cursorBlink: false,
+        // cursorBlink: 'true',
         // color of the text
         foregroundColor: '#fff',
         // terminal background color
@@ -41,7 +41,7 @@ module.exports = {
         // custom CSS to embed in the terminal window
         termCSS: '',
         // set custom startup directory (must be an absolute path)
-        workingDirectory: '',
+        workingDirectory: '/Users/leonidgrisenkov',
         // if you're using a Linux setup which show native menus, set to false
         // default: `true` on Linux, `true` on Windows, ignored on macOS
         showHamburgerMenu: '',
@@ -120,7 +120,7 @@ module.exports = {
         webGLRenderer: true,
         // keypress required for weblink activation: [ctrl|alt|meta|shift]
         // todo: does not pick up config changes automatically, need to restart terminal :/
-        webLinksActivationKey: '',
+        webLinksActivationKey: 'ctrl',
         // if `false` (without backticks and without quotes), Hyper will use ligatures provided by some fonts
         disableLigatures: true,
         // set to true to disable auto updates
@@ -139,12 +139,15 @@ module.exports = {
     //   `project#1.0.1`
     plugins: [
         "hyper-hide-title",
-        "hyperborder",
-		// "hyper-dracula",
+
+		// The orange border around hyper app
+        // "hyperborder",
+			
+		// Themes
+		// "nord-hyper",
 		"hyper-ayu-mirage",
 		// "hyper-ayu",
 		// "hyper-subliminal-theme",
-        // "hyper-oceanic-next",
         // "hyper-rose-pine",
         // "hyper-snazzy",
     ],

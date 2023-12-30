@@ -10,7 +10,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Use case-sensitive autocompletion
-CASE_SENSITIVE="true"
+CASE_SENSITIVE="false"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -71,6 +71,8 @@ export PATH=$HOME/.local/bin:$PATH
 # Homebrew
 export PATH=/opt/homebrew/opt:$PATH
 export PATH=/opt/homebrew/bin:$PATH
+export HOMEBREW_NO_ENV_HINTS=1
+export HOMEBREW_NO_EMOJI=1
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -82,8 +84,10 @@ export KUBECONFIG=$HOME/.kube/smlt-bdd-config.yaml
 export PATH=$HOME/.yandex-cloud/bin:$PATH
 
 # Aliases
-alias cat="bat --theme=Nord --style=numbers,header"
+alias cat="bat --theme=Nord --style=numbers"
 alias vim="nvim"
+alias ls="exa"
+
 alias k="kubectl"
 
 # Autocompletion settings
@@ -99,4 +103,12 @@ compinit -i
 export COMPDIR=$HOME/.completions/zsh
 
 # Bindkeys
+# Bindkey for zsh-autosuggestions plugin
 bindkey '^k' autosuggest-accept
+
+
+# Default apps
+export EDITOR="nvim"
+export TERMINAL="hyper"
+export BROWSER="safari"
+
