@@ -84,7 +84,7 @@ export KUBECONFIG=$HOME/.kube/smlt-bdd-config.yaml
 export PATH=$HOME/.yandex-cloud/bin:$PATH
 
 # Aliases
-alias cat="bat --theme=Nord --style=numbers"
+alias cat="batcat --theme=Nord --style=numbers"
 alias vim="nvim"
 alias ls="exa"
 alias grep="rg"
@@ -110,6 +110,4 @@ bindkey '^k' autosuggest-accept
 
 # Default apps
 export EDITOR="nvim"
-export TERMINAL="hyper"
-export BROWSER="safari"
 
