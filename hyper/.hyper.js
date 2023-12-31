@@ -10,7 +10,7 @@ module.exports = {
         // default font size in pixels for all tabs
         fontSize: 15,
         // font family with optional fallbacks
-        fontFamily: 'JetBrainsMono-ExtraLight', // 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+        fontFamily: 'MesloLGMDZ Nerd Font Mono',
         // default font weight: 'normal' or 'bold'
         fontWeight: 'normal',
         // font weight for bold characters: 'normal' or 'bold'
@@ -30,12 +30,16 @@ module.exports = {
         // color of the text
         foregroundColor: '#fff',
         // terminal background color
-        // opacity is only supported on macOS
         backgroundColor: '#000',
         // terminal selection color
         selectionColor: 'rgba(248,28,229,0.3)',
         // border color (window, tabs)
         borderColor: '#333',
+		// Opacity of the app window. Plugin: hyper-opacity
+		opacity: {
+				focus: 0.95, // When app is active
+				blur: 0.95 // When app is inactive
+		},
         // custom CSS to embed in the main window
         css: '',
         // custom CSS to embed in the terminal window
@@ -76,23 +80,7 @@ module.exports = {
         },
         // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
         // if left empty, your system's login shell will be used by default
-        //
-        // Windows
-        // - Make sure to use a full path if the binary name doesn't work
-        // - Remove `--login` in shellArgs
-        //
-        // Windows Subsystem for Linux (WSL) - previously Bash on Windows
-        // - Example: `C:\\Windows\\System32\\wsl.exe`
-        //
-        // Git-bash on Windows
-        // - Example: `C:\\Program Files\\Git\\bin\\bash.exe`
-        //
-        // PowerShell on Windows
-        // - Example: `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
-        //
-        // Cygwin
-        // - Example: `C:\\cygwin64\\bin\\bash.exe`
-        shell: '',
+        shell: '/bin/zsh',
         // for setting shell arguments (i.e. for using interactive shellArgs: `['-i']`)
         // by default `['--login']` will be used
         shellArgs: ['--login'],
@@ -142,6 +130,9 @@ module.exports = {
 
 		// The orange border around hyper app
         // "hyperborder",
+
+		// Opacity of the app window
+		"hyper-opacity",
 			
 		// Themes
 		// "nord-hyper",

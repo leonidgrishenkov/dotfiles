@@ -9,6 +9,7 @@ set softtabstop=4
 set hlsearch
 set noshowmode
 set clipboard=unnamedplus
+set termguicolors
 
 set ruler
 
