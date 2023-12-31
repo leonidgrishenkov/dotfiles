@@ -109,10 +109,12 @@ cmd zip ${{
 
 
 # My settigs
-# Movement
+# Movements
 map k up
 map l down
 map j updir
 map ; open
 
-set hidden true # show hidden files
+set hidden true # show dotfiles
+set ignorecase true
+set icons true # show file and folders icons

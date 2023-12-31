@@ -4,6 +4,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 
+# Default apps
+export EDITOR="nvim"
+export TERMINAL="hyper"
+export BROWSER="safari"
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -83,11 +88,23 @@ export KUBECONFIG=$HOME/.kube/smlt-bdd-config.yaml
 # Yandex cloud CLI
 export PATH=$HOME/.yandex-cloud/bin:$PATH
 
+# -------
 # Aliases
+# -------
 alias cat="bat --theme=Nord --style=numbers"
-alias vim="nvim"
-alias ls="exa"
-alias grep="rg"
+alias ls="exa --icons --group-directories-first"
+alias grep="rg --color=always"
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -Iv"
+alias vim="$EDITOR"
+
+# git aliases
+alias g="git"
+alias gs="git status"
+alias gc="git commit"
+alias ga="git add"
+alias gp="git pull"
 
 alias k="kubectl"
 
@@ -103,13 +120,13 @@ compinit -i
 # Set env
 export COMPDIR=$HOME/.completions/zsh
 
-# Bindkeys
-# Bindkey for zsh-autosuggestions plugin
+# -----------------
+# oh-my-zsh plugins
+# -----------------
+#
+# zsh-autosuggestions 
+# Bindkey
 bindkey '^k' autosuggest-accept
 
 
-# Default apps
-export EDITOR="nvim"
-export TERMINAL="hyper"
-export BROWSER="safari"
 
