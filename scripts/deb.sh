@@ -1,14 +1,17 @@
-#!/usr/bin/zsh
-
 export CONFIGS_PATH=$HOME/code/configs
 
+# Upgrade apt and install main utilities
 sudo apt update \
-		&& sudo apt install -y zsh lf ripgrep wget bat exa neovim \
-		&& chsh -s zsh
+    && sudo apt upgrade -y \
+    && sudo apt install -y zsh lf git ripgrep wget curl bat exa stow
 
+# Change default shell for $USER
+chsh -s $(which zsh)
 
+# Install oh-my-zsh
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# Install oh-my-zsh plugins
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k \
 		&& git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting \
 		&& git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
