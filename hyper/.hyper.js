@@ -37,8 +37,8 @@ module.exports = {
         // borderColor: '#333',
 		// Opacity of the app window. Plugin: hyper-opacity
 		opacity: {
-				focus: 0.90, // When app is active
-				blur: 0.90 // When app is inactive
+				focus: 0.95, // When app is active
+				blur: 0.95 // When app is inactive
 		},
         // custom CSS to embed in the main window
         css: '',
@@ -142,7 +142,7 @@ module.exports = {
         // "hyperborder",
 
 		// Opacity of the app window
-		"hyper-opacity",
+		// "hyper-opacity",
 
         // Move tabs with drag and drop
         // https://www.npmjs.com/package/hyperterm-tabs
