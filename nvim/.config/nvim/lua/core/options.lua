@@ -27,6 +27,8 @@ opt.fileencoding = "utf-8" -- The encoding written to a file
 
 -- UI
 opt.termguicolors = true -- Enable 24-bit RGB colors
+g.termguicolors = true
+opt.background = "dark"
 opt.showmode = false -- Don't show modes, e.g. -- INSERT --
 opt.pumheight = 10 -- Pop up menu height
 opt.laststatus = 3 -- Set global statusline

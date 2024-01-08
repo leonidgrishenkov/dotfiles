@@ -117,7 +117,7 @@ return {
             --         path = "[Path]",
             --         },
             -- }),
-        },
+            },
         -- Doc: `:h cmp-contig.window`
         window = {
             documentation = {
