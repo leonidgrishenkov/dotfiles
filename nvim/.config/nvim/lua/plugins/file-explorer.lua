@@ -219,7 +219,7 @@ return {
             no_buffer = false,
             no_bookmark = false,
             custom = {},
-            exclude = {},
+            exclude = { ".DS_Store" },
           },
           live_filter = {
             prefix = "[FILTER]: ",
