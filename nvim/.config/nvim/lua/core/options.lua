@@ -11,13 +11,13 @@ local g = vim.g
 local opt = vim.opt
 
 -- General
-opt.mouse = 'a' -- Enable mouse support
+opt.mouse = "a" -- Enable mouse support
 opt.mousemoveevent = true -- ?
 
 -- https://neovim.io/doc/user/provider.html#provider-clipboard
-opt.clipboard = 'unnamed' -- Copy/paste to system clipboard
+opt.clipboard = "unnamed" -- Copy/paste to system clipboard
 
-opt.completeopt = 'menuone,noinsert,noselect' -- Autocomplete options
+opt.completeopt = "menuone,noinsert,noselect" -- Autocomplete options
 
 opt.swapfile = false -- Don't use swapfile
 opt.backup = false -- Creates a backup file
@@ -32,13 +32,13 @@ opt.background = "dark"
 opt.showmode = false -- Don't show modes, e.g. -- INSERT --
 opt.pumheight = 10 -- Pop up menu height
 opt.laststatus = 3 -- Set global statusline
-opt.showmatch = true-- Highlight matching parenthesis
-opt.foldmethod = 'marker' -- Enable folding (default 'foldmarker')
+opt.showmatch = true -- Highlight matching parenthesis
+opt.foldmethod = "marker" -- Enable folding (default 'foldmarker')
 -- opt.colorcolumn = '80' -- Line lenght marker at 80 columns
 opt.splitright = true -- Vertical split to the right
 opt.splitbelow = true -- Horizontal split to the bottom
-opt.guifont = 'MesloLGM Nerd Font:h15'
-g.guifont = 'MesloLGM Nerd Font:h15'
+opt.guifont = "MesloLGM Nerd Font:h15"
+g.guifont = "MesloLGM Nerd Font:h15"
 
 -- Line numbers
 opt.relativenumber = true -- Show relative line numbers
