@@ -30,7 +30,6 @@ end
 -- Each plugin configured in it's own file
 -- in `lua/plugins` or `lua/themes` directories
 lazy.setup({
-    {import = "themes"},
     {import = "plugins"}
 })
 

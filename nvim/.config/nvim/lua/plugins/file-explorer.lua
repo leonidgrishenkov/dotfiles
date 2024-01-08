@@ -1,65 +1,101 @@
 --[[
-Plugin: `nvim-tree`
 Neovim file explorer.
 
-Repo: https://github.com/nvim-tree/nvim-tree.lua
+Plugin:
+    `nvim-tree`
 
-Each of `.setup({})` options documented in `:help nvim-tree.OPTION_NAME`
-To see all available commands `:NvimTree` + <tab>
+Repo:
+    https://github.com/nvim-tree/nvim-tree.lua
+
+Docs:
+    Seacrh: `:h nvim-tree.OPTION_NAME`
+    All commands: `:h nvim-tree-commands`
+    Keymapping: `h nvim-tree-mappings`. To see default section `:h nvim-tree-mappings-default`
 --]]
 
 return {
-  "nvim-tree/nvim-tree.lua",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  config = function()
-    local tree = require("nvim-tree")
+    "nvim-tree/nvim-tree.lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+        local tree = require("nvim-tree")
 
-    -- configure nvim-tree
-    tree.setup({
-        on_attach = "default",
-          hijack_cursor = true,
-          auto_reload_on_write = true,
-          disable_netrw = false,
-          hijack_netrw = true,
-          hijack_unnamed_buffer_when_opening = false,
-          root_dirs = {},
-          prefer_startup_root = false,
-          sync_root_with_cwd = false,
-          reload_on_bufenter = false,
-          respect_buf_cwd = false,
-          select_prompts = false,
-          sort = {
-            sorter = "name",
-            folders_first = true,
-            files_first = false,
-          },
-          view = {
-            centralize_selection = true,
-            cursorline = true,
-            debounce_delay = 10,
-            side = "left",
-            preserve_window_proportions = false,
-            number = false,
-            relativenumber = false,
-            signcolumn = "no",
-            width = 30,
-            float = {
-              enable = false,
-              quit_on_focus_loss = false,
-              open_win_config = {
-                relative = "editor",
-                border = "rounded",
-                width = 30,
-                height = 30,
-                row = 1,
-                col = 1,
+        -- recommended settings from nvim-tree documentation
+        vim.g.loaded_netrw = 1
+        vim.g.loaded_netrwPlugin = 1
+
+        --[[
+        Keymappings from editor
+        --]]
+        local function opts(desc)
+            return { desc = 'nvim-tree: ' .. desc, noremap = true, silent = true, nowait = true }
+        end
+        local api = require('nvim-tree.api')
+        
+        -- Toggle window
+        vim.keymap.set("n", "<leader>e", api.tree.toggle, opts('Toggle window'))
+        
+        --[[
+        Keymappings on attached to window
+        --]]
+        local function on_attach_keymap(bufnr)
+            -- Here define another one to add buffer
+            local function opts(desc)
+                return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+            end
+            -- Use defaults as base
+            api.config.mappings.default_on_attach(bufnr)
+
+            -- My remappings
+            -- Show all keymaps
+            vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+        end
+
+        -- Configure plugin
+        tree.setup({
+          on_attach = on_attach_keymap,
+            hijack_cursor = true,
+            auto_reload_on_write = true,
+            disable_netrw = false,
+            hijack_netrw = true,
+            hijack_unnamed_buffer_when_opening = false,
+            root_dirs = {},
+            prefer_startup_root = false,
+            sync_root_with_cwd = false,
+            reload_on_bufenter = false,
+            respect_buf_cwd = false,
+            select_prompts = false,
+            sort = {
+              sorter = "name",
+              folders_first = true,
+              files_first = false,
+            },
+            view = {
+              centralize_selection = true,
+              cursorline = true,
+              debounce_delay = 10,
+              side = "left",
+              preserve_window_proportions = false,
+              number = false,
+              relativenumber = false,
+              signcolumn = "no",
+              width = 30,
+              float = {
+                enable = false,
+                quit_on_focus_loss = false,
+                open_win_config = {
+                  relative = "editor",
+                  border = "rounded",
+                  width = 30,
+                  height = 30,
+                  row = 1,
+                  col = 1,
+                },
               },
             },
-          },
-          renderer = {
-            add_trailing = false,
-            group_empty = false,
-            full_name = false,
+            renderer = {
+              add_trailing = false,
+              group_empty = false,
+              full_name = false,
             root_folder_label = false,
             indent_width = 2,
             special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
@@ -271,6 +307,8 @@ return {
               watcher = false,
             },
           },
-    })
-  end,
+        })
+        
+
+    end,
 }

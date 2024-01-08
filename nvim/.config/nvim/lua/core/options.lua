@@ -1,19 +1,14 @@
 --[[
-General settings and configurations
+General configurations.
 
-All set options with description:
-https://neovim.io/doc/user/options.html#set-option
+All options:
+    `:h options`
 --]]
 
 -- Global variables
 local g = vim.g
 -- Set options (global/buffer/windows-scoped)
 local opt = vim.opt
-
--- Required for `nvim-tree` plugin to avoid bugs.
--- Should be at the start of the file like now.
-g.loaded_netrw = 1
-g.loaded_netrwPlugin = 1
 
 -- General
 opt.mouse = 'a' -- Enable mouse support
