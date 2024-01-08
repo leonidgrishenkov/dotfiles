@@ -73,7 +73,6 @@ HIST_STAMPS="yyyy-mm-dd"
 # Which plugins is currently used
 plugins=(
 	vi-mode
-	zsh-syntax-highlighting
 	zsh-autosuggestions
     zsh-completions
     # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
@@ -86,6 +85,8 @@ plugins=(
     zsh-help
     # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/poetry
     poetry
+    # https://github.com/zdharma-continuum/fast-syntax-highlighting
+    fast-syntax-highlighting
 )
 
 # Completions 
@@ -141,8 +142,7 @@ bindkey -M vicmd \; vi-forward-char
 # POETRY
 # ------
 # If `poetry` installed
-if command -v /opt/poetry/bin/poetry &> /dev/null; then
-    export PATH="/opt/poetry/bin:$PATH"
+if command -v poetry &> /dev/null; then
     # Create virtual envs in project
     export POETRY_VIRTUALENVS_IN_PROJECT=true
 fi
@@ -177,8 +177,8 @@ alias ls="exa --all --oneline --icons --group-directories-first"
 alias ll="exa --all --long --icons --group-directories-first --created --modified --header --binary --time-style long-iso"
 alias tree="exa --tree --all --icons --group-directories-first --ignore-glob='.git*|.venv*|__pycache__*'"
 
-alias vim="$EDITOR"
-alias v="$EDITOR"
+alias vim=$EDITOR
+alias v=$EDITOR
 
 # git aliases
 alias g="git"

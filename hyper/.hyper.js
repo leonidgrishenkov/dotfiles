@@ -37,8 +37,8 @@ module.exports = {
         borderColor: '#333',
 		// Opacity of the app window. Plugin: hyper-opacity
 		opacity: {
-				focus: 0.95, // When app is active
-				blur: 0.95 // When app is inactive
+				focus: 0.92, // When app is active
+				blur: 0.92 // When app is inactive
 		},
         // custom CSS to embed in the main window
         css: '',
@@ -108,7 +108,7 @@ module.exports = {
         webGLRenderer: true,
         // keypress required for weblink activation: [ctrl|alt|meta|shift]
         // todo: does not pick up config changes automatically, need to restart terminal :/
-        webLinksActivationKey: 'ctrl',
+        webLinksActivationKey: 'meta',
         // if `false` (without backticks and without quotes), Hyper will use ligatures provided by some fonts
         disableLigatures: true,
         // set to true to disable auto updates
