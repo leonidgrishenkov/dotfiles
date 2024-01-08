@@ -1,14 +1,16 @@
 --[[
-Plugin: `nvim-cmp`
 Autocompletion plugin.
+Plugin:
+    `nvim-cmp`
 
-Repo: https://github.com/hrsh7th/nvim-cmp
-Wiki: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
+Repo:
+    https://github.com/hrsh7th/nvim-cmp
+Wiki:
+    https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
 
 Doc:
     - All docs: `:h nvim-cmp`
     - About configuration (in cmp.setup({})): `:h cmp-config`
-
 
 To see all commands: `Cmp` + <tab>
 --]]
@@ -53,7 +55,7 @@ return {
         -- Configure how nvim-cmp interacts with snippet engine
         snippet = { 
             expand = function(args)
-            luasnip.lsp_expand(args.body)
+                luasnip.lsp_expand(args.body)
             end,
         },
         -- Keymapping
@@ -100,27 +102,30 @@ return {
             { name = "path" }, -- file system paths
             { name = "luasnip" }, -- snippets
         }),
-        -- configure lspkind for vs-code like pictograms in completion menu
         formatting = {
             fields = { "kind", "abbr", "menu" },
-            format = lspkind.cmp_format({
-                -- mode = "symbol_text",
-                maxwidth = 50,
-                ellipsis_char = "...",
-                menu = {
-                    buffer = "[Buffer]",
-                    nvim_lsp = "[LSP]",
-                    -- nvim_lua = "[Lua]",
-                    luasnip = "[LuaSnip]",
-                    path = "[Path]",
-                    },
-            }),
+            -- configure lspkind for vs-code like pictograms in completion menu
+            -- format = lspkind.cmp_format({
+            --     -- mode = "symbol_text",
+            --     maxwidth = 50,
+            --     ellipsis_char = "...",
+            --     menu = {
+            --         buffer = "[Buffer]",
+            --         nvim_lsp = "[LSP]",
+            --         -- nvim_lua = "[Lua]",
+            --         luasnip = "[LuaSnip]",
+            --         path = "[Path]",
+            --         },
+            -- }),
         },
         -- Doc: `:h cmp-contig.window`
         window = {
-            -- documentation = {
-            --     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-            -- },
+            documentation = {
+                border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+            },
+            completion = {
+                border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+            },
             -- completion = cmp.config.window.bordered(),
             -- documentation = cmp.config.window.bordered(),
         },

@@ -24,24 +24,26 @@ return {
         vim.g.loaded_netrwPlugin = 1
 
         --[[
-        Keymappings from editor
+        Global keymappings
         --]]
         local function opts(desc)
             return { desc = 'nvim-tree: ' .. desc, noremap = true, silent = true, nowait = true }
         end
-        local api = require('nvim-tree.api')
         
         -- Toggle window
-        vim.keymap.set("n", "<leader>e", api.tree.toggle, opts('Toggle window'))
+        vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<cr>", opts('Toggle window'))
+        vim.keymap.set("n", "<leader>ef", ":NvimTreeFindFileToggle<cr>", opts('Toggle window on current file'))
         
         --[[
-        Keymappings on attached to window
+        On attached keymappings
         --]]
         local function on_attach_keymap(bufnr)
             -- Here define another one to add buffer
             local function opts(desc)
                 return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
             end
+            local api = require('nvim-tree.api')
+
             -- Use defaults as base
             api.config.mappings.default_on_attach(bufnr)
 
@@ -218,8 +220,8 @@ return {
             git_clean = false,
             no_buffer = false,
             no_bookmark = false,
-            custom = {},
-            exclude = { ".DS_Store" },
+            custom = { ".DS_Store" },
+            exclude = { },
           },
           live_filter = {
             prefix = "[FILTER]: ",
