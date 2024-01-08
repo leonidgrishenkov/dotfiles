@@ -1,6 +1,6 @@
 [user]
 	name = "Grishenkov Leonid"
 	email = grishenkovleonid@gmail.com
-[credential]
-	helper = "cache --timeout=3600"
-	helper = osxkeychain
+; [credential]
+; 	helper = "cache --timeout=3600"
+; 	helper = osxkeychain
