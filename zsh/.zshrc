@@ -53,8 +53,8 @@ COMPLETION_WAITING_DOTS="%F{grey}waiting...%f"
 # COMPLETION_WAITING_DOTS="true"
 # Use case-sensitive autocompletion
 CASE_SENSITIVE=true
-# Uncomment the following line to disable auto-setting terminal title.
-DISABLE_AUTO_TITLE=true
+# Auto-setting terminal tab/window title
+DISABLE_AUTO_TITLE=false
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE=false
@@ -73,20 +73,44 @@ HIST_STAMPS="yyyy-mm-dd"
 # Which plugins is currently used
 plugins=(
 	vi-mode
+    # Repo: https://github.com/zsh-users/zsh-autosuggestions
 	zsh-autosuggestions
+    # Docs: https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
+    # Repo: https://github.com/zsh-users/zsh-completions
     zsh-completions
-    # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
+
+    # CLI commands syntax highlighting.
+    # Repo: https://github.com/zsh-users/zsh-syntax-highlighting
+    zsh-syntax-highlighting
+
+    # Add colors for man pages
+    # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
     colored-man-pages
+
     # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/command-not-found
     command-not-found
-    # https://github.com/laggardkernel/git-ignore
+
+    # Generate `.gitignore` files.
+    # Usage: `git-ignore` --help
+    # Repo: https://github.com/laggardkernel/git-ignore
     git-ignore
-    # https://github.com/Freed-Wu/zsh-help
+
+    # Add colors for help pages. Default only for `--help`.
+    # Repo: https://github.com/Freed-Wu/zsh-help
     zsh-help
-    # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/poetry
+    
+    # Autocompletions for `poetry`.
+    # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/poetry
     poetry
-    # https://github.com/zdharma-continuum/fast-syntax-highlighting
-    fast-syntax-highlighting
+    
+    # CLI commands syntax highlight with themes.
+    # Repo: https://github.com/zdharma-continuum/fast-syntax-highlighting
+    # Usage: `fast-theme --help`
+    # fast-syntax-highlighting
+    
+    # Change behevior of terminal titles generation
+    # Repo: https://github.com/trystan2k/zsh-tab-title
+    zsh-tab-title
 )
 
 # Completions 
@@ -112,6 +136,7 @@ zstyle ':omz:update' verbose minimal # Output mode
 
 # --- zsh-autosuggestions ---
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=249"
 # Set bindkey to accept currently shown autosuggestion
 bindkey '^k' autosuggest-accept
 
@@ -137,6 +162,19 @@ bindkey -M visual j vi-backward-char
 bindkey -M vicmd l vi-down-line-or-history
 bindkey -M vicmd k vi-up-line-or-history
 bindkey -M vicmd \; vi-forward-char
+
+# --- `zsh-tab-title` ---
+ZSH_TAB_TITLE_DISABLE_AUTO_TITLE=false
+# Prefix for title. Doesn't work for some reason.
+ZSH_TAB_TITLE_PREFIX="$USER@$HOST: "
+# Enable to show the full command being run without 
+# it's arguments in the tab title.
+# For example, `nano .zshrc` will show 'nano .zshrc'
+# instead of just 'nano'. Default is to display only 
+# the command without it's arguments
+ZSH_TAB_TITLE_ENABLE_FULL_COMMAND=true
+# Show only folder name insted of full path to pwd
+ZSH_TAB_TITLE_ONLY_FOLDER=true
 
 # ------
 # POETRY

@@ -20,9 +20,9 @@ module.exports = {
         // letter spacing as a relative unit
         letterSpacing: 0,
         // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-        cursorColor: 'rgba(248,28,229,0.8)',
+        // cursorColor: 'rgba(248,28,229,0.8)',
         // terminal text color under BLOCK cursor
-        cursorAccentColor: '#000',
+        // cursorAccentColor: '#000',
         // `'BEAM'` for |, `'UNDERLINE'` for _, `'BLOCK'` for █
         // cursorShape: 'BEAM',
         // set to `true` (without backticks and without quotes) for blinking cursor
@@ -34,18 +34,18 @@ module.exports = {
         // terminal selection color
         selectionColor: 'rgba(248,28,229,0.3)',
         // border color (window, tabs)
-        borderColor: '#333',
+        // borderColor: '#333',
 		// Opacity of the app window. Plugin: hyper-opacity
 		opacity: {
-				focus: 0.92, // When app is active
-				blur: 0.92 // When app is inactive
+				focus: 0.90, // When app is active
+				blur: 0.90 // When app is inactive
 		},
         // custom CSS to embed in the main window
         css: '',
         // custom CSS to embed in the terminal window
         termCSS: '',
         // set custom startup directory (must be an absolute path)
-        workingDirectory: '/Users/leonidgrisenkov',
+        // workingDirectory: '/Users/leonidgrisenkov',
         // if you're using a Linux setup which show native menus, set to false
         // default: `true` on Linux, `true` on Windows, ignored on macOS
         showHamburgerMenu: '',
@@ -80,7 +80,7 @@ module.exports = {
         },
         // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
         // if left empty, your system's login shell will be used by default
-        shell: '/bin/zsh',
+        shell: '',
         // for setting shell arguments (i.e. for using interactive shellArgs: `['-i']`)
         // by default `['--login']` will be used
         shellArgs: ['--login'],
@@ -118,6 +118,15 @@ module.exports = {
         // set to true to preserve working directory when creating splits or tabs
         preserveCWD: true,
         // for advanced config flags please refer to https://hyper.is/#cfg
+        // Plugin: `hyper-tabs-enhanced`
+        hyperTabs: {
+            trafficButtons: true,
+            tabIcons: true, // Show icons
+            tabIconsColored: false,
+            activityColor: '', // Active tab color
+            closeAlign: 'right', // Place for X button
+            activityPulse: true,
+        }
     },
     // a list of plugins to fetch and install from npm
     // format: [@org/]project[#version]
@@ -126,29 +135,35 @@ module.exports = {
     //   `@company/project`
     //   `project#1.0.1`
     plugins: [
-        "hyper-hide-title",
-
-		// The orange border around hyper app
+        // Hide the window title when there is only one tab
+        // "hyper-hide-title",
+		// The border around app window
+        // https://www.npmjs.com/package/hyperborder
         // "hyperborder",
 
 		// Opacity of the app window
 		"hyper-opacity",
+
+        // Move tabs with drag and drop
+        // https://www.npmjs.com/package/hyperterm-tabs
+        // "hyperterm-tabs",
+
+        // Enhanced tabs
+        // https://github.com/henrikruscon/hyper-tabs-enhanced
+        "hyper-tabs-enhanced",
+
+        // Saves and restores window position/size after restart
+        "hyper-save-windowstate",
 			
-		// Themes
+		// Dark themes
 		// "nord-hyper",
-		"hyper-ayu-mirage",
+		"hyper-ayu-mirage", // https://github.com/weirdpattern/hyper-ayu-mirage
+        // "hyper-clean",
 		// "hyper-ayu",
-		// "hyper-subliminal-theme",
-        // "hyper-rose-pine",
         // "hyper-snazzy",
+
+        // Light themes
+        // "hyper-teatime",
     ],
-    // in development, you can create a directory under
-    // `~/.hyper_plugins/local/` and include it here
-    // to load it and avoid it being `npm install`ed
-    localPlugins: [],
-    keymaps: {
-        // Example
-        // 'window:devtools': 'cmd+alt+o',
-    },
 };
 //# sourceMappingURL=config-default.js.map
