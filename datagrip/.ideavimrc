@@ -1,0 +1,27 @@
+" This is a config for JetBrains DataGrip plugin
+" that supports vim-like keymappings.
+"
+" This plugins doesn't support `lua` config.
+"
+" Not all vim options are working in DataGrip. 
+"
+" Repo: https://github.com/JetBrains/ideavim
+"
+" Supported set commands: https://github.com/JetBrains/ideavim/blob/master/doc/set-commands.md
+
+" Line numbers
+set number
+set relativenumber
+set numberwidth=2 " set number column width
+
+" Keymappings
+inoremap jf <Esc>
+vnoremap jf <Esc>
+
+noremap j h
+noremap l j
+noremap ; l
+
+set clipboard=unnamedplus
+set matchpairs
+
