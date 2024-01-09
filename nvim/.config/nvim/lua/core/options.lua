@@ -17,7 +17,8 @@ opt.mousemoveevent = true -- ?
 -- https://neovim.io/doc/user/provider.html#provider-clipboard
 opt.clipboard = "unnamed" -- Copy/paste to system clipboard
 
-opt.completeopt = "menuone,noinsert,noselect" -- Autocomplete options
+-- Is that specified in plugin setup?
+-- opt.completeopt = "menuone,noinsert,noselect" -- Autocomplete options
 
 opt.swapfile = false -- Don't use swapfile
 opt.backup = false -- Creates a backup file
@@ -50,7 +51,7 @@ opt.cursorline = true -- highlight the current line
 opt.cursorlineopt = "number" -- What to highlight
 opt.cursorcolumn = false -- highlight current cursor column
 
--- line wrapping
+-- Line wrapping
 opt.wrap = false -- display lines as one long line
 opt.linebreak = true -- companion to wrap, don't split words
 

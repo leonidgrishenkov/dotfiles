@@ -33,29 +33,24 @@ vim.g.mapleader = " " -- <space>
 local keymap = vim.keymap
 
 local function opts(desc)
-    return { desc = desc, noremap = true, silent = true, }
+	return { desc = desc, noremap = true, silent = true }
 end
 
 -- Disable arrow keys
-keymap.set('', '<up>', '<nop>')
-keymap.set('', '<down>', '<nop>')
-keymap.set('', '<left>', '<nop>')
-keymap.set('', '<right>', '<nop>')
+keymap.set("", "<up>", "<nop>")
+keymap.set("", "<down>", "<nop>")
+keymap.set("", "<left>", "<nop>")
+keymap.set("", "<right>", "<nop>")
 
--- Exit insert mode to normal
-keymap.set("i", "jf", "<ESC>", opts("Exit i mode"))
-keymap.set("v", "jf", "<ESC>", opts("Exit v mode"))
+-- Exit modes to normal
+keymap.set("i", "jf", "<ESC>", opts("Exit insert mode to normal"))
+keymap.set("v", "jf", "<ESC>", opts("Exit visual/select mode to normal"))
 
--- Movements
-keymap.set("n", "l", "<Down>", opts("Move down"))
-keymap.set("v", "l", "<Down>", opts("Move down"))
-
-keymap.set("n", "j", "<Left>", opts("Move left"))
-keymap.set("v", "j", "<Left>", opts("Move left"))
-
-keymap.set("n", ";", "<Right>", opts("Move right"))
-keymap.set("v", ";", "<Right>", opts("Move right"))
+-- Movements for all modes
+keymap.set("", "l", "<Down>", opts("Move down"))
+keymap.set("", "k", "<Up>", opts("Move up"))
+keymap.set("", "j", "<Left>", opts("Move left"))
+keymap.set("", ";", "<Right>", opts("Move right"))
 
 -- Close all windows and exit
-keymap.set('n', '<leader>q', ':q!<CR>', opts("Close all and exit as `:q!`")) -- <leader-key> + <q>
-
+keymap.set("n", "<leader>q", ":q!<CR>", opts("Close all and exit as `:q!`")) -- <leader-key> + <q>

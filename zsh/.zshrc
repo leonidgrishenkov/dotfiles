@@ -2,7 +2,7 @@
 
 # Specify default apps
 export EDITOR="nvim"
-export TERMINAL="hyper"
+export TERMINAL="iterm"
 export BROWSER="safari"
 
 # XDG Paths
@@ -211,9 +211,9 @@ fi
 alias cat="bat --style=plain --theme=Nord --color=always --decorations=always"
 alias grep="rg --color=always"
 
-alias ls="exa --all --oneline --icons --group-directories-first"
+alias ls="exa --all --oneline --icons --group-directories-first --ignore-glob='.DS_store'"
 alias ll="exa --all --long --icons --group-directories-first --created --modified --header --binary --time-style long-iso"
-alias tree="exa --tree --all --icons --group-directories-first --ignore-glob='.git*|.venv*|__pycache__*'"
+alias tree="exa --tree --all --icons --group-directories-first --ignore-glob='.git*|.venv*|__pycache__*|.DS_store'"
 
 alias vim=$EDITOR
 alias v=$EDITOR
