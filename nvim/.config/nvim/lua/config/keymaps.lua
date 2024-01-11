@@ -29,11 +29,12 @@ Where:
 
 -- Define the leader key for vim commands
 vim.g.mapleader = " " -- <space>
+vim.g.maplocalleader = " "
 
 local keymap = vim.keymap
 
 local function opts(desc)
-	return { desc = desc, noremap = true, silent = true }
+    return { desc = desc, noremap = true, silent = true }
 end
 
 -- Disable arrow keys
@@ -43,8 +44,9 @@ keymap.set("", "<left>", "<nop>")
 keymap.set("", "<right>", "<nop>")
 
 -- Exit modes to normal
-keymap.set("i", "jf", "<ESC>", opts("Exit insert mode to normal"))
-keymap.set("v", "jf", "<ESC>", opts("Exit visual/select mode to normal"))
+-- keymap.set("i", "jf", "<ESC>", opts("Exit insert mode to normal"))
+-- keymap.set("v", "jf", "<ESC>", opts("Exit visual/select mode to normal"))
+keymap.set({ "v", "i" }, "jf", "<ESC>", opts("Exit v|i to n mode"))
 
 -- Movements
 keymap.set("n", "l", "<Down>", opts("Move down"))
@@ -60,10 +62,26 @@ keymap.set("n", ";", "<Right>", opts("Move right"))
 keymap.set("v", ";", "<Right>", opts("Move right"))
 
 -- Close all windows and exit
-keymap.set("n", "<leader>q", ":q<CR>", opts("Close all and exit as `:q`")) -- <leader-key> + <q>
+-- keymap.set("n", "<leader>q", ":q<CR>", opts("Close all and exit as `:q`")) -- <leader-key> + <q>
 
 -- Switch between opened splitted windows
 keymap.set("n", "<leader>j", "<C-w>h", opts("Switch to right window")) -- Right
 keymap.set("n", "<leader>;", "<C-w>l", opts("Switch to left window")) -- Left
 keymap.set("n", "<leader>l", "<C-w>j", opts("Switch to down window")) -- Down
 keymap.set("n", "<leader>k", "<C-w>k", opts("Switch to up window")) -- Up
+
+-- Manipulate tabs
+keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", opts("Open new tab")) -- open new tab
+keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", opts("Close current tab")) -- close current tab
+keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", opts("Go to next tab")) --  go to next tab
+keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", opts("Go to previous tab")) --  go to previous tab
+keymap.set("n", "<leader>tm", "<cmd>tabnew %<CR>", opts("Open current buffer in new tab")) --  move current buffer to new tab
+
+-- Windows split
+keymap.set("n", "<leader>sv", "<-w>v", opts("Split window vertically")) -- split window vertically NOT WORKS
+keymap.set("n", "<leader>sh", "<C-w>s", opts("Split window horizontally")) -- split window horizontally
+keymap.set("n", "<leader>se", "<C-w>=", opts("Make splits equal size")) -- make split windows equal width & height
+keymap.set("n", "<leader>sx", "<cmd>close<CR>", opts("Close current split")) -- close current split window
+
+-- Clear search highlights
+keymap.set("n", "<leader>ch", ":nohl<CR>", opts("Clear search highlights"))

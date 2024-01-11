@@ -47,7 +47,7 @@ export BROWSER="safari"
 export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
 # export OPENER= ?
-export PAGER="bat" # less
+# export PAGER="bat" # less
 
 # -------------------------
 # `oh-my-zsh` configuration
@@ -114,7 +114,7 @@ plugins=(
     command-not-found
 
     # Generate `.gitignore` files.
-    # Usage: `git-ignore` --help
+    # Usage: `git-ignore` + <Enter>
     # Repo: https://github.com/laggardkernel/git-ignore
     git-ignore
 
@@ -160,11 +160,13 @@ zstyle ':omz:update' verbose minimal # Output mode
 # ---------------------------------
 # `p10k`
 # Wiki: https://github.com/Powerlevel9k/powerlevel9k/wiki/Stylizing-Your-Prompt
-# `$ POWERLEVEL9K_CONFIG_FILE=/path/to/file p10k configure`
 
 # All settings should be after source config file
 POWERLEVEL9K_CONFIG_FILE="$XDG_CONFIG_HOME/p10k/.p10k.zsh"
 [[ ! -f $POWERLEVEL9K_CONFIG_FILE ]] || source $POWERLEVEL9K_CONFIG_FILE
+
+# Remove os icon from left side of prompt
+unset 'POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[1]'
 
 # Disable configuration wizard auto prompt
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
@@ -176,10 +178,11 @@ POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
 # Hide python version if it doesn't come from one of these sources.
 POWERLEVEL9K_PYENV_SOURCES=(shell local global)
 
-# Git default icon
+# Define/remap icons
 POWERLEVEL9K_VCS_GIT_ICON="󰊢"
-# Gitlab icon
 POWERLEVEL9K_VCS_GIT_GITLAB_ICON="󰮠"
+POWERLEVEL9K_PROMPT_CHAR_ERROR_VIVIS_CONTENT_EXPANSION=""
+POWERLEVEL9K_PROMPT_CHAR_OK_VIVIS_CONTENT_EXPANSION=""
 
 # Display path behaviour
 # https://stackoverflow.com/questions/61176257/customizing-powerleve10k-prompt
@@ -190,7 +193,7 @@ POWERLEVEL9K_VCS_GIT_GITLAB_ICON="󰮠"
 # tab-completed to the original.
 #   - `truncate_to_unique` - Default value
 #   - `truncate_to_last` - Show only the last directory segment.
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_last"
+# POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_last"
 
 # `zsh-autosuggestions`
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
@@ -229,6 +232,15 @@ ZSH_TAB_TITLE_PREFIX="$USER@$HOST: "
 ZSH_TAB_TITLE_ENABLE_FULL_COMMAND=true
 # Show only folder name insted of full path to pwd
 ZSH_TAB_TITLE_ONLY_FOLDER=true
+
+# --------------------
+# `fzf` configuration
+# --------------------
+# 
+# Repo: https://github.com/junegunn/fzf#layout
+# Docs: `man fzf`
+#  
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=sharp --margin=0,1,0,1%"
 
 # ----------------------
 # `poetry` configuration

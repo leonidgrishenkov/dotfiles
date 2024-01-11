@@ -53,7 +53,7 @@ return {
 		local HEIGHT_RATIO = 0.8
 		local WIDTH_RATIO = 0.5
 
-		-- Configure plugin
+		-- Configure and enable plugin
 		tree.setup({
 			on_attach = on_attach_keymap,
 			hijack_cursor = true,
