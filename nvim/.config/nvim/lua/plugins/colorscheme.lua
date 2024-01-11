@@ -33,9 +33,11 @@ return {
 					types = {},
 					operators = {},
 				},
+				-- About integrations: https://github.com/catppuccin/nvim#integrations
 				integrations = {
 					nvimtree = true,
 					cmp = true,
+					treesitter = true,
 				},
 			})
 		end,
