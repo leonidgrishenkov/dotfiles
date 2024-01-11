@@ -20,7 +20,7 @@ return {
 				term_colors = true,
 				show_end_of_buffer = false,
 				styles = {
-					comments = {}, -- Change the style of comments
+					comments = {},
 					conditionals = { "italic" },
 					loops = {},
 					functions = {},

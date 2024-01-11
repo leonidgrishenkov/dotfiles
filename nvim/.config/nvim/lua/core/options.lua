@@ -13,6 +13,8 @@ local opt = vim.opt
 -- General
 opt.mouse = "a" -- Enable mouse support
 opt.mousemoveevent = true -- ?
+-- Learn about `modeline`
+-- opt.modeline = true
 
 -- https://neovim.io/doc/user/provider.html#provider-clipboard
 opt.clipboard = "unnamed" -- Copy/paste to system clipboard
