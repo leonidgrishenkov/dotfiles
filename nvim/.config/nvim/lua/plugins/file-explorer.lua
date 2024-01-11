@@ -1,16 +1,16 @@
 --[[
 Neovim file explorer.
 
-Plugin:
-    `nvim-tree`
+Plugin:`nvim-tree`
 
-Repo:
-    https://github.com/nvim-tree/nvim-tree.lua
+Repo: https://github.com/nvim-tree/nvim-tree.lua
 
 Docs:
     Seacrh: `:h nvim-tree.OPTION_NAME`
     All commands: `:h nvim-tree-commands`
     Keymapping: `h nvim-tree-mappings`. To see default section `:h nvim-tree-mappings-default`
+
+https://www.youtube.com/watch?v=SpexCBrZ1pQ
 --]]
 
 return {
@@ -18,10 +18,6 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
 		local tree = require("nvim-tree")
-
-		-- recommended settings from nvim-tree documentation
-		vim.g.loaded_netrw = 1
-		vim.g.loaded_netrwPlugin = 1
 
 		--[[
         Global keymappings
@@ -32,6 +28,7 @@ return {
 
 		-- Toggle window
 		vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<cr>", opts("Toggle window"))
+		-- Toggle window on current file
 		vim.keymap.set("n", "<leader>ef", ":NvimTreeFindFileToggle<cr>", opts("Toggle window on current file"))
 
 		--[[
@@ -44,13 +41,17 @@ return {
 			end
 			local api = require("nvim-tree.api")
 
-			-- Use defaults as base
+			-- Load defaults as base
 			api.config.mappings.default_on_attach(bufnr)
 
 			-- My remappings
 			-- Show all keymaps
 			vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
 		end
+
+		-- For center floating window configuration
+		local HEIGHT_RATIO = 0.8
+		local WIDTH_RATIO = 0.5
 
 		-- Configure plugin
 		tree.setup({
@@ -75,30 +76,47 @@ return {
 				centralize_selection = true,
 				cursorline = true,
 				debounce_delay = 10,
-				side = "left",
+				-- side = "left",
 				preserve_window_proportions = false,
 				number = false,
 				relativenumber = false,
 				signcolumn = "no",
-				width = 30,
+				-- Enable and configure center floating widnow.
+				-- https://github.com/nvim-tree/nvim-tree.lua/wiki/Recipes#center-a-floating-nvim-tree-window
+				-- Also you can configure auto-resize, see above link.
 				float = {
-					enable = false,
-					quit_on_focus_loss = false,
-					open_win_config = {
-						relative = "editor",
-						border = "rounded",
-						width = 30,
-						height = 30,
-						row = 1,
-						col = 1,
-					},
+					enable = true,
+					quit_on_focus_loss = true,
+					open_win_config = function()
+						local screen_w = vim.opt.columns:get()
+						local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+						local window_w = screen_w * WIDTH_RATIO
+						local window_h = screen_h * HEIGHT_RATIO
+						local window_w_int = math.floor(window_w)
+						local window_h_int = math.floor(window_h)
+						local center_x = (screen_w - window_w) / 2
+						local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
+
+						return {
+							border = "rounded",
+							relative = "editor",
+							row = center_y,
+							col = center_x,
+							width = window_w_int,
+							height = window_h_int,
+						}
+					end,
 				},
+				width = function()
+					return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
+				end,
 			},
 			renderer = {
 				add_trailing = false,
 				group_empty = false,
 				full_name = false,
-				root_folder_label = false,
+				-- Path at the top of the window
+				root_folder_label = ":~:s?$?/..?",
 				indent_width = 2,
 				special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
 				symlink_destination = true,

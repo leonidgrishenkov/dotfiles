@@ -10,6 +10,10 @@ local g = vim.g
 -- Set options (global/buffer/windows-scoped)
 local opt = vim.opt
 
+-- recommended settings from `nvim-tree` documentation
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+
 -- General
 opt.mouse = "a" -- Enable mouse support
 opt.mousemoveevent = true -- ?

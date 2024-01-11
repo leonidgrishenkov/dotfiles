@@ -60,4 +60,10 @@ keymap.set("n", ";", "<Right>", opts("Move right"))
 keymap.set("v", ";", "<Right>", opts("Move right"))
 
 -- Close all windows and exit
-keymap.set("n", "<leader>q", ":q!<CR>", opts("Close all and exit as `:q!`")) -- <leader-key> + <q>
+keymap.set("n", "<leader>q", ":q<CR>", opts("Close all and exit as `:q`")) -- <leader-key> + <q>
+
+-- Switch between opened splitted windows
+keymap.set("n", "<leader>j", "<C-w>h", opts("Switch to right window")) -- Right
+keymap.set("n", "<leader>;", "<C-w>l", opts("Switch to left window")) -- Left
+keymap.set("n", "<leader>l", "<C-w>j", opts("Switch to down window")) -- Down
+keymap.set("n", "<leader>k", "<C-w>k", opts("Switch to up window")) -- Up

@@ -74,24 +74,25 @@ return {
 				-- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
 				-- ["<C-y>"] = cmp.config.disable,
 
-				["<Tab>"] = function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					elseif luasnip.expand_or_jumpable() then
-						luasnip.expand_or_jump()
-					else
-						fallback()
-					end
-				end,
-				["<S-Tab>"] = function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					elseif luasnip.jumpable(-1) then
-						luasnip.jump(-1)
-					else
-						fallback()
-					end
-				end,
+				-- With this enabled <Tab> doesn't work in vim command line mode ( when use `:` ) for autocompletion
+				-- ["<Tab>"] = function(fallback)
+				-- 	if cmp.visible() then
+				-- 		cmp.select_next_item()
+				-- 	elseif luasnip.expand_or_jumpable() then
+				-- 		luasnip.expand_or_jump()
+				-- 	else
+				-- 		fallback()
+				-- 	end
+				-- end,
+				-- ["<S-Tab>"] = function(fallback)
+				-- 	if cmp.visible() then
+				-- 		cmp.select_prev_item()
+				-- 	elseif luasnip.jumpable(-1) then
+				-- 		luasnip.jump(-1)
+				-- 	else
+				-- 		fallback()
+				-- 	end
+				-- end,
 			}),
 			-- Sources for autocompletion
 			-- Doc: `:h cmp-contig.matching`
@@ -119,14 +120,14 @@ return {
 			},
 			-- Doc: `:h cmp-contig.window`
 			window = {
-				documentation = {
-					border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-				},
-				completion = {
-					border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-				},
-				-- completion = cmp.config.window.bordered(),
-				-- documentation = cmp.config.window.bordered(),
+				-- documentation = {
+				-- 	border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+				-- },
+				-- completion = {
+				-- 	border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+				-- },
+				completion = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered(),
 			},
 			-- Doc: `:h cmp-contig.matching`
 			matching = {},
