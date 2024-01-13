@@ -19,9 +19,9 @@ export LC_CTYPE='en_US.UTF-8'
 # --------------------
 # If `brew` installed
 if command -v /opt/homebrew/bin/brew &> /dev/null; then
-    # Export man `brew` path variables. See `man brew` + `/shellenv`
-    # eval $(brew shellenv)
-    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+    # Export all `brew` env vars. See `man brew` + `/shellenv`
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    # export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
     # No emoji in download output
     export HOMEBREW_NO_EMOJI=1
     # Don't show hints for env vatialbes
@@ -180,7 +180,7 @@ POWERLEVEL9K_PYENV_SOURCES=(shell local global)
 
 # Define/remap icons
 POWERLEVEL9K_VCS_GIT_ICON="󰊢"
-POWERLEVEL9K_VCS_GIT_GITLAB_ICON="󰮠"
+# POWERLEVEL9K_VCS_GIT_GITLAB_ICON="󰮠"
 POWERLEVEL9K_PROMPT_CHAR_ERROR_VIVIS_CONTENT_EXPANSION=""
 POWERLEVEL9K_PROMPT_CHAR_OK_VIVIS_CONTENT_EXPANSION=""
 
