@@ -1,10 +1,14 @@
 -- Repo: https://github.com/neovim/nvim-lspconfig
 -- Wiki: https://github.com/neovim/nvim-lspconfig/wiki
+-- :LspInfo
 return {
-	"neovim/nvim-lspconfig",
-	config = function()
-		local lspconfig = require("lspconfig")
+    "neovim/nvim-lspconfig",
+    config = function()
+        local lspconfig = require("lspconfig")
 
-		lspconfig.pyright.setup({})
-	end,
+        -- https://github.com/microsoft/pyright
+        lspconfig.pyright.setup({})
+
+        -- lspconfig.
+    end,
 }

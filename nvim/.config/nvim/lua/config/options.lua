@@ -17,6 +17,7 @@ g.loaded_netrwPlugin = 1
 -- General
 opt.mouse = "a" -- Enable mouse support
 opt.mousemoveevent = true -- ?
+opt.mousefocus = true -- ?
 -- Learn about `modeline`
 -- opt.modeline = true
 
@@ -29,6 +30,17 @@ opt.mousemoveevent = true -- ?
 -- `unnamedplus` - Sync with system clipboard
 opt.clipboard = "unnamedplus"
 
+-- Fillchars
+opt.fillchars = {
+    vert = "│",
+    fold = "⠀",
+    eob = " ", -- suppress ~ at EndOfBuffer
+    -- diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
+    msgsep = "‾",
+    foldopen = "▾",
+    foldsep = "│",
+    foldclose = "▸",
+}
 -- Autocomplete options for vim command line mode (in `:` when you press <Tab>)
 opt.completeopt = "menuone,noinsert,noselect"
 

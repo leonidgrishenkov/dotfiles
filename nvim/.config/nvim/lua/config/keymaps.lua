@@ -33,19 +33,26 @@ vim.g.maplocalleader = " "
 
 local keymap = vim.keymap
 
-local function opts(desc)
-    return { desc = desc, noremap = true, silent = true }
-end
-
 -- Disable arrow keys
 keymap.set("", "<up>", "<nop>")
 keymap.set("", "<down>", "<nop>")
 keymap.set("", "<left>", "<nop>")
 keymap.set("", "<right>", "<nop>")
 
--- Exit modes to normal
--- keymap.set("i", "jf", "<ESC>", opts("Exit insert mode to normal"))
--- keymap.set("v", "jf", "<ESC>", opts("Exit visual/select mode to normal"))
+local function opts(desc)
+    return { desc = desc, noremap = true, silent = true }
+end
+
+-- Disable yank when do some operations.
+-- TODO: Find is there any global option to disable auto yank when delete, paste etc.
+-- Disable yank on delete
+keymap.set({ "n", "v" }, "d", '"_d', opts("Delete w/o yank"))
+keymap.set({ "n", "v" }, "D", '"_D', opts("Delete w/o yank")) -- TODO: Is it correct description for `D`?
+-- Disable yank on paste
+-- keymap.set({ "n", "v" }, "p", '"_dp', opts("Paste w/o yank")) -- BUG: got error: `E99: Current buffer is not in diff mode`
+-- keymap.set({ "n", "v" }, "P", '"_dP', opts("Paste w/o yank")) -- TODO: Is it correct description for `P`?
+
+-- Remap exit modes to normal mode
 keymap.set({ "v", "i" }, "jf", "<ESC>", opts("Exit v|i to n mode"))
 
 -- Movements
