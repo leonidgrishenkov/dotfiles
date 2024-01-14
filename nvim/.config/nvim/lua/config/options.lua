@@ -42,7 +42,7 @@ opt.fillchars = {
     foldclose = "▸",
 }
 -- Autocomplete options for vim command line mode (in `:` when you press <Tab>)
-opt.completeopt = "menuone,noinsert,noselect"
+-- opt.completeopt = "menuone,noinsert,noselect"
 
 opt.swapfile = false -- Don't use swapfile
 opt.backup = false -- Creates a backup file

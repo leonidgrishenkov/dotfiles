@@ -3,7 +3,8 @@ return {
         -- Repo: https://github.com/catppuccin/nvim
         -- Docs: `:h catppuccin`
         "catppuccin/nvim",
-        lazy = true,
+        lazy = false, -- `false` means that we load this plugin during startup
+        priority = 1000, -- make sure to load this before all the other start plugins
         name = "catppuccin",
         config = function()
             require("catppuccin").setup({
@@ -30,11 +31,23 @@ return {
                 integrations = {
                     nvimtree = true,
                     cmp = true,
+                    telescope = true,
                     treesitter = true,
+                    telescope = true,
+                    mason = true,
+                    markdown = true,
+                    indent_blankline = { enabled = true },
+                    native_lsp = {
+                        enabled = true,
+                        underlines = {
+                            errors = { "undercurl" },
+                            hints = { "undercurl" },
+                            warnings = { "undercurl" },
+                            information = { "undercurl" },
+                        },
+                    },
                 },
             })
-        end,
-        init = function()
             vim.cmd("colorscheme catppuccin")
         end,
     },

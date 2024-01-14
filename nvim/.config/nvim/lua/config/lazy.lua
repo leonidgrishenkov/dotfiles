@@ -27,6 +27,7 @@ require("lazy").setup({ { import = "plugins" } }, {
     install = {
         -- install missing plugins on startup. This doesn't increase startup time.
         missing = true,
+        colorscheme = { "catppuccin" },
     },
     -- automatically check for plugin updates
     checker = {

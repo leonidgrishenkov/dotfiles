@@ -34,10 +34,10 @@ vim.g.maplocalleader = " "
 local keymap = vim.keymap
 
 -- Disable arrow keys
-keymap.set("", "<up>", "<nop>")
-keymap.set("", "<down>", "<nop>")
-keymap.set("", "<left>", "<nop>")
-keymap.set("", "<right>", "<nop>")
+keymap.set("", "<Up>", "<nop>")
+keymap.set("", "<Down>", "<nop>")
+keymap.set("", "<Left>", "<nop>")
+keymap.set("", "<Right>", "<nop>")
 
 local function opts(desc)
     return { desc = desc, noremap = true, silent = true }
@@ -56,17 +56,10 @@ keymap.set({ "n", "v" }, "D", '"_D', opts("Delete w/o yank")) -- TODO: Is it cor
 keymap.set({ "v", "i" }, "jf", "<ESC>", opts("Exit v|i to n mode"))
 
 -- Movements
-keymap.set("n", "l", "<Down>", opts("Move down"))
-keymap.set("v", "l", "<Down>", opts("Move down"))
-
-keymap.set("n", "k", "<Up>", opts("Move up"))
-keymap.set("v", "k", "<Up>", opts("Move up"))
-
-keymap.set("n", "j", "<Left>", opts("Move left"))
-keymap.set("v", "j", "<Left>", opts("Move left"))
-
-keymap.set("n", ";", "<Right>", opts("Move right"))
-keymap.set("v", ";", "<Right>", opts("Move right"))
+keymap.set({ "n", "v" }, "l", "<Down>", opts("Move down"))
+keymap.set({ "n", "v" }, "k", "<Up>", opts("Move up"))
+keymap.set({ "n", "v" }, "j", "<Left>", opts("Move left"))
+keymap.set({ "n", "v" }, ";", "<Right>", opts("Move right"))
 
 -- Close all windows and exit
 -- keymap.set("n", "<leader>q", ":q<CR>", opts("Close all and exit as `:q`")) -- <leader-key> + <q>
@@ -80,15 +73,17 @@ keymap.set("n", "<leader>k", "<C-w>k", opts("Switch to up window")) -- Up
 -- Manipulate tabs
 keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", opts("Open new tab")) -- open new tab
 keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", opts("Close current tab")) -- close current tab
-keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", opts("Go to next tab")) --  go to next tab
-keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", opts("Go to previous tab")) --  go to previous tab
+keymap.set("n", "<leader>]", "<cmd>tabn<CR>", opts("Go to next tab")) --  go to next tab
+keymap.set("n", "<leader>[", "<cmd>tabp<CR>", opts("Go to previous tab")) --  go to previous tab
 keymap.set("n", "<leader>tm", "<cmd>tabnew %<CR>", opts("Open current buffer in new tab")) --  move current buffer to new tab
 
 -- Windows split
-keymap.set("n", "<leader>sv", "<-w>v", opts("Split window vertically")) -- split window vertically NOT WORKS
-keymap.set("n", "<leader>sh", "<C-w>s", opts("Split window horizontally")) -- split window horizontally
-keymap.set("n", "<leader>se", "<C-w>=", opts("Make splits equal size")) -- make split windows equal width & height
-keymap.set("n", "<leader>sx", "<cmd>close<CR>", opts("Close current split")) -- close current split window
+-- Split window vertically.
+-- Can be done with command line:
+-- `:vsplit`
+keymap.set("n", "<leader>sv", "<C-w>v", opts("Split window vertically"))
+-- Split window horizontally. Command: `:split`
+keymap.set("n", "<leader>sh", "<C-w>s", opts("Split window horizontally"))
 
 -- Clear search highlights
 keymap.set("n", "<leader>ch", ":nohl<CR>", opts("Clear search highlights"))
