@@ -47,16 +47,16 @@ yabai -m config mouse_action2 resize
 # To see all created signals: `yabai -m signal --list | jq`
 
 # Create signals for apps to resize when window was created.
-apps=(Obsidian Code iTerm2 Safari) # Target apps
+# apps=(Obsidian Code iTerm2 Safari) # Target apps
 
-for app in "${apps[@]}"; do  
-    "$i"
-    yabai -m signal --add \
-        event=window_created \
-        app="^$app$" \
-        action="bash /Users/leonidgrisenkov/Code/configs/yabai/.config/yabai/resize-app.sh $app"
+# for app in "${apps[@]}"; do  
 
-done
+#     yabai -m signal --add \
+#         event=window_created \
+#         app="^$app$" \
+#         action="bash /Users/leonidgrisenkov/Code/configs/yabai/.config/yabai/resize-app.sh $app"
+
+# done
 
 # END
 

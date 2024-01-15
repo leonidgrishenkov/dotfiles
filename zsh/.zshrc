@@ -73,7 +73,7 @@ COMPLETION_WAITING_DOTS="%F{grey}waiting...%f"
 # Use case-sensitive autocompletion
 CASE_SENSITIVE=true
 # Auto set terminal tab title
-DISABLE_AUTO_TITLE=false
+DISABLE_AUTO_TITLE=true
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE=false
@@ -111,7 +111,7 @@ plugins=(
     colored-man-pages
 
     # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/command-not-found
-    command-not-found
+    command-not-found # BUG: Is this works?
 
     # Generate `.gitignore` files.
     # Usage: `git-ignore` + <Enter>
@@ -133,7 +133,7 @@ plugins=(
     
     # Change behevior of terminal titles generation
     # Repo: https://github.com/trystan2k/zsh-tab-title
-    zsh-tab-title
+    # zsh-tab-title
 
     # For integrations with `fzf` 
     # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
@@ -221,17 +221,17 @@ bindkey -M vicmd k vi-up-line-or-history
 bindkey -M vicmd \; vi-forward-char
 
 # `zsh-tab-title`
-ZSH_TAB_TITLE_DISABLE_AUTO_TITLE=true
+# ZSH_TAB_TITLE_DISABLE_AUTO_TITLE=true
 # Prefix for title. Doesn't work for some reason.
-ZSH_TAB_TITLE_PREFIX="$USER@$HOST: "
+# ZSH_TAB_TITLE_PREFIX="$USER@$HOST: "
 # Enable to show the full command being run without 
 # it's arguments in the tab title.
 # For example, `nano .zshrc` will show 'nano .zshrc'
 # instead of just 'nano'. Default is to display only 
 # the command without it's arguments
-ZSH_TAB_TITLE_ENABLE_FULL_COMMAND=true
+# ZSH_TAB_TITLE_ENABLE_FULL_COMMAND=true
 # Show only folder name insted of full path to pwd
-ZSH_TAB_TITLE_ONLY_FOLDER=true
+# ZSH_TAB_TITLE_ONLY_FOLDER=true
 
 # --------------------
 # `fzf` configuration
@@ -257,7 +257,7 @@ fi
 # If `kubectl` installed
 if command -v kubectl &> /dev/null; then
 
-    alias k="kubectl"
+    alias kube="kubectl"
     
     export KUBECONFIG="$HOME/.kube/smlt-bdd-config.yaml"
     # If config dir doesn't exists create one
@@ -300,13 +300,15 @@ alias gp="git push"
 
 # Other
 alias confdir="cd $HOME/Code/configs && ls"
+alias codedir="cd $HOME/Code"
 alias rmi="rm -Iv"
-alias hist="history"
+alias h="history | tail -n 50"
 
 # Change dir
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias .....='cd ../../../..'
 
 # Setting over ssh session
 # if [[ -n $SSH_CONNECTION ]]; then
