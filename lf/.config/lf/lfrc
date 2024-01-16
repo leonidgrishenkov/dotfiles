@@ -20,9 +20,6 @@ set ifs "\n"
 # leave some space at the top and the bottom of the screen
 set scrolloff 10
 
-# use enter for shell commands
-map <enter> shell
-
 # show the result of execution of previous commands
 map ` !true
 
@@ -45,14 +42,36 @@ cmd open &{{
     esac
 }}
 
-cmd mkdir %set -f; printf "Directory name: "; read ans; [ ! -e $ans ] && mkdir $ans && printf "$ans created" || printf "$ans already exists"
-cmd mkfile %set -f; printf "File name: "; read ans; [ ! -e $ans ] && touch $ans && printf "$ans created" || printf "$ans already exists"
+cmd mkdir %{{
+    set -f
+    printf " Directory name: "
+    read ans
+    if [ -e $ans ]; then
+        # printf "$ans already exists"
+        lf -remote "send $id :echoerr $ans already exists"
+    else
+        mkdir $ans && lf -remote "send $id :echomsg $ans created"
+    fi
+}}
+
+cmd mkfile %{{
+    set -f
+    printf " File name: "
+    read ans
+    if [ -e $ans ]; then
+        lf -remote "send $id :echoerr $ans already exists"
+    else
+        touch $ans && lf -remote "send $id :echomsg $ans created"
+    fi
+}}
 
 map md mkdir
 map mf mkfile
 
+# Remove keys
 map d
 map m
+map h
 
 # define a custom 'rename' command without prompt for overwrite
 # cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
@@ -63,16 +82,21 @@ map m
 
 # move current file or selected files to trash folder
 # (also see 'man mv' for backup/overwrite options)
-cmd trash %set -f; mv $fx ~/.trash
+# cmd trash %set -f; mv $fx ~/.trash
 
-# define a custom 'delete' command
-# cmd delete ${{
-#     set -f
-#     printf "$fx\n"
-#     printf "delete?[y/n]"
-#     read ans
-#     [ "$ans" = "y" ] && rm -rf $fx
-# }}
+cmd trash %{{
+    set -f
+    printf "$fx\n"
+    printf " Move to trash? [y/N] "
+    read ans
+    if [ "$ans" = "y" ]; then
+        mv $fx ~/.trash && printf "Moved $f to ~/.trash"
+    else
+        :
+    fi
+}}
+
+map dd trash
 
 # use '<delete>' key for either 'trash' or 'delete' command
 # map d trash
@@ -120,12 +144,7 @@ map l down
 map j updir
 map ; open
 
-map <enter> open
-
 map R reload
-
-# Remove mapping for `h` key
-# map h 
 
 set hidden true # show dotfiles
 set ignorecase true
@@ -147,30 +166,33 @@ set dircache false
 
 # Cursor hl
 set cursoractivefmt "\033[7m"
-set cursorparentfmt "\033[7;2m"
+set cursorparentfmt "\033[7;5;2m"
 # Disable cursor highlight in preview window
 set cursorpreviewfmt "" 
 
 # Dynamically set number of columns
 # based on the current terminal width
 cmd on-redraw %{{
-    if [ $lf_width -le 80 ]; then
-        lf -remote "send $id :set ratios 1:2"
+    if [ $lf_width -le 120 ]; then
+        lf -remote "send $id :set ratios 1:2; set preview false"
     else
-        lf -remote "send $id :set ratios 1:2:3"
+        lf -remote "send $id :set ratios 1:2:3; set preview true"
     fi
 }}
 
 # Run on startup to enable
-:on-redraw
+on-redraw
 
-cmd toggle_preview %{{
+cmd toggle-preview %{{
     if [ "$lf_preview" = "true" ]; then
         lf -remote "send $id :set preview false; set ratios 1:2"
+        # lf -remote "send $id :set preview false"
     else
         lf -remote "send $id :set preview true; set ratios 1:2:3"
+        # lf -remote "send $id :set preview true"
     fi
 }}
 
-map zp toggle_preview
+map zp toggle-preview
 
+map <enter> cmd-enter
