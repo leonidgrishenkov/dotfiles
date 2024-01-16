@@ -21,14 +21,19 @@ export LC_CTYPE='en_US.UTF-8'
 if command -v /opt/homebrew/bin/brew &> /dev/null; then
     # Export all `brew` env vars. See `man brew` + `/shellenv`
     eval "$(/opt/homebrew/bin/brew shellenv)"
-    # export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
     # No emoji in download output
     export HOMEBREW_NO_EMOJI=1
+
     # Don't show hints for env vatialbes
     export HOMEBREW_NO_ENV_HINTS=1
+
     export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
+
     # Add to FPATH completions installed by brew
     FPATH="/opt/homebrew/share/zsh/site-functions:$FPATH"
+    autoload -U compinit
+    compinit
 fi
 
 # Set one of the editor as `$EDITOR`
@@ -47,7 +52,9 @@ export BROWSER="safari"
 export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
 # export OPENER= ?
-# export PAGER="bat" # less
+
+# Change manpager to `bat`. Took from: https://github.com/sharkdp/bat#man
+export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain --theme=Nord --color=always --decorations=always'"
 
 # -------------------------
 # `oh-my-zsh` configuration
@@ -108,7 +115,7 @@ plugins=(
 
     # Add colors for man pages
     # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
-    colored-man-pages
+    # colored-man-pages
 
     # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/command-not-found
     command-not-found # BUG: Is this works?
@@ -195,6 +202,13 @@ POWERLEVEL9K_PROMPT_CHAR_OK_VIVIS_CONTENT_EXPANSION=""
 #   - `truncate_to_last` - Show only the last directory segment.
 # POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_last"
 
+# `zsh-help`
+# Redifine `--help` output appearence.
+# Took from: https://github.com/Freed-Wu/zsh-help#function--help
+-help() {
+    bat --language=help --style=plain --theme=Nord --color=always --decorations=always
+}
+
 # `zsh-autosuggestions`
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=249"
@@ -280,6 +294,7 @@ fi
 # -------
 # Aliases
 # -------
+# About `bat` and more features: https://github.com/sharkdp/bat
 alias cat="bat --style=plain --theme=Nord --color=always --decorations=always"
 
 alias gr="rg --color=always"
