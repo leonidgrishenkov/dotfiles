@@ -1,0 +1,11 @@
+wget
+curl
+jq
+stow
+git
+zsh
+ripgrep
+bat
+exa
+fd
+fzf
