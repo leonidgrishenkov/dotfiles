@@ -299,11 +299,15 @@ alias cat="bat --style=plain --theme=Nord --color=always --decorations=always"
 
 alias gr="rg --color=always"
 
-alias ls="exa --all --oneline --icons --group-directories-first"
-alias ll="exa --all --long --icons --group-directories-first --created --modified --header --binary --time-style long-iso"
-alias tree="exa --tree --all --icons --group-directories-first --ignore-glob='.git*|.venv*|__pycache__*|.DS_store'"
+alias ls="eza --all --oneline --icons --group-directories-first"
+alias ll="eza --all --long --icons --group-directories-first --created --modified --header --binary --time-style long-iso"
+alias tree="eza --tree --all --icons --group-directories-first --ignore-glob='.git*|.venv*|__pycache__*|.DS_store'"
 
 alias v=$EDITOR
+
+alias rmi="rm -Iv"
+alias h="history | tail -n 50"
+alias cl="clear"
 
 # `git` aliases
 alias g="git"
@@ -313,17 +317,16 @@ alias ga="git add"
 alias gp="git pull"
 alias gp="git push"
 
-# Other
-alias confdir="cd $HOME/Code/configs && ls"
-alias codedir="cd $HOME/Code"
-alias rmi="rm -Iv"
-alias h="history | tail -n 50"
-
 # Change dir
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+
+# Some often use paths
+export CONFPATH="$HOME/Code/configs"
+export CODEPATH="$HOME/Code"
+export ICLOUDPATH="$HOME/Library/Mobile\ Documents/com~apple~CloudDocs"
 
 # Setting over ssh session
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -332,6 +335,7 @@ alias .....='cd ../../../..'
 #   export EDITOR='vim'
 # fi
 
+# Extra zsh options
 # Don't let > silently overwrite files. To overwrite, use >! instead.
 setopt NO_CLOBBER
 
