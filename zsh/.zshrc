@@ -129,10 +129,6 @@ plugins=(
     # Repo: https://github.com/Freed-Wu/zsh-help
     zsh-help
     
-    # Autocompletions for `poetry`.
-    # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/poetry
-    poetry
-    
     # CLI commands syntax highlight with themes.
     # Repo: https://github.com/zdharma-continuum/fast-syntax-highlighting
     # Usage: `fast-theme --help`
@@ -141,11 +137,30 @@ plugins=(
     # Change behevior of terminal titles generation
     # Repo: https://github.com/trystan2k/zsh-tab-title
     # zsh-tab-title
+)
+
+# If `poetry` installed
+if command -v poetry &> /dev/null; then
+    # Create virtual envs in project
+    export POETRY_VIRTUALENVS_IN_PROJECT=true
+    
+    # Autocompletions for `poetry`.
+    # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/poetry
+    plugins+=(poetry) # Add to oh-my-zsh plugins list
+fi
+
+
+if command -v fzf &> /dev/null; then
 
     # For integrations with `fzf` 
     # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
-    fzf
-)
+    plugins+=(fzf) 
+
+    # Repo: https://github.com/junegunn/fzf#layout
+    # Docs: `man fzf`
+    export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=sharp --margin=0,1,0,1%"
+fi
+
 
 # Completions for apps
 FPATH="$ZSH_CUSTOM/plugins/zsh-completions/src:$FPATH"
@@ -246,24 +261,6 @@ bindkey -M vicmd \; vi-forward-char
 # ZSH_TAB_TITLE_ENABLE_FULL_COMMAND=true
 # Show only folder name insted of full path to pwd
 # ZSH_TAB_TITLE_ONLY_FOLDER=true
-
-# --------------------
-# `fzf` configuration
-# --------------------
-# 
-# Repo: https://github.com/junegunn/fzf#layout
-# Docs: `man fzf`
-#  
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=sharp --margin=0,1,0,1%"
-
-# ----------------------
-# `poetry` configuration
-# ----------------------
-# If `poetry` installed
-if command -v poetry &> /dev/null; then
-    # Create virtual envs in project
-    export POETRY_VIRTUALENVS_IN_PROJECT=true
-fi
 
 # -----------------------
 # `kubectl` configuration
