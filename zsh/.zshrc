@@ -203,8 +203,17 @@ POWERLEVEL9K_PYENV_SOURCES=(shell local global)
 # Define/remap icons
 POWERLEVEL9K_VCS_GIT_ICON="󰊢"
 # POWERLEVEL9K_VCS_GIT_GITLAB_ICON="󰮠"
-POWERLEVEL9K_PROMPT_CHAR_ERROR_VIVIS_CONTENT_EXPANSION=""
+
+# Insert mode icons
+POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION=""
+# TODO maybe add diferent color for error sybmol?
+POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_CONTENT_EXPANSION=""
+
+POWERLEVEL9K_PROMPT_CHAR_OK_VICMD_CONTENT_EXPANSION=""
+POWERLEVEL9K_PROMPT_CHAR_ERROR_VICMD_CONTENT_EXPANSION=""
+
 POWERLEVEL9K_PROMPT_CHAR_OK_VIVIS_CONTENT_EXPANSION=""
+POWERLEVEL9K_PROMPT_CHAR_ERROR_VIVIS_CONTENT_EXPANSION=""
 
 # Display path behaviour
 # https://stackoverflow.com/questions/61176257/customizing-powerleve10k-prompt
@@ -292,7 +301,7 @@ fi
 # Aliases
 # -------
 # About `bat` and more features: https://github.com/sharkdp/bat
-alias cat="bat --style=plain --theme=Nord --color=always --decorations=always"
+alias cat="bat --style=plain --theme=Nord --color=auto --decorations=auto"
 
 alias gr="rg --color=always"
 
