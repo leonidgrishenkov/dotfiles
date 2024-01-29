@@ -1,0 +1,94 @@
+[defaults]
+# Default connection options that will be used if the relevant argument was omitted.
+
+host = 127.0.0.1
+port = 8123
+db = default
+user = default
+password =
+cookie =
+
+# It's not secure to store the password here in plain text.
+
+[main]
+# Allow insecure server connections when using SSL
+insecure = False
+# Disable multiline mode by default
+multiline = False
+
+# Disable Vi mode by default
+#
+# Ideally, we want to read this value from `inputrc`, but this isn't possible
+# until https://github.com/prompt-toolkit/python-prompt-toolkit/issues/56 is
+# resolved.
+vi_mode = False
+
+# Show SQL statements timing
+timing = True
+
+# Preferred data format for the interactive mode
+format = PrettyCompact
+
+# Preferred data format for the non-interactive mode (file/stdin)
+format_stdin = TabSeparated
+
+# Show the reformatted query after its execution
+show_formatted_query = True
+
+# Syntax highlighting
+highlight = True
+
+# Syntax highlight certain output in the interactive mode:
+highlight_output = True
+
+# Syntax highlighting in TrueColor (if supported, see https://gist.github.com/XVilka/8346728)
+highlight_truecolor = True
+
+# Highlight theme (uncomment line below & check out https://help.farbox.com/pygments.html for available themes)
+#highlight_theme = default
+
+# if True, enables completion on every typed character (i.e. space)
+complete_while_typing = False
+
+# Show the output via pager (if defined)
+pager = False
+
+# Refresh metadata (databases, tables, column names) for autocompletion...
+# ...on the application start
+refresh_metadata_on_start = True
+
+# ...after each query (if set to True, may slow down usage)
+refresh_metadata_on_query = False
+
+
+# A horrible "user-defined functions" hack, powered with regexp and a little bit of insanity!
+# It makes the client find & replace queries to keep (or get on; it depends) your nerves.
+# It's commented out by default to not to enrage anyone. An example is provided below, though.
+
+#udf = {
+#        r'header\((.*?)\)': r'visitParamExtractString(headers, \1)',
+#	}
+
+# If you uncomment that above, please make sure that the trailing bracket is indented.
+# The example above will let you run such a query:
+# SELECT date, ip, visitParamExtractString(headers, 'User-Agent') FROM visits LIMIT 3;
+# with much less typing:
+# SELECT date, ip, header('User-Agent') FROM visits LIMIT 3;
+
+
+[http]
+
+# Timeout for the connection to the ClickHouse HTTP server (in seconds)
+conn_timeout = 10.0
+
+# Amount of retries if the connection was timed out
+conn_timeout_retry = 0
+
+# A dynamic delay between retries (see "urllib3 Retry backoff_factor")
+conn_timeout_retry_delay = 0.5
+
+
+[settings]
+# You can place the server-side settings here!
+
+# max_memory_usage = 20000000000
