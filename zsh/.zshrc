@@ -23,7 +23,8 @@ if command -v /opt/homebrew/bin/brew &> /dev/null; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
     # No emoji in download output
-    export HOMEBREW_NO_EMOJI=1
+    # export HOMEBREW_NO_EMOJI=1
+    export HOMEBREW_INSTALL_BADGE="💣"
 
     # Don't show hints for env vatialbes
     export HOMEBREW_NO_ENV_HINTS=1
@@ -139,6 +140,14 @@ plugins=(
     # zsh-tab-title
 )
 
+if [[ $SYSTEM = "Darwin" ]]; then
+    
+    # Usefull commands for macos
+    # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos
+    # All commands: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos#commands
+    plugins+=(macos) # Add to oh-my-zsh plugins list
+fi
+
 # If `poetry` installed
 if command -v poetry &> /dev/null; then
     # Create virtual envs in project
@@ -146,7 +155,7 @@ if command -v poetry &> /dev/null; then
     
     # Autocompletions for `poetry`.
     # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/poetry
-    plugins+=(poetry) # Add to oh-my-zsh plugins list
+    plugins+=(poetry) 
 fi
 
 
@@ -330,9 +339,9 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
 # Some often use paths
-export CONFPATH="$HOME/Code/configs"
-export CODEPATH="$HOME/Code"
-export ICLOUDPATH="$HOME/Library/Mobile\ Documents/com~apple~CloudDocs"
+export CONFPATH=$HOME/Code/configs
+export CODEPATH=$HOME/Code
+export ICLOUDPATH=$HOME/Library/Mobile\ Documents/com~apple~CloudDocs
 
 # Setting over ssh session
 # if [[ -n $SSH_CONNECTION ]]; then
