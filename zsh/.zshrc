@@ -28,6 +28,7 @@ if command -v /opt/homebrew/bin/brew &> /dev/null; then
 
     # Don't show hints for env vatialbes
     export HOMEBREW_NO_ENV_HINTS=1
+    export HOMEBREW_NO_AUTO_UPDATE=1
 
     export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
 
@@ -324,12 +325,11 @@ alias rmi="rm -Iv"
 alias h="history | tail -n 50"
 alias cl="clear"
 
-# `git` aliases
+# Aliases for `git`
 alias g="git"
 alias gs="git status"
 alias gc="git commit"
 alias ga="git add"
-alias gp="git pull"
 alias gp="git push"
 
 # Change dir

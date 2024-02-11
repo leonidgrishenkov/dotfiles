@@ -1,0 +1,248 @@
+{
+  // General settings
+  "workbench.settings.editor": "json",
+  "simpleBrowser.focusLockIndicator.enabled": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  // Updates
+  "update.mode": "none",
+  "update.showReleaseNotes": false,
+  // Extensions General Settings
+  "extensions.ignoreRecommendations": true,
+  "extensions.autoUpdate": false,
+  // SEARCH
+  "search.showLineNumbers": true,
+  "search.defaultViewMode": "tree",
+  "search.searchOnType": false,
+  "search.maxResults": 300,
+  "search.smartCase": true,
+  "search.sortOrder": "modified",
+  // UI
+  // Theme
+  "workbench.colorTheme": "Ayu Mirage",
+  "workbench.productIconTheme": "fluent-icons",
+  "workbench.iconTheme": "material-icon-theme",
+  "material-icon-theme.activeIconPack": "vue_vuex",
+  "material-icon-theme.folders.theme": "specific",
+  // FONTS
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "MesloLGM Nerd Font",
+  "terminal.integrated.fontFamily": "MesloLGM Nerd Font",
+  "editor.codeLensFontFamily": "MesloLGM Nerd Font",
+  "markdown.preview.fontFamily": "MesloLGM Nerd Font",
+  "debug.console.fontFamily": "MesloLGM Nerd Font",
+  "scm.inputFontFamily": "MesloLGM Nerd Font",
+  // FONT SIZES
+  "editor.fontSize": 13,
+  "debug.console.fontSize": 13,
+  "markdown.preview.fontSize": 13,
+  "terminal.integrated.fontSize": 13,
+  "editor.codeLensFontSize": 13,
+  "notebook.markup.fontSize": 13,
+  "notebook.output.fontSize": 13,
+  // WINDOW
+  "window.commandCenter": false,
+  "window.restoreWindows": "none",
+  "window.titleBarStyle": "custom",
+  // BREADCRUMBS
+  "breadcrumbs.enabled": true,
+  "breadcrumbs.filePath": "off",
+  // CODE EDITOR
+  "editor.tabSize": 4,
+  "editor.accessibilitySupport": "off",
+  "editor.minimap.enabled": false,
+  "editor.occurrencesHighlight": "off",
+  "editor.unicodeHighlight.invisibleCharacters": false,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": []
+  },
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.lightbulb.enabled": false,
+  "editor.find.addExtraSpaceOnTop": false,
+  // Line
+  "editor.lineNumbers": "relative",
+  "editor.renderLineHighlight": "gutter",
+  "editor.renderLineHighlightOnlyWhenFocus": true,
+  // Cursor
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSurroundingLines": 10,
+  "editor.cursorSmoothCaretAnimation": "on",
+  // Formatting
+  "editor.defaultFormatter": "charliermarsh.ruff",
+  "editor.formatOnSaveMode": "file",
+  "editor.formatOnSave": true,
+  // Guides
+  "editor.guides.indentation": true,
+  "editor.guides.highlightActiveIndentation": true,
+  "editor.guides.bracketPairs": false,
+  "editor.guides.highlightActiveBracketPair": false,
+  "editor.guides.bracketPairsHorizontal": false,
+  // Suggestions
+  "editor.suggest.preview": true,
+  "editor.quickSuggestions": {
+    "other": "off",
+    "comments": "off",
+    "strings": "off"
+  },
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.tabCompletion": "on",
+  "editor.suggest.showSnippets": true,
+  "editor.snippetSuggestions": "top",
+  "editor.hover.enabled": true,
+  "editor.hover.above": true,
+  "editor.parameterHints.enabled": true,
+  "editor.parameterHints.cycle": true,
+  // WORKBENCH
+  "workbench.tips.enabled": false,
+  "workbench.startupEditor": "none",
+  "workbench.editorAssociations": {
+    "*.py": "default"
+  },
+  "workbench.editor.enablePreview": false,
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.layoutControl.enabled": false,
+  "workbench.localHistory.enabled": false,
+  "workbench.panel.opensMaximized": "always",
+  "workbench.panel.defaultLocation": "bottom",
+  "workbench.colorCustomizations": {
+    "editorIndentGuide.activeBackground1": "#eef1ea",
+    "editorIndentGuide.activeBackground2": "#eef1ea",
+    "editorIndentGuide.activeBackground3": "#eef1ea",
+    "editorIndentGuide.activeBackground4": "#eef1ea",
+    "editorIndentGuide.activeBackground5": "#eef1ea",
+    "editorIndentGuide.activeBackground6": "#eef1ea",
+    "editorBracketHighlight.unexpectedBracket.foreground": "#ff0000",
+    "editorBracketMatch.background": "#484964",
+  },
+  "workbench.editor.tabActionCloseVisibility": false,
+  "workbench.editor.closeOnFileDelete": true,
+  // FILES
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.associations": {
+    ".env*": "dotenv"
+  },
+  // FILES EXPLORER
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  // GIT
+  "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "never",
+  "git.ignoreLegacyWarning": true,
+  "git.showPushSuccessNotification": true,
+  "git.enableSmartCommit": true,
+  "scm.diffDecorations": "gutter",
+  "scm.diffDecorationsGutterWidth": 2,
+  "scm.providerCountBadge": "visible",
+  "scm.alwaysShowRepositories": true,
+  "scm.defaultViewMode": "tree",
+  "scm.showActionButton": false,
+  // VIM
+  "vim.cursorStylePerMode.insert": "line-thin",
+  "vim.vimrc.enable": true,
+  "vim.smartRelativeLine": true,
+  "vim.vimrc.path": "~/.vscode/.vscodevimrc",
+  "vim.overrideCopy": false,
+  "vim.useSystemClipboard": true,
+  "vim.leader": "<space>",
+  "vim.highlightedyank.enable": true,
+  "vim.surround": false,
+  // To improve performance. Recomended by extension
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  },
+  // INTEGRATED TERMINAL
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.fastScrollSensitivity": 3,
+  "terminal.integrated.allowMnemonics": true,
+  "terminal.integrated.tabs.defaultIcon": "terminal-bash",
+  "terminal.integrated.shellIntegration.history": 0,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorStyleInactive": "line",
+  // APC
+  "apc.electron": {
+    "opacity": 0.95,
+    "transparent": true,
+    "vibrancy": null
+  },
+  // DOTENV
+  "dotenv.enableAutocloaking": false,
+  "dotenv.enableSecretpeeking": true,
+  // PYTHON
+  "python.terminal.activateEnvironment": false,
+  "python.venvPath": "${workspaceFolder}/.venv/bin/python",
+  "python.languageServer": "Pylance",
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.defaultFoldingRangeProvider": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "never",
+      "source.organizeImports.ruff": "always",
+    },
+  },
+  "python.analysis.autoFormatStrings": true,
+  "python.analysis.autoImportCompletions": false,
+  "python.analysis.completeFunctionParens": true,
+  "python.analysis.inlayHints.functionReturnTypes": false,
+  "python.analysis.logLevel": "Warning",
+  "python.analysis.typeCheckingMode": "standard",
+  "python.analysis.diagnosticMode": "openFilesOnly",
+  // IntelliCode Extension
+  "intellicodeApiExamples.python.enabled": true,
+  "vsintellicode.python.completionsEnabled": true,
+  "vsintellicode.features.python.deepLearning": "enabled",
+  "vsintellicode.modify.editor.suggestSelection": "enabled",
+  "vsintellicode.sql.completionsEnabled": false,
+  "vsintellicode.typescript.completionsEnabled": false,
+  // Docstring Extension
+  "autoDocstring.docstringFormat": "google",
+  // Ruff Extension
+  "ruff.trace.server": "messages",
+  "ruff.showNotifications": "always",
+  "ruff.lint.run": "onSave",
+  "ruff.codeAction.disableRuleComment": {
+    "enable": true
+  },
+  // JUPYTER NOTEBOOKS
+  "jupyter.askForKernelRestart": false,
+  "jupyter.disableJupyterAutoStart": true,
+  "jupyter.showVariableViewWhenDebugging": false,
+  "jupyter.interactiveWindow.textEditor.autoMoveToNextCell": false,
+  "jupyter.logging.level": "error",
+  "jupyter.allowUnauthorizedRemoteConnection": true,
+  "notebook.cellToolbarVisibility": "hover",
+  "notebook.formatOnSave.enabled": true,
+  "notebook.codeActionsOnSave": {
+    "notebook.source.fixAll": false,
+    "notebook.source.organizeImports": true
+  },
+  "notebook.output.textLineLimit": 150,
+  "notebook.output.scrolling": true,
+  "notebook.lineNumbers": "on",
+  // JSON
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "files.trimTrailingWhitespace": false,
+  },
+  // Error Lens Extension
+  "errorLens.gutterIconsEnabled": true,
+  "errorLens.gutterIconSet": "circle",
+  "errorLens.gutterIconSize": "75%",
+  // DOCKER
+  "docker.containers.label": "ContainerName",
+  "docker.containers.description": [
+    "Status"
+  ],
+  // REMOTE CONNECTION
+  "remote.autoForwardPortsSource": "hybrid",
+  // Other settings
+  "task.quickOpen.history": 0,
+  "redhat.telemetry.enabled": false,
+}
