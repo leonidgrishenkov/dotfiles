@@ -839,5 +839,25 @@
         "key": "cmd+r",
         "command": "-workbench.action.reloadWindow",
         "when": "isDevelopment && !isAuxiliaryWindowFocusedContext"
+    },
+    {
+        "key": "cmd+a f",
+        "command": "explorer.newFile",
+        "when": "filesExplorerFocus && foldersViewVisible"
+    },
+    {
+        "key": "cmd+a d",
+        "command": "explorer.newFolder",
+        "when": "filesExplorerFocus && foldersViewVisible"
+    },
+    {
+        "key": "d",
+        "command": "deleteFile",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "cmd+backspace",
+        "command": "-deleteFile",
+        "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus"
     }
 ]
