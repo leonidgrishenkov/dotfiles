@@ -371,3 +371,6 @@ setopt SHARE_HISTORY
 
 # Check if running on macOS, otherwise stop here
 # [[ ! "x$SYSTEM" == "xDarwin" ]] && return
+#
+#
+export HI='hi there! My name is dashenka!'
