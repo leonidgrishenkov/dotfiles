@@ -1,0 +1,8 @@
+# Default config: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#default
+
+keybinding:
+  universal:
+    prevItem-alt: 'k' # go one line up
+    nextItem-alt: 'l' # go one line down
+    prevBlock-alt: 'j' # goto the previous block / panel
+    nextBlock-alt: ';' # goto the next block / panel
