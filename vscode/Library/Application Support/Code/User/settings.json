@@ -127,6 +127,7 @@
   // FILES EXPLORER
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
+  "explorer.compactFolders": false,
   // GIT
   "git.confirmSync": false,
   "git.openRepositoryInParentFolders": "never",
@@ -227,6 +228,10 @@
   "notebook.output.scrolling": true,
   "notebook.lineNumbers": "on",
   // JSON
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  // JSON with comments
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features",
     "files.trimTrailingWhitespace": false,
@@ -236,6 +241,9 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   // Error Lens Extension
+  "errorLens.enabled": true,
+  "errorLens.fontFamily": "MesloLGM Nerd Font",
+  "errorLens.fontSize": 13,
   "errorLens.gutterIconsEnabled": true,
   "errorLens.gutterIconSet": "circle",
   "errorLens.gutterIconSize": "75%",
@@ -249,7 +257,10 @@
   // Other settings
   "task.quickOpen.history": 0,
   "redhat.telemetry.enabled": false,
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+  "errorLens.messageEnabled": false,
+  "[sql]": {
+    "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
   },
+  "sql-formatter.uppercase": true,
+  "gitlens.codeLens.enabled": false,
 }

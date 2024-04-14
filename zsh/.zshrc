@@ -40,7 +40,7 @@ fi
 
 # Set one of the editor as `$EDITOR`
 EDITORS="nvim,vim,vi"
-for editor in $(echo $EDITORS | sed "s/,/ /g"); do 
+for editor in $(echo $EDITORS | sed "s/,/ /g"); do
     if command -v $editor &> /dev/null; then
         export EDITOR=$editor
         break
@@ -73,11 +73,11 @@ export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
 [[ -d $ZSH_CACHE_DIR ]] || mkdir -p $ZSH_CACHE_DIR
 
 # zsh theme
-ZSH_THEME="powerlevel10k/powerlevel10k" 
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Autocompletion options
-# Display dots (or given format) when waiting for completions 
-COMPLETION_WAITING_DOTS="%F{grey}waiting...%f" 
+# Display dots (or given format) when waiting for completions
+COMPLETION_WAITING_DOTS="%F{grey}waiting...%f"
 # COMPLETION_WAITING_DOTS="true"
 # Use case-sensitive autocompletion
 CASE_SENSITIVE=true
@@ -130,19 +130,19 @@ plugins=(
     # Add colors for help pages. Default only for `--help`.
     # Repo: https://github.com/Freed-Wu/zsh-help
     zsh-help
-    
+
     # CLI commands syntax highlight with themes.
     # Repo: https://github.com/zdharma-continuum/fast-syntax-highlighting
     # Usage: `fast-theme --help`
     # fast-syntax-highlighting
-    
+
     # Change behevior of terminal titles generation
     # Repo: https://github.com/trystan2k/zsh-tab-title
     # zsh-tab-title
 )
 
 if [[ $SYSTEM = "Darwin" ]]; then
-    
+
     # Usefull commands for macos
     # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos
     # All commands: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos#commands
@@ -153,18 +153,18 @@ fi
 if command -v poetry &> /dev/null; then
     # Create virtual envs in project
     export POETRY_VIRTUALENVS_IN_PROJECT=true
-    
+
     # Autocompletions for `poetry`.
     # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/poetry
-    plugins+=(poetry) 
+    plugins+=(poetry)
 fi
 
 
 if command -v fzf &> /dev/null; then
 
-    # For integrations with `fzf` 
+    # For integrations with `fzf`
     # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
-    plugins+=(fzf) 
+    plugins+=(fzf)
 
     # Repo: https://github.com/junegunn/fzf#layout
     # Docs: `man fzf`
@@ -229,8 +229,8 @@ POWERLEVEL9K_PROMPT_CHAR_ERROR_VIVIS_CONTENT_EXPANSION=""
 # https://stackoverflow.com/questions/61176257/customizing-powerleve10k-prompt
 # Max symbols to show
 # POWERLEVEL9K_DIR_MAX_LENGTH=20
-# If directory is too long, shorten some of its segments to the 
-# shortest possible unique prefix. The shortened directory can be 
+# If directory is too long, shorten some of its segments to the
+# shortest possible unique prefix. The shortened directory can be
 # tab-completed to the original.
 #   - `truncate_to_unique` - Default value
 #   - `truncate_to_last` - Show only the last directory segment.
@@ -262,8 +262,8 @@ VI_MODE_CURSOR_OPPEND=0
 # Enter cmd mode from insert mode
 bindkey -M viins jf vi-cmd-mode
 # Movements
-bindkey -M vicmd j vi-backward-char 
-bindkey -M visual j vi-backward-char 
+bindkey -M vicmd j vi-backward-char
+bindkey -M visual j vi-backward-char
 bindkey -M vicmd l vi-down-line-or-history
 bindkey -M vicmd k vi-up-line-or-history
 bindkey -M vicmd \; vi-forward-char
@@ -272,10 +272,10 @@ bindkey -M vicmd \; vi-forward-char
 # ZSH_TAB_TITLE_DISABLE_AUTO_TITLE=true
 # Prefix for title. Doesn't work for some reason.
 # ZSH_TAB_TITLE_PREFIX="$USER@$HOST: "
-# Enable to show the full command being run without 
+# Enable to show the full command being run without
 # it's arguments in the tab title.
 # For example, `nano .zshrc` will show 'nano .zshrc'
-# instead of just 'nano'. Default is to display only 
+# instead of just 'nano'. Default is to display only
 # the command without it's arguments
 # ZSH_TAB_TITLE_ENABLE_FULL_COMMAND=true
 # Show only folder name insted of full path to pwd
@@ -288,7 +288,7 @@ bindkey -M vicmd \; vi-forward-char
 if command -v kubectl &> /dev/null; then
 
     alias kube="kubectl"
-    
+
     export KUBECONFIG="$HOME/.kube/smlt-bdd-config.yaml"
     # If config dir doesn't exists create one
     [[ -d $KUBECONFIG:h ]] || mkdir -p $KUBECONFIG:h
@@ -343,6 +343,9 @@ export CONFPATH=$HOME/Code/configs
 export CODEPATH=$HOME/Code
 export ICLOUDPATH=$HOME/Library/Mobile\ Documents/com~apple~CloudDocs
 
+# Python
+export PATH=$HOME/.python/3.12.2/bin:$PATH
+
 # Setting over ssh session
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -361,7 +364,7 @@ setopt NO_CLOBBER
 setopt HIST_IGNORE_ALL_DUPS
 
 # Leave blanks out
-setopt HIST_REDUCE_BLANKS       
+setopt HIST_REDUCE_BLANKS
 
 # Auto-sync history between concurrent sessions.
 setopt SHARE_HISTORY
