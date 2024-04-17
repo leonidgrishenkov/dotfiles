@@ -6,7 +6,8 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
 # Announce 265 bit color support
-export TERM=xterm-256color
+# export TERM=xterm-256color
+export TERM=screen-256color
 
 export SYSTEM="$(uname -s)"
 
@@ -73,7 +74,7 @@ export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
 [[ -d $ZSH_CACHE_DIR ]] || mkdir -p $ZSH_CACHE_DIR
 
 # zsh theme
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Autocompletion options
 # Display dots (or given format) when waiting for completions
@@ -169,6 +170,7 @@ if command -v fzf &> /dev/null; then
     # Repo: https://github.com/junegunn/fzf#layout
     # Docs: `man fzf`
     export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=sharp --margin=0,1,0,1%"
+    export FZF_COMPLETION_TRIGGER='~~'
 fi
 
 
@@ -194,36 +196,41 @@ zstyle ':omz:update' verbose minimal # Output mode
 # Wiki: https://github.com/Powerlevel9k/powerlevel9k/wiki/Stylizing-Your-Prompt
 
 # All settings should be after source config file
-POWERLEVEL9K_CONFIG_FILE="$XDG_CONFIG_HOME/p10k/.p10k.zsh"
-[[ ! -f $POWERLEVEL9K_CONFIG_FILE ]] || source $POWERLEVEL9K_CONFIG_FILE
+# POWERLEVEL9K_CONFIG_FILE="$XDG_CONFIG_HOME/p10k/.p10k.zsh"
+# [[ ! -f $POWERLEVEL9K_CONFIG_FILE ]] || source $POWERLEVEL9K_CONFIG_FILE
 
-# Remove os icon from left side of prompt
-unset 'POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[1]'
+# # Remove os icon from left side of prompt
+# unset 'POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[1]'
 
-# Disable configuration wizard auto prompt
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+# # Disable configuration wizard auto prompt
+# POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
-POWERLEVEL9K_MODE=nerdfont-complete
+# POWERLEVEL9K_MODE=nerdfont-complete
 
-# show Python version next to the virtual environment name.
-POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
-# Hide python version if it doesn't come from one of these sources.
-POWERLEVEL9K_PYENV_SOURCES=(shell local global)
+# # show Python version next to the virtual environment name.
+# POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
+# # Hide python version if it doesn't come from one of these sources.
+# POWERLEVEL9K_PYENV_SOURCES=(shell local global)
 
-# Define/remap icons
-POWERLEVEL9K_VCS_GIT_ICON="󰊢"
-# POWERLEVEL9K_VCS_GIT_GITLAB_ICON="󰮠"
+# # Define/remap icons
+# POWERLEVEL9K_VCS_GIT_ICON="󰊢"
+# # POWERLEVEL9K_VCS_GIT_GITLAB_ICON="󰮠"
 
-# Insert mode icons
-POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION=""
-# TODO maybe add diferent color for error sybmol?
-POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_CONTENT_EXPANSION=""
+# # Insert mode icons
+# POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION=""
+# # TODO maybe add diferent color for error sybmol?
+# POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_CONTENT_EXPANSION=""
 
-POWERLEVEL9K_PROMPT_CHAR_OK_VICMD_CONTENT_EXPANSION=""
-POWERLEVEL9K_PROMPT_CHAR_ERROR_VICMD_CONTENT_EXPANSION=""
+# POWERLEVEL9K_PROMPT_CHAR_OK_VICMD_CONTENT_EXPANSION=""
+# POWERLEVEL9K_PROMPT_CHAR_ERROR_VICMD_CONTENT_EXPANSION=""
 
-POWERLEVEL9K_PROMPT_CHAR_OK_VIVIS_CONTENT_EXPANSION=""
-POWERLEVEL9K_PROMPT_CHAR_ERROR_VIVIS_CONTENT_EXPANSION=""
+# POWERLEVEL9K_PROMPT_CHAR_OK_VIVIS_CONTENT_EXPANSION=""
+# POWERLEVEL9K_PROMPT_CHAR_ERROR_VIVIS_CONTENT_EXPANSION=""
+
+
+eval "$(starship init zsh)"
+
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 
 # Display path behaviour
 # https://stackoverflow.com/questions/61176257/customizing-powerleve10k-prompt
@@ -371,6 +378,3 @@ setopt SHARE_HISTORY
 
 # Check if running on macOS, otherwise stop here
 # [[ ! "x$SYSTEM" == "xDarwin" ]] && return
-#
-#
-export HI='hi there! My name is dashenka!'
