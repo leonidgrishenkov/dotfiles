@@ -364,7 +364,7 @@ return {
                     -- Also you can configure auto-resize, see above link.
                     float = {
                         enable = true,
-                        quit_on_focus_loss = false,
+                        quit_on_focus_loss = true,
                         open_win_config = function()
                             local screen_w = vim.opt.columns:get()
                             local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
@@ -823,7 +823,79 @@ return {
         config = function()
             local gitsigns = require("gitsigns")
 
-            gitsigns.setup({})
+            vim.cmd([[
+                highlight GitSignsAdd    guifg=#009900 ctermfg=2
+                highlight GitSignsChange guifg=#bbbb00 ctermfg=3
+            ]])
+
+            gitsigns.setup({
+                signs = {
+                    add = { text = "┃", hl = "GitSignsAdd" },
+                    change = { text = "┃", hl = "GitSignsChange" },
+                    delete = { text = "▁", show_count = true },
+                    topdelete = { text = "▔", show_count = true },
+                    changedelete = { text = "~" },
+                    untracked = { text = "┆" },
+                },
+            })
         end,
+    },
+    {
+        --[[
+        Repo: https://github.com/folke/which-key.nvim
+        ]]
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            local whichkey = require("which-key")
+            whichkey.setup({})
+
+            whichkey.register({
+                f = {
+                    name = "Find",
+                    f = { "Find File" },
+                    b = { "Find Buffer" },
+                    h = { "Find Help" },
+                    w = { "Find Text" },
+                },
+                e = { "File Manager" },
+                o = { "Git status" },
+                x = { "Close Buffer" },
+                w = { "Save" },
+                t = { name = "Terminal", f = { "Float terminal" }, h = { "Horizontal terminal" } },
+                h = { "No highlight" },
+                g = { name = "Git", b = "Branches", c = "Commits", s = "Status" },
+                c = { name = "Comment", l = "Comment Line" },
+                l = {
+                    name = "LSP",
+                    d = "Diagnostic",
+                    D = "Hover diagnostic",
+                    f = "Format",
+                    r = "Rename",
+                    a = "Action",
+                    s = "Symbol",
+                },
+            }, { prefix = "<leader>" })
+        end,
+    },
+    {
+        --[[
+        Highlights comments contains word such TODO, FIX etc.
+        Repo: https://github.com/folke/todo-comments.nvim
+        --]]
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        cmd = { "TodoTrouble", "TodoTelescope" },
+        opts = {},
+    },
+    {
+        --[[
+        Repo: https://github.com/folke/trouble.nvim
+        --]]
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
+        opts = {},
     },
 }
