@@ -1,5 +1,10 @@
 # Default config: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#default
 
+gui:
+  windowSize: 'normal'
+  language: 'en'
+  nerdFontsVersion: '3'
+
 keybinding:
   universal:
     prevItem-alt: 'k' # go one line up
