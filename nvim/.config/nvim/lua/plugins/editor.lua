@@ -832,8 +832,8 @@ return {
                 signs = {
                     add = { text = "┃", hl = "GitSignsAdd" },
                     change = { text = "┃", hl = "GitSignsChange" },
-                    delete = { text = "▁", show_count = true },
-                    topdelete = { text = "▔", show_count = true },
+                    delete = { text = "", show_count = true },
+                    topdelete = { text = "", show_count = true },
                     changedelete = { text = "~" },
                     untracked = { text = "┆" },
                 },
@@ -896,6 +896,16 @@ return {
         --]]
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
-        opts = {},
+        opts = {
+            -- Sings defined in lsp config
+            -- signs = {
+            --     -- icons / text used for a diagnostic
+            --     error = "",
+            --     warning = "",
+            --     hint = "",
+            --     information = "",
+            --     other = "",
+            -- },
+        },
     },
 }
