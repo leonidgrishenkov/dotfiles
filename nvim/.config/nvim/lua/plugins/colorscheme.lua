@@ -31,20 +31,39 @@ return {
                 integrations = {
                     nvimtree = true,
                     cmp = true,
-                    telescope = true,
                     treesitter = true,
-                    telescope = true,
+                    telescope = {
+                        enabled = true,
+                        -- style = "nvchad"
+                    },
+                    lsp_trouble = true,
+                    gitsigns = true,
+                    which_key = true,
                     mason = true,
                     markdown = true,
-                    indent_blankline = { enabled = true },
+                    noice = true,
                     native_lsp = {
                         enabled = true,
+                        virtual_text = {
+                            errors = { "italic" },
+                            hints = { "italic" },
+                            warnings = { "italic" },
+                            information = { "italic" },
+                        },
                         underlines = {
                             errors = { "undercurl" },
                             hints = { "undercurl" },
                             warnings = { "undercurl" },
                             information = { "undercurl" },
                         },
+                        inlay_hints = {
+                            background = true,
+                        },
+                    },
+                    indent_blankline = {
+                        enabled = true,
+                        scope_color = "", -- catppuccin color (eg. `lavender`) Default: text
+                        colored_indent_levels = false,
                     },
                 },
             })
