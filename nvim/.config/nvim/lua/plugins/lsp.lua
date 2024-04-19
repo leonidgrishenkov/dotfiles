@@ -17,6 +17,7 @@ return {
             lspconfig.lua_ls.setup({})
             lspconfig.yamlls.setup({})
             lspconfig.jsonls.setup({})
+            lspconfig.taplo.setup({})
 
             -- Change the Diagnostic symbols in the sign column (gutter)
             local signs = {
@@ -78,6 +79,7 @@ return {
                     "pyright",
                     "yamlls",
                     "jsonls",
+                    "taplo", -- LSP for toml files
                 },
                 -- auto-install configured servers (with lspconfig)
                 automatic_installation = true, -- not the same as ensure_installed
@@ -88,7 +90,9 @@ return {
                     "stylua", -- lua formatter
                     "ruff", -- python formatter and linter
                     "prettierd",
+                    "prettier",
                     "sql-formatter",
+                    "sqlfluff",
                     "stylua",
                     "shfmt",
                 },

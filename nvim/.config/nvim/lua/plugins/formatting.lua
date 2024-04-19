@@ -12,6 +12,7 @@ return {
         config = function()
             local conform = require("conform")
 
+            -- TODO: Find and setup formatter for toml file. Maybe taplo?
             conform.setup({
                 formatters_by_ft = {
                     -- All formatters: https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
@@ -22,7 +23,7 @@ return {
                     lua = { "stylua" },
                     sql = {
                         {
-                            "sql-formatter", -- Repo: https://github.com/sql-formatter-org/sql-formatter
+                            "sql_formatter", -- Repo: https://github.com/sql-formatter-org/sql-formatter
                             "sqlfluff", -- Repo: https://github.com/sqlfluff/sqlfluff
                         },
                     },
@@ -48,6 +49,10 @@ return {
                 formatters = {
                     shfmt = {
                         prepend_args = { "-i", "2" },
+                    },
+                    -- TODO: This doesn't working. Google and fix
+                    sql_formatter = {
+                        prepend_args = { "--config", "$XDG_CONFIG_HOME/sql-formatter/config.json" },
                     },
                 },
                 -- Conform will notify you when a formatter errors
