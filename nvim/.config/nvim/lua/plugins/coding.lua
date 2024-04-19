@@ -17,10 +17,9 @@ return {
             "BufNewFile", -- When open a new file
         },
         config = function()
-            local treesitter = require("nvim-treesitter")
-            local configs = require("nvim-treesitter.configs")
+            local treesitter = require("nvim-treesitter.configs")
 
-            configs.setup({
+            treesitter.setup({
                 -- A list of parser names that should be installed
                 -- Supported langs: https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
                 ensure_installed = {
@@ -38,17 +37,18 @@ return {
                     "vimdoc",
                     "dockerfile",
                     "gpg",
-                    "dot",
                     "sql",
                     "ssh_config",
                     "toml",
-                    "make", -- For `Makefile`
+                    "make",
+                    "tmux",
                 },
-                -- Install parsers synchronously (only applied to `ensure_installed`)
+                -- Install parsers synchronously (only applied to `ensure_installed`).
+                -- false = install async
                 sync_install = false,
                 -- Automatically install missing parsers when entering buffer
                 -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-                auto_install = false,
+                auto_install = true,
                 -- Enable syntax highlight
                 highlight = {
                     enable = true, -- `false` will disable the whole plugin
@@ -270,14 +270,28 @@ return {
             "InsertEnter", -- Load plugins only on `InsertEnter`
         },
         -- Example: https://github.com/josean-dev/dev-environment-files/blob/main/.config/nvim/lua/josean/plugins/nvim-autopairs.lua
-        -- dependencies = {
-        --     "nvim-cmp",
-        -- }
+        dependencies = {
+            "hrsh7th/nvim-cmp",
+        },
         config = function()
             -- Import plugin
             local autopairs = require("nvim-autopairs")
             -- Configure plugin
-            autopairs.setup({})
+            autopairs.setup({
+                check_ts = true, -- enable treesitter
+                ts_config = {
+                    lua = { "string" }, -- don't add pairs in lua string treesitter nodes
+                },
+            })
+
+            -- import nvim-autopairs completion functionality
+            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+
+            -- import nvim-cmp plugin (completions plugin)
+            local cmp = require("cmp")
+
+            -- make autopairs and completion work together
+            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
         end,
     },
     {
@@ -301,7 +315,7 @@ return {
                 },
                 -- `:h ibl.config.scope`
                 scope = {
-                    -- Scope is desibled because I to highlight scopes
+                    -- Scope is desibled because to highlight scopes
                     -- I use `mini.indentscope` plugin defined next.
                     enabled = false, -- Enable scope in indentation guides
                 },
@@ -340,7 +354,7 @@ return {
         version = false, -- see docs on github
         -- event = "LazyFile", -- TODO: why it doesn't work?
         config = function()
-            indentscope = require("mini.indentscope")
+            local indentscope = require("mini.indentscope")
 
             indentscope.setup({
                 -- Draw options
@@ -369,7 +383,7 @@ return {
 
                     -- Type of scope's border: which line(s) with smaller indent to
                     -- categorize as border. Can be one of: 'both', 'top', 'bottom', 'none'.
-                    border = "both",
+                    border = "top",
                 },
                 -- Module mappings. Use `''` (empty string) to disable one.
                 mappings = {
