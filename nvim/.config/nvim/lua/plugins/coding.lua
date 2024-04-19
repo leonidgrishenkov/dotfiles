@@ -88,23 +88,24 @@ return {
             "InsertEnter", -- Load plugin when switch to insert mode
         },
         dependencies = {
-            -- You can choose any another sources here: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
-            -- Snippet engine. Required
-            "saadparwaiz1/cmp_luasnip",
-            -- Also snippet engine?
-            "L3MON4D3/LuaSnip",
-            -- Source for buffer words. Repo: https://github.com/hrsh7th/cmp-buffer
-            "hrsh7th/cmp-buffer",
-            -- Source for file system paths. Repo: https://github.com/hrsh7th/cmp-path
-            "hrsh7th/cmp-path",
-            -- Repo: https://github.com/hrsh7th/cmp-nvim-lsp
-            "hrsh7th/cmp-nvim-lsp",
-            -- useful snippets
-            "rafamadriz/friendly-snippets",
-            -- vs-code like pictograms
-            "onsails/lspkind.nvim",
-            -- ?
+            -- Other sources are listed here: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
+            -- Lua
+            {
+                "L3MON4D3/LuaSnip",
+                version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+            },
+            "saadparwaiz1/cmp_luasnip", -- For lua autocompletion
+            -- Buffer and path
+            "hrsh7th/cmp-buffer", -- Source for text in current buffer. Repo: https://github.com/hrsh7th/cmp-buffer
+            "hrsh7th/cmp-path", -- Source for file system paths. Repo: https://github.com/hrsh7th/cmp-path
+            -- LSP
+            "hrsh7th/cmp-nvim-lsp", -- Repo: https://github.com/hrsh7th/cmp-nvim-lsp
             "neovim/nvim-lspconfig",
+            "hrsh7th/cmp-cmdline",
+            "onsails/lspkind.nvim", -- vs-code like pictograms
+            -- Other
+            "rafamadriz/friendly-snippets", -- Usefull snippets
+            "SergioRibera/cmp-dotenv", -- Cmp for env variables and dotenv file. Repo: https://github.com/SergioRibera/cmp-dotenv
         },
         config = function()
             local cmp = require("cmp")
@@ -135,7 +136,7 @@ return {
                     ["<C-l>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-k>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-                    ["<C-c>"] = cmp.mapping.abort(), -- close completion window
+                    ["<C-e>"] = cmp.mapping.abort(), -- close completion window
                     -- Accept currently selected item. If none selected, `select` first item.
                     ["<CR>"] = cmp.mapping.confirm({
                         select = false, -- Set to `false` to only confirm explicitly selected items.
@@ -168,9 +169,11 @@ return {
                 -- `:h cmp-contig.matching`
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
-                    { name = "buffer" }, -- text within current buffer
-                    { name = "path" }, -- file system paths
-                    { name = "luasnip" }, -- snippets
+                    { name = "buffer" },
+                    { name = "path" },
+                    { name = "luasnip" },
+                    { name = "cmdline" },
+                    { name = "dotenv" },
                 }),
                 formatting = {
                     fields = { "kind", "abbr", "menu" },
@@ -232,19 +235,27 @@ return {
                 sorting = defaults.sorting,
             })
 
+            -- Completions for text inside vim command lines.
+            -- Setup for `/` vim cmdline.
             cmp.setup.cmdline({ "/" }, {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = {
-                    { name = "path" },
+                    { name = "buffer" },
                 },
             })
-            --
-            -- cmp.setup.cmdline(":", {
-            --     mapping = cmp.mapping.preset.cmdline(),
-            --     sources = cmp.config.sources(
-            --         { { name = "path" } }
-            --     ),
-            -- })
+            -- Setup for `:` vim cmdline.
+            cmp.setup.cmdline(":", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { { name = "path" } },
+                    {
+                        {
+                            name = "cmdline",
+                            option = { ignore_cmds = { "Man", "!" } },
+                        },
+                    },
+                }),
+            })
         end,
     },
     {
@@ -266,7 +277,7 @@ return {
             -- Import plugin
             local autopairs = require("nvim-autopairs")
             -- Configure plugin
-            autopairs.setup({}) -- Empty = use default settings
+            autopairs.setup({})
         end,
     },
     {
