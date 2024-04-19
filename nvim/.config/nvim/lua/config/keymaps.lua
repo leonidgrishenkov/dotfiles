@@ -56,7 +56,7 @@ keymap.set({ "n", "v" }, "D", '"_D', opts("Delete w/o yank")) -- TODO: Is it cor
 keymap.set({ "v", "i" }, "jf", "<ESC>", opts("Exit v|i to n mode"))
 
 -- Movements
--- Unmap `h`  TODO is it work?
+-- Unmap `h`  TODO: is it work?
 keymap.set("", "h", "<nop>")
 
 keymap.set({ "n", "v" }, "l", "<Down>", opts("Move down"))

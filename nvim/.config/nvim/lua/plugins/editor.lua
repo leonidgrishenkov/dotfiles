@@ -87,7 +87,7 @@ return {
         "folke/noice.nvim",
         event = "VeryLazy",
         dependencies = {
-            "nui.nvim",
+            "MunifTanjim/nui.nvim",
         },
         config = function()
             local noice = require("noice")
@@ -110,6 +110,7 @@ return {
                             lang = "lua",
                         },
                         help = { pattern = "^:%s*he?l?p?%s+", icon = " " },
+                        input = {}, -- Used by input()
                     },
                 },
                 popupmenu = {
@@ -127,6 +128,11 @@ return {
                     view_history = "messages", -- view for :messages
                     view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
                 },
+                redirect = {
+                    view = "popup",
+                    filter = { event = "msg_show" },
+                },
+
                 -- Views configurations.
                 -- See all options here - https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
                 view = {
@@ -708,8 +714,8 @@ return {
             vim.keymap.set("n", "<leader>gc", builtin.git_branches, opts("Search for git commit in pwd"))
             vim.keymap.set("n", "<leader>gs", builtin.git_status, opts("Search for git status in pwd"))
 
-            vim.keymap.set("n", "gr", builtin.lsp_references, opts(""))
-            -- vim.keymap.set("n", "gd", builtin.lsp_definitions, opts(""))
+            vim.keymap.set("n", "gr", builtin.lsp_references, opts(" ")) -- Search with telescope in all references for current text
+            vim.keymap.set("n", "gd", builtin.lsp_definitions, opts(" ")) -- Go to definition
         end,
     },
     {

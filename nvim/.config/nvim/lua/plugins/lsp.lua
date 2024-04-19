@@ -14,8 +14,9 @@ return {
 
             -- https://github.com/microsoft/pyright
             lspconfig.pyright.setup({})
-
             lspconfig.lua_ls.setup({})
+            lspconfig.yamlls.setup({})
+            lspconfig.jsonls.setup({})
 
             -- Change the Diagnostic symbols in the sign column (gutter)
             local signs = {
@@ -75,6 +76,8 @@ return {
                 ensure_installed = {
                     "lua_ls",
                     "pyright",
+                    "yamlls",
+                    "jsonls",
                 },
                 -- auto-install configured servers (with lspconfig)
                 automatic_installation = true, -- not the same as ensure_installed
@@ -84,6 +87,10 @@ return {
                 ensure_installed = {
                     "stylua", -- lua formatter
                     "ruff", -- python formatter and linter
+                    "prettierd",
+                    "sql-formatter",
+                    "stylua",
+                    "shfmt",
                 },
                 auto_update = true,
                 run_on_start = true,
