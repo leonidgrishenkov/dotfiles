@@ -655,13 +655,13 @@ return {
                     -- Determines what happens if you try to scroll past the view of the picker.
                     scroll_strategy = "limit",
                     -- `:h telescope.layout`
-                    layout_strategy = "horizontal",
+                    layout_strategy = "vertical",
                     path_display = {
                         "truncate",
                         -- "smart",
                     },
                     color_devicons = true,
-                    -- On attached keymapping
+                    -- On attached to client keymapping (inside opened plugin window)
                     mappings = {
                         -- For normal mode
                         n = {
@@ -674,9 +674,10 @@ return {
                             ["<C-k>"] = actions.preview_scrolling_up,
                             ["<C-l>"] = actions.preview_scrolling_down,
 
-                            ["<C-c>"] = actions.close,
+                            ["<esc>"] = actions.close,
 
-                            ["<C-/>"] = actions.which_key,
+                            -- This is which key for telescope itself
+                            ["?"] = actions.which_key,
                         },
                         -- For insert mode
                         i = {
@@ -689,9 +690,7 @@ return {
                             ["<C-k>"] = actions.preview_scrolling_up,
                             ["<C-l>"] = actions.preview_scrolling_down,
 
-                            ["<C-c>"] = actions.close,
-
-                            ["<C-/>"] = actions.which_key,
+                            ["<esc>"] = actions.close,
                         },
                     },
                     -- preview configurations
