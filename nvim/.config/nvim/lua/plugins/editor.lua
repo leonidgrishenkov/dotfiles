@@ -69,14 +69,6 @@ return {
     },
     {
         --[[
-        UI components plugin.
-        Repo: https://github.com/MunifTanjim/nui.nvim
-        ]]
-        "MunifTanjim/nui.nvim",
-        lazy = true,
-    },
-    {
-        --[[
         This plugin replace standart UI for messages, cmdline and popupmenu.
 
         Repo: https://github.com/folke/noice.nvim
@@ -88,12 +80,18 @@ return {
         event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
+            "hrsh7th/nvim-cmp",
         },
         config = function()
             local noice = require("noice")
 
             -- `:h noice.nvim-noice-configuration`
             noice.setup({
+                popupmenu = {
+                    enabled = true, -- enables the Noice popupmenu UI
+                    backend = "cmp", -- backend to use to show regular cmdline completions: `nui` or `cmp`
+                    kind_icons = {}, -- set to `false` to disable icons
+                },
                 cmdline = {
                     -- enables the Noice cmdline UI
                     enabled = true,
@@ -113,15 +111,10 @@ return {
                         input = {}, -- Used by input()
                     },
                 },
-                popupmenu = {
-                    enabled = true, -- enables the Noice popupmenu UI
-                    backend = "cmp", -- backend to use to show regular cmdline completions: `nui` or `cmp`
-                    kind_icons = {}, -- set to `false` to disable icons
-                },
                 messages = {
                     -- NOTE: If you enable messages, then the cmdline is enabled automatically.
                     -- This is a current Neovim limitation.
-                    enabled = false, -- enables the Noice messages UI
+                    enabled = true, -- enables the Noice messages UI
                     view = "notify", -- default view for messages
                     view_error = "notify", -- view for errors
                     view_warn = "notify", -- view for warnings
@@ -363,7 +356,7 @@ return {
                     centralize_selection = true,
                     cursorline = true,
                     debounce_delay = 10,
-                    side = "left",
+                    -- side = "left",
                     preserve_window_proportions = false,
                     number = false,
                     relativenumber = false,
@@ -629,13 +622,16 @@ return {
         Commands can be called only through apis.
         ]]
         "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",
+        cmd = "Telescope",
+        version = false, -- telescope did only one release, so use HEAD for now
         dependencies = {
             "nvim-lua/plenary.nvim",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 -- enabled = vim.fn.executable("make") == 1, -- Took from - https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/editor.lua
-                build = "make",
+                build = vim.fn.executable("make") == 1 and "make"
+                    or "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+                enabled = vim.fn.executable("make") == 1 or vim.fn.executable("cmake") == 1,
             },
             "nvim-tree/nvim-web-devicons",
             "nvim-telescope/telescope-ui-select.nvim",
@@ -645,11 +641,12 @@ return {
             -- All available actions - `:h telescope.actions`
             local actions = require("telescope.actions")
             local builtin = require("telescope.builtin")
+            local themes = require("telescope.themes")
 
             telescope.setup({
                 defaults = {
-                    prompt_prefix = " ",
-                    selection_caret = " ",
+                    prompt_prefix = "   ",
+                    selection_caret = "   ",
                     -- With this mode telescope will start
                     initial_mode = "insert",
                     -- Determines what happens if you try to scroll past the view of the picker.
@@ -703,7 +700,7 @@ return {
                 },
                 extensions = {
                     ["ui-select"] = {
-                        require("telescope.themes").get_dropdown({}),
+                        themes.get_dropdown({}),
                     },
                 },
             })
@@ -757,15 +754,10 @@ return {
             local function opts(desc)
                 return { desc = desc, noremap = true, silent = true }
             end
-            -- All available pickers listed here - https://github.com/nvim-telescope/telescope.nvim#pickers
-            vim.keymap.set("n", "<leader>ff", builtin.find_files, opts("Search for file name in pwd"))
-            vim.keymap.set("n", "<leader>ft", builtin.live_grep, opts("Search for word in files in pwd"))
-            vim.keymap.set("n", "<leader>fb", builtin.buffers, opts("Search for file name in opened buffers"))
-            vim.keymap.set("n", "<leader>fr", builtin.oldfiles, opts("Search for file name in recent files"))
-            vim.keymap.set("n", "<leader>*", builtin.grep_string, opts("Search for pattern in pwd files"))
-            vim.keymap.set("n", "<leader>gb", builtin.git_branches, opts("Search for git branch in pwd"))
-            vim.keymap.set("n", "<leader>gc", builtin.git_branches, opts("Search for git commit in pwd"))
-            vim.keymap.set("n", "<leader>gs", builtin.git_status, opts("Search for git status in pwd"))
+            -- All available pickers listed here: https://github.com/nvim-telescope/telescope.nvim#pickers
+            vim.keymap.set("n", "<leader>km", builtin.keymaps, opts("telescope: Search for keymaps"))
+
+            vim.keymap.set("n", "<leader>tb", builtin.builtin, opts("telescope: List of builtin pickers"))
         end,
     },
     {
@@ -942,6 +934,7 @@ return {
         Repo: https://github.com/folke/trouble.nvim
         --]]
         "folke/trouble.nvim",
+        cmd = { "TroubleToggle", "Trouble" },
         dependencies = { "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
         opts = {
             -- WARN: Sings defined in lsp config

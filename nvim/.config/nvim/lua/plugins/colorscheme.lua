@@ -42,6 +42,7 @@ return {
                     mason = true,
                     markdown = true,
                     noice = true,
+                    mini = true,
                     native_lsp = {
                         enabled = true,
                         virtual_text = {

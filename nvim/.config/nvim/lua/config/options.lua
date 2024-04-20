@@ -30,17 +30,6 @@ opt.mousefocus = true -- ?
 -- `unnamedplus` - Sync with system clipboard
 opt.clipboard = "unnamedplus"
 
--- Fillchars
-opt.fillchars = {
-    vert = "│",
-    fold = "⠀",
-    eob = " ", -- suppress ~ at EndOfBuffer
-    -- diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
-    msgsep = "‾",
-    foldopen = "▾",
-    foldsep = "│",
-    foldclose = "▸",
-}
 -- Autocomplete options for vim command line mode (in `:` when you press <Tab>)
 -- opt.completeopt = "menuone,noinsert,noselect"
 
@@ -62,7 +51,6 @@ opt.showmode = false -- Don't show modes, e.g. -- INSERT --
 opt.pumheight = 10 -- Pop up menu height
 opt.laststatus = 3 -- Set global statusline
 opt.showmatch = true -- Highlight matching parenthesis
-opt.foldmethod = "marker" -- Enable folding (default 'foldmarker')
 -- opt.colorcolumn = '80' -- Line lenght marker at 80 columns
 opt.guifont = "MesloLGM Nerd Font:h15" -- ?
 g.guifont = "MesloLGM Nerd Font:h15" -- ?
@@ -97,8 +85,8 @@ opt.splitkeep = "screen"
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.winminwidth = 5 -- Minimum window width
 
-opt.wildmenu = true
-opt.wildmode = "longest:full,full" -- Command-line completion mode
+-- opt.wildmenu = true
+-- opt.wildmode = "longest:full,full" -- Command-line completion mode
 
 -- Tabs & indentation
 opt.expandtab = true -- Convert tab to spaces
@@ -131,9 +119,26 @@ opt.confirm = true -- Confirm to save changes before exiting modified buffer
 -- opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 opt.formatoptions = "jcroqlnt" -- tcqj
 
--- Folding
-vim.opt.foldlevel = 99
-vim.opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
+-- Folding.
+-- For keymaps see docs: :h fold opening and closing folds
+opt.foldenable = true -- enable folding
+opt.foldmethod = "indent" -- folds will be autodefined based on indents
+opt.foldlevel = 99 -- by default in new file all folds must be opened
+-- How to display closed folds
+-- opt.foldtext = " " -- ?
+
+-- Characters to fill the statuslines, vertical separators and special
+-- lines in the window.
+opt.fillchars = {
+    vert = "│",
+    -- fold = "⠀",
+    eob = " ", -- suppress ~ at EndOfBuffer
+    -- diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
+    msgsep = "‾",
+    foldopen = "▾",
+    foldsep = "│",
+    foldclose = "▸",
+}
 
 -- Fix markdown indentation settings
 -- vim.g.markdown_recommended_style = 0

@@ -21,8 +21,6 @@ return {
 
             local lspconfig = require("lspconfig")
 
-            local telescope_builtin = require("telescope.builtin")
-
             -- Setup required language servers
             local servers = { "pyright", "lua_ls", "yamlls", "jsonls", "taplo" }
             for _, lsp in ipairs(servers) do
@@ -35,7 +33,12 @@ return {
             -- Docs: https://neovim.io/doc/user/diagnostic.html
             -- :help vim.diagnostic.config
             vim.diagnostic.config({
-                virtual_text = { prefix = "●" }, -- Could be '●', '▎', 'x'
+                virtual_text = {
+                    -- prefix = "●",
+                    prefix = "icons",
+                    spacing = 4,
+                    source = "if_many",
+                },
                 signs = true, -- Show symbols in sign column (gutter)
                 underline = false, -- Underline problem line
                 update_in_insert = false,
@@ -123,28 +126,32 @@ return {
             })
         end,
     },
-    "mfussenegger/nvim-lint",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-        local lint = require("lint")
+    {
+        --[[
+        Repo: https://github.com/mfussenegger/nvim-lint
+        --]]
+        "mfussenegger/nvim-lint",
+        config = function()
+            local lint = require("lint")
 
-        lint.linters_by_ft = {
-            python = { "ruff" },
-            yaml = { "yamllint" },
-            sql = { "sqlfluff" },
-        }
+            lint.linters_by_ft = {
+                python = { "ruff" },
+                yaml = { "yamllint" },
+                sql = { "sqlfluff" },
+            }
 
-        local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+            local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
-        vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-            group = lint_augroup,
-            callback = function()
+            vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+                group = lint_augroup,
+                callback = function()
+                    lint.try_lint()
+                end,
+            })
+
+            vim.keymap.set("n", "<leader>l", function()
                 lint.try_lint()
-            end,
-        })
-
-        vim.keymap.set("n", "<leader>l", function()
-            lint.try_lint()
-        end, { desc = "Trigger linting for current file" })
-    end,
+            end, { desc = "Trigger linting for current file" })
+        end,
+    },
 }
