@@ -628,13 +628,14 @@ return {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
         dependencies = {
-            "plenary.nvim",
+            "nvim-lua/plenary.nvim",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 enabled = vim.fn.executable("make") == 1, -- Took from - https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/editor.lua
                 build = "make",
             },
-            "nvim-web-devicons",
+            "nvim-tree/nvim-web-devicons",
+            "nvim-telescope/telescope-ui-select.nvim",
         },
         config = function()
             local telescope = require("telescope")
@@ -653,7 +654,8 @@ return {
                     -- `:h telescope.layout`
                     layout_strategy = "horizontal",
                     path_display = {
-                        "truncate",
+                        -- "truncate",
+                        "smart",
                     },
                     -- On attached keymapping
                     mappings = {
@@ -696,9 +698,15 @@ return {
                         hide_on_startup = false,
                     },
                 },
+                extensions = {
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown({}),
+                    },
+                },
             })
 
             telescope.load_extension("fzf")
+            telescope.load_extension("ui-select")
 
             -- Global keymappings
             local function opts(desc)
@@ -715,7 +723,7 @@ return {
             vim.keymap.set("n", "<leader>gs", builtin.git_status, opts("Search for git status in pwd"))
 
             vim.keymap.set("n", "gr", builtin.lsp_references, opts(" ")) -- Search with telescope in all references for current text
-            vim.keymap.set("n", "gd", builtin.lsp_definitions, opts(" ")) -- Go to definition
+            -- vim.keymap.set("n", "gd", builtin.lsp_definitions, opts(" ")) -- Go to definition
         end,
     },
     {
@@ -903,7 +911,9 @@ return {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
         opts = {
-            -- Sings defined in lsp config
+            use_diagnostic_signs = false,
+            -- WARN: Sings defined in lsp config
+
             -- signs = {
             --     -- icons / text used for a diagnostic
             --     error = "",
@@ -912,6 +922,9 @@ return {
             --     information = "",
             --     other = "",
             -- },
+        },
+        keys = {
+            { "<leader>xx", "<cmd>TroubleToggle<CR>", desc = "Open/close trouble list" },
         },
     },
 }

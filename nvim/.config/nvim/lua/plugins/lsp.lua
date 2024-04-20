@@ -9,17 +9,35 @@ return {
         :LspInfo
         ]]
         "neovim/nvim-lspconfig",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            { "folke/neodev.nvim", opts = {} },
+        },
         config = function()
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
             local lspconfig = require("lspconfig")
 
-            -- https://github.com/microsoft/pyright
-            lspconfig.pyright.setup({})
-            lspconfig.lua_ls.setup({})
-            lspconfig.yamlls.setup({})
-            lspconfig.jsonls.setup({})
-            lspconfig.taplo.setup({})
+            -- Setup required language servers
+            local servers = { "pyright", "lua_ls", "yamlls", "jsonls", "taplo" }
+            for _, lsp in ipairs(servers) do
+                lspconfig[lsp].setup({
+                    capabilities = capabilities,
+                })
+            end
 
-            -- Change the Diagnostic symbols in the sign column (gutter)
+            -- Setup Diagnostic signs and highlight
+            -- Docs: https://neovim.io/doc/user/diagnostic.html
+            -- :help vim.diagnostic.config
+            vim.diagnostic.config({
+                virtual_text = { prefix = "●" },
+                signs = true, -- Show symbols in sign column (gutter)
+                underline = false, -- Underline problem line
+                update_in_insert = false,
+                severity_sort = false,
+            })
+
+            -- Setup symbols in the sign column (gutter)
             local signs = {
                 Error = "",
                 Warn = "",
@@ -30,6 +48,15 @@ return {
                 local hl = "DiagnosticSign" .. type
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
             end
+
+            -- Setup keymaps
+            local function opts(desc)
+                return { desc = desc, noremap = true, silent = true }
+            end
+
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show definition preview hover"))
+            vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
+            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts("Show code actions"))
         end,
     },
     {

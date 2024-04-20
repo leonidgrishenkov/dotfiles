@@ -70,6 +70,17 @@ return {
         end,
     },
     {
+        "hrsh7th/cmp-nvim-lsp",
+    },
+    {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        dependencies = {
+            "saadparwaiz1/cmp_luasnip", -- For lua autocompletion
+            "rafamadriz/friendly-snippets", -- Usefull snippets
+        },
+    },
+    {
         --[[
         Autocompletion plugin.
 
@@ -89,22 +100,13 @@ return {
         },
         dependencies = {
             -- Other sources are listed here: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
-            -- Lua
-            {
-                "L3MON4D3/LuaSnip",
-                version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-            },
-            "saadparwaiz1/cmp_luasnip", -- For lua autocompletion
             -- Buffer and path
             "hrsh7th/cmp-buffer", -- Source for text in current buffer. Repo: https://github.com/hrsh7th/cmp-buffer
             "hrsh7th/cmp-path", -- Source for file system paths. Repo: https://github.com/hrsh7th/cmp-path
             -- LSP
-            "hrsh7th/cmp-nvim-lsp", -- Repo: https://github.com/hrsh7th/cmp-nvim-lsp
-            "neovim/nvim-lspconfig",
-            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-cmdline", -- ?
             "onsails/lspkind.nvim", -- vs-code like pictograms
             -- Other
-            "rafamadriz/friendly-snippets", -- Usefull snippets
             "SergioRibera/cmp-dotenv", -- Cmp for env variables and dotenv file. Repo: https://github.com/SergioRibera/cmp-dotenv
         },
         config = function()
@@ -169,9 +171,9 @@ return {
                 -- `:h cmp-contig.matching`
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
-                    { name = "buffer" },
+                    { name = "buffer", keyword_length = 3 },
                     { name = "path" },
-                    { name = "luasnip" },
+                    { name = "luasnip", keyword_length = 2 },
                     { name = "cmdline" },
                     { name = "dotenv" },
                 }),
