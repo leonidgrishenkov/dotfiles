@@ -88,3 +88,6 @@ keymap.set("n", "<leader>tm", "<cmd>tabnew %<CR>", opts("Open current buffer in 
 
 -- Clear search highlights
 keymap.set("n", "<leader>ch", ":nohl<CR>", opts("Clear search highlights"))
+
+-- Move current visual-line selection up and down
+keymap.set("v", "<A-u>", '<cmd>call utils#MoveSelection("up")<cr>', { desc = "move selection up" })

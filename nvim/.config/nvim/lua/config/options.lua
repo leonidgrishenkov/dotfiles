@@ -64,11 +64,12 @@ opt.laststatus = 3 -- Set global statusline
 opt.showmatch = true -- Highlight matching parenthesis
 opt.foldmethod = "marker" -- Enable folding (default 'foldmarker')
 -- opt.colorcolumn = '80' -- Line lenght marker at 80 columns
-opt.splitright = true -- Vertical split to the right
-opt.splitbelow = true -- Horizontal split to the bottom
 opt.guifont = "MesloLGM Nerd Font:h15" -- ?
 g.guifont = "MesloLGM Nerd Font:h15" -- ?
-opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
+
+-- Setup Singcolumn size.
+-- See :h options for defails.
+opt.signcolumn = "auto:4"
 
 -- Line numbers
 opt.relativenumber = true -- Show relative line numbers
@@ -87,13 +88,17 @@ opt.sidescroll = 8 -- Columns of context
 -- opt.listchars+=precedes:<,extends:>
 opt.scrolloff = 4 -- Lines of context
 
+-- split windows
+opt.splitright = true -- split vertical window to the right
+opt.splitbelow = true -- split horizontal window to the bottom
+
 opt.spelllang = { "en" }
-opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = "screen"
-opt.splitright = true -- Put new windows right of curren
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
+
+opt.wildmenu = true
+opt.wildmode = "longest:full,full" -- Command-line completion mode
 
 -- Tabs & indentation
 opt.expandtab = true -- Convert tab to spaces

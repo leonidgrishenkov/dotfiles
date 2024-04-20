@@ -121,7 +121,8 @@ return {
             cmp.setup({
                 enabled = true,
                 completion = {
-                    completeopt = "menu,menuone,preview,noselect,noinsert",
+                    -- Behavior of the cmp plugin
+                    completeopt = "menu,preview,noinsert",
                     -- The number of characters needed to trigger auto-completion.
                     keyword_length = 2,
                 },
@@ -137,8 +138,12 @@ return {
                     ["<C-n>"] = cmp.mapping.select_next_item(), -- next suggestion
                     ["<C-l>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-k>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-                    ["<C-e>"] = cmp.mapping.abort(), -- close completion window
+                    ["<C-a>"] = cmp.mapping.complete(), -- Invoke cmp
+                    -- Close completion window
+                    ["<C-e>"] = cmp.mapping({
+                        i = cmp.mapping.abort(),
+                        c = cmp.mapping.close(),
+                    }),
                     -- Accept currently selected item. If none selected, `select` first item.
                     ["<CR>"] = cmp.mapping.confirm({
                         select = false, -- Set to `false` to only confirm explicitly selected items.
@@ -148,43 +153,52 @@ return {
                     ["<C-y>"] = cmp.config.disable,
 
                     -- With this enabled <Tab> doesn't work in vim command line mode ( when use `:` ) for autocompletion
-                    -- ["<Tab>"] = function(fallback)
-                    -- 	if cmp.visible() then
-                    -- 		cmp.select_next_item()
-                    -- 	elseif luasnip.expand_or_jumpable() then
-                    -- 		luasnip.expand_or_jump()
-                    -- 	else
-                    -- 		fallback()
-                    -- 	end
-                    -- end,
-                    -- ["<S-Tab>"] = function(fallback)
-                    -- 	if cmp.visible() then
-                    -- 		cmp.select_prev_item()
-                    -- 	elseif luasnip.jumpable(-1) then
-                    -- 		luasnip.jump(-1)
-                    -- 	else
-                    -- 		fallback()
-                    -- 	end
-                    -- end,
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item()
+                        elseif luasnip.expandable() then
+                            luasnip.expand()
+                        elseif luasnip.expand_or_jumpable() then
+                            luasnip.expand_or_jump()
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        elseif luasnip.jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
                 }),
-                -- Sources for autocompletion
-                -- `:h cmp-contig.matching`
+                -- Sources for autocompletion.
+                -- Docs: :h cmp-contig.matching
+                -- WARN: Order in this list will be used to prioritize
+                -- cmp results.
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
+                    { name = "luasnip", keyword_length = 2 },
                     { name = "buffer", keyword_length = 3 },
                     { name = "path" },
-                    { name = "luasnip", keyword_length = 2 },
                     { name = "cmdline" },
                     { name = "dotenv" },
                 }),
+                confirm_opts = {
+                    behavior = cmp.ConfirmBehavior.Replace,
+                    select = false,
+                },
                 formatting = {
+                    expandable_indicator = true,
                     fields = { "kind", "abbr", "menu" },
                     -- configure lspkind for vs-code like pictograms in completion menu
                     format = lspkind.cmp_format({
                         mode = "symbol", -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
                         -- Icons preset. Can be either 'default' (requires nerd-fonts font)
                         -- or 'codicons' for codicon preset (requires vscode-codicons font)
-                        preset = "default",
+                        -- preset = "default",
                         -- Override preset symbols. Default: {} (Use from preset)
                         symbol_map = {
                             Text = "󰉿",
@@ -231,23 +245,27 @@ return {
                 window = {
                     completion = cmp.config.window.bordered(),
                     documentation = cmp.config.window.bordered(),
+                    scrollbar = true,
                 },
                 -- `:h cmp-contig.matching`
-                matching = {},
+                matching = defaults.matching,
                 sorting = defaults.sorting,
+                experimental = {
+                    ghost_text = true,
+                },
             })
 
             -- Completions for text inside vim command lines.
             -- Setup for `/` vim cmdline.
-            cmp.setup.cmdline({ "/" }, {
-                mapping = cmp.mapping.preset.cmdline(),
+            cmp.setup.cmdline("/", {
+                -- mapping = cmp.mapping.preset.cmdline(),
                 sources = {
                     { name = "buffer" },
                 },
             })
             -- Setup for `:` vim cmdline.
             cmp.setup.cmdline(":", {
-                mapping = cmp.mapping.preset.cmdline(),
+                -- mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
                     { { name = "path" } },
                     {
@@ -456,6 +474,26 @@ return {
                     block = "<leader>//",
                 },
             })
+        end,
+    },
+    {
+        "kylechui/nvim-surround",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            require("nvim-surround").setup({})
+        end,
+    },
+    {
+        --[[
+        Adds highlights for markdown.
+        Repo: https://github.com/lukas-reineke/headlines.nvim
+        --]]
+        "lukas-reineke/headlines.nvim",
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        config = function()
+            local headlines = require("headlines")
+            headlines.setup({})
         end,
     },
 }

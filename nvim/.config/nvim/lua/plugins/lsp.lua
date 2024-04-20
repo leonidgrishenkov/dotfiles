@@ -7,11 +7,14 @@ return {
         Wiki: https://github.com/neovim/nvim-lspconfig/wiki
 
         :LspInfo
+        To restart plugin: :LspRestart
         ]]
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            { "folke/neodev.nvim", opts = {} },
+            { "folke/neodev.nvim", opts = {} }, -- will improve lua_ls functionality
+            -- Add ops on files such as rename imports if file name was changed
+            { "antosha417/nvim-lsp-file-operations", config = true },
         },
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -30,7 +33,7 @@ return {
             -- Docs: https://neovim.io/doc/user/diagnostic.html
             -- :help vim.diagnostic.config
             vim.diagnostic.config({
-                virtual_text = { prefix = "●" },
+                virtual_text = { prefix = "●" }, -- Could be '●', '▎', 'x'
                 signs = true, -- Show symbols in sign column (gutter)
                 underline = false, -- Underline problem line
                 update_in_insert = false,
@@ -49,14 +52,46 @@ return {
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
             end
 
-            -- Setup keymaps
-            local function opts(desc)
-                return { desc = desc, noremap = true, silent = true }
-            end
+            -- Setup keymaps.
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("LocalLspConfig", {}),
+                callback = function(ev)
+                    -- Buffer local mappings.
+                    -- See `:help vim.lsp.*` for documentation on any of the below functions
+                    local function opts(desc)
+                        return { desc = desc, buffer = ev.buf, silent = true }
+                    end
 
-            vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show definition preview hover"))
-            vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
-            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts("Show code actions"))
+                    -- Show documentation for text under cursor
+                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show definition preview hover"))
+
+                    -- see available code actions, in visual mode will apply to selection
+                    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts("Show code actions"))
+
+                    -- Smart rename text below cursor inside current scope (indent guide).
+                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Smart rename in buffer"))
+
+                    -- Show with Telescope
+                    -- TODO: why its go to definitions instead of showing it?
+                    -- To go back type: <ctrl> + o
+                    vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts("Show LSP definitions"))
+                    -- Show all references for text below cursor in current workspace
+                    vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts("Show LSP references"))
+
+                    -- Show all diagnostics for opened buffer
+                    vim.keymap.set(
+                        "n",
+                        "<leader>D",
+                        "<cmd>Telescope diagnostics bufnr=0<CR>",
+                        opts("Show buffer diagnostics")
+                    )
+                    -- Show diagnostics for current line
+                    vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts("Show line diagnostics"))
+
+                    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts("Go to previous diagnostic")) -- jump to previous diagnostic in buffer
+                    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts("Go to next diagnostic")) -- jump to next diagnostic in buffer
+                end,
+            })
         end,
     },
     {
@@ -120,7 +155,6 @@ return {
                     "prettier",
                     "sql-formatter",
                     "sqlfluff",
-                    "stylua",
                     "shfmt",
                 },
                 auto_update = true,
@@ -128,4 +162,28 @@ return {
             })
         end,
     },
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+        local lint = require("lint")
+
+        lint.linters_by_ft = {
+            python = { "ruff" },
+            yaml = { "yamllint" },
+            sql = { "sqlfluff" },
+        }
+
+        local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+
+        vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+            group = lint_augroup,
+            callback = function()
+                lint.try_lint()
+            end,
+        })
+
+        vim.keymap.set("n", "<leader>l", function()
+            lint.try_lint()
+        end, { desc = "Trigger linting for current file" })
+    end,
 }

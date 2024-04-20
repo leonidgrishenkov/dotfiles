@@ -2,7 +2,7 @@ return {
     {
         --[[
     Icons plugin. Used by other plugins.
-    
+
     Repo: https://github.com/nvim-tree/nvim-web-devicons
     ]]
         "nvim-tree/nvim-web-devicons",
@@ -78,10 +78,10 @@ return {
     {
         --[[
         This plugin replace standart UI for messages, cmdline and popupmenu.
-        
+
         Repo: https://github.com/folke/noice.nvim
         Wiki: https://github.com/folke/noice.nvim/wiki
-        
+
         `:checkhealth noice`
         ]]
         "folke/noice.nvim",
@@ -337,6 +337,9 @@ return {
             local HEIGHT_RATIO = 0.8
             local WIDTH_RATIO = 0.5
 
+            vim.g.loaded_netrw = 1
+            vim.g.loaded_netrwPlugin = 1
+
             -- Configure and enable plugin
             tree.setup({
                 on_attach = on_attach_keymap,
@@ -360,7 +363,7 @@ return {
                     centralize_selection = true,
                     cursorline = true,
                     debounce_delay = 10,
-                    -- side = "left",
+                    side = "left",
                     preserve_window_proportions = false,
                     number = false,
                     relativenumber = false,
@@ -370,7 +373,7 @@ return {
                     -- Also you can configure auto-resize, see above link.
                     float = {
                         enable = true,
-                        quit_on_focus_loss = true,
+                        quit_on_focus_loss = false,
                         open_win_config = function()
                             local screen_w = vim.opt.columns:get()
                             local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
@@ -559,7 +562,7 @@ return {
                         eject = true,
                         resize_window = true,
                         window_picker = {
-                            enable = true,
+                            enable = false, -- Disable to work well with window split
                             picker = "default",
                             chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
                             exclude = {
@@ -631,7 +634,7 @@ return {
             "nvim-lua/plenary.nvim",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
-                enabled = vim.fn.executable("make") == 1, -- Took from - https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/editor.lua
+                -- enabled = vim.fn.executable("make") == 1, -- Took from - https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/editor.lua
                 build = "make",
             },
             "nvim-tree/nvim-web-devicons",
@@ -654,8 +657,8 @@ return {
                     -- `:h telescope.layout`
                     layout_strategy = "horizontal",
                     path_display = {
-                        -- "truncate",
-                        "smart",
+                        "truncate",
+                        -- "smart",
                     },
                     -- On attached keymapping
                     mappings = {
@@ -739,93 +742,7 @@ return {
         config = function()
             local dressing = require("dressing")
 
-            dressing.setup({
-                -- input = {
-                --     -- Set to false to disable the vim.ui.input implementation
-                --     enabled = true,
-                --     -- Default prompt string
-                --     default_prompt = "Input",
-                --     -- Trim trailing `:` from prompt
-                --     trim_prompt = true,
-                --     -- Can be 'left', 'right', or 'center'
-                --     title_pos = "center",
-                --     -- When true, <Esc> will close the modal
-                --     insert_only = true,
-                --     -- When true, input will start in insert mode.
-                --     start_in_insert = true,
-                --     -- These are passed to nvim_open_win
-                --     border = "rounded",
-                --     -- 'editor' and 'win' will default to being centered
-                --     relative = "cursor",
-                --     -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-                --     prefer_width = 40,
-                --     width = nil,
-                --     -- min_width and max_width can be a list of mixed types.
-                --     -- min_width = {20, 0.2} means "the greater of 20 columns or 20% of total"
-                --     max_width = { 140, 0.9 },
-                --     min_width = { 20, 0.2 },
-                --     buf_options = {},
-                --     win_options = {
-                --         -- Disable line wrapping
-                --         wrap = false,
-                --         -- Indicator for when text exceeds window
-                --         list = true,
-                --         listchars = "precedes:...,extends:...",
-                --         -- Increase this for more context when text scrolls off the window
-                --         sidescrolloff = 0,
-                --     },
-                --     -- Set to `false` to disable
-                --     mappings = {
-                --         -- For normal mode
-                --         n = false,
-                --         -- For insert mode
-                --         i = {
-                --             ["<Esc>"] = "Close",
-                --             ["<C-c>"] = "Close",
-                --             ["<CR>"] = "Confirm",
-                --             ["<C-p>"] = "HistoryPrev",
-                --             ["<C-n>"] = "HistoryNext",
-                --         },
-                --     },
-                -- },
-                -- select = {
-                --     -- Set to false to disable the vim.ui.select implementation
-                --     enabled = true,
-                --     -- Priority list of preferred vim.select implementations
-                --     backend = { "telescope", "fzf_lua", "fzf", "builtin", "nui" },
-                --     -- Options for built-in selector
-                --     builtin = {
-                --         -- Display numbers for options and set up keymaps
-                --         show_numbers = true,
-                --         -- These are passed to nvim_open_win
-                --         border = "rounded",
-                --         -- 'editor' and 'win' will default to being centered
-                --         relative = "editor",
-                --         buf_options = {},
-                --         win_options = {
-                --             cursorline = true,
-                --             cursorlineopt = "number",
-                --         },
-                --         -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-                --         -- the min_ and max_ options can be a list of mixed types.
-                --         -- max_width = {140, 0.8} means "the lesser of 140 columns or 80% of total"
-                --         width = nil,
-                --         max_width = { 140, 0.8 },
-                --         min_width = { 40, 0.2 },
-                --         height = nil,
-                --         max_height = 0.9,
-                --         min_height = { 10, 0.2 },
-                --         -- Set to `false` to disable
-                --         mappings = {
-                --             ["<Esc>"] = "Close",
-                --             ["<C-c>"] = "Close",
-                --             ["<CR>"] = "Confirm",
-                --             ["<C-p>"] = "HistoryPrev",
-                --             ["<C-n>"] = "HistoryNext",
-                --         },
-                --     },
-                -- },
-            })
+            dressing.setup({})
         end,
     },
     {
@@ -834,9 +751,11 @@ return {
         Repo: https://github.com/lewis6991/gitsigns.nvim
         ]]
         "lewis6991/gitsigns.nvim",
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
             local gitsigns = require("gitsigns")
 
+            -- Setup colors for symbols in signcolomn
             vim.cmd([[
                 highlight GitSignsAdd    guifg=#009900 ctermfg=2
                 highlight GitSignsChange guifg=#bbbb00 ctermfg=3
@@ -851,6 +770,38 @@ return {
                     changedelete = { text = "~" },
                     untracked = { text = "┆" },
                 },
+                watch_gitdir = {
+                    follow_files = true,
+                },
+                signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+                numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+                linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+                word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+                preview_config = {
+                    -- Options passed to nvim_open_win
+                    border = "rounded",
+                    relative = "cursor",
+                    row = 0,
+                    col = 1,
+                },
+                show_deleted = false, -- Show old version inline via virtual lines.
+                on_attach = function(bufnr)
+                    local gs = package.loaded.gitsigns
+
+                    local function map(mode, l, r, desc)
+                        vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
+                    end
+
+                    -- Navigations
+                    map("n", "]h", gs.next_hunk, "Next Hunk")
+                    map("n", "[h", gs.prev_hunk, "Prev Hunk")
+
+                    -- Actions
+                    map("n", "<leader>hs", gs.stage_hunk, "Stage hunk")
+                    map("n", "<leader>hr", gs.reset_hunk, "Reset hunk")
+                    map("n", "<leader>hu", gs.undo_stage_hunk, "Undo stage hunk")
+                    map("n", "<leader>hp", gs.preview_hunk, "Preview hunk")
+                end,
             })
         end,
     },
@@ -864,7 +815,19 @@ return {
             vim.o.timeout = true
             vim.o.timeoutlen = 300
             local whichkey = require("which-key")
-            whichkey.setup({})
+            whichkey.setup({
+                icons = {
+                    breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+                    separator = "➜", -- symbol used between a key and it's label
+                    group = "+", -- symbol prepended to a group
+                },
+                window = {
+                    border = "single", -- none, single, double, shadow
+                    position = "bottom", -- bottom, top
+                    margin = { 0, 0, 0, 0 }, -- extra window margin [top, right, bottom, left]
+                    padding = { 1, 0, 1, 0 }, -- extra window padding [top, right, bottom, left]
+                },
+            })
 
             whichkey.register({
                 f = {
@@ -896,13 +859,44 @@ return {
     },
     {
         --[[
-        Highlights comments contains word such TODO, FIX etc.
+        Highlights comments contains words such todo, fix, warn etc.
         Repo: https://github.com/folke/todo-comments.nvim
         --]]
         "folke/todo-comments.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
-        cmd = { "TodoTrouble", "TodoTelescope" },
-        opts = {},
+        config = function()
+            local todo = require("todo-comments")
+
+            vim.keymap.set("n", "]t", function()
+                todo.jump_next()
+            end, { desc = "Next todo comment" })
+
+            vim.keymap.set("n", "[t", function()
+                todo.jump_prev()
+            end, { desc = "Previous todo comment" })
+
+            -- Default config: https://github.com/folke/todo-comments.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
+            todo.setup({
+                signs = false, -- show icons in the signs column
+                -- highlighting of the line containing the todo comment
+                -- * before: highlights before the keyword (typically comment characters)
+                -- * keyword: highlights of the keyword
+                -- * after: highlights after the keyword (todo text)
+                highlight = {
+                    multiline = false, -- enable multine todo comments
+                    before = "", -- "fg" or "bg" or empty
+                    keyword = "fg", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
+                    after = "fg", -- "fg" or "bg" or empty
+                    pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
+                    comments_only = true, -- uses treesitter to match keywords in comments only
+                    max_line_len = 400, -- ignore lines longer than this
+                    exclude = {}, -- list of file types to exclude highlighting
+                },
+                -- regex that will be used to match keywords.
+                -- don't replace the (KEYWORDS) placeholder
+                pattern = [[\b(KEYWORDS):]], -- ripgrep regex
+            })
+        end,
     },
     {
         --[[
@@ -911,20 +905,30 @@ return {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
         opts = {
-            use_diagnostic_signs = false,
             -- WARN: Sings defined in lsp config
-
-            -- signs = {
-            --     -- icons / text used for a diagnostic
-            --     error = "",
-            --     warning = "",
-            --     hint = "",
-            --     information = "",
-            --     other = "",
-            -- },
+            use_diagnostic_signs = true,
         },
         keys = {
             { "<leader>xx", "<cmd>TroubleToggle<CR>", desc = "Open/close trouble list" },
+            {
+                "<leader>xw",
+                "<cmd>TroubleToggle workspace_diagnostics<CR>",
+                desc = "Open trouble workspace diagnostics",
+            },
+            { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<CR>", desc = "Open trouble document diagnostics" },
+            { "<leader>xl", "<cmd>TroubleToggle loclist<CR>", desc = "Open trouble location list" },
+            { "<leader>xt", "<cmd>TodoTrouble<CR>", desc = "Open todos in trouble" },
+        },
+    },
+    {
+        --[[
+        Plugin to maximize splitted window.
+
+        Repo: TODO: add link to repo
+        --]]
+        "szw/vim-maximizer",
+        keys = {
+            { "<leader>sm", "<cmd>MaximizerToggle<CR>", desc = "Maximize/minimize a split" },
         },
     },
 }
