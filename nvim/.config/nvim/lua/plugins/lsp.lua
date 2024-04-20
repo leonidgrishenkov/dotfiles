@@ -21,6 +21,8 @@ return {
 
             local lspconfig = require("lspconfig")
 
+            local telescope_builtin = require("telescope.builtin")
+
             -- Setup required language servers
             local servers = { "pyright", "lua_ls", "yamlls", "jsonls", "taplo" }
             for _, lsp in ipairs(servers) do
@@ -51,47 +53,6 @@ return {
                 local hl = "DiagnosticSign" .. type
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
             end
-
-            -- Setup keymaps.
-            vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup("LocalLspConfig", {}),
-                callback = function(ev)
-                    -- Buffer local mappings.
-                    -- See `:help vim.lsp.*` for documentation on any of the below functions
-                    local function opts(desc)
-                        return { desc = desc, buffer = ev.buf, silent = true }
-                    end
-
-                    -- Show documentation for text under cursor
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show definition preview hover"))
-
-                    -- see available code actions, in visual mode will apply to selection
-                    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts("Show code actions"))
-
-                    -- Smart rename text below cursor inside current scope (indent guide).
-                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Smart rename in buffer"))
-
-                    -- Show with Telescope
-                    -- TODO: why its go to definitions instead of showing it?
-                    -- To go back type: <ctrl> + o
-                    vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts("Show LSP definitions"))
-                    -- Show all references for text below cursor in current workspace
-                    vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts("Show LSP references"))
-
-                    -- Show all diagnostics for opened buffer
-                    vim.keymap.set(
-                        "n",
-                        "<leader>D",
-                        "<cmd>Telescope diagnostics bufnr=0<CR>",
-                        opts("Show buffer diagnostics")
-                    )
-                    -- Show diagnostics for current line
-                    vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts("Show line diagnostics"))
-
-                    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts("Go to previous diagnostic")) -- jump to previous diagnostic in buffer
-                    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts("Go to next diagnostic")) -- jump to next diagnostic in buffer
-                end,
-            })
         end,
     },
     {
