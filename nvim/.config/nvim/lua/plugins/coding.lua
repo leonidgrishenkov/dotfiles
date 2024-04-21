@@ -105,7 +105,9 @@ return {
             "hrsh7th/cmp-path", -- Source for file system paths. Repo: https://github.com/hrsh7th/cmp-path
             -- LSP
             "hrsh7th/cmp-cmdline", -- ?
-            "onsails/lspkind.nvim", -- vs-code like pictograms
+            -- vs-code like pictograms
+            -- Repo: https://github.com/onsails/lspkind.nvim
+            "onsails/lspkind.nvim",
             -- Other
             "SergioRibera/cmp-dotenv", -- Cmp for env variables and dotenv file. Repo: https://github.com/SergioRibera/cmp-dotenv
         },
@@ -121,8 +123,8 @@ return {
             cmp.setup({
                 enabled = true,
                 completion = {
-                    -- Behavior of the cmp plugin
-                    completeopt = "menu,preview,noinsert",
+                    -- Behavior of the cmp plugin. For details see: :h completeopt
+                    completeopt = "menu,menuone,preview,noinsert,noselect",
                     -- The number of characters needed to trigger auto-completion.
                     keyword_length = 2,
                 },
@@ -245,7 +247,6 @@ return {
                 window = {
                     completion = cmp.config.window.bordered(),
                     documentation = cmp.config.window.bordered(),
-                    scrollbar = true,
                 },
                 -- `:h cmp-contig.matching`
                 matching = defaults.matching,
@@ -257,15 +258,23 @@ return {
 
             -- Completions for text inside vim command lines.
             -- Setup for `/` vim cmdline.
-            cmp.setup.cmdline("/", {
-                -- mapping = cmp.mapping.preset.cmdline(),
+            cmp.setup.cmdline({ "/", "?" }, {
+                mapping = cmp.mapping.preset.insert({
+                    ["<C-p>"] = cmp.mapping.select_prev_item(),
+                    ["<C-n>"] = cmp.mapping.select_next_item(),
+                    ["<C-a>"] = cmp.mapping.complete(),
+                }),
                 sources = {
                     { name = "buffer" },
                 },
             })
             -- Setup for `:` vim cmdline.
             cmp.setup.cmdline(":", {
-                -- mapping = cmp.mapping.preset.cmdline(),
+                mapping = cmp.mapping.preset.insert({
+                    ["<C-p>"] = cmp.mapping.select_prev_item(),
+                    ["<C-n>"] = cmp.mapping.select_next_item(),
+                    ["<C-a>"] = cmp.mapping.complete(),
+                }),
                 sources = cmp.config.sources({
                     { { name = "path" } },
                     {

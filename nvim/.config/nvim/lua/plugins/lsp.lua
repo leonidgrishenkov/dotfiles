@@ -17,25 +17,53 @@ return {
             { "antosha417/nvim-lsp-file-operations", config = true },
         },
         config = function()
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
             local lspconfig = require("lspconfig")
 
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
             -- Setup required language servers
-            local servers = { "pyright", "lua_ls", "yamlls", "jsonls", "taplo" }
-            for _, lsp in ipairs(servers) do
-                lspconfig[lsp].setup({
-                    capabilities = capabilities,
-                })
-            end
+            -- LSP for python
+            lspconfig["pyright"].setup({
+                capabilities = capabilities,
+            })
+
+            -- LSP for lua
+            lspconfig["lua_ls"].setup({
+                capabilities = capabilities,
+                settings = {
+                    Lua = {
+                        -- make the language server recognize "vim" global
+                        diagnostics = {
+                            globals = { "vim" },
+                        },
+                        completion = {
+                            callSnippet = "Replace",
+                        },
+                    },
+                },
+            })
+
+            -- LSP for yaml
+            lspconfig["yamlls"].setup({
+                capabilities = capabilities,
+            })
+
+            -- LSP for json
+            lspconfig["jsonls"].setup({
+                capabilities = capabilities,
+            })
+
+            -- LSP for toml
+            lspconfig["taplo"].setup({
+                capabilities = capabilities,
+            })
 
             -- Setup Diagnostic signs and highlight
             -- Docs: https://neovim.io/doc/user/diagnostic.html
             -- :help vim.diagnostic.config
             vim.diagnostic.config({
                 virtual_text = {
-                    -- prefix = "●",
-                    prefix = "icons",
+                    prefix = "●",
                     spacing = 4,
                     source = "if_many",
                 },
