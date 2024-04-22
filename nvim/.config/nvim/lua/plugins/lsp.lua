@@ -21,6 +21,48 @@ return {
 
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+            -- On attach keymaps. When plugin connected to LSP server.
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+                callback = function(ev)
+                    -- Buffer local mappings.
+                    -- See `:help vim.lsp.*` for documentation on any of the below functions
+                    local opts = { buffer = ev.buf, silent = true }
+
+                    -- Show documentation for text under cursor
+                    opts.desc = "Show definition preview hover"
+                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+
+                    -- see available code actions, in visual mode will apply to selection
+                    opts.desc = "Show code actions"
+                    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+
+                    -- Smart rename text below cursor inside current scope (indent guide).
+                    opts.desc = "Smart rename in buffer"
+                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+
+                    -- Show with Telescope
+                    -- To go back type: <ctrl> + o
+                    opts.desc = "Go to LSP definition"
+                    vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+                    -- Show all references for text below cursor in current workspace
+                    opts.desc = "Show all LSP references"
+                    vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+
+                    -- Show all diagnostics for opened buffer
+                    opts.desc = "Show buffer diagnostics"
+                    vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+                    -- Show diagnostics for current line
+                    opts.desc = "Show line diagnostics"
+                    vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+
+                    opts.desc = "Jump to previous diagnostic"
+                    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+                    opts.desc = "Jump to next diagnostic"
+                    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+                end,
+            })
+
             -- Setup required language servers
             -- LSP for python
             lspconfig["pyright"].setup({

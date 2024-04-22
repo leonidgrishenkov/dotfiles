@@ -708,56 +708,18 @@ return {
             telescope.load_extension("fzf")
             telescope.load_extension("ui-select")
 
-            -- On attach keymaps. When plugin connected to LSP server.
-            vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-                callback = function(ev)
-                    -- Buffer local mappings.
-                    -- See `:help vim.lsp.*` for documentation on any of the below functions
-                    local function opts(desc)
-                        return { desc = desc, buffer = ev.buf, silent = true }
-                    end
-
-                    -- Show documentation for text under cursor
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show definition preview hover"))
-
-                    -- see available code actions, in visual mode will apply to selection
-                    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts("Show code actions"))
-
-                    -- Smart rename text below cursor inside current scope (indent guide).
-                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Smart rename in buffer"))
-
-                    -- Show with Telescope
-                    -- To go back type: <ctrl> + o
-                    vim.keymap.set("n", "gd", function()
-                        -- builtin.lsp_definitions({ jump_type = "tab" })
-                        builtin.lsp_definitions()
-                    end, opts("Go to LSP definition"))
-                    -- Show all references for text below cursor in current workspace
-                    vim.keymap.set("n", "gR", function()
-                        builtin.lsp_references()
-                    end, opts("Show all LSP references"))
-
-                    -- Show all diagnostics for opened buffer
-                    vim.keymap.set("n", "<leader>D", function()
-                        builtin.diagnostics({ bufnr = 0 })
-                    end, opts("Show buffer diagnostics"))
-                    -- Show diagnostics for current line
-                    vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts("Show line diagnostics"))
-
-                    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts("Go to previous diagnostic")) -- jump to previous diagnostic in buffer
-                    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts("Go to next diagnostic")) -- jump to next diagnostic in buffer
-                end,
-            })
-
             -- Global keymappings
-            local function opts(desc)
-                return { desc = desc, noremap = true, silent = true }
-            end
             -- All available pickers listed here: https://github.com/nvim-telescope/telescope.nvim#pickers
-            vim.keymap.set("n", "<leader>km", builtin.keymaps, opts("telescope: Search for keymaps"))
+            vim.keymap.set("n", "<leader>km", builtin.keymaps, { desc = "telescope: Search for keymaps" })
 
-            vim.keymap.set("n", "<leader>tb", builtin.builtin, opts("telescope: List of builtin pickers"))
+            vim.keymap.set("n", "<leader>tb", builtin.builtin, { desc = "telescope: List of builtin pickers" })
+
+            vim.keymap.set(
+                "n",
+                "<leader>ff",
+                "<cmd>Telescope find_files<CR>",
+                { desc = "telescope: Search files in pwd by file name" }
+            )
         end,
     },
     {
