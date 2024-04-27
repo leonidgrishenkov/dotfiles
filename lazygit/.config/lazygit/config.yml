@@ -1,11 +1,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
 #
 # Default config: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#default
-
+---
 gui:
   windowSize: normal # normal is the best option
   language: en
-  nerdFontsVersion: 3
+  nerdFontsVersion: "3"
   skipDiscardChangeWarning: true
   skipStashWarning: true
   showRandomTip: false
@@ -18,7 +18,7 @@ gui:
   showPanelJumps: false # Show number for each window to jump on
   theme: # Color attributes: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#color-attributes
     activeBorderColor:
-      - '#af38ff'
+      - "#af38ff"
       - bold
 
 keybinding:

@@ -93,6 +93,19 @@ return {
             -- LSP for json
             lspconfig["jsonls"].setup({
                 capabilities = capabilities,
+                -- lazy-load schemastore when needed
+                on_new_config = function(new_config)
+                    new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+                    vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+                end,
+                settings = {
+                    json = {
+                        format = {
+                            enable = true,
+                        },
+                        validate = { enable = true },
+                    },
+                },
             })
 
             -- LSP for toml
@@ -194,34 +207,6 @@ return {
                 auto_update = true,
                 run_on_start = true,
             })
-        end,
-    },
-    {
-        --[[
-        Repo: https://github.com/mfussenegger/nvim-lint
-        --]]
-        "mfussenegger/nvim-lint",
-        config = function()
-            local lint = require("lint")
-
-            lint.linters_by_ft = {
-                python = { "ruff" },
-                yaml = { "yamllint" },
-                sql = { "sqlfluff" },
-            }
-
-            local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-
-            vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-                group = lint_augroup,
-                callback = function()
-                    lint.try_lint()
-                end,
-            })
-
-            vim.keymap.set("n", "<leader>l", function()
-                lint.try_lint()
-            end, { desc = "Trigger linting for current file" })
         end,
     },
 }

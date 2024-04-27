@@ -44,13 +44,9 @@ local function opts(desc)
 end
 
 -- Disable yank when do some operations.
--- TODO: Find is there any global option to disable auto yank when delete, paste etc.
 -- Disable yank on delete
 keymap.set({ "n", "v" }, "d", '"_d', opts("Delete w/o yank"))
-keymap.set({ "n", "v" }, "D", '"_D', opts("Delete w/o yank")) -- TODO: Is it correct description for `D`?
--- Disable yank on paste
--- keymap.set({ "n", "v" }, "p", '"_dp', opts("Paste w/o yank")) -- BUG: got error: `E99: Current buffer is not in diff mode`
--- keymap.set({ "n", "v" }, "P", '"_dP', opts("Paste w/o yank")) -- TODO: Is it correct description for `P`?
+keymap.set({ "n", "v" }, "D", '"_D', opts("Delete w/o yank"))
 
 -- Remap exit modes to normal mode
 keymap.set({ "v", "i" }, "jf", "<ESC>", opts("Exit v|i to n mode"))
@@ -88,3 +84,10 @@ keymap.set("n", "<leader>tm", "<cmd>tabnew %<CR>", opts("Open current buffer in 
 
 -- Clear search highlights
 keymap.set("n", "<leader>ch", ":nohl<CR>", opts("Clear search highlights"))
+
+-- -- Move block
+-- keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move Block Down" })
+-- keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move Block Up" })
+
+-- -- close buffer
+-- keymap.set("n", "<leader>q", "<cmd>bd<CR>", { desc = "Close Buffer" })

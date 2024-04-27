@@ -17,8 +17,9 @@ return {
                 formatters_by_ft = {
                     -- All formatters: https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
                     -- Use a sub-list to run only the first available formatter
-                    json = { { "prettierd", "prettier" } },
-                    yaml = { { "prettierd", "prettier" } },
+                    ["json"] = { "prettier" },
+                    ["jsonc"] = { { "prettierd", "prettier" } },
+                    ["yaml"] = { { "prettierd", "prettier" } },
                     markdown = { { "prettierd", "prettier" } },
                     lua = { "stylua" },
                     sql = {
@@ -28,13 +29,12 @@ return {
                         },
                     },
                     -- Dynamically determine formatter for python
-                    python = function(bufnr)
-                        if require("conform").get_formatter_info("ruff_format", bufnr).available then
-                            return { "ruff_format" }
-                        else
-                            return { "isort", "black" }
-                        end
-                    end,
+                    python = {
+                        -- Fix lint errors
+                        "ruff_fix",
+                        -- Run the Ruff formatter
+                        "ruff_format",
+                    },
                     sh = { "shfmt" },
                     -- Use the "_" filetype to run formatters on filetypes that don't
                     -- have other formatters configured.
@@ -42,7 +42,7 @@ return {
                 },
                 format_on_save = {
                     lsp_fallback = true,
-                    async = true,
+                    async = false,
                     timeout_ms = 1000,
                 },
                 -- Add extra options for formatters
@@ -53,6 +53,9 @@ return {
                     -- TODO: This doesn't working. Google and fix
                     sql_formatter = {
                         prepend_args = { "--config", "$XDG_CONFIG_HOME/sql-formatter/config.json" },
+                    },
+                    prettier = {
+                        prepend_args = { "--tab-width", "4", "--use-tabs", "true" },
                     },
                 },
                 -- Conform will notify you when a formatter errors

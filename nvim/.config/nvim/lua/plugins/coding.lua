@@ -93,6 +93,7 @@ return {
             - All command: `:h cmp-command` or `:Cmp` + <tab>
             - `CmpStatus`
         --]]
+        -- TODO: Remove cmp invoke iside telescope
         "hrsh7th/nvim-cmp",
         version = false, -- Last release is way too old. Took from here: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/coding.lua
         event = {
@@ -182,7 +183,7 @@ return {
                 -- cmp results.
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
-                    { name = "luasnip", keyword_length = 2 },
+                    { name = "luasnip", keyword_length = 3 },
                     { name = "buffer", keyword_length = 3 },
                     { name = "path" },
                     { name = "cmdline" },
@@ -197,7 +198,7 @@ return {
                     fields = { "kind", "abbr", "menu" },
                     -- configure lspkind for vs-code like pictograms in completion menu
                     format = lspkind.cmp_format({
-                        mode = "symbol", -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+                        mode = "symbol_text", -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
                         -- Icons preset. Can be either 'default' (requires nerd-fonts font)
                         -- or 'codicons' for codicon preset (requires vscode-codicons font)
                         -- preset = "default",
@@ -259,6 +260,7 @@ return {
             -- Completions for text inside vim command lines.
             -- Setup for `/` vim cmdline.
             cmp.setup.cmdline({ "/", "?" }, {
+                -- TODO: this doesn't work
                 mapping = cmp.mapping.preset.insert({
                     ["<C-p>"] = cmp.mapping.select_prev_item(),
                     ["<C-n>"] = cmp.mapping.select_next_item(),

@@ -6,7 +6,6 @@ return {
     Repo: https://github.com/nvim-tree/nvim-web-devicons
     ]]
         "nvim-tree/nvim-web-devicons",
-        lazy = true,
         config = function()
             local devicons = require("nvim-web-devicons")
 
@@ -60,10 +59,23 @@ return {
                     },
                     ["yaml"] = {
                         icon = "",
-                        color = "",
+                        color = "#984CA1",
                         name = "Yaml",
                     },
                 },
+            })
+        end,
+    },
+    {
+        "rcarriga/nvim-notify",
+        config = function()
+            local notify = require("notify")
+
+            notify.setup({
+                background_colour = "#000000",
+                timeout = 5000,
+                render = "compact",
+                stages = "fade",
             })
         end,
     },
@@ -81,199 +93,28 @@ return {
         dependencies = {
             "MunifTanjim/nui.nvim",
             "hrsh7th/nvim-cmp",
+            "rcarriga/nvim-notify",
         },
         config = function()
             local noice = require("noice")
 
             -- `:h noice.nvim-noice-configuration`
             noice.setup({
-                popupmenu = {
-                    enabled = true, -- enables the Noice popupmenu UI
-                    backend = "cmp", -- backend to use to show regular cmdline completions: `nui` or `cmp`
-                    kind_icons = {}, -- set to `false` to disable icons
-                },
-                cmdline = {
-                    -- enables the Noice cmdline UI
-                    enabled = true,
-                    -- All available types of view: `:h noice.nvim-noice-views`
-                    view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
-                    format = {
-                        cmdline = { pattern = "^:", icon = "", lang = "vim" },
-                        search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-                        search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
-                        filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
-                        lua = {
-                            pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" },
-                            icon = "",
-                            lang = "lua",
-                        },
-                        help = { pattern = "^:%s*he?l?p?%s+", icon = " " },
-                        input = {}, -- Used by input()
+                lsp = {
+                    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                    -- took from plugin repo
+                    override = {
+                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                        ["vim.lsp.util.stylize_markdown"] = true,
+                        ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
                     },
                 },
-                messages = {
-                    -- NOTE: If you enable messages, then the cmdline is enabled automatically.
-                    -- This is a current Neovim limitation.
-                    enabled = true, -- enables the Noice messages UI
-                    view = "notify", -- default view for messages
-                    view_error = "notify", -- view for errors
-                    view_warn = "notify", -- view for warnings
-                    view_history = "messages", -- view for :messages
-                    view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
-                },
-                redirect = {
-                    view = "popup",
-                    filter = { event = "msg_show" },
-                },
-
-                -- Views configurations.
-                -- See all options here - https://github.com/folke/noice.nvim/blob/main/lua/noice/config/views.lua
-                view = {
-                    popupmenu = {
-                        relative = "editor",
-                        -- zindex = 65, -- ?
-                        -- when auto, then it will be positioned to the cmdline or cursor
-                        position = {
-                            row = 8,
-                            col = "50%",
-                        },
-                        size = {
-                            width = 60,
-                            height = 10,
-                            -- max_height = 20,
-                            -- min_width = 10,
-                        },
-                        win_options = {
-                            winbar = "",
-                            foldenable = false,
-                            cursorline = true,
-                            cursorlineopt = "line",
-                            winhighlight = {
-                                -- Normal = "NoicePopupmenu", -- change to NormalFloat to make it look like other floats
-                                Normal = "Normal",
-                                FloatBorder = "DiagnosticInfo",
-                                -- FloatBorder = "NoicePopupmenuBorder", -- border highlight
-                                CursorLine = "NoicePopupmenuSelected", -- used for highlighting the selected item
-                                PmenuMatch = "NoicePopupmenuMatch", -- used to highlight the part of the item that matches the input
-                            },
-                        },
-                        border = {
-                            style = "rounded",
-                            padding = { 0, 1 },
-                        },
-                    },
-                    --     popup = {
-                    --         backend = "popup",
-                    --         relative = "editor",
-                    --         close = {
-                    --             events = { "BufLeave" },
-                    --             keys = { "q" },
-                    --         },
-                    --         enter = true,
-                    --         border = {
-                    --             style = "rounded",
-                    --             padding = { 0, 1 },
-                    --         },
-                    --         position = "50%",
-                    --         size = {
-                    --             width = "120",
-                    --             height = "20",
-                    --         },
-                    --         win_options = {
-                    --             winhighlight = { Normal = "NoicePopup", FloatBorder = "NoicePopupBorder" },
-                    --             winbar = "",
-                    --             foldenable = false,
-                    --         },
-                    --     },
-                    --     virtualtext = {
-                    --         backend = "virtualtext",
-                    --         format = { "{message}" },
-                    --         hl_group = "NoiceVirtualText",
-                    --     },
-                    cmdline_popup = {
-                        -- backend = "popup",
-                        -- relative = "editor",
-                        -- focusable = false,
-                        -- enter = false,
-                        -- zindex = 200,
-                        position = {
-                            row = 5,
-                            col = "50%",
-                        },
-                        size = {
-                            -- min_width = 60,
-                            width = 60,
-                            height = "auto",
-                        },
-                        -- border = {
-                        --     style = "rounded",
-                        --     padding = { 0, 1 },
-                        -- },
-                        --     win_options = {
-                        --         winhighlight = {
-                        --             Normal = "NoiceCmdlinePopup",
-                        --             FloatTitle = "NoiceCmdlinePopupTitle",
-                        --             FloatBorder = "NoiceCmdlinePopupBorder",
-                        --             IncSearch = "",
-                        --             CurSearch = "",
-                        --             Search = "",
-                        --         },
-                        --         winbar = "",
-                        --         foldenable = false,
-                        --         cursorline = false,
-                        --     },
-                    },
-                    cmdline_output = {
-                        format = "details",
-                        view = "popup",
-                    },
-                    --     confirm = {
-                    --         backend = "popup",
-                    --         relative = "editor",
-                    --         focusable = false,
-                    --         align = "center",
-                    --         enter = false,
-                    --         zindex = 210,
-                    --         format = { "{confirm}" },
-                    --         position = {
-                    --             row = "50%",
-                    --             col = "50%",
-                    --         },
-                    --         size = "auto",
-                    --         border = {
-                    --             style = "rounded",
-                    --             padding = { 0, 1 },
-                    --             text = {
-                    --                 top = " Confirm ",
-                    --             },
-                    --         },
-                    --         win_options = {
-                    --             winhighlight = {
-                    --                 Normal = "NoiceConfirm",
-                    --                 FloatBorder = "NoiceConfirmBorder",
-                    --             },
-                    --             winbar = "",
-                    --             foldenable = false,
-                    --         },
-                    --     },
-                    --     split = {
-                    --         backend = "split",
-                    --         enter = false,
-                    --         relative = "editor",
-                    --         position = "bottom",
-                    --         size = "20%",
-                    --         close = {
-                    --             keys = { "q" },
-                    --         },
-                    --         win_options = {
-                    --             winhighlight = { Normal = "NoiceSplit", FloatBorder = "NoiceSplitBorder" },
-                    --             wrap = true,
-                    --         },
-                    --     },
-                    --     vsplit = {
-                    --         view = "split",
-                    --         position = "right",
-                    --     },
+                presets = {
+                    bottom_search = false, -- use a classic bottom cmdline for search
+                    command_palette = true, -- position the cmdline and popupmenu together
+                    long_message_to_split = true, -- long messages will be sent to a split
+                    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+                    lsp_doc_border = true, -- add a border to hover docs and signature help
                 },
             })
         end,
@@ -360,7 +201,7 @@ return {
                     preserve_window_proportions = false,
                     number = false,
                     relativenumber = false,
-                    signcolumn = "yes", -- ?
+                    signcolumn = "no",
                     -- Enable and configure center floating widnow.
                     -- https://github.com/nvim-tree/nvim-tree.lua/wiki/Recipes#center-a-floating-nvim-tree-window
                     -- Also you can configure auto-resize, see above link.
@@ -397,7 +238,7 @@ return {
                     full_name = false,
                     -- Path at the top of the window
                     root_folder_label = ":~:s?$?/..?",
-                    indent_width = 2,
+                    indent_width = 3,
                     special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
                     symlink_destination = true,
                     highlight_git = false,
@@ -430,7 +271,7 @@ return {
                         },
                         git_placement = "before",
                         modified_placement = "after",
-                        diagnostics_placement = "signcolumn",
+                        diagnostics_placement = "after",
                         bookmarks_placement = "signcolumn",
                         padding = "   ",
                         symlink_arrow = " ➛ ",
@@ -485,31 +326,27 @@ return {
                 },
                 git = {
                     enable = true,
-                    show_on_dirs = true,
+                    show_on_dirs = false,
                     show_on_open_dirs = true,
                     disable_for_dirs = {},
                     timeout = 400,
                     cygwin_support = false,
                 },
                 diagnostics = {
-                    enable = false,
+                    enable = true,
                     show_on_dirs = false,
                     show_on_open_dirs = true,
                     debounce_delay = 50,
-                    severity = {
-                        min = vim.diagnostic.severity.HINT,
-                        max = vim.diagnostic.severity.ERROR,
-                    },
                     icons = {
-                        hint = "",
-                        info = "",
-                        warning = "",
-                        error = "",
+                        error = "",
+                        warning = "",
+                        hint = "",
+                        info = "",
                     },
                 },
                 modified = {
                     enable = true,
-                    show_on_dirs = true,
+                    show_on_dirs = false,
                     show_on_open_dirs = true,
                 },
                 filters = {
@@ -520,10 +357,6 @@ return {
                     no_bookmark = false,
                     custom = { ".DS_Store" },
                     exclude = {},
-                },
-                live_filter = {
-                    prefix = "[FILTER]: ",
-                    always_show_folders = true,
                 },
                 filesystem_watchers = {
                     enable = true,
@@ -541,27 +374,12 @@ return {
                         max_folder_discovery = 300,
                         exclude = {},
                     },
-                    file_popup = {
-                        open_win_config = {
-                            col = 1,
-                            row = 1,
-                            relative = "cursor",
-                            border = "shadow",
-                            style = "minimal",
-                        },
-                    },
                     open_file = {
-                        quit_on_open = false,
+                        quit_on_open = true,
                         eject = true,
                         resize_window = true,
                         window_picker = {
                             enable = false, -- Disable to work well with window split
-                            picker = "default",
-                            chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-                            exclude = {
-                                filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
-                                buftype = { "nofile", "terminal", "help" },
-                            },
                         },
                     },
                     remove_file = {
@@ -580,7 +398,7 @@ return {
                 },
                 notify = {
                     threshold = vim.log.levels.INFO,
-                    absolute_path = true,
+                    absolute_path = false,
                 },
                 help = {
                     sort_by = "key",
@@ -594,17 +412,17 @@ return {
                 },
                 experimental = {},
                 log = {
-                    enable = false,
+                    enable = true,
                     truncate = false,
                     types = {
                         all = false,
                         config = false,
-                        copy_paste = false,
+                        copy_paste = true,
                         dev = false,
-                        diagnostics = false,
+                        diagnostics = true,
                         git = false,
-                        profile = false,
-                        watcher = false,
+                        profile = true,
+                        watcher = true,
                     },
                 },
             })
@@ -622,7 +440,6 @@ return {
         Commands can be called only through apis.
         ]]
         "nvim-telescope/telescope.nvim",
-        cmd = "Telescope",
         version = false, -- telescope did only one release, so use HEAD for now
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -643,6 +460,19 @@ return {
             local builtin = require("telescope.builtin")
             local themes = require("telescope.themes")
 
+            -- Global keymappings
+            -- All available pickers listed here: https://github.com/nvim-telescope/telescope.nvim#pickers
+            vim.keymap.set("n", "<leader>km", builtin.keymaps, { desc = "telescope: Search for keymaps" })
+
+            vim.keymap.set("n", "<leader>tb", builtin.builtin, { desc = "telescope: List of builtin pickers" })
+
+            vim.keymap.set(
+                "n",
+                "<leader>ff",
+                "<cmd>Telescope find_files<CR>",
+                { desc = "telescope: Search files in pwd by file name" }
+            )
+
             telescope.setup({
                 defaults = {
                     prompt_prefix = "   ",
@@ -655,7 +485,6 @@ return {
                     layout_strategy = "vertical",
                     path_display = {
                         "truncate",
-                        -- "smart",
                     },
                     color_devicons = true,
                     -- On attached to client keymapping (inside opened plugin window)
@@ -707,19 +536,7 @@ return {
 
             telescope.load_extension("fzf")
             telescope.load_extension("ui-select")
-
-            -- Global keymappings
-            -- All available pickers listed here: https://github.com/nvim-telescope/telescope.nvim#pickers
-            vim.keymap.set("n", "<leader>km", builtin.keymaps, { desc = "telescope: Search for keymaps" })
-
-            vim.keymap.set("n", "<leader>tb", builtin.builtin, { desc = "telescope: List of builtin pickers" })
-
-            vim.keymap.set(
-                "n",
-                "<leader>ff",
-                "<cmd>Telescope find_files<CR>",
-                { desc = "telescope: Search files in pwd by file name" }
-            )
+            telescope.load_extension("noice")
         end,
     },
     {
@@ -736,66 +553,6 @@ return {
             local dressing = require("dressing")
 
             dressing.setup({})
-        end,
-    },
-    {
-        --[[
-        Git decorations inside editor.
-        Repo: https://github.com/lewis6991/gitsigns.nvim
-        ]]
-        "lewis6991/gitsigns.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-        config = function()
-            local gitsigns = require("gitsigns")
-
-            -- Setup colors for symbols in signcolomn
-            vim.cmd([[
-                highlight GitSignsAdd    guifg=#009900 ctermfg=2
-                highlight GitSignsChange guifg=#bbbb00 ctermfg=3
-            ]])
-
-            gitsigns.setup({
-                signs = {
-                    add = { text = "┃", hl = "GitSignsAdd" },
-                    change = { text = "┃", hl = "GitSignsChange" },
-                    delete = { text = "", show_count = true },
-                    topdelete = { text = "", show_count = true },
-                    changedelete = { text = "~" },
-                    untracked = { text = "┆" },
-                },
-                watch_gitdir = {
-                    follow_files = true,
-                },
-                signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-                numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-                linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-                word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-                preview_config = {
-                    -- Options passed to nvim_open_win
-                    border = "rounded",
-                    relative = "cursor",
-                    row = 0,
-                    col = 1,
-                },
-                show_deleted = false, -- Show old version inline via virtual lines.
-                on_attach = function(bufnr)
-                    local gs = package.loaded.gitsigns
-
-                    local function map(mode, l, r, desc)
-                        vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
-                    end
-
-                    -- Navigations
-                    map("n", "]h", gs.next_hunk, "Next Hunk")
-                    map("n", "[h", gs.prev_hunk, "Prev Hunk")
-
-                    -- Actions
-                    map("n", "<leader>hs", gs.stage_hunk, "Stage hunk")
-                    map("n", "<leader>hr", gs.reset_hunk, "Reset hunk")
-                    map("n", "<leader>hu", gs.undo_stage_hunk, "Undo stage hunk")
-                    map("n", "<leader>hp", gs.preview_hunk, "Preview hunk")
-                end,
-            })
         end,
     },
     {
@@ -917,8 +674,6 @@ return {
     {
         --[[
         Plugin to maximize splitted window.
-
-        Repo: TODO: add link to repo
         --]]
         "szw/vim-maximizer",
         keys = {

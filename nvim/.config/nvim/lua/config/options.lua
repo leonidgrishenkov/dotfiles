@@ -5,19 +5,17 @@ All options:
     `:h options`
 --]]
 
--- Global variables
-local g = vim.g
--- Set options (global/buffer/windows-scoped)
-local opt = vim.opt
+-- `vim.g` - Global options
+-- `vim.opt` - Set options (global/buffer/windows-scoped)
 
 -- recommended settings from `nvim-tree` documentation
-g.loaded_netrw = 1
-g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- General
-opt.mouse = "a" -- Enable mouse support
-opt.mousemoveevent = true -- ?
-opt.mousefocus = true -- ?
+vim.opt.mouse = "a" -- Enable mouse support
+vim.opt.mousemoveevent = true -- ?
+vim.opt.mousefocus = true -- ?
 -- Learn about `modeline`
 -- opt.modeline = true
 
@@ -28,108 +26,106 @@ opt.mousefocus = true -- ?
 
 -- https://neovim.io/doc/user/provider.html#provider-clipboard
 -- `unnamedplus` - Sync with system clipboard
-opt.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamedplus"
 
--- Autocomplete options for vim command line mode (in `:` when you press <Tab>)
--- opt.completeopt = "menuone,noinsert,noselect"
-
-opt.swapfile = false -- Don't use swapfile
-opt.backup = false -- Creates a backup file
-opt.undofile = true -- Enable/disable persistent undo
-opt.writebackup = false -- If a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-opt.fileencoding = "utf-8" -- The encoding written to a file
+vim.opt.swapfile = false -- Don't use swapfile
+vim.opt.backup = false -- Creates a backup file
+vim.opt.undofile = true -- Enable/disable persistent undo
+vim.opt.writebackup = false -- If a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+vim.opt.fileencoding = "utf-8" -- The encoding written to a file
 
 -- UI
-opt.termguicolors = true -- Enable 24-bit RGB colors
-g.termguicolors = true
+vim.opt.termguicolors = true -- Enable 24-bit RGB colors
+vim.g.termguicolors = true
 
 -- opt.cmdheight = 0 -- ?
 -- opt.guicursor = "" -- disable cursor-styling
 
-opt.background = "dark"
-opt.showmode = false -- Don't show modes, e.g. -- INSERT --
-opt.pumheight = 10 -- Pop up menu height
-opt.laststatus = 3 -- Set global statusline
-opt.showmatch = true -- Highlight matching parenthesis
+vim.opt.background = "dark"
+vim.opt.showmode = false -- Don't show modes, e.g. -- INSERT --
+vim.opt.pumheight = 10 -- Pop up menu height
+vim.opt.laststatus = 3 -- Set global statusline
+vim.opt.showmatch = true -- Highlight matching parenthesis
 -- opt.colorcolumn = '80' -- Line lenght marker at 80 columns
-opt.guifont = "MesloLGM Nerd Font:h15" -- ?
-g.guifont = "MesloLGM Nerd Font:h15" -- ?
+vim.opt.guifont = "MesloLGM Nerd Font:h15" -- ?
+vim.g.guifont = "MesloLGM Nerd Font:h15" -- ?
 
 -- Setup Singcolumn size.
 -- See :h options for defails.
-opt.signcolumn = "auto:4"
+vim.opt.signcolumn = "auto:3"
 
 -- Line numbers
-opt.relativenumber = true -- Show relative line numbers
-opt.number = true -- shows absolute line number on cursor line (when relative number is on)
-opt.numberwidth = 1 -- set number column width
+vim.opt.relativenumber = true -- Show relative line numbers
+vim.opt.number = true -- shows absolute line number on cursor line (when relative number is on)
+vim.opt.numberwidth = 1 -- set number column width
 
 -- Cursor
-opt.cursorline = true -- highlight the current line
-opt.cursorlineopt = "number" -- What to highlight
-opt.cursorcolumn = false -- highlight current cursor column
+vim.opt.cursorline = true -- highlight the current line
+vim.opt.cursorlineopt = "number" -- What to highlight
+vim.opt.cursorcolumn = false -- highlight current cursor column
 
 -- Line wrapping
-opt.wrap = false -- display lines as one long line
+vim.opt.wrap = false -- display lines as one long line
 -- opt.linebreak = true  -- ?
-opt.sidescroll = 8 -- Columns of context
+vim.opt.sidescroll = 8 -- Columns of context
 -- opt.listchars+=precedes:<,extends:>
-opt.scrolloff = 4 -- Lines of context
+-- Number of lines to keep if this is an up or down border
+vim.opt.scrolloff = 8 --
 
 -- split windows
-opt.splitright = true -- split vertical window to the right
-opt.splitbelow = true -- split horizontal window to the bottom
+vim.opt.splitright = true -- split vertical window to the right
+vim.opt.splitbelow = true -- split horizontal window to the bottom
 
-opt.spelllang = { "en" }
-opt.splitkeep = "screen"
-opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-opt.winminwidth = 5 -- Minimum window width
+vim.opt.spelllang = { "en" }
+vim.opt.splitkeep = "screen"
+vim.opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
+-- opt.winminwidth = 5 -- Minimum window width
 
 -- opt.wildmenu = true
 -- opt.wildmode = "longest:full,full" -- Command-line completion mode
 
 -- Tabs & indentation
-opt.expandtab = true -- Convert tab to spaces
-opt.shiftwidth = 4 -- Spaces for indent width
-opt.tabstop = 4 -- 1 tab == 4 spaces
-opt.smartindent = true -- Autoindent new lines
-opt.autoindent = true -- Copy indent from current line when starting new one
+vim.opt.expandtab = true -- Convert tab to spaces
+vim.opt.shiftwidth = 4 -- Spaces for indent width
+vim.opt.tabstop = 4 -- 1 tab == 4 spaces
+vim.opt.smartindent = true -- Autoindent new lines
+vim.opt.autoindent = true -- Copy indent from current line when starting new one
 
-opt.shiftround = true -- Round indent
+vim.opt.shiftround = true -- Round indent
 
 -- Search
-opt.hlsearch = true -- Highlight all matches on previous search pattern
-opt.incsearch = true
-opt.ignorecase = true -- Ignore case when searching
-opt.smartcase = true -- Ignore lowercase for the whole pattern
+vim.opt.hlsearch = true -- Highlight all matches on previous search pattern
+vim.opt.incsearch = true
+vim.opt.ignorecase = true -- Ignore case when searching
+vim.opt.smartcase = true -- Ignore lowercase for the whole pattern
 
 -- Memory and CPU
-opt.hidden = true -- Enable background buffers
-opt.history = 100 -- Remember N lines in history
-opt.lazyredraw = false -- Faster scrolling
-opt.synmaxcol = 240 -- Max column for syntax highlight
-opt.updatetime = 250 -- ms to wait for trigger an event (4000ms default)
-opt.timeoutlen = 300 -- ?
+vim.opt.hidden = true -- Enable background buffers
+vim.opt.history = 100 -- Remember N lines in history
+vim.opt.lazyredraw = false -- Faster scrolling
+vim.opt.synmaxcol = 240 -- Max column for syntax highlight
+vim.opt.updatetime = 250 -- ms to wait for trigger an event (4000ms default)
+vim.opt.timeoutlen = 300 -- ?
 
-opt.conceallevel = 3 -- Hide * markup for bold and italic
-opt.confirm = true -- Confirm to save changes before exiting modified buffer
+-- opt.conceallevel = 3 -- Hide * markup for bold and italic TODO: how it works?
+vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
 
 -- opt.pumblend = 10 -- Popup blend
 -- opt.pumheight = 10 -- Maximum number of entries in a popup
 -- opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
-opt.formatoptions = "jcroqlnt" -- tcqj
+vim.opt.formatoptions = "jcroqlnt" -- tcqj
 
 -- Folding.
 -- For keymaps see docs: :h fold opening and closing folds
-opt.foldenable = true -- enable folding
-opt.foldmethod = "indent" -- folds will be autodefined based on indents
-opt.foldlevel = 99 -- by default in new file all folds must be opened
+vim.opt.foldenable = true -- enable folding
+vim.opt.foldmethod = "indent" -- folds will be autodefined based on indents
+vim.opt.foldlevel = 99 -- by default in new file all folds must be opened
 -- How to display closed folds
 -- opt.foldtext = " " -- ?
 
 -- Characters to fill the statuslines, vertical separators and special
 -- lines in the window.
-opt.fillchars = {
+vim.opt.fillchars = {
     vert = "│",
     -- fold = "⠀",
     eob = " ", -- suppress ~ at EndOfBuffer
