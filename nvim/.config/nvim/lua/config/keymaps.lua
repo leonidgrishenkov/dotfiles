@@ -91,3 +91,4 @@ keymap.set("n", "<leader>ch", ":nohl<CR>", opts("Clear search highlights"))
 
 -- -- close buffer
 -- keymap.set("n", "<leader>q", "<cmd>bd<CR>", { desc = "Close Buffer" })
+

@@ -81,6 +81,7 @@ return {
                     preserve_window_proportions = false,
                     number = false,
                     relativenumber = false,
+                    -- Show signcolumn in UI. Required for providers (if set to show in signcolumn)
                     signcolumn = "no",
                     -- Enable and configure center floating widnow.
                     -- https://github.com/nvim-tree/nvim-tree.lua/wiki/Recipes#center-a-floating-nvim-tree-window
@@ -116,17 +117,18 @@ return {
                     add_trailing = false,
                     group_empty = false,
                     full_name = false,
-                    -- Path at the top of the window
-                    root_folder_label = ":~:s?$?/..?",
-                    indent_width = 3,
+                    -- Path at the top of the window.
+                    -- `false` = don't show path.
+                    root_folder_label = false, -- Default value: `:~:s?$?/..?",`
+                    indent_width = 2,
                     special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
                     symlink_destination = true,
-                    highlight_git = false,
-                    highlight_diagnostics = false,
+                    highlight_git = "icon",
+                    highlight_diagnostics = "none",
                     highlight_opened_files = "name",
                     highlight_modified = "none",
                     highlight_bookmarks = "none",
-                    highlight_clipboard = "name",
+                    highlight_clipboard = "none",
                     indent_markers = {
                         enable = true,
                         inline_arrows = true,
@@ -149,18 +151,19 @@ return {
                                 color = true,
                             },
                         },
-                        git_placement = "before",
-                        modified_placement = "after",
+                        -- Posible values for placements: `after`, `before`, `signcolumn`.
+                        git_placement = "after",
+                        modified_placement = "before",
                         diagnostics_placement = "after",
-                        bookmarks_placement = "signcolumn",
-                        padding = "   ",
+                        padding = "  ",
                         symlink_arrow = " ➛ ",
+                        -- Which elements should be shown in UI.
                         show = {
                             file = true,
                             folder = true,
                             folder_arrow = true,
-                            git = false,
-                            modified = false,
+                            git = true,
+                            modified = true,
                             diagnostics = true,
                             bookmarks = false,
                         },
@@ -168,7 +171,7 @@ return {
                             default = "",
                             symlink = "",
                             bookmark = "󰆤",
-                            modified = "●",
+                            modified = "",
                             folder = {
                                 arrow_closed = "",
                                 arrow_open = "",
@@ -180,13 +183,13 @@ return {
                                 symlink_open = "",
                             },
                             git = {
-                                unstaged = "✗",
-                                staged = "✓",
-                                unmerged = "",
-                                renamed = "➜",
-                                untracked = "★",
-                                deleted = "",
-                                ignored = "◌",
+                                unstaged = "󱓊", --"󰽤",
+                                staged = "󱓏", --"",
+                                unmerged = "󱓎",
+                                renamed = "󱓍",
+                                untracked = "󱓋", --"◌",
+                                deleted = "",
+                                ignored = "󱓌",
                             },
                         },
                     },
@@ -206,16 +209,16 @@ return {
                 },
                 git = {
                     enable = true,
-                    show_on_dirs = false,
-                    show_on_open_dirs = true,
+                    show_on_dirs = true,
+                    show_on_open_dirs = false,
                     disable_for_dirs = {},
                     timeout = 400,
                     cygwin_support = false,
                 },
                 diagnostics = {
                     enable = true,
-                    show_on_dirs = false,
-                    show_on_open_dirs = true,
+                    show_on_dirs = true,
+                    show_on_open_dirs = false,
                     debounce_delay = 50,
                     icons = {
                         error = "",
@@ -226,10 +229,11 @@ return {
                 },
                 modified = {
                     enable = true,
-                    show_on_dirs = false,
-                    show_on_open_dirs = true,
+                    show_on_dirs = true,
+                    show_on_open_dirs = false,
                 },
                 filters = {
+                    -- `true` = don't show file type.
                     git_ignored = false,
                     dotfiles = false,
                     git_clean = false,
