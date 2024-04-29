@@ -2,12 +2,13 @@ return {
     {
         --[[
         Highlights the current level of indentation, and animates the highlighting.
+
         Repo: https://github.com/echasnovski/mini.indentscope
-        `:h mini.indentscope`
+        Docs: `mini.indentscope`
         ]]
         "echasnovski/mini.indentscope",
         version = false, -- see docs on github
-        -- event = "LazyFile", -- TODO: why it doesn't work?
+        event = "BufEnter",
         config = function()
             local indentscope = require("mini.indentscope")
 
@@ -53,12 +54,13 @@ return {
             })
 
             vim.api.nvim_create_autocmd("FileType", {
-                -- Where plugin should be desibled same as in exclude section of above plugin
+                -- Where plugin should be desibled same as in exclude section of `indent-blankline` plugin.
                 pattern = {
                     "help",
                     "lazy",
                     "mason",
                     "gitcommit",
+                    "notify",
                     "lspinfo",
                     "NvimTree",
                     "checkhealth",
@@ -71,6 +73,11 @@ return {
                     vim.b.miniindentscope_disable = true
                 end,
             })
+
+            -- Setup highlight color for indent sybmol.
+            local catppuccin_palette = require("catppuccin.palettes").get_palette("frappe")
+            -- Using catppuccin palette.
+            vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = catppuccin_palette.mauve })
         end,
     },
 }
