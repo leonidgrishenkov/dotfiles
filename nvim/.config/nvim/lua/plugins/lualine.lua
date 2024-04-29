@@ -8,7 +8,12 @@ return {
             lualine.setup({
                 options = {
                     icons_enabled = true,
+                    globalstatus = true,
                     theme = "catppuccin",
+                    disabled_filetypes = {
+                        statusline = {},
+                        winbar = {},
+                    },
                 },
                 sections = {
                     --[[
@@ -21,7 +26,7 @@ return {
                     --]]
                     lualine_a = { { "mode", icons_enabled = true } },
                     lualine_b = {
-                        { "branch", icon = "" },
+                        { "branch", icon = " " }, --       
                         {
                             "diff",
                             symbols = { added = "+", modified = "~", removed = "" },
