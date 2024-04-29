@@ -5,6 +5,7 @@ return {
 
         Repo: https://github.com/nvim-telescope/telescope.nvim
         Wiki: https://github.com/nvim-telescope/telescope.nvim/wiki
+        Telescope extensions: https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions
 
         Usefull commands:
             `checkhealth telescope`
@@ -17,11 +18,10 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             {
+                -- Instalation using `make`.
+                -- See: https://github.com/nvim-telescope/telescope-fzf-native.nvim?tab=readme-ov-file#make-linux-macos-windows-with-mingw
                 "nvim-telescope/telescope-fzf-native.nvim",
-                -- enabled = vim.fn.executable("make") == 1, -- Took from - https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/editor.lua
-                build = vim.fn.executable("make") == 1 and "make"
-                    or "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-                enabled = vim.fn.executable("make") == 1 or vim.fn.executable("cmake") == 1,
+                build = "make",
             },
             "nvim-tree/nvim-web-devicons",
             "nvim-telescope/telescope-ui-select.nvim",
@@ -35,9 +35,23 @@ return {
 
             -- Global keymappings
             -- All available pickers listed here: https://github.com/nvim-telescope/telescope.nvim#pickers
-            vim.keymap.set("n", "<leader>km", builtin.keymaps, { desc = "telescope: Search for keymaps" })
+            vim.keymap.set("n", "<leader>fkm", builtin.keymaps, { desc = "telescope: Search for keymaps" })
 
-            vim.keymap.set("n", "<leader>tb", builtin.builtin, { desc = "telescope: List of builtin pickers" })
+            vim.keymap.set("n", "<leader>ftb", builtin.builtin, { desc = "telescope: Search in builtin pickers" })
+
+            vim.keymap.set(
+                "n",
+                "<leader>fs",
+                "<cmd>Telescope live_grep<CR>",
+                { desc = "telescope: Search files in pwd by string" }
+            )
+
+            vim.keymap.set(
+                "n",
+                "<leader>fb",
+                "<cmd>Telescope buffers<CR>",
+                { desc = "telescope: Search in opened buffers by file name" }
+            )
 
             vim.keymap.set(
                 "n",
@@ -92,8 +106,19 @@ return {
                             ["<esc>"] = actions.close,
                         },
                     },
+                    --  A table of lua regex that define the files that should be ignored.
+                    file_ignore_pattern = {
+                        "node_modules",
+                        "yarn.lock",
+                        ".git",
+                        ".sl",
+                        "_build",
+                        ".next",
+                    },
                     -- preview configurations
                     preview = {
+                        -- Don't show preview for files larger than specified value.
+                        filesize_limit = 0.5, -- MB
                         -- treesitter highlighting for all available filetypes
                         treesitter = true,
                         -- show preview when telescope was opened

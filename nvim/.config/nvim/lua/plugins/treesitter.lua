@@ -7,6 +7,9 @@ return {
         Wiki: https://github.com/nvim-treesitter/nvim-treesitter/wiki
 
         `:TSConfigInfo`
+
+        Also:
+        About treesitter objects usage: https://www.youtube.com/watch?v=CEMPq_r8UYQ
         ]]
         "nvim-treesitter/nvim-treesitter",
         -- When updates also update all included parsers

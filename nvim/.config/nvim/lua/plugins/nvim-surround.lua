@@ -1,6 +1,8 @@
 return {
     {
         --[[
+        Add/delete/change word surround symbol pairs.
+
         Repo: https://github.com/kylechui/nvim-surround
 
         Docs:
