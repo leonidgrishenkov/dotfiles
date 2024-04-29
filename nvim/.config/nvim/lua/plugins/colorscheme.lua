@@ -43,6 +43,7 @@ return {
                     markdown = true,
                     noice = true,
                     mini = true,
+                    fidget = true,
                     native_lsp = {
                         enabled = true,
                         virtual_text = {

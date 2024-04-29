@@ -26,7 +26,7 @@ vim.opt.mousefocus = true -- ?
 
 -- https://neovim.io/doc/user/provider.html#provider-clipboard
 -- `unnamedplus` - Sync with system clipboard
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamed,unnamedplus"
 
 vim.opt.swapfile = false -- Don't use swapfile
 vim.opt.backup = false -- Creates a backup file
@@ -36,7 +36,7 @@ vim.opt.fileencoding = "utf-8" -- The encoding written to a file
 
 -- UI
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors
-vim.g.termguicolors = true
+vim.g.termguicolors = true -- TODO: Does this work?
 
 -- opt.cmdheight = 0 -- ?
 -- opt.guicursor = "" -- disable cursor-styling
@@ -117,10 +117,12 @@ vim.opt.formatoptions = "jcroqlnt" -- tcqj
 
 -- Folding.
 -- For keymaps see docs: :h fold opening and closing folds
-vim.opt.foldenable = true -- enable folding
-vim.opt.foldmethod = "indent" -- folds will be autodefined based on indents
-vim.opt.foldlevel = 99 -- by default in new file all folds must be opened
--- How to display closed folds
+-- vim.opt.foldmethod = "indent" -- folds will be autodefined based on indents
+-- Recommended for `nvim-ufo` plugin: https://github.com/kevinhwang91/nvim-ufo?tab=readme-ov-file#minimal-configuration
+vim.o.foldcolumn = "0" -- Show fold infos in signcolomn
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
 -- opt.foldtext = " " -- ?
 
 -- Characters to fill the statuslines, vertical separators and special
