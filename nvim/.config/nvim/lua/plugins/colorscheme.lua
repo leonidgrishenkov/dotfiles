@@ -62,6 +62,7 @@ return {
                             background = true,
                         },
                     },
+                    --- @diagnostic disable: assign-type-mismatch
                     indent_blankline = {
                         enabled = true,
                         scope_color = "", -- catppuccin color (eg. `lavender`) Default: text
