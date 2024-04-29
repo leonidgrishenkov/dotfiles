@@ -32,10 +32,13 @@ return {
                     nvimtree = true,
                     cmp = true,
                     treesitter = true,
+                    ufo = true,
+                    treesitter_context = true,
                     telescope = {
                         enabled = true,
-                        -- style = "nvchad"
+                        style = "nvchad",
                     },
+                    notify = true,
                     lsp_trouble = true,
                     gitsigns = true,
                     which_key = true,
@@ -43,6 +46,7 @@ return {
                     markdown = true,
                     noice = true,
                     mini = true,
+                    headlines = true,
                     fidget = true,
                     native_lsp = {
                         enabled = true,

@@ -48,7 +48,7 @@ return {
 
             telescope.setup({
                 defaults = {
-                    prompt_prefix = "  ",
+                    prompt_prefix = "   ",
                     selection_caret = "  ",
                     -- With this mode telescope will start
                     initial_mode = "insert",
