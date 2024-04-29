@@ -84,26 +84,26 @@ return {
                     ["<C-y>"] = cmp.config.disable,
 
                     -- With this enabled <Tab> doesn't work in vim command line mode ( when use `:` ) for autocompletion
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif luasnip.expandable() then
-                            luasnip.expand()
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
+                    -- ["<Tab>"] = cmp.mapping(function(fallback)
+                    --     if cmp.visible() then
+                    --         cmp.select_next_item()
+                    --     elseif luasnip.expandable() then
+                    --         luasnip.expand()
+                    --     elseif luasnip.expand_or_jumpable() then
+                    --         luasnip.expand_or_jump()
+                    --     else
+                    --         fallback()
+                    --     end
+                    -- end, { "i", "s" }),
+                    -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+                    --     if cmp.visible() then
+                    --         cmp.select_prev_item()
+                    --     elseif luasnip.jumpable(-1) then
+                    --         luasnip.jump(-1)
+                    --     else
+                    --         fallback()
+                    --     end
+                    -- end, { "i", "s" }),
                 }),
                 -- Sources for autocompletion.
                 -- Docs: :h cmp-contig.matching
@@ -184,37 +184,36 @@ return {
                     ghost_text = true,
                 },
             })
-
+            -- TODO: Is all of  these are overwritted by noice?
             -- Completions for text inside vim command lines.
             -- Setup for `/` vim cmdline.
-            cmp.setup.cmdline({ "/", "?" }, {
-                -- TODO: this doesn't work
-                mapping = cmp.mapping.preset.insert({
-                    ["<C-p>"] = cmp.mapping.select_prev_item(),
-                    ["<C-n>"] = cmp.mapping.select_next_item(),
-                    ["<C-a>"] = cmp.mapping.complete(),
-                }),
-                sources = {
-                    { name = "buffer" },
-                },
-            })
-            -- Setup for `:` vim cmdline.
-            cmp.setup.cmdline(":", {
-                mapping = cmp.mapping.preset.insert({
-                    ["<C-p>"] = cmp.mapping.select_prev_item(),
-                    ["<C-n>"] = cmp.mapping.select_next_item(),
-                    ["<C-a>"] = cmp.mapping.complete(),
-                }),
-                sources = cmp.config.sources({
-                    { { name = "path" } },
-                    {
-                        {
-                            name = "cmdline",
-                            option = { ignore_cmds = { "Man", "!" } },
-                        },
-                    },
-                }),
-            })
+            -- cmp.setup.cmdline({ "/", "?" }, {
+            --     mapping = cmp.mapping.preset.insert({
+            --         ["<C-p>"] = cmp.mapping.select_prev_item(),
+            --         ["<C-n>"] = cmp.mapping.select_next_item(),
+            --         ["<C-a>"] = cmp.mapping.complete(),
+            --     }),
+            --     sources = {
+            --         { name = "buffer" },
+            --     },
+            -- })
+            -- -- Setup for `:` vim cmdline.
+            -- cmp.setup.cmdline(":", {
+            --     mapping = cmp.mapping.preset.insert({
+            --         ["<C-p>"] = cmp.mapping.select_prev_item(),
+            --         ["<C-n>"] = cmp.mapping.select_next_item(),
+            --         ["<C-a>"] = cmp.mapping.complete(),
+            --     }),
+            --     sources = cmp.config.sources({
+            --         { { name = "path" } },
+            --         {
+            --             {
+            --                 name = "cmdline",
+            --                 option = { ignore_cmds = { "Man", "!" } },
+            --             },
+            --         },
+            --     }),
+            -- })
         end,
     },
 }
