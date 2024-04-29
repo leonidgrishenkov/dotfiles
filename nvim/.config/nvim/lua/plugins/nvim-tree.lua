@@ -168,19 +168,19 @@ return {
                             bookmarks = false,
                         },
                         glyphs = {
-                            default = "",
+                            default = "", --   
                             symlink = "",
                             bookmark = "󰆤",
                             modified = "",
                             folder = {
                                 arrow_closed = "",
                                 arrow_open = "",
-                                default = "",
-                                open = "",
+                                default = "",
+                                open = "",
                                 empty = "",
                                 empty_open = "",
-                                symlink = "",
-                                symlink_open = "",
+                                symlink = "", -- 󰉒 󱧮    
+                                symlink_open = "",
                             },
                             git = {
                                 unstaged = "󱓊", --"󰽤",
