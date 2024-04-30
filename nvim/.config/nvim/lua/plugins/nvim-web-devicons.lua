@@ -4,6 +4,9 @@ return {
         Icons plugin. Used by other plugins.
 
         Repo: https://github.com/nvim-tree/nvim-web-devicons
+
+        Docs:
+            - Run :NvimWebDeviconsHiTest to see all icons and their highlighting.
         ]]
         "nvim-tree/nvim-web-devicons",
         config = function()
@@ -38,15 +41,15 @@ return {
                 -- Same as `override` but specifically for overrides by filename
                 -- takes effect when `strict` is true
                 override_by_filename = {
-                    [".gitignore"] = {
-                        icon = "󰊢",
+                    ["poetry.lock"] = {
+                        icon = "",
                         color = "#984CA1",
-                        name = "Gitignore",
+                        name = "PoetryLock",
                     },
-                    [".gitconfig"] = {
-                        icon = "󰊢",
+                    ["pyproject.toml"] = {
+                        icon = "",
                         color = "#984CA1",
-                        name = "Gitconfig",
+                        name = "PyProjectToml",
                     },
                 },
                 -- Same as `override` but specifically for overrides by extension
@@ -61,6 +64,16 @@ return {
                         icon = "",
                         color = "#984CA1",
                         name = "Yaml",
+                    },
+                    ["yml"] = {
+                        icon = "",
+                        color = "#984CA1",
+                        name = "Yaml",
+                    },
+                    ["py"] = {
+                        icon = "",
+                        color = "#984CA1",
+                        name = "Python",
                     },
                 },
             })
