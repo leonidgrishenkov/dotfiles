@@ -1,9 +1,12 @@
 #!/bin/zsh
+# vim: set filetype=zsh:
+# vim: set ts=4 sw=4 et:
 
 # XDG Paths
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
+
 
 # Announce 265 bit color support
 # export TERM=xterm-256color
@@ -19,33 +22,33 @@ export LC_CTYPE='en_US.UTF-8'
 # `brew` configuration
 # --------------------
 # If `brew` installed
-if command -v /opt/homebrew/bin/brew &> /dev/null; then
-    # Export all `brew` env vars. See `man brew` + `/shellenv`
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+if command -v /opt/homebrew/bin/brew &>/dev/null; then
+  # Export all `brew` env vars. See `man brew` + `/shellenv`
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    # No emoji in download output
-    # export HOMEBREW_NO_EMOJI=1
-    export HOMEBREW_INSTALL_BADGE="💣"
+  # No emoji in download output
+  # export HOMEBREW_NO_EMOJI=1
+  export HOMEBREW_INSTALL_BADGE="💣"
 
-    # Don't show hints for env vatialbes
-    export HOMEBREW_NO_ENV_HINTS=1
-    export HOMEBREW_NO_AUTO_UPDATE=1
+  # Don't show hints for env vatialbes
+  export HOMEBREW_NO_ENV_HINTS=1
+  export HOMEBREW_NO_AUTO_UPDATE=1
 
-    export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
+  export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
 
-    # Add to FPATH completions installed by brew
-    FPATH="/opt/homebrew/share/zsh/site-functions:$FPATH"
-    autoload -U compinit
-    compinit
+  # Add to FPATH completions installed by brew
+  FPATH="/opt/homebrew/share/zsh/site-functions:$FPATH"
+  autoload -U compinit
+  compinit
 fi
 
 # Set one of the editor as `$EDITOR`
 EDITORS="nvim,vim,vi"
 for editor in $(echo $EDITORS | sed "s/,/ /g"); do
-    if command -v $editor &> /dev/null; then
-        export EDITOR=$editor
-        break
-    fi
+  if command -v $editor &>/dev/null; then
+    export EDITOR=$editor
+    break
+  fi
 done
 # Send message if no one editor is installed
 [[ ! -z $EDITOR ]] || echo "No editor is installed" >&2
@@ -101,78 +104,76 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # Which plugins is currently used
 plugins=(
-    # Enable vim mode support in CLI
-    # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vi-mode
-	vi-mode
+  # Enable vim mode support in CLI
+  # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vi-mode
+  vi-mode
 
-    # Repo: https://github.com/zsh-users/zsh-autosuggestions
-	zsh-autosuggestions
+  # Repo: https://github.com/zsh-users/zsh-autosuggestions
+  zsh-autosuggestions
 
-    # Docs: https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
-    # Repo: https://github.com/zsh-users/zsh-completions
-    zsh-completions
+  # Docs: https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
+  # Repo: https://github.com/zsh-users/zsh-completions
+  zsh-completions
 
-    # CLI commands syntax highlighting.
-    # Repo: https://github.com/zsh-users/zsh-syntax-highlighting
-    zsh-syntax-highlighting
+  # CLI commands syntax highlighting.
+  # Repo: https://github.com/zsh-users/zsh-syntax-highlighting
+  zsh-syntax-highlighting
 
-    # Add colors for man pages
-    # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
-    # colored-man-pages
+  # Add colors for man pages
+  # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
+  # colored-man-pages
 
-    # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/command-not-found
-    command-not-found # BUG: Is this works?
+  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/command-not-found
+  command-not-found # BUG: Is this works?
 
-    # Generate `.gitignore` files.
-    # Usage: `git-ignore` + <Enter>
-    # Repo: https://github.com/laggardkernel/git-ignore
-    git-ignore
+  # Generate `.gitignore` files.
+  # Usage: `git-ignore` + <Enter>
+  # Repo: https://github.com/laggardkernel/git-ignore
+  git-ignore
 
-    # Add colors for help pages. Default only for `--help`.
-    # Repo: https://github.com/Freed-Wu/zsh-help
-    zsh-help
+  # Add colors for help pages. Default only for `--help`.
+  # Repo: https://github.com/Freed-Wu/zsh-help
+  zsh-help
 
-    # CLI commands syntax highlight with themes.
-    # Repo: https://github.com/zdharma-continuum/fast-syntax-highlighting
-    # Usage: `fast-theme --help`
-    # fast-syntax-highlighting
+  # CLI commands syntax highlight with themes.
+  # Repo: https://github.com/zdharma-continuum/fast-syntax-highlighting
+  # Usage: `fast-theme --help`
+  # fast-syntax-highlighting
 
-    # Change behevior of terminal titles generation
-    # Repo: https://github.com/trystan2k/zsh-tab-title
-    # zsh-tab-title
+  # Change behevior of terminal titles generation
+  # Repo: https://github.com/trystan2k/zsh-tab-title
+  # zsh-tab-title
 )
 
 if [[ $SYSTEM = "Darwin" ]]; then
 
-    # Usefull commands for macos
-    # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos
-    # All commands: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos#commands
-    plugins+=(macos) # Add to oh-my-zsh plugins list
+  # Usefull commands for macos
+  # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos
+  # All commands: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos#commands
+  plugins+=(macos) # Add to oh-my-zsh plugins list
 fi
 
 # If `poetry` installed
-if command -v poetry &> /dev/null; then
-    # Create virtual envs in project
-    export POETRY_VIRTUALENVS_IN_PROJECT=true
+if command -v poetry &>/dev/null; then
+  # Create virtual envs in project
+  export POETRY_VIRTUALENVS_IN_PROJECT=true
 
-    # Autocompletions for `poetry`.
-    # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/poetry
-    plugins+=(poetry)
+  # Autocompletions for `poetry`.
+  # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/poetry
+  plugins+=(poetry)
 fi
 
+if command -v fzf &>/dev/null; then
 
-if command -v fzf &> /dev/null; then
+  # For integrations with `fzf`
+  # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
+  plugins+=(fzf)
 
-    # For integrations with `fzf`
-    # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
-    plugins+=(fzf)
-
-    # Repo: https://github.com/junegunn/fzf#layout
-    # Docs: `man fzf`
-    export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=sharp --margin=0,1,0,1%"
-    export FZF_COMPLETION_TRIGGER='~~'
+  # Repo: https://github.com/junegunn/fzf#layout
+  # Docs: `man fzf`
+  export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=sharp --margin=0,1,0,1%"
+  export FZF_COMPLETION_TRIGGER='~~'
 fi
-
 
 # Completions for apps
 FPATH="$ZSH_CUSTOM/plugins/zsh-completions/src:$FPATH"
@@ -185,8 +186,8 @@ source $ZSH/oh-my-zsh.sh
 
 # `oh-my-zsh` updates
 # https://github.com/ohmyzsh/ohmyzsh#getting-updates
-zstyle ':omz:update' mode auto # Auto update
-zstyle ':omz:update' frequency 7 # Check updates every 7 days
+zstyle ':omz:update' mode auto       # Auto update
+zstyle ':omz:update' frequency 7     # Check updates every 7 days
 zstyle ':omz:update' verbose minimal # Output mode
 
 # ---------------------------------
@@ -227,7 +228,6 @@ zstyle ':omz:update' verbose minimal # Output mode
 # POWERLEVEL9K_PROMPT_CHAR_OK_VIVIS_CONTENT_EXPANSION=""
 # POWERLEVEL9K_PROMPT_CHAR_ERROR_VIVIS_CONTENT_EXPANSION=""
 
-
 eval "$(starship init zsh)"
 
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
@@ -247,7 +247,7 @@ export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 # Redifine `--help` output appearence.
 # Took from: https://github.com/Freed-Wu/zsh-help#function--help
 -help() {
-    bat --language=help --style=plain --theme=Nord --color=always --decorations=always
+  bat --language=help --style=plain --theme=Nord --color=always --decorations=always
 }
 
 # `zsh-autosuggestions`
@@ -292,26 +292,26 @@ bindkey -M vicmd \; vi-forward-char
 # `kubectl` configuration
 # -----------------------
 # If `kubectl` installed
-if command -v kubectl &> /dev/null; then
+if command -v kubectl &>/dev/null; then
 
-    alias kube="kubectl"
+  alias kube="kubectl"
 
-    export KUBECONFIG="$HOME/.kube/smlt-bdd-config.yaml"
-    # If config dir doesn't exists create one
-    [[ -d $KUBECONFIG:h ]] || mkdir -p $KUBECONFIG:h
+  export KUBECONFIG="$HOME/.kube/smlt-bdd-config.yaml"
+  # If config dir doesn't exists create one
+  [[ -d $KUBECONFIG:h ]] || mkdir -p $KUBECONFIG:h
 fi
 
 # -------------------------------
 # Yandex Cloud `yc` configuration
 # -------------------------------
 # If CLI utility `yc` installed source completions
-if command -v yc &> /dev/null; then
+if command -v yc &>/dev/null; then
 
-    if command -v brew &> /dev/null; then # Check if we use `brew`
-        source \
-        $(brew info --cask yandex-cloud-cli --json=v2 \
-        | jq -r '.casks[].artifacts[] | select(.uninstall? // empty) | .uninstall[].delete')/completion.zsh.inc
-    fi
+  if command -v brew &>/dev/null; then # Check if we use `brew`
+    source \
+      $(brew info --cask yandex-cloud-cli --json=v2 |
+        jq -r '.casks[].artifacts[] | select(.uninstall? // empty) | .uninstall[].delete')/completion.zsh.inc
+  fi
 fi
 
 # -------
