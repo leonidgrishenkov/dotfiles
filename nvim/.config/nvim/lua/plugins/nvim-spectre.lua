@@ -22,10 +22,10 @@ return {
 
             -- Default settings: https://github.com/nvim-pack/nvim-spectre?tab=readme-ov-file#customization
             spectre.setup({
-                -- highlight = {
-                --     search = "SpectreSearch",
-                --     replace = "SpectreReplace",
-                -- },
+                highlight = {
+                    search = "SpectreSearch",
+                    replace = "SpectreReplace",
+                },
             })
         end,
     },
