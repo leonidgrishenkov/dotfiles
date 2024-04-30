@@ -31,13 +31,11 @@ Where:
 vim.g.mapleader = " " -- <space>
 vim.g.maplocalleader = " "
 
-local keymap = vim.keymap
-
 -- Disable arrow keys
-keymap.set("", "<Up>", "<nop>")
-keymap.set("", "<Down>", "<nop>")
-keymap.set("", "<Left>", "<nop>")
-keymap.set("", "<Right>", "<nop>")
+vim.keymap.set("", "<Up>", "<nop>")
+vim.keymap.set("", "<Down>", "<nop>")
+vim.keymap.set("", "<Left>", "<nop>")
+vim.keymap.set("", "<Right>", "<nop>")
 
 local function opts(desc)
     return { desc = desc, noremap = true, silent = true }
@@ -45,45 +43,45 @@ end
 
 -- Disable yank when do some operations.
 -- Disable yank on delete
-keymap.set({ "n", "v" }, "d", '"_d', opts("Delete w/o yank"))
-keymap.set({ "n", "v" }, "D", '"_D', opts("Delete w/o yank"))
+vim.keymap.set({ "n", "v" }, "d", '"_d', opts("Delete w/o yank"))
+vim.keymap.set({ "n", "v" }, "D", '"_D', opts("Delete w/o yank"))
 
 -- Remap exit modes to normal mode
-keymap.set({ "v", "i" }, "jf", "<ESC>", opts("Exit v|i to n mode"))
+vim.keymap.set({ "v", "i" }, "jf", "<ESC>", opts("Exit v|i to n mode"))
 
 -- Movements
 -- Unmap `h`  TODO: is it work?
-keymap.set("", "h", "<nop>")
+vim.keymap.set("", "h", "<nop>")
 
-keymap.set({ "n", "v" }, "l", "<Down>", opts("Move down"))
-keymap.set({ "n", "v" }, "k", "<Up>", opts("Move up"))
-keymap.set({ "n", "v" }, "j", "<Left>", opts("Move left"))
-keymap.set({ "n", "v" }, ";", "<Right>", opts("Move right"))
+vim.keymap.set({ "n", "v" }, "l", "<Down>", opts("Move down"))
+vim.keymap.set({ "n", "v" }, "k", "<Up>", opts("Move up"))
+vim.keymap.set({ "n", "v" }, "j", "<Left>", opts("Move left"))
+vim.keymap.set({ "n", "v" }, ";", "<Right>", opts("Move right"))
 
 -- Close all windows and exit
 -- keymap.set("n", "<leader>q", ":q<CR>", opts("Close all and exit as `:q`")) -- <leader-key> + <q>
 
 -- Panes createion (Window split)
 -- Split window vertically. Command line:`:vsplit`
-keymap.set("n", "<leader>V", "<C-w>v", opts("Split window vertically"))
+vim.keymap.set("n", "<leader>V", "<C-w>v", opts("Split window vertically"))
 -- Split window horizontally. Command: `:split`
-keymap.set("n", "<leader>H", "<C-w>s", opts("Split window horizontally"))
+vim.keymap.set("n", "<leader>H", "<C-w>s", opts("Split window horizontally"))
 
 -- Switch panes
-keymap.set("n", "<leader>j", "<C-w>h", opts("Switch pane left"))
-keymap.set("n", "<leader>l", "<C-w>j", opts("Switch to down"))
-keymap.set("n", "<leader>k", "<C-w>k", opts("Switch to up"))
-keymap.set("n", "<leader>;", "<C-w>l", opts("Switch to right"))
+vim.keymap.set("n", "<leader>j", "<C-w>h", opts("Switch pane left"))
+vim.keymap.set("n", "<leader>l", "<C-w>j", opts("Switch to down"))
+vim.keymap.set("n", "<leader>k", "<C-w>k", opts("Switch to up"))
+vim.keymap.set("n", "<leader>;", "<C-w>l", opts("Switch to right"))
 
 -- Manipulate tabs
-keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", opts("Open new tab")) -- open new tab
-keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", opts("Close current tab")) -- close current tab
-keymap.set("n", "<leader>]", "<cmd>tabn<CR>", opts("Go to next tab")) --  go to next tab
-keymap.set("n", "<leader>[", "<cmd>tabp<CR>", opts("Go to previous tab")) --  go to previous tab
-keymap.set("n", "<leader>tm", "<cmd>tabnew %<CR>", opts("Open current buffer in new tab")) --  move current buffer to new tab
+vim.keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", opts("Open new tab")) -- open new tab
+vim.keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", opts("Close current tab")) -- close current tab
+vim.keymap.set("n", "<leader>]", "<cmd>tabn<CR>", opts("Go to next tab")) --  go to next tab
+vim.keymap.set("n", "<leader>[", "<cmd>tabp<CR>", opts("Go to previous tab")) --  go to previous tab
+vim.keymap.set("n", "<leader>tm", "<cmd>tabnew %<CR>", opts("Open current buffer in new tab")) --  move current buffer to new tab
 
 -- Clear search highlights
-keymap.set("n", "<leader>ch", ":nohl<CR>", opts("Clear search highlights"))
+vim.keymap.set("n", "<leader>ch", ":nohl<CR>", opts("Clear search highlights"))
 
 -- -- Move block
 -- keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move Block Down" })
