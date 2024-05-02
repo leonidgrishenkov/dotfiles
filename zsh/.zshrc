@@ -336,10 +336,10 @@ alias cl="clear"
 alias g="lazygit"
 
 # Change dir
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
+alias ..='cd .. && ls'
+alias ...='cd ../.. && ls'
+alias ....='cd ../../.. && ls'
+alias .....='cd ../../../.. && ls'
 
 # Some often use paths
 export CONFPATH=$HOME/Code/configs
