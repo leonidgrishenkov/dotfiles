@@ -333,11 +333,7 @@ alias h="history | tail -n 50"
 alias cl="clear"
 
 # Aliases for `git`
-alias g="git"
-alias gs="git status"
-alias gc="git commit"
-alias ga="git add"
-alias gp="git push"
+alias g="lazygit"
 
 # Change dir
 alias ..='cd ..'
