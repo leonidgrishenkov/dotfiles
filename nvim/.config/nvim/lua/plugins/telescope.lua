@@ -59,7 +59,7 @@ return {
                     -- With this mode telescope will start
                     initial_mode = "insert",
                     -- Determines what happens if you try to scroll past the view of the picker.
-                    scroll_strategy = "limit",
+                    scroll_strategy = "cycle",
                     -- `:h telescope.layout`
                     layout_strategy = "vertical",
                     path_display = {

@@ -18,8 +18,8 @@ return {
         },
         config = function()
             local lspconfig = require("lspconfig")
-
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            local icons = require("utils.icons").diagnostics
 
             -- On attach keymaps. When plugin connected to LSP server.
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -53,6 +53,7 @@ return {
 
                     opts.desc = "Search in buffer diagnostics"
                     vim.keymap.set("n", "<leader>fd", ":Telescope diagnostics bufnr=0<CR>", opts)
+
                     -- Show diagnostics for current line
                     opts.desc = "Show line diagnostics"
                     vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
@@ -131,10 +132,10 @@ return {
 
             -- Setup symbols in the sign column (gutter)
             local signs = {
-                Error = "",
-                Warn = "",
-                Hint = "",
-                Info = "",
+                Error = icons.Error,
+                Warn = icons.Warn,
+                Hint = icons.Hint,
+                Info = icons.Info,
             }
             for type, icon in pairs(signs) do
                 local hl = "DiagnosticSign" .. type

@@ -45,7 +45,7 @@ return {
                             icon = "",
                             lang = "lua",
                         },
-                        help = { pattern = "^:%s*he?l?p?%s+", icon = "󰆋" }, -- 󰋖 󰞋 󰮥 󰘥 󰌵    󰋗 󰆋
+                        help = { pattern = "^:%s*he?l?p?%s+", icon = "" }, -- 󰋖 󰞋 󰮥 󰘥 󰌵    󰋗 󰆋
                     },
                 },
                 routes = {
@@ -77,7 +77,7 @@ return {
                         -- When true, messages routing to the same notify
                         -- instance will replace existing messages instead of
                         -- pushing a new notification every time.
-                        replace = true,
+                        replace = false,
                     },
                 },
                 presets = {

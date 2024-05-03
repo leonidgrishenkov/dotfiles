@@ -20,6 +20,7 @@ return {
             -- Configure plugin
             autopairs.setup({
                 check_ts = true, -- enable treesitter
+                disable_filetype = { "TelescopePrompt", "spectre_panel" },
                 ts_config = {
                     lua = { "string" }, -- don't add pairs in lua string treesitter nodes
                 },

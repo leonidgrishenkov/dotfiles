@@ -3,6 +3,7 @@ return {
         --[[
         Autocompletion plugin.
 
+
         Repo: https://github.com/hrsh7th/nvim-cmp
         Wiki: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
 
@@ -123,7 +124,7 @@ return {
                     { name = "luasnip", keyword_length = 3 },
                     { name = "buffer", keyword_length = 3 },
                     { name = "path" },
-                    { name = "cmdline" },
+                    -- { name = "cmdline" },
                     { name = "dotenv" },
                 }),
                 confirm_opts = {

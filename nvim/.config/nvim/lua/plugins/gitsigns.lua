@@ -3,26 +3,32 @@ return {
         --[[
         Git decorations inside editor.
         Repo: https://github.com/lewis6991/gitsigns.nvim
+
+        Docs:
+            - Help page: `gitsigns`
         ]]
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             local gitsigns = require("gitsigns")
+            local icons = require("utils.icons").git
 
             -- Setup colors for symbols in signcolomn
             vim.cmd([[
                 highlight GitSignsAdd    guifg=#009900 ctermfg=2
                 highlight GitSignsChange guifg=#bbbb00 ctermfg=3
+
+                highlight GitSignsDelete guifg=#E78284
+                highlight GitSignsTopdelete guifg=#E78284
             ]])
 
             gitsigns.setup({
                 signs = {
-                    add = { text = "┃", hl = "GitSignsAdd" },
-                    change = { text = "┃", hl = "GitSignsChange" },
-                    delete = { text = "", show_count = true },
-                    topdelete = { text = "", show_count = true },
-                    changedelete = { text = "~" },
-                    untracked = { text = "┆" },
+                    add = { text = icons.AddSign, hl = "GitSignsAdd" },
+                    change = { text = icons.AddSign, hl = "GitSignsChange" },
+                    delete = { text = icons.RemoveSign, hl = "GitSignsDelete", show_count = true },
+                    topdelete = { text = icons.RemoveSign, hl = "GitSignsTopDelete", show_count = true },
+                    changedelete = { text = icons.ChangeRemoveSign },
                 },
                 watch_gitdir = {
                     follow_files = true,

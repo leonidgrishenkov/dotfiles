@@ -71,6 +71,9 @@ return {
                 indent = {
                     enable = true,
                 },
+                autopairs = {
+                    enable = true,
+                },
             })
         end,
     },
