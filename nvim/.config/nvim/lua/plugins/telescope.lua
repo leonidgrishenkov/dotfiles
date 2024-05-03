@@ -26,6 +26,7 @@ return {
             "nvim-tree/nvim-web-devicons",
             "nvim-telescope/telescope-ui-select.nvim",
         },
+
         config = function()
             local telescope = require("telescope")
             -- All available actions - `:h telescope.actions`
@@ -35,29 +36,20 @@ return {
 
             -- Global keymappings
             -- All available pickers listed here: https://github.com/nvim-telescope/telescope.nvim#pickers
-            vim.keymap.set("n", "<leader>fkm", builtin.keymaps, { desc = "telescope: Search for keymaps" })
-
-            vim.keymap.set("n", "<leader>ftb", builtin.builtin, { desc = "telescope: Search in builtin pickers" })
-
+            vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
+            vim.keymap.set("n", "<leader>fp", ":Telescope<CR>", { desc = "Panel" })
+            vim.keymap.set("n", "<leader>fc", ":Telescope commands<CR>", { desc = "Commands" })
+            vim.keymap.set("n", "<leader>fo", ":Telescope vim_options<CR>", { desc = "Options" })
+            -- Files
+            vim.keymap.set("n", "<leader>fs", ":Telescope live_grep<CR>", { desc = "Files by string" })
+            vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Files by file name" })
+            -- Buffers
+            vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "Buffers by file name" })
             vim.keymap.set(
                 "n",
-                "<leader>fs",
-                "<cmd>Telescope live_grep<CR>",
-                { desc = "telescope: Search files in pwd by string" }
-            )
-
-            vim.keymap.set(
-                "n",
-                "<leader>fb",
-                "<cmd>Telescope buffers<CR>",
-                { desc = "telescope: Search in opened buffers by file name" }
-            )
-
-            vim.keymap.set(
-                "n",
-                "<leader>ff",
-                "<cmd>Telescope find_files<CR>",
-                { desc = "telescope: Search files in pwd by file name" }
+                "<leader>fz",
+                ":Telescope current_buffer_fuzzy_find<CR>",
+                { desc = "Fuzzy in current buffer" }
             )
 
             telescope.setup({
@@ -75,6 +67,7 @@ return {
                     },
                     color_devicons = true,
                     -- On attached to client keymapping (inside opened plugin window)
+
                     mappings = {
                         -- For normal mode
                         n = {

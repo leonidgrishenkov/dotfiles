@@ -30,28 +30,29 @@ return {
                     local opts = { buffer = ev.buf, silent = true }
 
                     -- Show documentation for text under cursor
-                    opts.desc = "Show definition preview hover"
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                    opts.desc = "Show definition preview of word"
+                    vim.keymap.set("n", "<leader>lp", vim.lsp.buf.hover, opts)
 
                     -- see available code actions, in visual mode will apply to selection
-                    opts.desc = "Show code actions"
-                    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+                    -- opts.desc = "Show code actions"
+                    -- vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 
                     -- Smart rename text below cursor inside current scope (indent guide).
-                    opts.desc = "Smart rename in buffer"
-                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+                    -- TODO: Maybe change this keymap to single char?
+                    opts.desc = "Rename word in buffer"
+                    vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, opts)
 
-                    -- Show with Telescope
+                    -- Telescope
                     -- To go back type: <ctrl> + o
-                    opts.desc = "Go to LSP definition"
-                    vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-                    -- Show all references for text below cursor in current workspace
-                    opts.desc = "Show all LSP references"
-                    vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+                    -- TODO: Is there any method to show definition in preview?
+                    opts.desc = "Show definitions of word"
+                    vim.keymap.set("n", "<leader>ld", ":Telescope lsp_definitions jump_type=never<CR>", opts)
 
-                    -- Show all diagnostics for opened buffer
-                    opts.desc = "Show buffer diagnostics"
-                    vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+                    opts.desc = "Show references of word"
+                    vim.keymap.set("n", "<leader>lr", ":Telescope lsp_references<CR>", opts)
+
+                    opts.desc = "Search in buffer diagnostics"
+                    vim.keymap.set("n", "<leader>fd", ":Telescope diagnostics bufnr=0<CR>", opts)
                     -- Show diagnostics for current line
                     opts.desc = "Show line diagnostics"
                     vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)

@@ -76,8 +76,8 @@ return {
                 mapping = cmp.mapping.preset.insert({
                     ["<C-p>"] = cmp.mapping.select_prev_item(), -- previous suggestion
                     ["<C-n>"] = cmp.mapping.select_next_item(), -- next suggestion
-                    ["<C-l>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-k>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-k>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-l>"] = cmp.mapping.scroll_docs(4),
                     ["<C-a>"] = cmp.mapping.complete(), -- Invoke cmp
                     -- Close completion window
                     ["<C-e>"] = cmp.mapping({
@@ -114,7 +114,7 @@ return {
                     --     end
                     -- end, { "i", "s" }),
                 }),
-                -- Sources for autocompletion.
+                -- Sources for autocompletion
                 -- Docs: :h cmp-contig.matching
                 -- WARN: Order in this list will be used to prioritize
                 -- cmp results.

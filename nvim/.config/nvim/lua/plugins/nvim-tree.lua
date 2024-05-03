@@ -22,13 +22,11 @@ return {
             Global keymappings
             --]]
             local function opts(desc)
-                return { desc = "nvim-tree: " .. desc, noremap = true, silent = true, nowait = true }
+                return { desc = desc, noremap = true, silent = true, nowait = true }
             end
 
-            -- Toggle window
-            vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<cr>", opts("Toggle window"))
-            -- Toggle window on current file
-            vim.keymap.set("n", "<leader>ef", ":NvimTreeFindFileToggle<cr>", opts("Toggle window on current file"))
+            vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", opts("Show File Explorer"))
+            -- vim.keymap.set("n", "<leader>ef", ":NvimTreeFindFileToggle<CR>", opts("Toggle window on current file"))
 
             --[[
             On attached keymappings

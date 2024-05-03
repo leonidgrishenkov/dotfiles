@@ -9,7 +9,7 @@ return {
         config = function()
             require("catppuccin").setup({
                 flavour = "frappe", -- Can be one of: latte, frappe, macchiato, mocha
-                transparent_background = true,
+                transparent_background = true, -- disables setting the background color.
                 term_colors = true,
                 show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
                 styles = {
@@ -46,6 +46,7 @@ return {
                     markdown = true,
                     noice = true,
                     mini = true,
+                    semantic_tokens = true,
                     headlines = true,
                     fidget = true,
                     native_lsp = {
