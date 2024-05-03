@@ -50,7 +50,16 @@ return {
 
             -- Configure plugin
             cmp.setup({
-                enabled = true,
+                -- enabled = true,
+                enabled = function()
+                    -- Disable cmp in Telescope prompt
+                    local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+                    if buftype == "prompt" then
+                        return false
+                    end
+                    return true
+                end,
+
                 completion = {
                     -- Behavior of the cmp plugin. For details see: :h completeopt
                     completeopt = "menu,menuone,preview,noinsert,noselect",
