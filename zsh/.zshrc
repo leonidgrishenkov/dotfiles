@@ -7,10 +7,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-
 # Announce 265 bit color support
-# export TERM=xterm-256color
-export TERM=screen-256color
+export TERM=xterm-256color
+# export TERM=screen-256color
 
 export SYSTEM="$(uname -s)"
 
@@ -76,9 +75,6 @@ export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
 # If it doesn't exists create one
 [[ -d $ZSH_CACHE_DIR ]] || mkdir -p $ZSH_CACHE_DIR
 
-# zsh theme
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-
 # Autocompletion options
 # Display dots (or given format) when waiting for completions
 COMPLETION_WAITING_DOTS="%F{grey}waiting...%f"
@@ -97,8 +93,8 @@ DISABLE_UNTRACKED_FILES_DIRTY=true
 
 # History of commands
 HISTFILE="$ZSH_CACHE_DIR/history"
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=999
+SAVEHIST=1000
 # Timestamp format in `history` output
 HIST_STAMPS="yyyy-mm-dd"
 
@@ -124,7 +120,7 @@ plugins=(
   # colored-man-pages
 
   # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/command-not-found
-  command-not-found # BUG: Is this works?
+  command-not-found # BUG: It doesn't  work
 
   # Generate `.gitignore` files.
   # Usage: `git-ignore` + <Enter>
@@ -190,59 +186,17 @@ zstyle ':omz:update' mode auto       # Auto update
 zstyle ':omz:update' frequency 7     # Check updates every 7 days
 zstyle ':omz:update' verbose minimal # Output mode
 
+# ----------
+# `starship`
+# ----------
+# Init starship
+eval "$(starship init zsh)"
+# Set var with path to config file
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
+
 # ---------------------------------
 # `oh-my-zsh` plugins configuration
 # ---------------------------------
-# `p10k`
-# Wiki: https://github.com/Powerlevel9k/powerlevel9k/wiki/Stylizing-Your-Prompt
-
-# All settings should be after source config file
-# POWERLEVEL9K_CONFIG_FILE="$XDG_CONFIG_HOME/p10k/.p10k.zsh"
-# [[ ! -f $POWERLEVEL9K_CONFIG_FILE ]] || source $POWERLEVEL9K_CONFIG_FILE
-
-# # Remove os icon from left side of prompt
-# unset 'POWERLEVEL9K_LEFT_PROMPT_ELEMENTS[1]'
-
-# # Disable configuration wizard auto prompt
-# POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-
-# POWERLEVEL9K_MODE=nerdfont-complete
-
-# # show Python version next to the virtual environment name.
-# POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
-# # Hide python version if it doesn't come from one of these sources.
-# POWERLEVEL9K_PYENV_SOURCES=(shell local global)
-
-# # Define/remap icons
-# POWERLEVEL9K_VCS_GIT_ICON="󰊢"
-# # POWERLEVEL9K_VCS_GIT_GITLAB_ICON="󰮠"
-
-# # Insert mode icons
-# POWERLEVEL9K_PROMPT_CHAR_OK_VIINS_CONTENT_EXPANSION=""
-# # TODO maybe add diferent color for error sybmol?
-# POWERLEVEL9K_PROMPT_CHAR_ERROR_VIINS_CONTENT_EXPANSION=""
-
-# POWERLEVEL9K_PROMPT_CHAR_OK_VICMD_CONTENT_EXPANSION=""
-# POWERLEVEL9K_PROMPT_CHAR_ERROR_VICMD_CONTENT_EXPANSION=""
-
-# POWERLEVEL9K_PROMPT_CHAR_OK_VIVIS_CONTENT_EXPANSION=""
-# POWERLEVEL9K_PROMPT_CHAR_ERROR_VIVIS_CONTENT_EXPANSION=""
-
-eval "$(starship init zsh)"
-
-export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
-
-# Display path behaviour
-# https://stackoverflow.com/questions/61176257/customizing-powerleve10k-prompt
-# Max symbols to show
-# POWERLEVEL9K_DIR_MAX_LENGTH=20
-# If directory is too long, shorten some of its segments to the
-# shortest possible unique prefix. The shortened directory can be
-# tab-completed to the original.
-#   - `truncate_to_unique` - Default value
-#   - `truncate_to_last` - Show only the last directory segment.
-# POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_last"
-
 # `zsh-help`
 # Redifine `--help` output appearence.
 # Took from: https://github.com/Freed-Wu/zsh-help#function--help
@@ -252,7 +206,7 @@ export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 
 # `zsh-autosuggestions`
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=249"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 # Set bindkey to accept currently shown autosuggestion
 bindkey '^k' autosuggest-accept
 
@@ -274,19 +228,6 @@ bindkey -M visual j vi-backward-char
 bindkey -M vicmd l vi-down-line-or-history
 bindkey -M vicmd k vi-up-line-or-history
 bindkey -M vicmd \; vi-forward-char
-
-# `zsh-tab-title`
-# ZSH_TAB_TITLE_DISABLE_AUTO_TITLE=true
-# Prefix for title. Doesn't work for some reason.
-# ZSH_TAB_TITLE_PREFIX="$USER@$HOST: "
-# Enable to show the full command being run without
-# it's arguments in the tab title.
-# For example, `nano .zshrc` will show 'nano .zshrc'
-# instead of just 'nano'. Default is to display only
-# the command without it's arguments
-# ZSH_TAB_TITLE_ENABLE_FULL_COMMAND=true
-# Show only folder name insted of full path to pwd
-# ZSH_TAB_TITLE_ONLY_FOLDER=true
 
 # -----------------------
 # `kubectl` configuration
@@ -317,6 +258,8 @@ fi
 # -------
 # Aliases
 # -------
+# NOTE: To remove any alias use `unalias` command.
+
 # About `bat` and more features: https://github.com/sharkdp/bat
 alias cat="bat --style=plain --theme=Nord --color=auto --decorations=auto"
 
@@ -328,7 +271,7 @@ alias tree="eza --tree --all --icons --group-directories-first --ignore-glob='.g
 
 alias v=$EDITOR
 
-alias rmi="rm -Iv"
+alias rm="rm -Iv"
 alias h="history | tail -n 50"
 alias cl="clear"
 
@@ -336,14 +279,12 @@ alias cl="clear"
 alias g="lazygit"
 
 # Change dir
-alias ..='cd .. && ls'
-alias ...='cd ../.. && ls'
-alias ....='cd ../../.. && ls'
-alias .....='cd ../../../.. && ls'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 
-# Some often use paths
-export CONFPATH=$HOME/Code/configs
-export CODEPATH=$HOME/Code
+# Some often used paths
 export ICLOUDPATH=$HOME/Library/Mobile\ Documents/com~apple~CloudDocs
 
 # Python
@@ -357,20 +298,28 @@ export PATH=$HOME/.python/3.12.2/bin:$PATH
 # fi
 
 # Extra zsh options
+# History
+# Auto-sync history between concurrent sessions.
+setopt SHARE_HISTORY
+# Keep only the most recent copy of each duplicate entry in history.
+setopt HIST_IGNORE_ALL_DUPS
+# Leave blanks out
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
+
+# Search in history with arrow keys.
+# Usage: you can type some command and them press arrow keys
+# to search in history what you used with this command.
+# For example: nvim <press arrow key>
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
+
+# Other
 # Don't let > silently overwrite files. To overwrite, use >! instead.
 setopt NO_CLOBBER
 
 # Use modern file-locking mechanisms, for better safety & performance.
 # setopt HIST_FCNTL_LOCK
-
-# Keep only the most recent copy of each duplicate entry in history.
-setopt HIST_IGNORE_ALL_DUPS
-
-# Leave blanks out
-setopt HIST_REDUCE_BLANKS
-
-# Auto-sync history between concurrent sessions.
-setopt SHARE_HISTORY
 
 # Check if running on macOS, otherwise stop here
 # [[ ! "x$SYSTEM" == "xDarwin" ]] && return
