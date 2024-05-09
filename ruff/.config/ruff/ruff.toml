@@ -1,38 +1,55 @@
+# The common config file for `ruff`.
+# All available settings:
+cache-dir = "~/.cache/ruff"
+
+# The number of spaces per indentation level (tab).
 indent-width = 4
 
+# The length is determined by the number of characters per line.
+line-length = 100 # Allow lines to be as long as 100
+
 [lint]
-extend-select = [
-  "UP",  # pyupgrade
-  "D",   # pydocstyle
+# https://docs.astral.sh/ruff/settings/#lint_select
+# All  available rules: https://docs.astral.sh/ruff/rules/#rules
+select = [
+    # Category: pycodestyle
+    # https://docs.astral.sh/ruff/rules/#pycodestyle-e-w
+    "E", # All erorrs
+    "W",  # All warnigns
+    # Category: PyFlake
+    # https://docs.astral.sh/ruff/rules/#pyflakes-f
+    "F", # All rules
+    # Category: isort
+    "I", # All rules
+    # Category: Ruff-specific rules
+    "RUF",
+    # Category: Airflow
+    "AIR",
+    # Category: Pandas
+    # https://docs.astral.sh/ruff/rules/#pandas-vet-pd
+    "PD",
+
 ]
 
 [lint.pydocstyle]
 convention = "google"
 
-
 [format]
 # Like Black, use double quotes for strings.
 quote-style = "double"
 
-# Like Black, indent with spaces, rather than tabs.
-indent-style = "tab"
+# https://docs.astral.sh/ruff/settings/#format_indent-style
+indent-style = "space"
 
-# Like Black, respect magic trailing commas.
+# https://docs.astral.sh/ruff/settings/#format_skip-magic-trailing-comma
 skip-magic-trailing-comma = false
 
-# Like Black, automatically detect the appropriate line ending.
-line-ending = "auto"
+# https://docs.astral.sh/ruff/settings/#format_line-ending
+line-ending = "lf" # Use `\n` line endings for all files.
 
-# Enable auto-formatting of code examples in docstrings. Markdown,
-# reStructuredText code/literal blocks and doctests are all supported.
-#
-# This is currently disabled by default, but it is planned for this
-# to be opt-out in the future.
+# Enable reformatting of code snippets in docstrings.
+# https://docs.astral.sh/ruff/settings/#format_docstring-code-format
 docstring-code-format = true
 
-# Set the line length limit used when formatting code snippets in
-# docstrings.
-#
-# This only has an effect when the `docstring-code-format` setting is
-# enabled.
+# https://docs.astral.sh/ruff/settings/#format_docstring-code-line-length
 docstring-code-line-length = "dynamic"
