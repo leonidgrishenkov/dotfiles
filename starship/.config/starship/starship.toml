@@ -5,6 +5,7 @@ $os\
 $directory\
 $git_branch\
 $git_status\
+$battery\
 $nodejs\
 $cmake\
 $java\
@@ -17,7 +18,6 @@ $docker_context\
 $helm\
 $container\
 $line_break\
-$battery\
 $character"""
 
 
@@ -66,13 +66,13 @@ truncation_symbol = "../"
 read_only = " 󰌾"
 
 [battery]
-full_symbol = "󰁹"
-charging_symbol = "󰂄"
-discharging_symbol = "󰂃"
+full_symbol = "󰁹 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󰂃 "
 
 [[battery.display]]
-threshold = 10
-style = "bold red"
+threshold = 20
+style = "red"
 
 [username]
 show_always = false
