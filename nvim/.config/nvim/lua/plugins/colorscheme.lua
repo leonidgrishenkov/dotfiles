@@ -12,6 +12,9 @@ return {
                 transparent_background = true, -- disables setting the background color.
                 term_colors = true,
                 show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+                no_italic = false, -- Force no italic
+                no_bold = false, -- Force no bold
+                no_underline = false, -- Force no underline
                 styles = {
                     -- To see all available values: `:h highlight-args`
                     comments = {},
@@ -52,16 +55,16 @@ return {
                     native_lsp = {
                         enabled = true,
                         virtual_text = {
-                            errors = { "italic" },
-                            hints = { "italic" },
-                            warnings = { "italic" },
-                            information = { "italic" },
+                            errors = {},
+                            hints = {},
+                            warnings = {},
+                            information = {},
                         },
                         underlines = {
-                            errors = { "undercurl" },
-                            hints = { "undercurl" },
-                            warnings = { "undercurl" },
-                            information = { "undercurl" },
+                            errors = {},
+                            hints = {},
+                            warnings = {},
+                            information = {},
                         },
                         inlay_hints = {
                             background = true,

@@ -17,6 +17,7 @@ return {
         },
         config = function()
             local tree = require("nvim-tree")
+            local icons = require("utils.icons")
 
             --[[
             Global keymappings
@@ -219,10 +220,10 @@ return {
                     show_on_open_dirs = false,
                     debounce_delay = 50,
                     icons = {
-                        error = "",
-                        warning = "",
-                        hint = "",
-                        info = "",
+                        error = icons.diagnostics.Error,
+                        warning = icons.diagnostics.Warn,
+                        hint = icons.diagnostics.Hint,
+                        info = icons.diagnostics.Info,
                     },
                 },
                 modified = {

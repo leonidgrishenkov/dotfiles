@@ -1,3 +1,5 @@
+---@diagnostic disable: unused-local
+
 return {
     {
         --[[
@@ -19,7 +21,15 @@ return {
         config = function()
             local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            -- Some servers complain if not provided (e.g., yamlls)
+            capabilities.textDocument.foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+            }
             local icons = require("utils.icons").diagnostics
+
+            -- Enable border for LspInfo window
+            require("lspconfig.ui.windows").default_options.border = "rounded"
 
             -- On attach keymaps. When plugin connected to LSP server.
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -33,12 +43,11 @@ return {
                     opts.desc = "Show definition preview of word"
                     vim.keymap.set("n", "<leader>lp", vim.lsp.buf.hover, opts)
 
-                    -- see available code actions, in visual mode will apply to selection
-                    -- opts.desc = "Show code actions"
-                    -- vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+                    -- See available code actions, in visual mode will apply to selection
+                    opts.desc = "Show code actions"
+                    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
 
                     -- Smart rename text below cursor inside current scope (indent guide).
-                    -- TODO: Maybe change this keymap to single char?
                     opts.desc = "Rename word in buffer"
                     vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, opts)
 
@@ -65,10 +74,46 @@ return {
                 end,
             })
 
-            -- Setup required language servers
+            -- Setup required language servers.
+            -- Docs about servers configurations: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
             -- LSP for python
             lspconfig["pyright"].setup({
                 capabilities = capabilities,
+                filetypes = { "python" },
+                settings = {
+                    pyright = {
+                        -- Disable organize imports in favor of Ruff.
+                        disableOrganizeImports = true,
+                    },
+                    python = {
+                        analysis = {
+                            -- Ignore all files for analysis to exclusively use Ruff for linting.
+                            ignore = { "*" },
+                            -- autoSearchPaths = true,
+                            -- diagnosticMode = "openFilesOnly",
+                            -- useLibraryCodeForTypes = true,
+                        },
+                    },
+                },
+            })
+
+            lspconfig["ruff_lsp"].setup({
+                filetypes = { "python" },
+                on_attach = function(client, bufnr)
+                    -- Disable `textDocument/hover` in favor of Pyright
+                    if client.name == "ruff_lsp" then
+                        client.server_capabilities.hoverProvider = false
+                    end
+                end,
+                -- Configure `ruff-lsp`.
+                -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
+                -- For the default config, along with instructions on how to customize the settings
+                init_options = {
+                    settings = {
+                        -- Any extra CLI arguments for `ruff` go here.
+                        args = { "--config", "~/.config/ruff/ruff.toml" },
+                    },
+                },
             })
 
             -- LSP for lua
@@ -90,6 +135,11 @@ return {
             -- LSP for yaml
             lspconfig["yamlls"].setup({
                 capabilities = capabilities,
+                settings = {
+                    yaml = {
+                        keyOrdering = false,
+                    },
+                },
             })
 
             -- LSP for json
@@ -125,9 +175,9 @@ return {
                     source = "if_many",
                 },
                 signs = true, -- Show symbols in sign column (gutter)
-                underline = false, -- Underline problem line
-                update_in_insert = false,
-                severity_sort = false,
+                underline = true, -- Underline problem line
+                update_in_insert = true,
+                severity_sort = true,
             })
 
             -- Setup symbols in the sign column (gutter)
@@ -141,74 +191,6 @@ return {
                 local hl = "DiagnosticSign" .. type
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
             end
-        end,
-    },
-    {
-
-        --[[
-        :h mason-commands
-
-        :Mason - opens a graphical status window
-        :MasonUpdate - updates all managed registries
-        :MasonInstall <package> ... - installs/re-installs the provided packages
-        :MasonUninstall <package> ... - uninstalls the provided packages
-        :MasonUninstallAll - uninstalls all packages
-        :MasonLog - opens the mason.nvim log file in a new tab window
-
-        --]]
-        "williamboman/mason.nvim",
-        build = ":MasonUpdate",
-        dependencies = {
-            "williamboman/mason-lspconfig.nvim", -- https://github.com/williamboman/mason-lspconfig.nvim
-            "WhoIsSethDaniel/mason-tool-installer.nvim", -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
-        },
-        -- :h mason-settings
-        config = function()
-            -- import mason
-            local mason = require("mason")
-
-            -- import mason-lspconfig
-            local mason_lspconfig = require("mason-lspconfig")
-
-            local mason_tool_installer = require("mason-tool-installer")
-
-            -- enable mason and configure icons
-            mason.setup({
-                ui = {
-                    icons = {
-                        package_installed = "✓",
-                        package_pending = "➜",
-                        package_uninstalled = "✗",
-                    },
-                },
-            })
-
-            mason_lspconfig.setup({
-                -- list of servers for mason to install
-                ensure_installed = {
-                    "lua_ls",
-                    "pyright",
-                    "yamlls",
-                    "jsonls",
-                    "taplo", -- LSP for toml files
-                },
-                -- auto-install configured servers (with lspconfig)
-                automatic_installation = true, -- not the same as ensure_installed
-            })
-
-            mason_tool_installer.setup({
-                ensure_installed = {
-                    "stylua", -- lua formatter
-                    "ruff", -- python formatter and linter
-                    "prettierd",
-                    "prettier",
-                    "sql-formatter",
-                    "sqlfluff",
-                    "shfmt",
-                },
-                auto_update = true,
-                run_on_start = true,
-            })
         end,
     },
 }

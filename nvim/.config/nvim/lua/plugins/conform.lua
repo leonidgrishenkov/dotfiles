@@ -28,13 +28,6 @@ return {
                             "sqlfluff", -- Repo: https://github.com/sqlfluff/sqlfluff
                         },
                     },
-                    -- Dynamically determine formatter for python
-                    python = {
-                        -- Fix lint errors
-                        "ruff_fix",
-                        -- Run the Ruff formatter
-                        "ruff_format",
-                    },
                     sh = { "shfmt" },
                     -- Use the "_" filetype to run formatters on filetypes that don't
                     -- have other formatters configured.

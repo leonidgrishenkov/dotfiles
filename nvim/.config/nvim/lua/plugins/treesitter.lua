@@ -29,6 +29,8 @@ return {
                 ensure_installed = {
                     "lua",
                     "luadoc",
+                    "ninja",
+                    "rst",
                     "python",
                     "bash",
                     "json",

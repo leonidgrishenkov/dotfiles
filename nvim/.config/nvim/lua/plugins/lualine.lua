@@ -4,7 +4,7 @@ return {
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             local lualine = require("lualine")
-            local icons = require("utils.icons").git
+            local icons = require("utils.icons")
 
             lualine.setup({
                 options = {
@@ -27,12 +27,21 @@ return {
                     --]]
                     lualine_a = { { "mode", icons_enabled = true } },
                     lualine_b = {
-                        { "branch", icon = icons.Branch },
+                        { "branch", icon = icons.git.Branch },
                         {
                             "diff",
-                            symbols = { added = icons.Add, modified = icons.Mod, removed = icons.Remove },
+                            symbols = { added = icons.git.Add, modified = icons.git.Mod, removed = icons.git.Remove },
                         },
-                        "diagnostics",
+                        {
+                            "diagnostics",
+                            symbols = {
+                                error = icons.diagnostics.Error,
+                                warn = icons.diagnostics.Warn,
+                                hint = icons.diagnostics.Hint,
+                                info = icons.diagnostics.Info,
+                            },
+                            update_in_insert = true,
+                        },
                     },
                     lualine_c = {
                         {
