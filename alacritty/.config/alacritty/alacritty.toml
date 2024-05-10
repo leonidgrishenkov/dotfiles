@@ -24,10 +24,10 @@ startup_mode = "Windowed"
 size = 14
 builtin_box_drawing = false
 
-normal = { family = "MesloLGS Nerd Font", style = "Regular" }
-italic = { family = "MesloLGS Nerd Font", style = "Italic" }
-bold_italic = { family = "MesloLGS Nerd Font", style = "Bold Italic" }
-bold = { family = "MesloLGS Nerd Font", style = "Bold" }
+normal = { family = "JetBrainsMonoNL Nerd Font Propo", style = "ExtraLight" }
+italic = { family = "JetBrainsMonoNL Nerd Font Propo", style = "ExtraLight Italic" }
+bold = { family = "JetBrainsMonoNL Nerd Font Propo", style = "Medium" }
+bold_italic = { family = "JetBrainsMonoNL Nerd Font Propo", style = "Medium Italic" }
 
 [cursor]
 style = { shape = "Beam", blinking = "Off" }
