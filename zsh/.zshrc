@@ -194,6 +194,22 @@ eval "$(starship init zsh)"
 # Set var with path to config file
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 
+
+# -------
+# `yazi`
+# -------
+# Use `yy` as shell command wrapper that provides the ability
+# to change the current working directory when exiting Yazi.
+# Took from utility doc: https://yazi-rs.github.io/docs/quick-start#shell-wrapper
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
 # ---------------------------------
 # `oh-my-zsh` plugins configuration
 # ---------------------------------
