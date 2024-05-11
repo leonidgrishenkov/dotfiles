@@ -18,7 +18,7 @@ return {
                 styles = {
                     -- To see all available values: `:h highlight-args`
                     comments = {},
-                    conditionals = { "italic" },
+                    conditionals = {},
                     loops = {},
                     functions = {},
                     keywords = {},
