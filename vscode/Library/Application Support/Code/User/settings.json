@@ -25,12 +25,12 @@
   "material-icon-theme.folders.theme": "specific",
   // FONTS
   "editor.fontLigatures": true,
-  "editor.fontFamily": "MesloLGM Nerd Font",
-  "terminal.integrated.fontFamily": "MesloLGM Nerd Font",
-  "editor.codeLensFontFamily": "MesloLGM Nerd Font",
-  "markdown.preview.fontFamily": "MesloLGM Nerd Font",
-  "debug.console.fontFamily": "MesloLGM Nerd Font",
-  "scm.inputFontFamily": "MesloLGM Nerd Font",
+  "editor.fontFamily": "JetBrainsMonoNL Nerd Font Propo",
+  "terminal.integrated.fontFamily": "JetBrainsMonoNL Nerd Font Propo",
+  "editor.codeLensFontFamily": "JetBrainsMonoNL Nerd Font Propo",
+  "markdown.preview.fontFamily": "JetBrainsMonoNL Nerd Font Propo",
+  "debug.console.fontFamily": "JetBrainsMonoNL Nerd Font Propo",
+  "scm.inputFontFamily": "JetBrainsMonoNL Nerd Font Propo",
   // FONT SIZES
   "editor.fontSize": 13,
   "debug.console.fontSize": 13,
