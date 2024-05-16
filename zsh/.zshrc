@@ -59,7 +59,7 @@ export GIT_EDITOR=$EDITOR
 # export OPENER= ?
 
 # Change manpager to `bat`. Took from: https://github.com/sharkdp/bat#man
-export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain --theme=Nord --color=always --decorations=always'"
+export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain --theme=catppuccin-frappe --color=always --decorations=always'"
 
 # -------------------------
 # `oh-my-zsh` configuration
@@ -217,7 +217,7 @@ function yy() {
 # Redifine `--help` output appearence.
 # Took from: https://github.com/Freed-Wu/zsh-help#function--help
 -help() {
-  bat --language=help --style=plain --theme=Nord --color=always --decorations=always
+  bat --language=help --style=plain --theme=catppuccin-frappe --color=always --decorations=always
 }
 
 # `zsh-autosuggestions`
@@ -277,7 +277,7 @@ fi
 # NOTE: To remove any alias use `unalias` command.
 
 # About `bat` and more features: https://github.com/sharkdp/bat
-alias cat="bat --style=plain --theme=Nord --color=auto --decorations=auto"
+alias cat="bat --style=plain --theme=catppuccin-frappe --color=auto --decorations=auto"
 
 alias gr="rg --color=always"
 
