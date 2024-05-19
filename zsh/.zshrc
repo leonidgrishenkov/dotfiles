@@ -22,44 +22,60 @@ export LC_CTYPE='en_US.UTF-8'
 # --------------------
 # If `brew` installed
 if command -v /opt/homebrew/bin/brew &>/dev/null; then
-  # Export all `brew` env vars. See `man brew` + `/shellenv`
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+    # Export all `brew` env vars. See `man brew` + `/shellenv`
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 
-  # No emoji in download output
-  # export HOMEBREW_NO_EMOJI=1
-  export HOMEBREW_INSTALL_BADGE="💣"
+    # No emoji in download output
+    # export HOMEBREW_NO_EMOJI=1
+    export HOMEBREW_INSTALL_BADGE=""
 
-  # Don't show hints for env vatialbes
-  export HOMEBREW_NO_ENV_HINTS=1
-  export HOMEBREW_NO_AUTO_UPDATE=1
+    # Don't show hints for env vatialbes
+    export HOMEBREW_NO_ENV_HINTS=1
+    export HOMEBREW_NO_AUTO_UPDATE=1
 
-  export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
+    export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
 
-  # Add to FPATH completions installed by brew
-  FPATH="/opt/homebrew/share/zsh/site-functions:$FPATH"
-  autoload -U compinit
-  compinit
+    # Add to FPATH completions installed by brew
+    FPATH="/opt/homebrew/share/zsh/site-functions:$FPATH"
+    # TODO: Does we need here this command?
+    # autoload -U compinit
+    # compinit
 fi
 
 # Set one of the editor as `$EDITOR`
 EDITORS="nvim,vim,vi"
 for editor in $(echo $EDITORS | sed "s/,/ /g"); do
-  if command -v $editor &>/dev/null; then
-    export EDITOR=$editor
-    break
-  fi
+    if command -v $editor &>/dev/null; then
+        export EDITOR=$editor
+        break
+    fi
 done
 # Send message if no one editor is installed
 [[ ! -z $EDITOR ]] || echo "No editor is installed" >&2
 
-export TERMINAL="iterm"
-export BROWSER="safari"
 export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
 # export OPENER= ?
+alias v=$EDITOR
 
-# Change manpager to `bat`. Took from: https://github.com/sharkdp/bat#man
-export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain --theme=catppuccin-frappe --color=always --decorations=always'"
+
+if command -v bat &>/dev/null; then
+    # About `bat` and more features: https://github.com/sharkdp/bat
+    alias cat="bat --style=plain --theme=catppuccin-frappe --color=auto --decorations=auto"
+
+    # Change manpager to `bat`. Took from: https://github.com/sharkdp/bat#man
+    export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain --theme=catppuccin-frappe --color=always --decorations=always'"
+fi
+
+if command -v rg &>/dev/null; then
+    alias gr="rg --color=always"
+fi
+
+if command -v eza &>/dev/null; then
+    alias ls="eza --all --oneline --icons --group-directories-first"
+    alias ll="eza --all --long --icons --group-directories-first --created --modified --header --binary --time-style long-iso"
+    alias tree="eza --tree --all --icons --group-directories-first --ignore-glob='.git*|.venv*|__pycache__*|.DS_store'"
+fi
 
 # ----------------------
 # `zinit` configurations
@@ -90,6 +106,9 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 # https://github.com/zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-autosuggestions
+# https://github.com/Aloxaf/fzf-tab
+zinit light Aloxaf/fzf-tab
+
 
 # Install plugins from oh-my-zsh repo.
 # Enable vim mode support in CLI
@@ -120,12 +139,49 @@ HYPHEN_INSENSITIVE=false
 # much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY=true
 
-# History of commands
+# Commands history settings
+# Number of commands that will be stored in history file
+HISTSIZE=2000
+# Path to history file
 HISTFILE="$ZSH_CACHE_DIR/history"
-HISTSIZE=999
-SAVEHIST=1000
+SAVEHIST=$HISTSIZE
+# Erase duplicates in history file
+HISTDUP=erase
+# History options for zsh
+# Appned commands into history file instead of overwrite them
+setopt appendhistory
+# Share history across all zsh sessions
+setopt sharehistory
+# Don't write to history commands with space before it.
+# NOTE: This is usefull to prevent any sensetive command to be
+# written into history file.
+setopt hist_ignore_space
+# All 3 commands below will prevent zsh to save and store
+# duplicates in history file.
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+# Don't show duplicates into prompt when cycle thought them.
+setopt hist_find_no_dups
+
+alias h="history | tail -n 50"
+
+# Cycle thought history competions
+bindkey "^p" history-search-backward
+bindkey "^n" history-search-forward
+
 # Timestamp format in `history` output
 HIST_STAMPS="yyyy-mm-dd"
+
+
+# Add colors for cd into directory competions
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# Completions should be case-insensitive
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls $realpath'
+
 
 # if [[ $SYSTEM = "Darwin" ]]; then
 
@@ -164,10 +220,12 @@ HIST_STAMPS="yyyy-mm-dd"
 # `starship`
 # ----------
 # Init starship
-eval "$(starship init zsh)"
-# Set var with path to config file
-export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
-
+#
+if command -v starship &>/dev/null; then
+    eval "$(starship init zsh)"
+    # Set var with path to config file
+    export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
+fi
 
 # -------
 # `yazi`
@@ -175,20 +233,33 @@ export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 # Use `yy` as shell command wrapper that provides the ability
 # to change the current working directory when exiting Yazi.
 # Took from utility doc: https://yazi-rs.github.io/docs/quick-start#shell-wrapper
-function yy() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
+if command -v yazi &>/dev/null; then
+    function yy() {
+        local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+        yazi "$@" --cwd-file="$tmp"
+        if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+            cd -- "$cwd"
+        fi
+        rm -f -- "$tmp"
+    }
+fi
 
 # --------
 # `zoxide`
 # --------
 # Init zoxide
-eval "$(zoxide init zsh)"
+if command -v zoxide &>/dev/null; then
+    eval "$(zoxide init zsh)"
+    alias cd="z"
+fi
+
+# ------
+# `fzf`
+# ------
+# Initialize `fzf`
+if command -v fzf &>/dev/null; then
+    eval "$(fzf --zsh)"
+fi
 
 # ---------------------------------
 # `oh-my-zsh` plugins configuration
@@ -196,9 +267,10 @@ eval "$(zoxide init zsh)"
 # `zsh-help`
 # Redifine `--help` output appearence.
 # Took from: https://github.com/Freed-Wu/zsh-help#function--help
--help() {
-  bat --language=help --style=plain --theme=catppuccin-frappe --color=always --decorations=always
-}
+# TODO: This is not working
+# -help() {
+#   bat --language=help --style=plain --theme=catppuccin-frappe --color=always --decorations=always
+# }
 
 # `zsh-autosuggestions`
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
@@ -224,6 +296,12 @@ bindkey -M visual j vi-backward-char
 bindkey -M vicmd l vi-down-line-or-history
 bindkey -M vicmd k vi-up-line-or-history
 bindkey -M vicmd \; vi-forward-char
+
+
+if command -v lazygit &>/dev/null; then
+    alias g="lazygit"
+fi
+
 
 # -----------------------
 # `kubectl` configuration
@@ -251,31 +329,8 @@ if command -v yc &>/dev/null; then
   fi
 fi
 
-# -------
-# Aliases
-# -------
-# NOTE: To remove any alias use `unalias` command.
-
-# About `bat` and more features: https://github.com/sharkdp/bat
-alias cat="bat --style=plain --theme=catppuccin-frappe --color=auto --decorations=auto"
-
-alias gr="rg --color=always"
-
-alias ls="eza --all --oneline --icons --group-directories-first"
-alias ll="eza --all --long --icons --group-directories-first --created --modified --header --binary --time-style long-iso"
-alias tree="eza --tree --all --icons --group-directories-first --ignore-glob='.git*|.venv*|__pycache__*|.DS_store'"
-
-alias v=$EDITOR
-
 alias rm="rm -Iv"
-alias h="history | tail -n 50"
-alias cl="clear"
-
-# Aliases for `git`
-alias g="lazygit"
-
-# Use `zoxide` instead of `cd`
-alias cd="z"
+alias c="clear"
 
 # Some often used paths
 export ICLOUDPATH="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
@@ -292,20 +347,10 @@ export PATH=$HOME/.python/3.12.2/bin:$PATH
 
 # Extra zsh options
 # History
-# Auto-sync history between concurrent sessions.
-setopt SHARE_HISTORY
-# Keep only the most recent copy of each duplicate entry in history.
-setopt HIST_IGNORE_ALL_DUPS
 # Leave blanks out
-setopt HIST_REDUCE_BLANKS
-setopt HIST_VERIFY
+# setopt HIST_REDUCE_BLANKS
+# setopt HIST_VERIFY
 
-# Search in history with arrow keys.
-# Usage: you can type some command and them press arrow keys
-# to search in history what you used with this command.
-# For example: nvim <press arrow key>
-bindkey "^[[A" history-search-backward
-bindkey "^[[B" history-search-forward
 
 # Other
 # Don't let > silently overwrite files. To overwrite, use >! instead.
