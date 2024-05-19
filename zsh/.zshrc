@@ -61,19 +61,48 @@ export GIT_EDITOR=$EDITOR
 # Change manpager to `bat`. Took from: https://github.com/sharkdp/bat#man
 export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain --theme=catppuccin-frappe --color=always --decorations=always'"
 
-# -------------------------
-# `oh-my-zsh` configuration
-# -------------------------
-# Path to oh-my-zsh instalation
-export ZSH="$HOME/.oh-my-zsh"
+# ----------------------
+# `zinit` configurations
+# https://github.com/zdharma-continuum/zinit
+# ----------------------
+# Install zinit if it doesn't installed and create its direcory
+ZINIT_HOME="$XDG_DATA_HOME/zinit/zinit.git"
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
-# Pat to custom plugins
-export ZSH_CUSTOM="$ZSH/custom"
+# Activate zinit
+source "${ZINIT_HOME}/zinit.zsh"
 
 # Path to zsh cache
 export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
 # If it doesn't exists create one
 [[ -d $ZSH_CACHE_DIR ]] || mkdir -p $ZSH_CACHE_DIR
+
+# Path to completions cache
+ZSH_COMPDUMP="$ZSH_CACHE_DIR/zcompdump"
+
+# Install plugins for ZSH via zinit
+# https://github.com/zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-syntax-highlighting
+# https://github.com/zsh-users/zsh-completions
+zinit light zsh-users/zsh-completions
+# https://github.com/zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-autosuggestions
+
+# Install plugins from oh-my-zsh repo.
+# Enable vim mode support in CLI
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vi-mode
+zinit snippet OMZP::vi-mode
+zinit snippet OMZP::command-not-found
+# BUG: Installation failed with error: 'The requested URL returned error: 404'
+# zinit snippet OMZP::zsh-help
+
+# Load completions
+autoload -Uz compinit && compinit
+
+zinit cdreplay -q
 
 # Autocompletion options
 # Display dots (or given format) when waiting for completions
@@ -98,93 +127,38 @@ SAVEHIST=1000
 # Timestamp format in `history` output
 HIST_STAMPS="yyyy-mm-dd"
 
-# Which plugins is currently used
-plugins=(
-  # Enable vim mode support in CLI
-  # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vi-mode
-  vi-mode
-
-  # Repo: https://github.com/zsh-users/zsh-autosuggestions
-  zsh-autosuggestions
-
-  # Docs: https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
-  # Repo: https://github.com/zsh-users/zsh-completions
-  zsh-completions
-
-  # CLI commands syntax highlighting.
-  # Repo: https://github.com/zsh-users/zsh-syntax-highlighting
-  zsh-syntax-highlighting
-
-  # Add colors for man pages
-  # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/colored-man-pages
-  # colored-man-pages
-
-  # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/command-not-found
-  command-not-found # BUG: It doesn't  work
-
-  # Generate `.gitignore` files.
-  # Usage: `git-ignore` + <Enter>
-  # Repo: https://github.com/laggardkernel/git-ignore
-  git-ignore
-
-  # Add colors for help pages. Default only for `--help`.
-  # Repo: https://github.com/Freed-Wu/zsh-help
-  zsh-help
-
-  # CLI commands syntax highlight with themes.
-  # Repo: https://github.com/zdharma-continuum/fast-syntax-highlighting
-  # Usage: `fast-theme --help`
-  # fast-syntax-highlighting
-
-  # Change behevior of terminal titles generation
-  # Repo: https://github.com/trystan2k/zsh-tab-title
-  # zsh-tab-title
-)
-
-if [[ $SYSTEM = "Darwin" ]]; then
+# if [[ $SYSTEM = "Darwin" ]]; then
 
   # Usefull commands for macos
   # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos
   # All commands: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos#commands
-  plugins+=(macos) # Add to oh-my-zsh plugins list
-fi
+#   plugins+=(macos) # Add to oh-my-zsh plugins list
+# fi
 
 # If `poetry` installed
-if command -v poetry &>/dev/null; then
-  # Create virtual envs in project
-  export POETRY_VIRTUALENVS_IN_PROJECT=true
+# if command -v poetry &>/dev/null; then
+#   # Create virtual envs in project
+#   export POETRY_VIRTUALENVS_IN_PROJECT=true
 
-  # Autocompletions for `poetry`.
-  # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/poetry
-  plugins+=(poetry)
-fi
+#   # Autocompletions for `poetry`.
+#   # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/poetry
+#   plugins+=(poetry)
+# fi
 
-if command -v fzf &>/dev/null; then
+# if command -v fzf &>/dev/null; then
 
-  # For integrations with `fzf`
-  # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
-  plugins+=(fzf)
+#   # For integrations with `fzf`
+#   # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
+#   plugins+=(fzf)
 
-  # Repo: https://github.com/junegunn/fzf#layout
-  # Docs: `man fzf`
-  export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=sharp --margin=0,1,0,1%"
-  export FZF_COMPLETION_TRIGGER='~~'
-fi
+#   # Repo: https://github.com/junegunn/fzf#layout
+#   # Docs: `man fzf`
+#   export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=sharp --margin=0,1,0,1%"
+#   export FZF_COMPLETION_TRIGGER='~~'
+# fi
 
 # Completions for apps
-FPATH="$ZSH_CUSTOM/plugins/zsh-completions/src:$FPATH"
-
-# Path to completions cache
-ZSH_COMPDUMP="$ZSH_CACHE_DIR/zcompdump"
-
-# Source main `oh-my-zsh.sh`
-source $ZSH/oh-my-zsh.sh
-
-# `oh-my-zsh` updates
-# https://github.com/ohmyzsh/ohmyzsh#getting-updates
-zstyle ':omz:update' mode auto       # Auto update
-zstyle ':omz:update' frequency 7     # Check updates every 7 days
-zstyle ':omz:update' verbose minimal # Output mode
+# FPATH="$ZSH_CUSTOM/plugins/zsh-completions/src:$FPATH"
 
 # ----------
 # `starship`
@@ -209,6 +183,12 @@ function yy() {
 	fi
 	rm -f -- "$tmp"
 }
+
+# --------
+# `zoxide`
+# --------
+# Init zoxide
+eval "$(zoxide init zsh)"
 
 # ---------------------------------
 # `oh-my-zsh` plugins configuration
@@ -294,14 +274,11 @@ alias cl="clear"
 # Aliases for `git`
 alias g="lazygit"
 
-# Change dir
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
+# Use `zoxide` instead of `cd`
+alias cd="z"
 
 # Some often used paths
-export ICLOUDPATH=$HOME/Library/Mobile\ Documents/com~apple~CloudDocs
+export ICLOUDPATH="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 
 # Python
 export PATH=$HOME/.python/3.12.2/bin:$PATH
