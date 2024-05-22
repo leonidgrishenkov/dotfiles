@@ -15,7 +15,7 @@ select = [
     # Category: pycodestyle
     # https://docs.astral.sh/ruff/rules/#pycodestyle-e-w
     "E", # All erorrs
-    "W",  # All warnigns
+    "W", # All warnigns
     # Category: PyFlake
     # https://docs.astral.sh/ruff/rules/#pyflakes-f
     "F", # All rules
@@ -30,6 +30,9 @@ select = [
     "PD",
 
 ]
+
+# https://docs.astral.sh/ruff/settings/#lint_ignore
+ignore = ["RUF001", "RUF002", "PD901", "E501"]
 
 [lint.pydocstyle]
 convention = "google"
