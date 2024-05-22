@@ -2,8 +2,9 @@
 # Dosc about configuration: https://alacritty.org/config-alacritty.html
 
 # Setup theme
-# All available themes: https://github.com/alacritty/alacritty-theme
-import = ["~/.config/alacritty/themes/nord.toml"]
+# All available themes can be downloaded from here:
+# https://github.com/alacritty/alacritty-theme
+import = ["~/.config/alacritty/themes/catppuccin_frappe.toml"]
 
 [env]
 TERM = "xterm-256color"
