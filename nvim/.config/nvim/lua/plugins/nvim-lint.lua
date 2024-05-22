@@ -9,7 +9,7 @@ return {
 
             lint.linters_by_ft = {
                 yaml = { "yamllint" },
-                sql = { "sqlfluff" },
+                -- sql = { "sqlfluff" },
                 python = { "mypy" },
             }
 

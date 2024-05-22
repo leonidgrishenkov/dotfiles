@@ -120,7 +120,7 @@ return {
                     -- `false` = don't show path.
                     root_folder_label = false, -- Default value: `:~:s?$?/..?",`
                     indent_width = 2,
-                    special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+                    special_files = {}, -- Default: { "Cargo.toml", "Makefile", "README.md", "readme.md" },
                     symlink_destination = true,
                     highlight_git = "name",
                     highlight_diagnostics = "none",

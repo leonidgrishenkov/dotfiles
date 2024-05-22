@@ -25,7 +25,7 @@ return {
                     sql = {
                         {
                             "sql_formatter", -- Repo: https://github.com/sql-formatter-org/sql-formatter
-                            "sqlfluff", -- Repo: https://github.com/sqlfluff/sqlfluff
+                            -- "sqlfluff", -- Repo: https://github.com/sqlfluff/sqlfluff
                         },
                     },
                     sh = { "shfmt" },
@@ -43,9 +43,13 @@ return {
                     shfmt = {
                         prepend_args = { "-i", "2" },
                     },
-                    -- TODO: This doesn't working. Google and fix
                     sql_formatter = {
-                        prepend_args = { "--config", "$XDG_CONFIG_HOME/sql-formatter/config.json" },
+                        -- TODO: Replace hardcoded path with getting env variable value
+                        -- Maybe like that: os.getenv 'HOME' .. '/.config/sql_formatter/sql_formatter.json'
+                        prepend_args = {
+                            "--config",
+                            "/Users/leonidgrisenkov/Code/configs/sql-formatter/.config/sql-formatter/config.json",
+                        },
                     },
                     prettier = {
                         prepend_args = { "--tab-width", "4", "--use-tabs", "true" },
