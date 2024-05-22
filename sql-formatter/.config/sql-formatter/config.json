@@ -1,5 +1,8 @@
 {
-  "tabWidth": 4,
-  "keywordCase": "upper",
-  "linesBetweenQueries": 2
+	"useTabs": true,
+	"tabWidth": 4,
+	"linesBetweenQueries": 2,
+	"keywordCase": "upper",
+	"dataTypeCase": "upper",
+	"functionCase": "upper"
 }
