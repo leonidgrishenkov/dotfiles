@@ -1,0 +1,10 @@
+wget
+curl
+stow
+ripgrep
+jq
+bat
+eza
+fd
+fzf
+
