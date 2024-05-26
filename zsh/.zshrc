@@ -58,13 +58,19 @@ export GIT_EDITOR=$EDITOR
 # export OPENER= ?
 alias v=$EDITOR
 
+if [[ $SYSTEM = "Darwin" ]]; then
+    BATCMD="bat"
+elif [[ $SYSTEM = "Linux" ]]; then
+    BATCMD="batcat"
+fi
 
-if command -v bat &>/dev/null; then
+if command -v $BATCMD &>/dev/null; then
+
     # About `bat` and more features: https://github.com/sharkdp/bat
-    alias cat="bat --style=plain --theme=catppuccin-frappe --color=auto --decorations=auto"
+    alias cat="$BATCDM --style=plain --theme=catppuccin-frappe --color=auto --decorations=auto"
 
     # Change manpager to `bat`. Took from: https://github.com/sharkdp/bat#man
-    export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain --theme=catppuccin-frappe --color=always --decorations=always'"
+    export MANPAGER="sh -c 'col -bx | $BATCMD --language=man --style=plain --theme=catppuccin-frappe --color=always --decorations=always'"
 fi
 
 if command -v rg &>/dev/null; then
@@ -257,8 +263,9 @@ fi
 # `fzf`
 # ------
 # Initialize `fzf`
+# https://github.com/junegunn/fzf
 if command -v fzf &>/dev/null; then
-    eval "$(fzf --zsh)"
+    source <(fzf --zsh)
 fi
 
 # ---------------------------------
@@ -332,11 +339,14 @@ fi
 alias rm="rm -Iv"
 alias c="clear"
 
-# Some often used paths
-export ICLOUDPATH="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 
-# Python
-export PATH=$HOME/.python/3.12.2/bin:$PATH
+if [[ $SYSTEM = "Darwin" ]]; then
+    # Some often used paths
+    export ICLOUDPATH="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+
+    # Python
+    export PATH=$HOME/.python/3.12.2/bin:$PATH
+fi
 
 # Setting over ssh session
 # if [[ -n $SSH_CONNECTION ]]; then
