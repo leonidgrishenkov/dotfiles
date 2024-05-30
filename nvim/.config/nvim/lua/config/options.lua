@@ -70,7 +70,7 @@ vim.opt.wrap = false -- display lines as one long line
 vim.opt.sidescroll = 8 -- Columns of context
 -- opt.listchars+=precedes:<,extends:>
 -- Number of lines to keep if this is an up or down border
-vim.opt.scrolloff = 8 --
+vim.opt.scrolloff = 4
 
 -- split windows
 vim.opt.splitright = true -- split vertical window to the right
