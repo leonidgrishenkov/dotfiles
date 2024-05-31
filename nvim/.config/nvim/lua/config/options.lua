@@ -39,7 +39,6 @@ vim.opt.termguicolors = true -- Enable 24-bit RGB colors
 vim.g.termguicolors = true -- TODO: Does this work?
 
 -- opt.cmdheight = 0 -- ?
--- opt.guicursor = "" -- disable cursor-styling
 
 vim.opt.background = "dark"
 vim.opt.showmode = false -- Don't show modes, e.g. -- INSERT --
@@ -63,6 +62,7 @@ vim.opt.numberwidth = 1 -- set number column width
 vim.opt.cursorline = true -- highlight the current line
 vim.opt.cursorlineopt = "number" -- What to highlight
 vim.opt.cursorcolumn = false -- highlight current cursor column
+vim.opt.guicursor = "n-v-c:block-blinkon200,i:ver25-blinkon200" -- cursor styling
 
 -- Line wrapping
 vim.opt.wrap = false -- display lines as one long line
