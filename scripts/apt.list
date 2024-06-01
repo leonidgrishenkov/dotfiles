@@ -1,8 +1,9 @@
+gpg
 wget
 curl
-stow
 ripgrep
 jq
 bat
+gcc
+make
 fzf
-
