@@ -58,6 +58,9 @@ export GIT_EDITOR=$EDITOR
 # export OPENER= ?
 alias v=$EDITOR
 
+# Enable `cargo`
+source "$HOME/.cargo/env"
+
 if command -v bat &>/dev/null; then
     # About `bat` and more features: https://github.com/sharkdp/bat
     alias cat="bat --style=plain --theme=catppuccin-frappe --color=auto --decorations=auto"
