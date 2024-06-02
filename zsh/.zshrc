@@ -55,17 +55,37 @@ done
 
 export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
+export PAGER="less"
 # export OPENER= ?
 alias v=$EDITOR
 
 # Enable `cargo`
 source "$HOME/.cargo/env"
 
+# If we are on linux machine add alias for batcat to be consistent with usage on  macos.
+if [[ $SYSTEM = "Linux" ]]; then
+    alias bat="batcat"
+fi
+
 if command -v bat &>/dev/null; then
-    # About `bat` and more features: https://github.com/sharkdp/bat
-    alias cat="bat --style=plain --theme=catppuccin-frappe --color=auto --decorations=auto"
-    # Change manpager to `bat`. Took from: https://github.com/sharkdp/bat#man
-    export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain --theme=catppuccin-frappe --color=always --decorations=always'"
+    # https://github.com/sharkdp/bat
+
+    # Set zsh-syntax-highlighting theme
+    export BAT_THEME="catppuccin-frappe"
+    # Setup output elements to show
+    export BAT_STYLE="header,numbers,grid"
+    # Don't show long outputs as pager
+    export BAT_PAGING="never"
+
+    # Use bat to show man pages output.
+    # https://github.com/sharkdp/bat#man
+    export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain'"
+
+    # Use bat to show help pages output.
+    # https://github.com/sharkdp/bat?tab=readme-ov-file#highlighting---help-messages
+    alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+    alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+
 fi
 
 if command -v rg &>/dev/null; then
@@ -116,8 +136,6 @@ zinit light Aloxaf/fzf-tab
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vi-mode
 zinit snippet OMZP::vi-mode
 zinit snippet OMZP::command-not-found
-# BUG: Installation failed with error: 'The requested URL returned error: 404'
-# zinit snippet OMZP::zsh-help
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -264,16 +282,8 @@ if command -v fzf &>/dev/null; then
 fi
 
 # ---------------------------------
-# `oh-my-zsh` plugins configuration
+# zsh plugins configuration
 # ---------------------------------
-# `zsh-help`
-# Redifine `--help` output appearence.
-# Took from: https://github.com/Freed-Wu/zsh-help#function--help
-# TODO: This is not working
-# -help() {
-#   bat --language=help --style=plain --theme=catppuccin-frappe --color=always --decorations=always
-# }
-
 # `zsh-autosuggestions`
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
@@ -349,12 +359,6 @@ fi
 # else
 #   export EDITOR='vim'
 # fi
-
-# Extra zsh options
-# History
-# Leave blanks out
-# setopt HIST_REDUCE_BLANKS
-# setopt HIST_VERIFY
 
 
 # Other
