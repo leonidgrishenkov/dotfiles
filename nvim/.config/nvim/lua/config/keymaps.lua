@@ -43,8 +43,8 @@ end
 
 -- Disable yank when do some operations.
 -- Disable yank on delete
-vim.keymap.set({ "n", "v" }, "d", '"_d', opts("Delete w/o yank"))
-vim.keymap.set({ "n", "v" }, "D", '"_D', opts("Delete w/o yank"))
+vim.keymap.set({ "n", "v" }, "d", '"_d', opts("Delete without yank"))
+vim.keymap.set({ "n", "v" }, "D", '"_D', opts("Delete without yank"))
 
 -- Remap exit modes to normal mode
 vim.keymap.set({ "v", "i" }, "jf", "<ESC>", opts("Exit v|i to n mode"))
@@ -58,49 +58,28 @@ vim.keymap.set({ "n", "v" }, "k", "<Up>", opts("Move up"))
 vim.keymap.set({ "n", "v" }, "j", "<Left>", opts("Move left"))
 vim.keymap.set({ "n", "v" }, ";", "<Right>", opts("Move right"))
 
--- Close all windows and exit
--- keymap.set("n", "<leader>q", ":q<CR>", opts("Close all and exit as `:q`")) -- <leader-key> + <q>
-
 -- Panes management
--- Split window vertically. Command:`:vsplit`
-vim.keymap.set("n", "<leader>pV", "<C-w>v", opts("Split window vertically"))
--- Split window horizontally. Command: `:split`
-vim.keymap.set("n", "<leader>pH", "<C-w>s", opts("Split window horizontally"))
-
+-- Unmap default keybind to split windows
+vim.keymap.set("", "<C-w>v", "<nop>")
+vim.keymap.set("", "<C-w>s", "<nop>")
 -- Switch panes
-vim.keymap.set("n", "<leader>pl", "<C-w>j", opts("Switch to bottom pane"))
-vim.keymap.set("n", "<leader>pk", "<C-w>k", opts("Switch to top pane"))
-vim.keymap.set("n", "<leader>p;", "<C-w>l", opts("Switch to right pane"))
-vim.keymap.set("n", "<leader>pj", "<C-w>h", opts("Switch to left pane"))
+vim.keymap.set("n", "<C-w>l", "<C-w>j", opts("Switch to bottom pane"))
+vim.keymap.set("n", "<C-w>k", "<C-w>k", opts("Switch to top pane"))
+vim.keymap.set("n", "<C-w>;", "<C-w>l", opts("Switch to right pane"))
+vim.keymap.set("n", "<C-w>j", "<C-w>h", opts("Switch to left pane"))
 
--- Manipulate tabs
--- TODO: Remap these keys
--- vim.keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", opts("Open new tab")) -- open new tab
--- vim.keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", opts("Close current tab")) -- close current tab
--- vim.keymap.set("n", "<leader>]", "<cmd>tabn<CR>", opts("Go to next tab")) --  go to next tab
--- vim.keymap.set("n", "<leader>[", "<cmd>tabp<CR>", opts("Go to previous tab")) --  go to previous tab
--- vim.keymap.set("n", "<leader>tm", "<cmd>tabnew %<CR>", opts("Open current buffer in new tab")) --  move current buffer to new tab
+-- Buffers
+vim.keymap.set("n", "t;", ":bnext<CR>", opts("Go to next buffer"))
+vim.keymap.set("n", "tj", ":bprev<CR>", opts("Go to previous buffer"))
+vim.keymap.set("n", "td", ":bdelete<CR>", opts("Close current buffer"))
 
 -- Clear search highlights
 vim.keymap.set("n", "<leader>h", ":nohl<CR>", opts("Clear search highlights"))
-
--- -- Move block
--- keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move Block Down" })
--- keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move Block Up" })
-
--- -- close buffer
--- keymap.set("n", "<leader>q", "<cmd>bd<CR>", { desc = "Close Buffer" })
 
 -- `spectre` keymaps
 vim.keymap.set("n", "<leader>st", ':lua require("spectre").toggle()<CR>', {
     desc = "Toggle Spectre",
 })
--- vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
---     desc = "Search current word",
--- })
--- vim.keymap.set("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
---     desc = "Search current word",
--- })
 vim.keymap.set("n", "<leader>sf", ':lua require("spectre").open_file_search({select_word=true})<CR>', {
     desc = "Search on current file",
 })
