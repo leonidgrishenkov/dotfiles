@@ -98,6 +98,11 @@ if command -v eza &>/dev/null; then
     alias tree="eza --tree --all --icons --group-directories-first --ignore-glob='.git*|.venv*|__pycache__*|.DS_store'"
 fi
 
+# https://github.com/noahgorstein/jqp?tab=readme-ov-file#configuration
+if command -v jqp &>/dev/null; then
+    alias jqp="jqp --theme catppuccin-frappe"
+fi
+
 # ----------------------
 # `zinit` configurations
 # https://github.com/zdharma-continuum/zinit
