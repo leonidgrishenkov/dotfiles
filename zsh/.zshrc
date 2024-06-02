@@ -198,42 +198,8 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # Completions should be case-insensitive
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls $realpath'
-
-
-# if [[ $SYSTEM = "Darwin" ]]; then
-
-  # Usefull commands for macos
-  # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos
-  # All commands: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos#commands
-#   plugins+=(macos) # Add to oh-my-zsh plugins list
-# fi
-
-# If `poetry` installed
-# if command -v poetry &>/dev/null; then
-#   # Create virtual envs in project
-#   export POETRY_VIRTUALENVS_IN_PROJECT=true
-
-#   # Autocompletions for `poetry`.
-#   # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/poetry
-#   plugins+=(poetry)
-# fi
-
-# if command -v fzf &>/dev/null; then
-
-#   # For integrations with `fzf`
-#   # Repo: https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/fzf
-#   plugins+=(fzf)
-
-#   # Repo: https://github.com/junegunn/fzf#layout
-#   # Docs: `man fzf`
-#   export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=sharp --margin=0,1,0,1%"
-#   export FZF_COMPLETION_TRIGGER='~~'
-# fi
-
-# Completions for apps
-# FPATH="$ZSH_CUSTOM/plugins/zsh-completions/src:$FPATH"
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
+# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls $realpath'
 
 # ----------
 # `starship`
@@ -278,7 +244,27 @@ fi
 # Initialize `fzf`
 # https://github.com/junegunn/fzf
 if command -v fzf &>/dev/null; then
+    # Set up fzf key bindings and fuzzy completion
+    # https://github.com/junegunn/fzf?tab=readme-ov-file#setting-up-shell-integration
     source <(fzf --zsh)
+
+    # https://github.com/junegunn/fzf#layout
+    export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=sharp --margin=0,1,0,1%"
+
+    # Options to fzf command
+    export FZF_COMPLETION_OPTS='--border --info=inline'
+
+    function _fzf_comprun() {
+        local command=$1
+        shift
+
+        case "$command" in
+            cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+            export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+            ssh)          fzf --preview 'dig {}'                   "$@" ;;
+            *)            fzf --preview 'bat --style=plain --color=always {}' "$@" ;;
+        esac
+    }
 fi
 
 # ---------------------------------
