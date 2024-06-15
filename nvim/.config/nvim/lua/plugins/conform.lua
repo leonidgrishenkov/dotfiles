@@ -24,8 +24,10 @@ return {
                     ["lua"] = { "stylua" },
                     ["sql"] = {
                         {
-                            "sql_formatter", -- Repo: https://github.com/sql-formatter-org/sql-formatter
-                            -- "sqlfluff", -- Repo: https://github.com/sqlfluff/sqlfluff
+                            -- https://github.com/sqlfluff/sqlfluff
+                            "sqlfluff",
+                            -- https://github.com/sql-formatter-org/sql-formatter
+                            -- "sql_formatter",
                         },
                     },
                     ["sh"] = { "shfmt" },

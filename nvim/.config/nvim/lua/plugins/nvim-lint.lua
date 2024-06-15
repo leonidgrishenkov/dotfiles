@@ -1,20 +1,26 @@
 return {
     {
         --[[
-        Repo: https://github.com/mfussenegger/nvim-lint
+        Plugin for linting. https://github.com/mfussenegger/nvim-lint
         --]]
         "mfussenegger/nvim-lint",
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
             local lint = require("lint")
 
             lint.linters_by_ft = {
-                yaml = { "yamllint" },
-                -- sql = { "sqlfluff" },
-                python = { "mypy" },
+                -- https://github.com/adrienverge/yamllint
+                ["yaml"] = { "yamllint" },
+                -- https://github.com/sqlfluff/sqlfluff
+                -- TODO: Create and use here config file for sqlfluff
+                ["sql"] = { "sqlfluff" },
+                ["python"] = { "mypy" },
             }
 
             local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
+            -- TODO: Read more about event types. Maybe here we need to add a couple more events
+            -- because not linter reapplyied only on save.
             vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
                 group = lint_augroup,
                 callback = function()
