@@ -1,9 +1,9 @@
 return {
     {
         --[[
-        Setup formatting diffrent sources with conform plugin.
+        Code formatting plugin. https://github.com/stevearc/conform.nvim
 
-        Repo: https://github.com/stevearc/conform.nvim
+        To see info about attached client to current buffer: :ConformInfo
         --]]
         "stevearc/conform.nvim",
         lazy = true,
@@ -18,37 +18,36 @@ return {
                     -- All formatters: https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
                     -- Use a sub-list to run only the first available formatter
                     ["json"] = { "prettier" },
-                    ["jsonc"] = { { "prettierd", "prettier" } },
-                    ["yaml"] = { { "prettierd", "prettier" } },
-                    markdown = { { "prettierd", "prettier" } },
-                    lua = { "stylua" },
-                    sql = {
+                    ["jsonc"] = { "prettier" },
+                    ["yaml"] = { "prettier" },
+                    ["markdown"] = { "prettier" },
+                    ["lua"] = { "stylua" },
+                    ["sql"] = {
                         {
                             "sql_formatter", -- Repo: https://github.com/sql-formatter-org/sql-formatter
                             -- "sqlfluff", -- Repo: https://github.com/sqlfluff/sqlfluff
                         },
                     },
-                    sh = { "shfmt" },
+                    ["sh"] = { "shfmt" },
                     -- Use the "_" filetype to run formatters on filetypes that don't
                     -- have other formatters configured.
                     ["_"] = { "trim_whitespace" },
                 },
-                format_on_save = {
-                    lsp_fallback = true,
-                    async = false,
-                    timeout_ms = 1000,
-                },
+                -- Autoformat on save option.
+                -- format_on_save = {
+                --     lsp_fallback = true,
+                --     async = false,
+                --     timeout_ms = 1000,
+                -- },
                 -- Add extra options for formatters
                 formatters = {
                     shfmt = {
                         prepend_args = { "-i", "2" },
                     },
                     sql_formatter = {
-                        -- TODO: Replace hardcoded path with getting env variable value
-                        -- Maybe like that: os.getenv 'HOME' .. '/.config/sql_formatter/sql_formatter.json'
                         prepend_args = {
                             "--config",
-                            "/Users/leonidgrisenkov/Code/configs/sql-formatter/.config/sql-formatter/config.json",
+                            os.getenv("HOME") .. "/Code/configs/sql-formatter/.config/sql-formatter/config.json",
                         },
                     },
                     prettier = {

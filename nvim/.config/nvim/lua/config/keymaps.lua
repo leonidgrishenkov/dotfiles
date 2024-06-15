@@ -77,9 +77,18 @@ vim.keymap.set("n", "td", ":bdelete<CR>", opts("Close current buffer"))
 vim.keymap.set("n", "<leader>h", ":nohl<CR>", opts("Clear search highlights"))
 
 -- `spectre` keymaps
-vim.keymap.set("n", "<leader>st", ':lua require("spectre").toggle()<CR>', {
-    desc = "Toggle Spectre",
-})
-vim.keymap.set("n", "<leader>sf", ':lua require("spectre").open_file_search({select_word=true})<CR>', {
-    desc = "Search on current file",
-})
+vim.keymap.set("n", "<leader>st", ':lua require("spectre").toggle()<CR>', opts("Toggle Spectre"))
+vim.keymap.set(
+    "n",
+    "<leader>sf",
+    ':lua require("spectre").open_file_search({select_word=true})<CR>',
+    opts("Search on current file")
+)
+
+-- `conform` keymaps
+vim.keymap.set(
+    "n",
+    "<leader>lf",
+    ":lua require('conform').format({ async = true, lsp_fallback = true })<CR>",
+    opts("Format buffer")
+)

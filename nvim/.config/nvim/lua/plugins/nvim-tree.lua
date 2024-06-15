@@ -8,6 +8,7 @@ return {
             Seacrh: `:h nvim-tree.OPTION_NAME`
             All commands: `:h nvim-tree-commands`
             Keymapping: `h nvim-tree-mappings`. To see default section `:h nvim-tree-mappings-default`
+            Toggle help: `g?`
 
         https://www.youtube.com/watch?v=SpexCBrZ1pQ
         --]]
@@ -155,7 +156,7 @@ return {
                         modified_placement = "before",
                         diagnostics_placement = "after",
                         padding = "  ",
-                        symlink_arrow = " ➛ ",
+                        symlink_arrow = "  ",
                         -- Which elements should be shown in UI.
                         show = {
                             file = true,
