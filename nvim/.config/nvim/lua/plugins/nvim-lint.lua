@@ -12,7 +12,6 @@ return {
                 -- https://github.com/adrienverge/yamllint
                 ["yaml"] = { "yamllint" },
                 -- https://github.com/sqlfluff/sqlfluff
-                -- TODO: Create and use here config file for sqlfluff
                 ["sql"] = { "sqlfluff" },
                 ["python"] = { "mypy" },
             }

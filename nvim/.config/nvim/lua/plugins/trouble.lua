@@ -2,9 +2,6 @@ return {
     {
         -- https://github.com/folke/trouble.nvim
         "folke/trouble.nvim",
-        -- Trouble v3 accessed via `dev` branch.
-        -- If you want to use Trouble v2 comment below line.
-        branch = "dev",
         -- cmd = { "TroubleToggle", "Trouble" },
         dependencies = { "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
         opts = {
