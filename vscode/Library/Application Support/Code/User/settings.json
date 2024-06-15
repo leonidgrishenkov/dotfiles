@@ -262,5 +262,6 @@
     "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
   },
   "sql-formatter.uppercase": true,
+  "sql-formatter.dialect": "sql",
   "gitlens.codeLens.enabled": false,
 }
