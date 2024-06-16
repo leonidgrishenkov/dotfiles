@@ -76,7 +76,8 @@ return {
 
             -- Setup required language servers.
             -- Docs about servers configurations: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-            -- LSP for python
+            --
+            -- Pyright as LSP and static type checker for python.
             lspconfig["pyright"].setup({
                 capabilities = capabilities,
                 filetypes = { "python" },
@@ -88,15 +89,25 @@ return {
                     python = {
                         analysis = {
                             -- Ignore all files for analysis to exclusively use Ruff for linting.
-                            ignore = { "*" },
+                            -- ignore = { "*" },
+                            -- Determines the default type-checking level used by pyright.
+                            -- Could be one of: "off", "basic", "standard" or "strict"
+                            typeCheckingMode = "basic",
+                            -- Determines whether pyright offers auto-import completions.
+                            autoImportCompletions = false,
+                            -- Determines whether pyright automatically adds common search paths like "src"
+                            -- if there are no execution environments defined in the config file.
                             -- autoSearchPaths = true,
-                            -- diagnosticMode = "openFilesOnly",
+                            -- Determines whether pyright analyzes (and reports errors for) all files in the workspace,
+                            -- as indicated by the config file. If this option is set to "openFilesOnly", pyright analyzes only open files.
+                            diagnosticMode = "openFilesOnly",
                             -- useLibraryCodeForTypes = true,
                         },
                     },
                 },
             })
 
+            -- Ruff as linter and formatter for python.
             lspconfig["ruff_lsp"].setup({
                 filetypes = { "python" },
                 on_attach = function(client, bufnr)
@@ -111,7 +122,7 @@ return {
                 init_options = {
                     settings = {
                         -- Any extra CLI arguments for `ruff` go here.
-                        args = { "--config", "~/.config/ruff/ruff.toml" },
+                        args = { "--config", os.getenv("XDG_CONFIG_HOME") .. "/ruff/ruff.toml" },
                     },
                 },
             })
@@ -162,6 +173,11 @@ return {
 
             -- LSP for toml
             lspconfig["taplo"].setup({
+                capabilities = capabilities,
+            })
+
+            -- LSP for SQL
+            lspconfig["sqls"].setup({
                 capabilities = capabilities,
             })
 

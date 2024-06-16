@@ -50,6 +50,7 @@ return {
                     "yamlls",
                     "jsonls",
                     "taplo", -- LSP for toml files
+                    "sqls", -- LSP for SQL
                 },
                 -- auto-install configured servers (with lspconfig)
                 automatic_installation = true, -- not the same as ensure_installed
@@ -58,14 +59,11 @@ return {
             mason_tool_installer.setup({
                 -- Other tools for mason to install (linters, formatters etc.)
                 ensure_installed = {
-                    "stylua", -- lua formatter
-                    -- "ruff", -- python formatter and linter
-                    "prettierd",
+                    "stylua",
                     "prettier",
-                    "sql-formatter",
                     "sqlfluff",
+                    "yamllint",
                     "shfmt",
-                    "mypy",
                 },
                 auto_update = true,
                 run_on_start = true,

@@ -13,7 +13,6 @@ return {
                 ["yaml"] = { "yamllint" },
                 -- https://github.com/sqlfluff/sqlfluff
                 ["sql"] = { "sqlfluff" },
-                ["python"] = { "mypy" },
             }
 
             local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

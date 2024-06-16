@@ -12,7 +12,6 @@ return {
         config = function()
             local conform = require("conform")
 
-            -- TODO: Find and setup formatter for toml file. Maybe taplo?
             conform.setup({
                 formatters_by_ft = {
                     -- All formatters: https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
@@ -45,12 +44,6 @@ return {
                 formatters = {
                     shfmt = {
                         prepend_args = { "-i", "2" },
-                    },
-                    sql_formatter = {
-                        prepend_args = {
-                            "--config",
-                            os.getenv("HOME") .. "/Code/configs/sql-formatter/.config/sql-formatter/config.json",
-                        },
                     },
                     prettier = {
                         prepend_args = { "--tab-width", "4", "--use-tabs", "true" },

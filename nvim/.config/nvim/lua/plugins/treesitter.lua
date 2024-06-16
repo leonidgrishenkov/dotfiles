@@ -38,16 +38,19 @@ return {
                     "yaml",
                     "markdown",
                     "markdown_inline",
+                    "git_config",
                     "gitignore",
                     "vim",
                     "vimdoc",
                     "dockerfile",
+                    "helm",
                     "gpg",
                     "sql",
                     "ssh_config",
                     "toml",
                     "make",
                     "tmux",
+                    "just", -- for JustFile
                 },
                 -- Install parsers synchronously (only applied to `ensure_installed`).
                 -- false = install async
