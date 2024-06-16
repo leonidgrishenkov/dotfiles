@@ -1,6 +1,8 @@
 # vim: set filetype=toml:
 
-# Default configuration: https://docs.sqlfluff.com/en/3.0.7/configuration.html#default-configuration
+# Documentation:
+# - Default configuration: https://docs.sqlfluff.com/en/3.0.7/configuration.html#default-configuration
+# - Rules reference: https://docs.sqlfluff.com/en/3.0.7/rules.html#rules-reference
 
 [sqlfluff]
 # Ignore sertain rules.
@@ -24,7 +26,7 @@ extended_capitalisation_policy = None
 extended_capitalisation_policy = upper
 
 [sqlfluff:rules:capitalisation.literals]
-capitalisation_policy = None
+capitalisation_policy = upper
 
 [sqlfluff:rules:capitalisation.types]
 extended_capitalisation_policy = upper
