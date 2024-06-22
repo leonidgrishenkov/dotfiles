@@ -41,27 +41,34 @@ local function opts(desc)
     return { desc = desc, noremap = true, silent = true }
 end
 
--- Disable yank when do some operations.
--- Disable yank on delete
-vim.keymap.set({ "n", "v" }, "d", '"_d', opts("Delete without yank"))
-vim.keymap.set({ "n", "v" }, "D", '"_D', opts("Delete without yank"))
+-- Disable yank on delete word
+vim.keymap.set({ "n", "v" }, "d", '"_d', opts(nil))
+vim.keymap.set({ "n", "v" }, "D", '"_D', opts(nil))
+
+-- Disable yank on delete symbol
+vim.keymap.set({ "n", "v" }, "x", '"_x', opts(nil))
+vim.keymap.set({ "n", "v" }, "X", '"_X', opts(nil))
+
+-- Disable yank on paste operation
+vim.keymap.set("x", "p", "P", opts(nil))
 
 -- Remap exit modes to normal mode
-vim.keymap.set({ "v", "i" }, "jf", "<ESC>", opts("Exit v|i to n mode"))
+vim.keymap.set({ "v", "i" }, "jf", "<ESC>", opts(nil))
 
 -- Movements
 -- Unmap `h`
 vim.keymap.set("", "h", "<nop>")
 
-vim.keymap.set({ "n", "v" }, "l", "<Down>", opts("Move down"))
-vim.keymap.set({ "n", "v" }, "k", "<Up>", opts("Move up"))
-vim.keymap.set({ "n", "v" }, "j", "<Left>", opts("Move left"))
-vim.keymap.set({ "n", "v" }, ";", "<Right>", opts("Move right"))
+vim.keymap.set({ "n", "v" }, "l", "<Down>", opts(nil))
+vim.keymap.set({ "n", "v" }, "k", "<Up>", opts(nil))
+vim.keymap.set({ "n", "v" }, "j", "<Left>", opts(nil))
+vim.keymap.set({ "n", "v" }, ";", "<Right>", opts(nil))
 
 -- Panes management
 -- Unmap default keybind to split windows
 vim.keymap.set("", "<C-w>v", "<nop>")
 vim.keymap.set("", "<C-w>s", "<nop>")
+
 -- Switch panes
 vim.keymap.set("n", "<C-w>l", "<C-w>j", opts("Switch to bottom pane"))
 vim.keymap.set("n", "<C-w>k", "<C-w>k", opts("Switch to top pane"))
@@ -90,5 +97,5 @@ vim.keymap.set(
     "n",
     "<leader>lf",
     ":lua require('conform').format({ async = true, lsp_fallback = true })<CR>",
-    opts("Format buffer")
+    opts("Format current buffer")
 )
