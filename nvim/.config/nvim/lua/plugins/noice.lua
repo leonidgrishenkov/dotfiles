@@ -46,6 +46,7 @@ return {
                             lang = "lua",
                         },
                         help = { pattern = "^:%s*he?l?p?%s+", icon = "" }, -- 󰋖 󰞋 󰮥 󰘥 󰌵    󰋗 󰆋
+                        -- input = { view = "cmdline_input", icon = "󰥻 " }, -- Used by input()
                     },
                 },
                 routes = {

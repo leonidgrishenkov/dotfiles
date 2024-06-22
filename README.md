@@ -1,7 +1,11 @@
 
+This repository is addapted to work with [GNU stow](https://www.gnu.org/software/stow/) utility.
 
-Create symlink for obsidian:
+To start syncing you local app or utility configuration with this repo execute this command:
 
 ```shell
-stow -t $HOME -S obsidian -v
+stow -v -t $HOME -S lazygit
 ```
+
+This command will create a symlinks with file structure correcponding to specifies app path in this repo.
+
