@@ -3,7 +3,7 @@
 "
 " This plugins doesn't support `lua` config.
 "
-" Not all vim options are working in DataGrip. 
+" Not all vim options are working in DataGrip.
 "
 " Repo: https://github.com/JetBrains/ideavim
 "
@@ -12,7 +12,6 @@
 " Line numbers
 set number
 set relativenumber
-set numberwidth=2 " set number column width
 
 " Keymappings
 inoremap jf <Esc>
@@ -21,6 +20,19 @@ vnoremap jf <Esc>
 noremap j h
 noremap l j
 noremap ; l
+
+" Disable yank on delete operations
+nnoremap d "_d
+vnoremap d "_d
+nnoremap D "_D
+vnoremap D "_D
+
+nnoremap x "_x
+vnoremap x "_x
+nnoremap X "_X
+vnoremap X "_X
+
+xnoremap p P
 
 set clipboard=unnamedplus
 set matchpairs
