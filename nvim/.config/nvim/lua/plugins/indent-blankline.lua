@@ -9,9 +9,7 @@ return {
         ]]
         "lukas-reineke/indent-blankline.nvim",
         config = function()
-            local ibl = require("ibl")
-
-            ibl.setup({
+            require("ibl").setup({
                 -- Configures the indentation
                 -- `:help ibl.config.indent`
                 indent = {

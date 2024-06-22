@@ -32,6 +32,12 @@ return {
                 },
                 -- About integrations: https://github.com/catppuccin/nvim#integrations
                 integrations = {
+                    barbecue = {
+                        dim_dirname = true, -- directory name is dimmed by default
+                        bold_basename = true,
+                        dim_context = false,
+                        alt_background = false,
+                    },
                     nvimtree = true,
                     cmp = true,
                     treesitter = true,
@@ -50,7 +56,6 @@ return {
                     noice = true,
                     mini = true,
                     semantic_tokens = true,
-                    headlines = true,
                     fidget = true,
                     native_lsp = {
                         enabled = true,

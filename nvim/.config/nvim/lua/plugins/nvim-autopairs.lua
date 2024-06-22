@@ -5,6 +5,7 @@ return {
 
         Repo: https://github.com/windwp/nvim-autopairs
         Wiki: https://github.com/windwp/nvim-autopairs/wiki
+        Dos: :h nvim-autopairs
         --]]
         "windwp/nvim-autopairs",
         event = {

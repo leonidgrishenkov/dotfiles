@@ -10,9 +10,7 @@ return {
         event = "VeryLazy",
         -- `:h dressing-configuration`
         config = function()
-            local dressing = require("dressing")
-
-            dressing.setup({})
+            require("dressing").setup({})
         end,
     },
 }
