@@ -187,8 +187,8 @@ return {
             vim.diagnostic.config({
                 virtual_text = {
                     prefix = "●",
-                    spacing = 4,
-                    source = "if_many",
+                    spacing = 2,
+                    source = true,
                 },
                 signs = true, -- Show symbols in sign column (gutter)
                 underline = true, -- Underline problem line
