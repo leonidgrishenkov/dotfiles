@@ -78,6 +78,7 @@ return {
             -- Docs about servers configurations: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
             --
             -- Pyright as LSP and static type checker for python.
+            -- https://microsoft.github.io/pyright/#/settings?id=pyright-settings
             lspconfig["pyright"].setup({
                 capabilities = capabilities,
                 filetypes = { "python" },
@@ -102,6 +103,11 @@ return {
                             -- as indicated by the config file. If this option is set to "openFilesOnly", pyright analyzes only open files.
                             diagnosticMode = "openFilesOnly",
                             -- useLibraryCodeForTypes = true,
+                            -- Mapping with duagnostic settings overrides.
+                            -- https://microsoft.github.io/pyright/#/configuration?id=type-check-diagnostics-settings
+                            diagnosticSeverityOverrides = {
+                                reportMissingImports = "error",
+                            }
                         },
                     },
                 },
