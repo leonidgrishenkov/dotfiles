@@ -337,6 +337,8 @@ if command -v yc &>/dev/null; then
 fi
 
 alias rm="rm -Iv"
+alias cp="cp -iv"
+alias mv="mv -iv"
 alias c="clear"
 
 
