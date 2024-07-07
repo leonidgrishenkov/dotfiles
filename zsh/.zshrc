@@ -305,6 +305,10 @@ if command -v lazygit &>/dev/null; then
     alias g="lazygit"
 fi
 
+if command -v zellij &>/dev/null; then
+    alias zj="zellij"
+fi
+
 
 # -----------------------
 # `kubectl` configuration
