@@ -1,38 +1,49 @@
 lastupdatecheck: 1713008007
 recentrepos:
     - /Users/leonidgrisenkov/Code/configs
-    - /Users/leonidgrisenkov/Code/samolet/bi/finmodel_covenant_datamart
-    - /Users/leonidgrisenkov/code/configs
-    - /Users/leonidgrisenkov/Code/samolet/data/reports/optimacros_export_consolidation_data
-    - /Users/leonidgrisenkov/Code/samolet/tech/data_slicer
     - /Users/leonidgrisenkov/Code/samolet/lake
-    - /Users/leonidgrisenkov/Code/samolet/data/reports/scenter_production_program_for_targets_calc_table
-    - /Users/leonidgrisenkov/Code/samolet/tech/spark_source_loader
-    - /Users/leonidgrisenkov/Code/samolet/layer/scenter
-    - /Users/leonidgrisenkov/Code/samolet/layer/scalendar
-    - /Users/leonidgrisenkov/Code/samolet/custom_libraries/transformlib
-    - /Users/leonidgrisenkov/Code/samolet/layer/test-system
-    - /Users/leonidgrisenkov/Code/samolet/layer/exponea
+    - /Users/leonidgrisenkov/Code/samolet/parsing/competitors_mortgage_programs
     - /Users/leonidgrisenkov/Code/samolet/data/reports/scenter_production_program_for_finmodel
-    - /Users/leonidgrisenkov/Code/samolet/tech/hdfs_tables_exporter
-    - /Users/leonidgrisenkov/Code/samolet/layer/fabrika_uluch_s_plus
+    - /Users/leonidgrisenkov/Code/samolet/data/reports/scenter_production_program_for_targets_calc_table
+    - /Users/leonidgrisenkov/Code/samolet/data/reports/optimacros_export_consolidation_data
+    - /Users/leonidgrisenkov/Code/samolet/source/core
+    - /Users/leonidgrisenkov/Code/samolet/tech/spark_source_loader
+    - /Users/leonidgrisenkov/Code/samolet/data/optimacros_kafka_export
+    - /Users/leonidgrisenkov/Code/samolet/layer/scontrol
+    - /Users/leonidgrisenkov/Code/samolet/parsing/excel/development_economics_target_plan_parser
+    - /Users/leonidgrisenkov/Code/samolet/tech/data_slicer
+    - /Users/leonidgrisenkov/Code/samolet/parsing/spark_interfax
+    - /Users/leonidgrisenkov/Code/samolet/layer/scenter
     - /Users/leonidgrisenkov/Code/samolet/tech/clean-mapping-generator
+    - /Users/leonidgrisenkov/Code/samolet/layer/exponea
     - /Users/leonidgrisenkov/Code/samolet/tech/information-schema-import
+    - /Users/leonidgrisenkov/Code/samolet/tech/hdfs_tables_exporter
+    - /Users/leonidgrisenkov/Code/samolet/bi/finmodel_covenant_datamart
+    - /Users/leonidgrisenkov/Code/samolet/parsing/excel/control_room
+    - /Users/leonidgrisenkov/Code/samolet/parsing/excel/finmodel_consolidation_all_business_units_parser
+    - /Users/leonidgrisenkov/Code/samolet/data/reports/optimacros_export_consolidation_data/
+    - /Users/leonidgrisenkov/Code/samolet/bi/loan_portfolio
+    - /Users/leonidgrisenkov/Code/samolet/custom_libraries/transformlib
+    - /Users/leonidgrisenkov/Code/samolet/parsing/excel/finmodel_smlt_plus_bdr_registry_parser
+    - /Users/leonidgrisenkov/Code/samolet/layer/icbit
+    - /Users/leonidgrisenkov/code/configs
+    - /Users/leonidgrisenkov/Code/samolet/layer/scalendar
+    - /Users/leonidgrisenkov/Code/samolet/layer/test-system
+    - /Users/leonidgrisenkov/Code/samolet/layer/fabrika_uluch_s_plus
     - /Users/leonidgrisenkov/Code/samolet/layer/smaterials
     - /Users/leonidgrisenkov/Code/samolet/layer/yandex_metrica
-    - /Users/leonidgrisenkov/Code/samolet/layer/icbit
     - /Users/leonidgrisenkov/Code/samolet/layer/financial_result
     - /Users/leonidgrisenkov/Code/samolet/layer/cbr
     - /Users/leonidgrisenkov/Code/samolet/layer/ag_crm_p24
     - /Users/leonidgrisenkov/code/samolet/parsing/metalsmining
-    - /Users/leonidgrisenkov/code/lake
 startuppopupversion: 5
-lastversion: 0.42.0
+lastversion: 0.43.0
 customcommandshistory:
     - 'refactor: Remove DAG owner hardcode. Update README'
 hidecommandlog: false
 ignorewhitespaceindiffview: false
 diffcontextsize: 2
+renamesimilaritythreshold: 50
 localbranchsortorder: recency
 remotebranchsortorder: alphabetical
 gitlogorder: topo-order
