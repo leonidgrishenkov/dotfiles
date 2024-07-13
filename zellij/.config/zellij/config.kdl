@@ -263,7 +263,7 @@ simplified_ui false
 
 // Choose the theme that is specified in the themes section.
 // Default: default
-theme "terafox"
+theme "tokyo-night-storm"
 
 // The name of the default layout to load on startup
 // Default: "default"
@@ -271,7 +271,7 @@ default_layout "default"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal
-default_mode "locked"
+default_mode "normal"
 
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could
@@ -345,6 +345,6 @@ copy_on_select true
 ui {
     pane_frames {
         rounded_corners true
-        hide_session_name true
+        hide_session_name false
     }
 }
