@@ -1,16 +1,16 @@
 return {
     diagnostics = {
-        Error = " ", -- 
-        Hint = "󰠠 ", --  
-        Info = " ", --   
-        Question = " ", --   
-        Warn = " ", --     
+        Error = " ", --    󰈸 
+        Hint = " ", --    󰠠 
+        Info = "", --     
+        Question = "", --   
+        Warn = " ", --       󱈸   󱈸
     },
     git = {
         Add = " ",
         AddAlt = " ",
         AddSign = "┃", -- `..Sign` suffix is for `GitSigns` plugin.
-        Branch = " ", --       
+        Branch = " ", --         
         Diff = " ",
         DiffAlt = " ",
         Ignore = "◌ ",

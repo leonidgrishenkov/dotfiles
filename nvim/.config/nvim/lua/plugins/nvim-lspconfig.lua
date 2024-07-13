@@ -107,7 +107,7 @@ return {
                             -- https://microsoft.github.io/pyright/#/configuration?id=type-check-diagnostics-settings
                             diagnosticSeverityOverrides = {
                                 reportMissingImports = "error",
-                            }
+                            },
                         },
                     },
                 },
@@ -192,7 +192,7 @@ return {
             -- :help vim.diagnostic.config
             vim.diagnostic.config({
                 virtual_text = {
-                    prefix = "●",
+                    prefix = "",
                     spacing = 2,
                     source = true,
                 },
