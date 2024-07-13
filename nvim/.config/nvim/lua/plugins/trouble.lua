@@ -26,14 +26,14 @@ return {
         -- Keys for v3
         keys = {
             {
-                "<leader>xx",
-                "<cmd>Trouble diagnostics toggle<cr>",
-                desc = "Diagnostics (Trouble)",
+                "<leader>xw",
+                ":Trouble diagnostics toggle<cr>",
+                desc = "Toggle workspace diagnostics",
             },
             {
-                "<leader>xX",
-                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-                desc = "Buffer Diagnostics (Trouble)",
+                "<leader>xb",
+                ":Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "Toggle buffer diagnostics",
             },
             -- {
             --     "<leader>cs",
@@ -47,18 +47,18 @@ return {
             -- },
             {
                 "<leader>xL",
-                "<cmd>Trouble loclist toggle<cr>",
-                desc = "Location List (Trouble)",
+                ":Trouble loclist toggle<cr>",
+                desc = "Location List",
             },
             {
                 "<leader>xQ",
-                "<cmd>Trouble qflist toggle<cr>",
-                desc = "Quickfix List (Trouble)",
+                ":Trouble qflist toggle<cr>",
+                desc = "Quickfix List",
             },
             {
                 "<leader>xt",
-                "<cmd>TodoTrouble<CR>",
-                desc = "Open todos in trouble",
+                ":TodoTrouble<CR>",
+                desc = "Open TODOs",
             },
         },
     },
