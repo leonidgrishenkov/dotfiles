@@ -4,7 +4,7 @@ return {
         Repo: https://github.com/folke/which-key.nvim
 
         Commands:
-            - Check health: `checkhealth which-key`
+            - Check health: `:checkhealth which-key`
         ]]
         "folke/which-key.nvim",
         event = "VeryLazy",
@@ -15,9 +15,11 @@ return {
             local wk = require("which-key")
             wk.setup({
                 icons = {
+                    rules = false, -- don't show icons in UI
                     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
                     separator = "➜", -- symbol used between a key and it's label
                     group = "", -- symbol prepended to a group
+                    ellipsis = "…",
                 },
                 window = {
                     border = "single", -- none, single, double, shadow
@@ -30,35 +32,17 @@ return {
             -- NOTE: Here I defined only group names. For each keymap which-key automatically
             -- gets its description from keymap definition. Therefore we don't need
             -- to obviously specify any of them except keymaps without description.
-            wk.register({
-                -- Group for different Telescope search
-                f = {
-                    name = "Find",
-                },
-                -- Group for Git actions
-                g = {
-                    name = "Git",
-                },
-                -- Group for Comment actions
-                c = {
-                    name = "Comment",
-                    l = "Comment/uncomment line/lines",
-                    b = "Comment/uncomment block",
-                },
-                -- Group for LSP actions
-                l = {
-                    name = "LSP",
-                },
-                x = {
-                    name = "Diagnostics",
-                },
-                s = {
-                    name = "Search & Replace",
-                },
-                p = {
-                    name = "Panes",
-                },
-            }, { prefix = "<leader>" })
+            wk.add({
+                { "<leader>c", group = "Comment" },
+                { "<leader>cb", desc = "Comment/uncomment block" },
+                { "<leader>cl", desc = "Comment/uncomment line/lines" },
+                { "<leader>f", group = "Find" },
+                { "<leader>g", group = "Git" },
+                { "<leader>l", group = "LSP" },
+                { "<leader>p", group = "Panes" },
+                { "<leader>s", group = "Search & Replace" },
+                { "<leader>x", group = "Diagnostics" },
+            })
         end,
     },
 }
