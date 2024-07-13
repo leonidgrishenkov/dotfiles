@@ -1,10 +1,10 @@
 return {
     diagnostics = {
-        Error = " ",
+        Error = " ", -- 
         Hint = "󰠠 ", --  
-        Info = " ",
-        Question = " ",
-        Warn = " ",
+        Info = " ", --   
+        Question = " ", --   
+        Warn = " ", --     
     },
     git = {
         Add = " ",
