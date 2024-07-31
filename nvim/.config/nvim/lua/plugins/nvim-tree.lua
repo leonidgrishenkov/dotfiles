@@ -59,13 +59,13 @@ return {
                 on_attach = on_attach_keymap,
                 hijack_cursor = true,
                 auto_reload_on_write = true,
-                -- disable_netrw = false, -- Already disabled via options in lua/config/options.lua
+                -- disable_netrw = false, -- Its already disabled via options in lua/config/options.lua
                 hijack_netrw = true,
                 hijack_unnamed_buffer_when_opening = false,
                 root_dirs = {},
                 prefer_startup_root = false,
                 sync_root_with_cwd = false,
-                reload_on_bufenter = false,
+                reload_on_bufenter = false, -- TODO: learn about
                 respect_buf_cwd = false,
                 select_prompts = false,
                 sort = {
@@ -119,7 +119,7 @@ return {
                     full_name = false,
                     -- Path at the top of the window.
                     -- `false` = don't show path.
-                    root_folder_label = false, -- Default value: `:~:s?$?/..?",`
+                    root_folder_label = ":~:s?$?/..?", -- Default value: ":~:s?$?/..?",
                     indent_width = 2,
                     special_files = {}, -- Default: { "Cargo.toml", "Makefile", "README.md", "readme.md" },
                     symlink_destination = true,
@@ -239,7 +239,7 @@ return {
                     git_clean = false,
                     no_buffer = false,
                     no_bookmark = false,
-                    custom = { ".DS_Store" },
+                    custom = {},
                     exclude = {},
                 },
                 filesystem_watchers = {
