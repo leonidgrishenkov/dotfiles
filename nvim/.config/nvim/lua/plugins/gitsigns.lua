@@ -2,10 +2,9 @@ return {
     {
         --[[
         Git decorations inside editor.
-        Repo: https://github.com/lewis6991/gitsigns.nvim
 
-        Docs:
-            - Help page: `gitsigns`
+        https://github.com/lewis6991/gitsigns.nvim
+        Doc: :help gitsigns
         ]]
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPre", "BufNewFile" },
@@ -14,22 +13,23 @@ return {
             local icons = require("utils.icons").git
 
             -- Setup colors for symbols in signcolomn
+            -- :help  gitsigns-highlight-groups
             vim.cmd([[
                 highlight GitSignsAdd    guifg=#009900 ctermfg=2
                 highlight GitSignsChange guifg=#bbbb00 ctermfg=3
-
                 highlight GitSignsDelete guifg=#E78284
                 highlight GitSignsTopdelete guifg=#E78284
             ]])
 
             gitsigns.setup({
                 signs = {
-                    add = { text = icons.AddSign, hl = "GitSignsAdd" },
-                    change = { text = icons.AddSign, hl = "GitSignsChange" },
-                    delete = { text = icons.RemoveSign, hl = "GitSignsDelete", show_count = true },
-                    topdelete = { text = icons.RemoveSign, hl = "GitSignsTopDelete", show_count = true },
+                    add = { text = icons.AddSign },
+                    change = { text = icons.AddSign },
+                    delete = { text = icons.RemoveSign, show_count = true },
+                    topdelete = { text = icons.RemoveSign, show_count = true },
                     changedelete = { text = icons.ChangeRemoveSign },
                 },
+                signs_staged_enable = false,
                 watch_gitdir = {
                     follow_files = true,
                 },
@@ -37,6 +37,7 @@ return {
                 numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
                 linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
                 word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+                current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
                 preview_config = {
                     -- Options passed to nvim_open_win
                     border = "rounded",
