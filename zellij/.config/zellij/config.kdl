@@ -183,6 +183,57 @@ keybinds {
     shared_except "tmux" "locked" {
         bind "Ctrl b" { SwitchToMode "Tmux"; }
     }
+    // Configuraions for plugin: 'zellij forgot'
+    // https://github.com/karimould/zellij-forgot
+    shared_except "locked" {
+        bind "Ctrl y" {
+            LaunchOrFocusPlugin "file:~/Code/configs/zellij/.config/zellij/plugins/zellij_forgot.wasm" {
+                "LOAD_ZELLIJ_BINDINGS" "false"
+                "Lock"                  "Ctrl + g"
+                "Unlock"                "Ctrl + g"
+                "New pane"              "Ctrl + p + n"
+                "Change focus of pane"  "Ctrl + p + Arrow key"
+                "Close pane"            "Ctrl + p + x"
+                "Rename pane"           "Ctrl + p + c"
+                "Toggle fullscreen"     "Ctrl + p + f"
+                "Toggle floating pane"  "Ctrl + p + w"
+                "Toggle embed pane"     "Ctrl + p + e"
+                "Choose right pane"     "Ctrl + p + l"
+                "Choose left pane"      "Ctrl + p + r"
+                "Choose upper pane"     "Ctrl + p + k"
+                "Choose lower pane"     "Ctrl + p + j"
+                "New tab"               "Ctrl + t + n"
+                "Close tab"             "Ctrl + t + x"
+                "Change focus of tab"   "Ctrl + t + Arrow key"
+                "Rename tab"            "Ctrl + t + r"
+                "Sync tab"              "Ctrl + t + s"
+                "Brake pane to new tab" "Ctrl + t + b"
+                "Brake pane left"       "Ctrl + t + ["
+                "Brake pane right"      "Ctrl + t + ]"
+                "Toggle tab"            "Ctrl + t + Tab"
+                "Increase pane size"    "Ctrl + n + +"
+                "Decrease pane size"    "Ctrl + n + -"
+                "Increase pane top"     "Ctrl + n + k"
+                "Increase pane right"   "Ctrl + n + l"
+                "Increase pane bottom"  "Ctrl + n + j"
+                "Increase pane left"    "Ctrl + n + h"
+                "Decrease pane top"     "Ctrl + n + K"
+                "Decrease pane right"   "Ctrl + n + L"
+                "Decrease pane bottom"  "Ctrl + n + J"
+                "Decrease pane left"    "Ctrl + n + H"
+                "Move pane to top"      "Ctrl + h + k"
+                "Move pane to right"    "Ctrl + h + l"
+                "Move pane to bottom"   "Ctrl + h + j"
+                "Move pane to left"     "Ctrl + h + h"
+                "Search"                "Ctrl + s + s"
+                "Go into edit mode"     "Ctrl + s + e"
+                "Detach session"        "Ctrl + o + w"
+                "Open session manager"  "Ctrl + o + w"
+                "Quit zellij"           "Ctrl + q"
+                floating true
+            }
+        }
+    }
 }
 
 plugins {
@@ -267,7 +318,7 @@ theme "tokyo-night-storm"
 
 // The name of the default layout to load on startup
 // Default: "default"
-default_layout "default"
+default_layout "compact"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal
@@ -287,8 +338,7 @@ default_mode "normal"
 // buffer. Excess number of lines are discarded in a FIFO fashion.
 // Valid values: positive integers
 // Default value: 10000
-//
-// scroll_buffer_size 10000
+scroll_buffer_size 10000
 
 // Provide a command to execute when copying text. The text will be piped to
 // the stdin of the program to perform the copy. This can be used with
