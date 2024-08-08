@@ -1,5 +1,5 @@
 #!/bin/zsh
-# vim: set filetype=zsh:
+# vim: set filetype=sh:
 # vim: set ts=4 sw=4 et:
 
 # XDG Paths
@@ -7,9 +7,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-# Announce 265 bit color support
-export TERM=xterm-256color
-# export TERM=screen-256color
+# NOTE: This variable announced in alacritty config.
+# It's recommended here:
+# https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
+# export TERM=xterm-256color
 
 export SYSTEM="$(uname -s)"
 
@@ -62,7 +63,8 @@ alias v=$EDITOR
 # Enable `cargo`
 source "$HOME/.cargo/env"
 
-# If we are on linux machine add alias for batcat to be consistent with usage on  macos.
+# If we are on linux machine add alias for batcat
+# to be consistent with usage on  macos.
 if [[ $SYSTEM = "Linux" ]]; then
     alias bat="batcat"
 fi
@@ -85,7 +87,6 @@ if command -v bat &>/dev/null; then
     # https://github.com/sharkdp/bat?tab=readme-ov-file#highlighting---help-messages
     alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
     alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
-
 fi
 
 if command -v rg &>/dev/null; then
@@ -299,6 +300,15 @@ bindkey -M visual j vi-backward-char
 bindkey -M vicmd l vi-down-line-or-history
 bindkey -M vicmd k vi-up-line-or-history
 bindkey -M vicmd \; vi-forward-char
+bindkey -M vicmd ee edit-command-line
+
+# Yank to the system clipboard
+function vi-yank-xclip {
+    zle vi-yank
+   echo "$CUTBUFFER" | pbcopy -i
+}
+zle -N vi-yank-xclip
+bindkey -M vicmd 'y' vi-yank-xclip
 
 
 if command -v lazygit &>/dev/null; then
@@ -345,9 +355,6 @@ alias c="clear"
 if [[ $SYSTEM = "Darwin" ]]; then
     # Some often used paths
     export ICLOUDPATH="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
-
-    # Python
-    export PATH=$HOME/.python/3.12.2/bin:$PATH
 fi
 
 # Setting over ssh session
