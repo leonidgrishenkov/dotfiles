@@ -4,7 +4,7 @@ return {
         Hint = " ", --    󰠠 
         Info = "", --     
         Question = "", --   
-        Warn = " ", --       󱈸   󱈸
+        Warn = " ", --       󱈸   󱈸
     },
     git = {
         Add = " ",

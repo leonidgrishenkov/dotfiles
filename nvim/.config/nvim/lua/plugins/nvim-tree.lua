@@ -120,7 +120,7 @@ return {
                     -- Path at the top of the window.
                     -- `false` = don't show path.
                     root_folder_label = ":~:s?$?/..?", -- Default value: ":~:s?$?/..?",
-                    indent_width = 2,
+                    indent_width = 4,
                     special_files = {}, -- Default: { "Cargo.toml", "Makefile", "README.md", "readme.md" },
                     symlink_destination = true,
                     highlight_git = "name",
