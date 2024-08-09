@@ -40,18 +40,7 @@ return {
 
                 -- Same as `override` but specifically for overrides by filename
                 -- takes effect when `strict` is true
-                override_by_filename = {
-                    ["poetry.lock"] = {
-                        icon = "",
-                        color = "#984CA1",
-                        name = "PoetryLock",
-                    },
-                    ["pyproject.toml"] = {
-                        icon = "",
-                        color = "#984CA1",
-                        name = "PyProjectToml",
-                    },
-                },
+                override_by_filename = {},
                 -- Same as `override` but specifically for overrides by extension
                 -- takes effect when `strict` is true
                 override_by_extension = {
@@ -69,11 +58,6 @@ return {
                         icon = "",
                         color = "#984CA1",
                         name = "Yaml",
-                    },
-                    ["py"] = {
-                        icon = "",
-                        color = "#984CA1",
-                        name = "Python",
                     },
                 },
             })
