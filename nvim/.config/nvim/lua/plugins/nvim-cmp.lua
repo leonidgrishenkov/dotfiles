@@ -3,7 +3,6 @@ return {
         --[[
         Autocompletion plugin.
 
-
         Repo: https://github.com/hrsh7th/nvim-cmp
         Wiki: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
 
@@ -117,15 +116,15 @@ return {
                 }),
                 -- Sources for autocompletion
                 -- Docs: :h cmp-contig.matching
-                -- WARN: Order in this list will be used to prioritize
-                -- cmp results.
+                -- WARN: Order in this list will be used to prioritize cmp results.
                 sources = cmp.config.sources({
+                    { name = "copilot", group_index = 1, priority = 100 },
                     { name = "nvim_lsp" },
                     { name = "luasnip", keyword_length = 3 },
                     { name = "buffer", keyword_length = 3 },
-                    { name = "path" },
+                    { name = "path", keyword_length = 6 },
                     -- { name = "cmdline" },
-                    { name = "dotenv" },
+                    { name = "dotenv", keyword_length = 3 },
                 }),
                 confirm_opts = {
                     behavior = cmp.ConfirmBehavior.Replace,
@@ -167,11 +166,13 @@ return {
                             Event = "",
                             Operator = "󰆕",
                             TypeParameter = "",
+                            -- https://github.com/zbirenbaum/copilot-cmp?tab=readme-ov-file#highlighting--icon
+                            Copilot = "",
                         },
-                        maxwidth = 1000, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                        maxwidth = 60, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
                         -- can also be a function to dynamically calculate max width such as
                         -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
-                        ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+                        ellipsis_char = "..", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
                         show_labelDetails = false, -- show labelDetails in menu. Disabled by default
                         --     menu = {
                         --         buffer = "[Buffer]",
@@ -194,7 +195,7 @@ return {
                     ghost_text = true,
                 },
             })
-            -- TODO: Is all of  these are overwritted by noice?
+            -- TODO: Is all of  these are overwrited by noice?
             -- Completions for text inside vim command lines.
             -- Setup for `/` vim cmdline.
             -- cmp.setup.cmdline({ "/", "?" }, {
