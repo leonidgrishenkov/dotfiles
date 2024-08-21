@@ -155,7 +155,7 @@
     "vscodevim.vim": 1
   },
   // INTEGRATED TERMINAL
-  "terminal.external.osxExec": "iTerm.app",
+  "terminal.external.osxExec": "Alactritty.app",
   "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.fastScrollSensitivity": 3,
   "terminal.integrated.allowMnemonics": true,
@@ -166,11 +166,11 @@
   "terminal.integrated.cursorStyle": "line",
   "terminal.integrated.cursorStyleInactive": "line",
   // APC
-  "apc.electron": {
-    "opacity": 0.97,
-    "transparent": false,
-    "vibrancy": "ultra-dark"
-  },
+  // "apc.electron": {
+  //   "opacity": 0.97,
+  //   "transparent": false,
+  //   "vibrancy": "ultra-dark"
+  // },
   // DOTENV
   "dotenv.enableAutocloaking": false,
   "dotenv.enableSecretpeeking": true,
