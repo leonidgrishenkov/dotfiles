@@ -3,8 +3,8 @@ return {
         Error = " ", --    󰈸 
         Hint = " ", --    󰠠 
         Info = "", --     
-        Question = "", --   
-        Warn = " ", --       󱈸   󱈸
+        Question = " ", --    
+        Warn = " ", --       󱈸   󱈸
     },
     git = {
         Add = " ",
@@ -24,6 +24,7 @@ return {
         Repo = " ",
         Tag = " ",
         Untrack = " ",
+        Unmerged = " ",
     },
     documents = {
         File = " ", --   
@@ -37,11 +38,16 @@ return {
         SymlinkFolder = " ", -- 󰉒 󱧮    
         Import = " ",
     },
+    tree = {
+        ArrowClosed = "",
+        ArrowOpen = "",
+        Edge = "│ ",
+        Corner = "└ ",
+        Bottom = "─",
+    },
     ui = {
         Arrow = " ",
-        ArrowClosed = "",
         ArrowLeft = " ",
-        ArrowOpen = "",
         ArrowRight = " ",
         Bluetooth = " ",
         Bookmark = " ",
@@ -60,11 +66,9 @@ return {
         Color = " ",
         Command = " ",
         Comment = " ",
-        Corner = "└ ",
         Dashboard = " ",
         Database = " ",
         Download = " ",
-        Edge = "│ ",
         Electric = " ",
         Fire = " ",
         Firefox = " ",

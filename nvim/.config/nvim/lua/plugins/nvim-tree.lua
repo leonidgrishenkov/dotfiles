@@ -133,10 +133,10 @@ return {
                         enable = true,
                         inline_arrows = true,
                         icons = {
-                            corner = "└",
-                            edge = "│",
-                            item = "│",
-                            bottom = "─",
+                            corner = icons.tree.Corner,
+                            edge = icons.tree.Edge,
+                            item = icons.tree.Edge,
+                            bottom = icons.tree.Bottom,
                             none = " ",
                         },
                     },
@@ -173,8 +173,8 @@ return {
                             bookmark = "󰆤",
                             modified = "",
                             folder = {
-                                arrow_closed = "",
-                                arrow_open = "",
+                                arrow_closed = icons.tree.ArrowClosed,
+                                arrow_open = icons.tree.ArrowOpen,
                                 default = "",
                                 open = "",
                                 empty = "",
@@ -185,7 +185,7 @@ return {
                             git = {
                                 unstaged = icons.git.Mod,
                                 staged = icons.git.Add,
-                                unmerged = " ",
+                                unmerged = icons.git.Unmerged,
                                 renamed = icons.git.Rename,
                                 untracked = icons.git.Untrack,
                                 deleted = icons.git.RemoveSign,
@@ -216,7 +216,7 @@ return {
                     cygwin_support = false,
                 },
                 diagnostics = {
-                    enable = true,
+                    enable = false,
                     show_on_dirs = true,
                     show_on_open_dirs = false,
                     debounce_delay = 50,
