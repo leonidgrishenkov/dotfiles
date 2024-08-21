@@ -32,7 +32,7 @@ select = [
 ]
 
 # https://docs.astral.sh/ruff/settings/#lint_ignore
-ignore = ["RUF001", "RUF002", "RUF003", "PD901", "PD010", "E501"]
+ignore = ["RUF001", "RUF002", "RUF003", "PD901", "PD010", "E501", "F821", "F841"]
 
 [lint.pydocstyle]
 convention = "google"
