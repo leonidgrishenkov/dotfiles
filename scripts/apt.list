@@ -1,9 +1,0 @@
-gpg
-wget
-curl
-ripgrep
-jq
-bat
-gcc
-make
-fzf
