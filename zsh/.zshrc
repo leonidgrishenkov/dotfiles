@@ -38,7 +38,7 @@ if command -v /opt/homebrew/bin/brew &>/dev/null; then
 
     # Add to FPATH completions installed by brew
     FPATH="/opt/homebrew/share/zsh/site-functions:$FPATH"
-    # TODO: Does we need here this command?
+    # TODO: Do we need here this command?
     # autoload -U compinit
     # compinit
 fi
@@ -61,13 +61,11 @@ export PAGER="less"
 alias v=$EDITOR
 
 # Enable `cargo`
-source "$HOME/.cargo/env"
+if [[ -d "$HOME/.cargo" ]]; then source "$HOME/.cargo/env"; fi
 
 # If we are on linux machine add alias for batcat
 # to be consistent with usage on  macos.
-if [[ $SYSTEM = "Linux" ]]; then
-    alias bat="batcat"
-fi
+if [[ $SYSTEM = "Linux" ]]; then alias bat="batcat"; fi
 
 if command -v bat &>/dev/null; then
     # https://github.com/sharkdp/bat
@@ -310,15 +308,11 @@ function vi-yank-xclip {
 zle -N vi-yank-xclip
 bindkey -M vicmd 'y' vi-yank-xclip
 
+# Alias for lazygit
+if command -v lazygit &>/dev/null; then alias g="lazygit"; fi
 
-if command -v lazygit &>/dev/null; then
-    alias g="lazygit"
-fi
-
-if command -v zellij &>/dev/null; then
-    alias zj="zellij"
-fi
-
+# Alias for zellij multiplexor
+if command -v zellij &>/dev/null; then alias zj="zellij"; fi
 
 # -----------------------
 # `kubectl` configuration
@@ -333,28 +327,19 @@ if command -v kubectl &>/dev/null; then
   [[ -d $KUBECONFIG:h ]] || mkdir -p $KUBECONFIG:h
 fi
 
-# -------------------------------
-# Yandex Cloud `yc` configuration
-# -------------------------------
-# If CLI utility `yc` installed source completions
-if command -v yc &>/dev/null; then
-
-  if command -v brew &>/dev/null; then # Check if we use `brew`
-    source \
-      $(brew info --cask yandex-cloud-cli --json=v2 |
-        jq -r '.casks[].artifacts[] | select(.uninstall? // empty) | .uninstall[].delete')/completion.zsh.inc
-  fi
-fi
-
 alias rm="rm -Iv"
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias c="clear"
 
 
+# Only for MacOS
 if [[ $SYSTEM = "Darwin" ]]; then
-    # Some often used paths
-    export ICLOUDPATH="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+    # Yandex Cloud CLI - `yc`.
+    # Add binary to PATH:
+    if [ -d "$HOME/.yandex-cloud/bin" ]; then export PATH="$HOME/.yandex-cloud/bin:${PATH}"; fi
+    # Enable zsh completions:
+    if [ -f "$HOME/.yandex-cloud/completion.zsh.inc" ]; then source "$HOME/.yandex-cloud/completion.zsh.inc"; fi
 fi
 
 # Setting over ssh session
@@ -372,5 +357,3 @@ setopt NO_CLOBBER
 # Use modern file-locking mechanisms, for better safety & performance.
 # setopt HIST_FCNTL_LOCK
 
-# Check if running on macOS, otherwise stop here
-# [[ ! "x$SYSTEM" == "xDarwin" ]] && return
