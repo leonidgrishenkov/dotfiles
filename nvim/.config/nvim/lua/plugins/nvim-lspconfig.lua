@@ -187,6 +187,13 @@ return {
                 capabilities = capabilities,
             })
 
+            -- LSP for Terraform
+            -- https://github.com/hashicorp/terraform-ls
+            -- Usage: https://github.com/hashicorp/terraform-ls/blob/main/docs/USAGE.md
+            lspconfig["terraformls"].setup({
+                capabilities = capabilities,
+            })
+
             -- Setup Diagnostic signs and highlight
             -- Docs: https://neovim.io/doc/user/diagnostic.html
             -- :help vim.diagnostic.config
