@@ -10,6 +10,17 @@ stow --target=$HOME \
 
 This command will create a symlinks with files structure correcponding to specified app name in this repo, in this example `lazygit`.
 
+
+Several items can be listed with a space like that:
+
+```shell
+stow --target=$HOME \
+    --stow lazygit zsh zellij \
+    --verbose
+```
+
+# Recreate symlinks
+
 To recreate symlinks, for example there were made some changes in directories names:
 
 ```shell
@@ -18,18 +29,12 @@ stow --target=$HOME \
     --verbose
 ```
 
+# Delete symlinks
+
 To delete symlinks:
 
 ```shell
 stow --target=$HOME \
     --delete lazygit \
-    --verbose
-```
-
-A few items could be listed with a comma:
-
-```shell
-stow --target=$HOME \
-    --restow lazygit,zsh,zellij \
     --verbose
 ```
