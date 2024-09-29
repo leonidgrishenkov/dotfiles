@@ -8,7 +8,7 @@ stow --target=$HOME \
     --verbose
 ```
 
-This command will create a symlinks with files structure correcponding to specified app name in this repo, in this example `lazygit`.
+This command will create a symlinks with files structure corresponding to specified app name in this repo, in this example `lazygit`.
 
 
 Several items can be listed with a space like that:
@@ -38,3 +38,13 @@ stow --target=$HOME \
     --delete lazygit \
     --verbose
 ```
+
+# Clone repository
+
+To clone this repository localy:
+
+```shehll
+git clone git@github-personal:leonidgrishenkov/dotfiles.git
+```
+
+Where `github-personal` is the name of corresponding ssh key configuration in `~/.ssh/config`.
