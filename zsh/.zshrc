@@ -57,7 +57,8 @@ done
 export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
 export PAGER="less"
-# export OPENER= ?
+# Use nvim as man pager:
+export MANPAGER="nvim +Man!"
 alias v=$EDITOR
 
 # Enable `cargo`
@@ -74,12 +75,12 @@ if command -v bat &>/dev/null; then
     export BAT_THEME="catppuccin-frappe"
     # Setup output elements to show
     export BAT_STYLE="header,numbers,grid"
-    # Don't show long outputs as pager
-    export BAT_PAGING="never"
+    export BAT_PAGING="always"
+    export BAT_PAGER="less -RF"
 
     # Use bat to show man pages output.
     # https://github.com/sharkdp/bat#man
-    export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain'"
+    # export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain'"
 
     # Use bat to show help pages output.
     # https://github.com/sharkdp/bat?tab=readme-ov-file#highlighting---help-messages
@@ -319,12 +320,7 @@ if command -v zellij &>/dev/null; then alias zj="zellij"; fi
 # -----------------------
 # If `kubectl` installed
 if command -v kubectl &>/dev/null; then
-
-  alias kube="kubectl"
-
-  export KUBECONFIG="$HOME/.kube/smlt-bdd-config.yaml"
-  # If config dir doesn't exists create one
-  [[ -d $KUBECONFIG:h ]] || mkdir -p $KUBECONFIG:h
+  alias k="kubectl"
 fi
 
 alias rm="rm -Iv"
