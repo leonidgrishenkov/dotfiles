@@ -13,6 +13,7 @@ return {
             local conform = require("conform")
 
             conform.setup({
+                log_level = vim.log.levels.DEBUG,
                 formatters_by_ft = {
                     -- All formatters: https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
                     -- Use a sub-list to run only the first available formatter
@@ -22,12 +23,8 @@ return {
                     ["markdown"] = { "prettier" },
                     ["lua"] = { "stylua" },
                     ["sql"] = {
-                        {
-                            -- https://github.com/sqlfluff/sqlfluff
-                            "sqlfluff",
-                            -- https://github.com/sql-formatter-org/sql-formatter
-                            -- "sql_formatter",
-                        },
+                        -- https://github.com/sqlfluff/sqlfluff
+                        "sqlfluff",
                     },
                     ["sh"] = { "shfmt" },
                     -- Use the "_" filetype to run formatters on filetypes that don't
@@ -49,8 +46,13 @@ return {
                         prepend_args = { "--tab-width", "4", "--use-tabs", "true" },
                     },
                 },
+                default_format_opts = {
+                    lsp_format = "fallback",
+                },
                 -- Conform will notify you when a formatter errors
                 notify_on_error = true,
+                -- Conform will notify you when no formatters are available for the buffer
+                notify_no_formatters = true,
             })
         end,
     },
