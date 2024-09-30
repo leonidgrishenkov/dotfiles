@@ -5,16 +5,16 @@
 # - Rules reference: https://docs.sqlfluff.com/en/3.0.7/rules.html#rules-reference
 
 [sqlfluff]
-# Ignore sertain rules.
-# - LT12: Files must end with a single trailing newline.
-#   https://docs.sqlfluff.com/en/3.0.7/rules.html#rule-LT12
-exclude_rules = LT12
+dialect = postgres
+max_line_length = 200
+fix_even_unparsable = True
 
 [sqlfluff:indentation]
-# https://docs.sqlfluff.com/en/stable/layout.html#configuring-indent-locations
 indent_unit = tab
 tab_space_size = 4
 indented_joins = True
+indented_using_on = True
+allow_implicit_indents = True
 
 [sqlfluff:rules:capitalisation.keywords]
 capitalisation_policy = upper
