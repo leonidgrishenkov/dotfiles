@@ -54,8 +54,10 @@ return {
                     -- Telescope
                     -- To go back type: <ctrl> + o
                     -- TODO: Is there any method to show definition in preview?
-                    opts.desc = "Show definitions of word"
-                    vim.keymap.set("n", "<leader>ld", ":Telescope lsp_definitions jump_type=never<CR>", opts)
+                    opts.desc = "Show definition of word"
+                    vim.keymap.set("n", "<leader>lD", ":Telescope lsp_definitions jump_type=never<CR>", opts)
+                    opts.desc = "Go to definition of word"
+                    vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, opts)
 
                     opts.desc = "Show references of word"
                     vim.keymap.set("n", "<leader>lr", ":Telescope lsp_references<CR>", opts)
@@ -65,7 +67,7 @@ return {
 
                     -- Show diagnostics for current line
                     opts.desc = "Show line diagnostics"
-                    vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+                    vim.keymap.set("n", "<leader>xl", vim.diagnostic.open_float, opts)
 
                     opts.desc = "Jump to previous diagnostic"
                     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
