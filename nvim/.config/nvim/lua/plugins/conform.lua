@@ -13,7 +13,7 @@ return {
             local conform = require("conform")
 
             conform.setup({
-                log_level = vim.log.levels.DEBUG,
+                log_level = vim.log.levels.ERROR,
                 formatters_by_ft = {
                     -- All formatters: https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
                     -- Use a sub-list to run only the first available formatter
