@@ -6,10 +6,13 @@ return {
         Repo: https://github.com/nvim-treesitter/nvim-treesitter
         Wiki: https://github.com/nvim-treesitter/nvim-treesitter/wiki
 
-        `:TSConfigInfo`
+        Commands:
+            :TSConfigInfo
+            :TSUpdate
+            :TSIntall
 
         Also:
-        About treesitter objects usage: https://www.youtube.com/watch?v=CEMPq_r8UYQ
+            About treesitter objects usage: https://www.youtube.com/watch?v=CEMPq_r8UYQ
         ]]
         "nvim-treesitter/nvim-treesitter",
         -- When updates also update all included parsers
@@ -50,7 +53,7 @@ return {
                     "toml",
                     "make",
                     "tmux",
-                    "just", -- for JustFile
+                    -- "just", -- for JustFile
                 },
                 -- Install parsers synchronously (only applied to `ensure_installed`).
                 -- false = install async
