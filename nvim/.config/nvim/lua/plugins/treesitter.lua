@@ -42,6 +42,7 @@ return {
                     "markdown",
                     "markdown_inline",
                     "git_config",
+                    "git_rebase",
                     "gitignore",
                     "vim",
                     "vimdoc",
@@ -53,7 +54,12 @@ return {
                     "toml",
                     "make",
                     "tmux",
-                    -- "just", -- for JustFile
+                    "hcl", -- terraform HCL
+                    "kdl", -- KDL
+                    "nginx",
+                    "nix",
+                    "xml",
+                    -- "just", -- JustFile
                 },
                 -- Install parsers synchronously (only applied to `ensure_installed`).
                 -- false = install async
