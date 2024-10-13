@@ -59,6 +59,7 @@ return {
                     "nginx",
                     "nix",
                     "xml",
+                    "html"
                     -- "just", -- JustFile
                 },
                 -- Install parsers synchronously (only applied to `ensure_installed`).
