@@ -2,7 +2,7 @@ This repository is addapted to work with [GNU stow](https://www.gnu.org/software
 
 To start syncing local machine configuration with this repo, for example, for `lazygit` execute this command:
 
-```shell
+```sh
 stow --target=$HOME \
     --stow lazygit \
     --verbose
@@ -13,7 +13,7 @@ This command will create a symlinks with files structure corresponding to specif
 
 Several items can be listed with a space like that:
 
-```shell
+```sh
 stow --target=$HOME \
     --stow lazygit zsh zellij \
     --verbose
@@ -23,7 +23,7 @@ stow --target=$HOME \
 
 To recreate symlinks, for example there were made some changes in directories names:
 
-```shell
+```sh
 stow --target=$HOME \
     --restow lazygit \
     --verbose
@@ -33,7 +33,7 @@ stow --target=$HOME \
 
 To delete symlinks:
 
-```shell
+```sh
 stow --target=$HOME \
     --delete lazygit \
     --verbose
@@ -43,7 +43,7 @@ stow --target=$HOME \
 
 To clone this repository localy:
 
-```shehll
+```sh
 git clone git@github-personal:leonidgrishenkov/dotfiles.git
 ```
 

@@ -4,9 +4,8 @@
 # Setup theme
 # All available themes can be downloaded from here:
 # https://github.com/alacritty/alacritty-theme
-# import = ["~/.config/alacritty/themes/catppuccin_frappe.toml"]
-# import = ["~/.config/alacritty/themes/catppuccin_mocha.toml"]
-import = ["~/.config/alacritty/themes/catppuccin_macchiato.toml"]
+import = ["~/.config/alacritty/themes/catppuccin_frappe.toml"]
+# import = ["~/.config/alacritty/themes/catppuccin_latte.toml"]
 
 [env]
 TERM = "xterm-256color"
@@ -18,7 +17,7 @@ padding = { x = 7, y = 7 }
 
 decorations = "Buttonless"
 
-opacity = 1
+opacity = 0.95
 blur = true
 
 startup_mode = "Windowed"
