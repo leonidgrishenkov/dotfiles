@@ -344,6 +344,11 @@ if [[ $SYSTEM = "Darwin" ]]; then
     fi
 fi
 
+if command -v direnv &>/dev/null; then
+    # Configure your shell to use direnv.
+    eval "$(direnv hook zsh)"
+fi
+
 # Setting over ssh session
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
