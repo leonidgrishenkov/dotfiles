@@ -1,11 +1,12 @@
 # Repo: https://github.com/alacritty/alacritty
 # Dosc about configuration: https://alacritty.org/config-alacritty.html
-
-# Setup theme
+#
+[general]
+# Setup theme.
 # All available themes can be downloaded from here:
 # https://github.com/alacritty/alacritty-theme
-import = ["~/.config/alacritty/themes/catppuccin_frappe.toml"]
 # import = ["~/.config/alacritty/themes/catppuccin_latte.toml"]
+import = ["~/.config/alacritty/themes/catppuccin_frappe.toml"]
 
 [env]
 TERM = "xterm-256color"
