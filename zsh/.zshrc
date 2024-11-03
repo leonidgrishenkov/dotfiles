@@ -332,10 +332,16 @@ alias c="clear"
 # Only for MacOS
 if [[ $SYSTEM = "Darwin" ]]; then
     # Yandex Cloud CLI - `yc`.
-    # Add binary to PATH:
-    if [ -d "$HOME/.yandex-cloud/bin" ]; then export PATH="$HOME/.yandex-cloud/bin:${PATH}"; fi
-    # Enable zsh completions:
-    if [ -f "$HOME/.yandex-cloud/completion.zsh.inc" ]; then source "$HOME/.yandex-cloud/completion.zsh.inc"; fi
+    # Add binary to PATH.
+    if [ -d "$HOME/.yandex-cloud/bin" ]; then
+        export PATH="$HOME/.yandex-cloud/bin:${PATH}"
+
+        # Enable zsh completions.
+        if [ -f "$HOME/.yandex-cloud/completion.zsh.inc" ]; then source "$HOME/.yandex-cloud/completion.zsh.inc"; fi
+
+        # Add aliases for some common commands.
+        alias yccil="yc compute instance list"
+    fi
 fi
 
 # Setting over ssh session
