@@ -349,6 +349,11 @@ if command -v direnv &>/dev/null; then
     eval "$(direnv hook zsh)"
 fi
 
+
+if command -v terraform &>/dev/null; then
+    alias t="terraform"
+fi
+
 # Setting over ssh session
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
