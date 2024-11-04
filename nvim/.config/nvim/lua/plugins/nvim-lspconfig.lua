@@ -185,9 +185,9 @@ return {
             })
 
             -- LSP for SQL
-            lspconfig["sqls"].setup({
-                capabilities = capabilities,
-            })
+            -- lspconfig["sqls"].setup({
+            --     capabilities = capabilities,
+            -- })
 
             -- LSP for Terraform
             -- https://github.com/hashicorp/terraform-ls
