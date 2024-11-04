@@ -66,7 +66,7 @@ if [[ -d "$HOME/.cargo" ]]; then source "$HOME/.cargo/env"; fi
 
 # If we are on linux machine add alias for batcat
 # to be consistent with usage on  macos.
-if [[ $SYSTEM = "Linux" ]]; then alias bat="batcat"; fi
+# if [[ $SYSTEM = "Linux" ]]; then alias bat="batcat"; fi
 
 if command -v bat &>/dev/null; then
     # https://github.com/sharkdp/bat
