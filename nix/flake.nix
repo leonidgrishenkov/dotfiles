@@ -2,8 +2,8 @@
   description = "Configuration for development machines";
 
   inputs = {
-      # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-      nixpkgs.url = "github:NixOS/nixpkgs";  # Fetch the latest nixpkgs
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+      # nixpkgs.url = "github:NixOS/nixpkgs";  # Fetch the latest nixpkgs
   };
 
   outputs = { self, nixpkgs }:
@@ -28,6 +28,7 @@
             pkgs.zsh
             pkgs.stow
             pkgs.starship
+            pkgs.unzip
           ];
 
           shellHook = ''
