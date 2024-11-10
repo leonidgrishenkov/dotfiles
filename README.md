@@ -11,7 +11,7 @@ stow --target=$HOME \
 This command will create a symlinks with files structure corresponding to specified app name in this repo, in this example `lazygit`.
 
 
-Several items can be listed with a space like that:
+Several items can be listed separated by space like that:
 
 ```sh
 stow --target=$HOME \
