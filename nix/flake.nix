@@ -1,9 +1,8 @@
 {
-  description = "Configuration for development machines";
+  description = "Configuration for dev machines";
 
   inputs = {
       nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-      # nixpkgs.url = "github:NixOS/nixpkgs";  # Fetch the latest nixpkgs
   };
 
   outputs = { self, nixpkgs }:
