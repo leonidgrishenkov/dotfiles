@@ -2,15 +2,13 @@ return {
     {
 
         --[[
-        :h mason-commands
-
-        :Mason - opens a graphical status window
-        :MasonUpdate - updates all managed registries
-        :MasonInstall <package> ... - installs/re-installs the provided packages
-        :MasonUninstall <package> ... - uninstalls the provided packages
-        :MasonUninstallAll - uninstalls all packages
-        :MasonLog - opens the mason.nvim log file in a new tab window
-
+        Commands (To see all: :h mason-commands):
+            :Mason - opens a graphical status window
+            :MasonUpdate - updates all managed registries
+            :MasonInstall <package> ... - installs/re-installs the provided packages
+            :MasonUninstall <package> ... - uninstalls the provided packages
+            :MasonUninstallAll - uninstalls all packages
+            :MasonLog - opens the mason.nvim log file in a new tab window
         --]]
         "williamboman/mason.nvim",
         build = ":MasonUpdate",
@@ -51,6 +49,8 @@ return {
                     "jsonls",
                     "taplo", -- LSP for toml files
                     -- "sqls", -- LSP for SQL
+                    "terraformls",
+                    "bashls",
                 },
                 -- auto-install configured servers (with lspconfig)
                 automatic_installation = true, -- not the same as ensure_installed

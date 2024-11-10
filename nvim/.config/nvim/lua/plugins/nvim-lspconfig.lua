@@ -8,8 +8,9 @@ return {
         Repo: https://github.com/neovim/nvim-lspconfig
         Wiki: https://github.com/neovim/nvim-lspconfig/wiki
 
-        :LspInfo
-        To restart plugin: :LspRestart
+        Commands:
+            :LspInfo - Shows info about lsp server attached to current buffer.
+            :LspRestart - Restarts entire plugin.
         ]]
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
@@ -28,8 +29,10 @@ return {
             }
             local icons = require("utils.icons").diagnostics
 
+            -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
             -- Enable border for LspInfo window
-            require("lspconfig.ui.windows").default_options.border = "rounded"
+            -- TODO: This is not working anymore. Find some workarround.
+            -- require("lspconfig.ui.windows").default_options.border = "single"
 
             -- On attach keymaps. When plugin connected to LSP server.
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -117,6 +120,7 @@ return {
 
             -- Ruff as linter and formatter for python.
             lspconfig["ruff_lsp"].setup({
+                cmd = { "ruff-lsp" },
                 filetypes = { "python" },
                 on_attach = function(client, bufnr)
                     -- Disable `textDocument/hover` in favor of Pyright
@@ -125,7 +129,7 @@ return {
                     end
                 end,
                 -- Configure `ruff-lsp`.
-                -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
+                -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff_lsp
                 -- For the default config, along with instructions on how to customize the settings
                 init_options = {
                     settings = {
@@ -196,6 +200,10 @@ return {
                 capabilities = capabilities,
             })
 
+            -- LSP for Bash.
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls
+            lspconfig["bashls"].setup({})
+
             -- Setup Diagnostic signs and highlight
             -- Docs: https://neovim.io/doc/user/diagnostic.html
             -- :help vim.diagnostic.config
@@ -203,12 +211,25 @@ return {
                 virtual_text = {
                     prefix = "",
                     spacing = 2,
-                    source = true,
+                    source = false,
+                    format = function(diagnostic)
+                        if diagnostic.severity == vim.diagnostic.severity.ERROR then
+                            return string.format("%s %s", icons.Error, diagnostic.message)
+                        elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+                            return string.format("%s %s", icons.Warn, diagnostic.message)
+                        elseif diagnostic.severity == vim.diagnostic.severity.HINT then
+                            return string.format("%s %s", icons.Hint, diagnostic.message)
+                        end
+                        return diagnostic.message
+                    end,
                 },
                 signs = true, -- Show symbols in sign column (gutter)
                 underline = true, -- Underline problem line
                 update_in_insert = true,
                 severity_sort = true,
+                float = {
+                    source = true,
+                },
             })
 
             -- Setup symbols in the sign column (gutter)
