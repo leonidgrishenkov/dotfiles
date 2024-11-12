@@ -1,6 +1,6 @@
 # Repo: https://github.com/alacritty/alacritty
 # Dosc about configuration: https://alacritty.org/config-alacritty.html
-#
+
 [general]
 # Setup theme.
 # All available themes can be downloaded from here:
@@ -22,6 +22,10 @@ opacity = 0.95
 blur = true
 
 startup_mode = "Windowed"
+
+# Enables Alt key usage.
+# https://github.com/alacritty/alacritty/issues/7637
+option_as_alt = "Both"
 
 [font]
 size = 14
