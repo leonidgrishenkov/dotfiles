@@ -94,6 +94,7 @@
   "editor.parameterHints.enabled": true,
   "editor.parameterHints.cycle": true,
   // WORKBENCH
+  "workbench.sideBar.location": "right",
   "workbench.tips.enabled": false,
   "workbench.startupEditor": "none",
   "workbench.editorAssociations": {
@@ -113,7 +114,7 @@
     "editorIndentGuide.activeBackground5": "#eef1ea",
     "editorIndentGuide.activeBackground6": "#eef1ea",
     "editorBracketHighlight.unexpectedBracket.foreground": "#ff0000",
-    "editorBracketMatch.background": "#484964",
+    "editorBracketMatch.background": "#484964"
   },
   "workbench.editor.tabActionCloseVisibility": false,
   "workbench.editor.closeOnFileDelete": true,
@@ -176,7 +177,6 @@
   "dotenv.enableSecretpeeking": true,
   // PYTHON
   "python.terminal.activateEnvironment": false,
-  "python.venvPath": "${workspaceFolder}/.venv/bin/python",
   "python.languageServer": "Pylance",
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
   "[python]": {
@@ -189,6 +189,7 @@
     },
   },
   "python.analysis.autoFormatStrings": true,
+  "python.analysis.authSearchPaths": true,
   "python.analysis.autoImportCompletions": false,
   "python.analysis.completeFunctionParens": true,
   "python.analysis.inlayHints.functionReturnTypes": false,
