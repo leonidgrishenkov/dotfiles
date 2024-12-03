@@ -243,7 +243,8 @@
   },
   // Error Lens Extension
   "errorLens.enabled": true,
-  "errorLens.fontFamily": "MesloLGM Nerd Font",
+  "errorLens.messageEnabled": true,
+  "errorLens.fontFamily": "JetBrainsMonoNL Nerd Font Propo",
   "errorLens.fontSize": 13,
   "errorLens.gutterIconsEnabled": true,
   "errorLens.gutterIconSet": "circle",
@@ -258,7 +259,6 @@
   // Other settings
   "task.quickOpen.history": 0,
   "redhat.telemetry.enabled": false,
-  "errorLens.messageEnabled": false,
   "[sql]": {
     "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
   },
