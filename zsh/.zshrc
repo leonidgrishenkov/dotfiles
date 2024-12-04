@@ -58,7 +58,7 @@ export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
 export PAGER="less"
 # Use nvim as man pager:
-export MANPAGER="nvim +Man!"
+# export MANPAGER="nvim +Man!"
 alias v=$EDITOR
 
 # Enable `cargo`
@@ -80,7 +80,7 @@ if command -v bat &>/dev/null; then
 
     # Use bat to show man pages output.
     # https://github.com/sharkdp/bat#man
-    # export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain'"
+    export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain'"
 
     # Use bat to show help pages output.
     # https://github.com/sharkdp/bat?tab=readme-ov-file#highlighting---help-messages
