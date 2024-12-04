@@ -1,5 +1,6 @@
+-- Dinamically set theme depends on system appearance.
 -- https://github.com/catppuccin/wezterm
-function scheme_for_appearance(appearance)
+local function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
 		return "Catppuccin Frappe" -- or Macchiato, Frappe, Latte
 	else
@@ -25,7 +26,7 @@ config.font_rules = {
 		italic = true,
 		font = wezterm.font({
 			family = FONT_FAMILY,
-			weight = "Medium",
+			weight = "Bold",
 			style = "Italic",
 		}),
 	},
@@ -34,7 +35,7 @@ config.font_rules = {
 		italic = false,
 		font = wezterm.font({
 			family = FONT_FAMILY,
-			weight = "Medium",
+			weight = "Bold",
 			style = "Normal",
 		}),
 	},
@@ -43,7 +44,7 @@ config.font_rules = {
 		italic = true,
 		font = wezterm.font({
 			family = FONT_FAMILY,
-			weight = "ExtraLight",
+			weight = "Medium",
 			style = "Italic",
 		}),
 	},
@@ -52,16 +53,21 @@ config.font_rules = {
 		italic = false,
 		font = wezterm.font({
 			family = FONT_FAMILY,
-			weight = "ExtraLight",
+			weight = "Medium",
 		}),
 	},
 }
 
+-- Disable entire tab bar.
 config.enable_tab_bar = false
-
+-- Tab bar can only be used to resize window.
+-- If you set it to `NONE` tab bar will have no any functionality.
 config.window_decorations = "RESIZE"
 
-config.window_background_opacity = 0.85
-config.macos_window_background_blur = 20
+config.window_background_opacity = 0.92
+config.macos_window_background_blur = 40
+
+-- Disable bell sound.
+config.audible_bell = "Disabled"
 
 return config
