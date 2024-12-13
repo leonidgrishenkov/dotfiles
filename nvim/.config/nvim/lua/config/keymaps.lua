@@ -78,7 +78,8 @@ vim.keymap.set("n", "<C-w>j", "<C-w>h", opts("Switch to left pane"))
 -- Buffers
 vim.keymap.set("n", "t;", ":bnext<CR>", opts("Go to next buffer"))
 vim.keymap.set("n", "tj", ":bprev<CR>", opts("Go to previous buffer"))
-vim.keymap.set("n", "td", ":bdelete<CR>", opts("Close current buffer"))
+vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", opts("Close current buffer"))
+vim.keymap.set("n", "<leader>ba", ":bufdo bd<CR>", opts("Close all buffers"))
 
 -- Clear search highlights
 vim.keymap.set("n", "<leader>h", ":nohl<CR>", opts("Clear search highlights"))

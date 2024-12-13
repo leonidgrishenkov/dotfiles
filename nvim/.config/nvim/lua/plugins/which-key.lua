@@ -40,6 +40,8 @@ return {
                 { "<leader>p", group = "Panes" },
                 { "<leader>s", group = "Search & Replace" },
                 { "<leader>x", group = "Diagnostics" },
+                { "<leader>a", group = "Avante" },
+                { "<leader>b", group = "Buffers" },
             })
         end,
     },

@@ -6,6 +6,7 @@ return {
         Global keymaps are defined in `lua/config/keymaps.lua`.
 
         Repo: https://github.com/nvim-pack/nvim-spectre
+        TODO: How to disable intermediate files when replacing?
         --]]
         "nvim-pack/nvim-spectre",
         lazy = true,
