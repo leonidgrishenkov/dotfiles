@@ -1,18 +1,19 @@
 -- Dinamically set theme depends on system appearance.
 -- https://github.com/catppuccin/wezterm
-local function scheme_for_appearance(appearance)
-	if appearance:find("Dark") then
-		return "Catppuccin Frappe" -- or Macchiato, Frappe, Latte
-	else
-		return "Catppuccin Latte"
-	end
-end
+-- local function scheme_for_appearance(appearance)
+-- 	if appearance:find("Dark") then
+-- 		return "Catppuccin Frappe"
+-- 	else
+-- 		return "Catppuccin Latte"
+-- 	end
+-- end
 
 local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
+-- config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
+config.color_scheme = "Catppuccin Macchiato" -- Available options: Macchiato, Frappe, Latte, Mocha
 
 FONT_FAMILY = "JetBrainsMonoNL Nerd Font Propo"
 

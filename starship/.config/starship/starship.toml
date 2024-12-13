@@ -61,7 +61,7 @@ vimcmd_symbol = "[❮](fg:purple)"
 [directory]
 style = "fg:blue"
 format = "[ $path ]($style)"
-truncation_length = 3
+truncation_length = 5
 truncation_symbol = "../"
 read_only = " 󰌾"
 
