@@ -376,14 +376,19 @@ if [[ $SYSTEM = "Darwin" ]]; then
 fi
 
 if command -v direnv &>/dev/null; then
-    # Configure your shell to use direnv.
     eval "$(direnv hook zsh)"
 fi
 
-if command -v terraform &>/dev/null; then alias t="terraform"; fi
+if command -v terraform &>/dev/null;
+    then alias t="terraform"
+fi
 
 if command -v uv &>/dev/null; then
     eval "$(uv generate-shell-completion zsh)"
+fi
+
+if command -v op &>/dev/null; then
+    eval "$(op completion zsh)"
 fi
 
 # Setting over ssh session
