@@ -2,11 +2,9 @@ return {
     {
         "yetone/avante.nvim",
         event = "VeryLazy",
+        enabled = false,
         lazy = false,
         version = false, -- set this if you want to always pull the latest change
-        opts = {
-            -- add any opts here
-        },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
         build = "make",
         config = function()
@@ -18,7 +16,7 @@ return {
                     temperature = 0,
                     max_tokens = 4096,
                 },
-                hints = { enabled = false},
+                hints = { enabled = false },
             })
         end,
     },
