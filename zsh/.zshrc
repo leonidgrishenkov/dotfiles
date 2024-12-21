@@ -154,7 +154,7 @@ COMPLETION_WAITING_DOTS="%F{grey}waiting...%f"
 # Use case-sensitive autocompletion
 CASE_SENSITIVE=true
 # Auto set terminal tab title
-DISABLE_AUTO_TITLE=true
+DISABLE_AUTO_TITLE=false
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE=false
@@ -312,8 +312,37 @@ bindkey -M vicmd 'y' vi-yank-xclip
 # Alias for lazygit
 if command -v lazygit &>/dev/null; then alias g="lazygit"; fi
 
-# Alias for zellij multiplexor
-if command -v zellij &>/dev/null; then alias zj="zellij"; fi
+update_zellij_pane_name() {
+    # https://www.reddit.com/r/zellij/comments/10skez0/does_zellij_support_changing_tabs_name_according/?rdt=58606
+    # If we are inside zellij
+    if [[ -n $ZELLIJ ]]; then
+        local _current_dir=$PWD
+
+        if [[ $_current_dir == $HOME ]]; then
+            local _pane_name="~"
+        else
+            # TODO: add less short substitution
+            # _pane_name="../${_current_dir##*/}"
+            local _pane_name=$_current_dir
+        fi
+
+        # TODO: this doesn't work
+        if [[ -n $SSH_CONNECTION ]]; then
+            _pane_name="ssh-test"
+        fi
+
+        command nohup zellij action rename-pane $_pane_name >/dev/null 2>&1
+    fi
+}
+
+# zellij multiplexor
+if command -v zellij &>/dev/null; then
+    alias zj="zellij"
+
+    # Add hook to invoke func to update zellij pane name.
+    # autoload -U add-zsh-hook
+    # add-zsh-hook chpwd update_zellij_pane_name
+fi
 
 # -----------------------
 # `kubectl` configuration
@@ -337,7 +366,9 @@ if [[ $SYSTEM = "Darwin" ]]; then
         export PATH="$HOME/.yandex-cloud/bin:${PATH}"
 
         # Enable zsh completions.
-        if [ -f "$HOME/.yandex-cloud/completion.zsh.inc" ]; then source "$HOME/.yandex-cloud/completion.zsh.inc"; fi
+        if [ -f "$HOME/.yandex-cloud/completion.zsh.inc" ]; then
+            source "$HOME/.yandex-cloud/completion.zsh.inc"
+        fi
 
         # Add aliases for some common commands.
         alias yccil="yc compute instance list"
@@ -349,8 +380,11 @@ if command -v direnv &>/dev/null; then
     eval "$(direnv hook zsh)"
 fi
 
-
 if command -v terraform &>/dev/null; then alias t="terraform"; fi
+
+if command -v uv &>/dev/null; then
+    eval "$(uv generate-shell-completion zsh)"
+fi
 
 # Setting over ssh session
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -366,4 +400,3 @@ setopt NO_CLOBBER
 
 # Use modern file-locking mechanisms, for better safety & performance.
 # setopt HIST_FCNTL_LOCK
-
