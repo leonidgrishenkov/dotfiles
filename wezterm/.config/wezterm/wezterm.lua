@@ -1,3 +1,6 @@
+-- https://wezfurlong.org/wezterm/config/files.html
+-- https://wezfurlong.org/wezterm/config/lua/general.html
+--
 -- Dinamically set theme depends on system appearance.
 -- https://github.com/catppuccin/wezterm
 -- local function scheme_for_appearance(appearance)
@@ -70,5 +73,14 @@ config.macos_window_background_blur = 40
 
 -- Disable bell sound.
 config.audible_bell = "Disabled"
+
+config.keys = {
+	{
+        -- Disable 'CMD + t' keybind.
+		key = "t",
+		mods = "CMD",
+		action = wezterm.action.DisableDefaultAssignment,
+	},
+}
 
 return config
