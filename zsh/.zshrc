@@ -132,9 +132,6 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 # https://github.com/zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-autosuggestions
-# https://github.com/Aloxaf/fzf-tab
-zinit light Aloxaf/fzf-tab
-
 
 # Install plugins from oh-my-zsh repo.
 # Enable vim mode support in CLI
@@ -203,8 +200,6 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # Completions should be case-insensitive
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' menu no
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
-# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls $realpath'
 
 # ----------
 # `starship`
@@ -254,10 +249,39 @@ if command -v fzf &>/dev/null; then
     source <(fzf --zsh)
 
     # https://github.com/junegunn/fzf#layout
-    export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=sharp --margin=0,1,0,1%"
+    # export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border=sharp --margin=0,1,0,1%"
 
     # Options to fzf command
-    export FZF_COMPLETION_OPTS='--border --info=inline'
+    # export FZF_COMPLETION_OPTS='--border --info=inline'
+
+    # Catppuccin frappe theme.
+    # https://github.com/catppuccin/fzf
+    export FZF_DEFAULT_OPTS=" \
+        --color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
+        --color=marker:#babbf1,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284 \
+        --color=selected-bg:#51576d \
+        --multi"
+
+    export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+    # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
+    # - The first argument to the function ($1) is the base path to start traversal
+    # - See the source code (completion.{bash,zsh}) for the details.
+    _fzf_compgen_path() {
+        fd --hidden --exclude .git . "$1"
+    }
+
+    # Use fd to generate the list for directory completion
+    _fzf_compgen_dir() {
+        fd --type=d --hidden --exclude .git . "$1"
+    }
+
+    show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
+
+    export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
+    export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 
     function _fzf_comprun() {
         local command=$1
@@ -267,7 +291,7 @@ if command -v fzf &>/dev/null; then
             cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
             export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
             ssh)          fzf --preview 'dig {}'                   "$@" ;;
-            *)            fzf --preview 'bat --style=plain --color=always {}' "$@" ;;
+            *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
         esac
     }
 fi
@@ -387,6 +411,7 @@ if command -v uv &>/dev/null; then
     eval "$(uv generate-shell-completion zsh)"
 fi
 
+# 1password-cli
 if command -v op &>/dev/null; then
     eval "$(op completion zsh)"
 fi
