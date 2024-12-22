@@ -7,16 +7,16 @@ return {
         Warn = " ", --       󱈸   󱈸
     },
     git = {
-        Add = " ",
+        Add = "",
         AddAlt = " ",
         AddSign = "┃", -- `..Sign` suffix is for `GitSigns` plugin.
         Branch = " ", --         
         Diff = " ",
         DiffAlt = " ",
         Ignore = "◌ ",
-        Mod = " ",
+        Mod = "~",
         Octoface = " ",
-        Remove = " ",
+        Remove = "",
         RemoveAlt = " ",
         RemoveSign = "",
         ChangeRemoveSign = "~",

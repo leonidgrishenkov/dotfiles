@@ -1,4 +1,12 @@
-# Theme
+# Configurations
+
+[Default configurations](https://github.com/sxyazi/yazi/tree/shipped/yazi-config/preset)
+
+## Keybinds
+
+Press `~` to open help menu with all available keybinds
+
+## Themes
 
 Docs: https://yazi-rs.github.io/docs/configuration/theme
 
