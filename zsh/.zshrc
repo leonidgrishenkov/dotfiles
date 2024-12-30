@@ -324,13 +324,15 @@ bindkey -M vicmd k vi-up-line-or-history
 bindkey -M vicmd \; vi-forward-char
 bindkey -M vicmd ee edit-command-line
 
-# Yank to the system clipboard
-function vi-yank-xclip {
-    zle vi-yank
-   echo "$CUTBUFFER" | pbcopy -i
-}
-zle -N vi-yank-xclip
-bindkey -M vicmd 'y' vi-yank-xclip
+if [[ $SYSTEM = "Darwin" ]]; then
+    # Yank to the system clipboard
+    function vi-yank-xclip {
+        zle vi-yank
+    echo "$CUTBUFFER" | pbcopy -i
+    }
+    zle -N vi-yank-xclip
+    bindkey -M vicmd 'y' vi-yank-xclip
+fi
 
 # Alias for lazygit
 if command -v lazygit &>/dev/null; then alias g="lazygit"; fi
