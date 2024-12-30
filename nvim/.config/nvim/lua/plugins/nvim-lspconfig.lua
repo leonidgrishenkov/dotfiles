@@ -207,7 +207,10 @@ return {
 
             -- LSP for Bash.
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls
-            lspconfig["bashls"].setup({})
+            lspconfig["bashls"].setup({
+                capabilities = capabilities,
+                filetypes = { "bash", "sh", "zsh" },
+            })
 
             -- Setup Diagnostic signs and highlight
             -- Docs: https://neovim.io/doc/user/diagnostic.html
