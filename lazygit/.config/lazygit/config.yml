@@ -6,28 +6,39 @@
 # Default config: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#default
 ---
 gui:
-    windowSize: normal # normal is the best option
-    language: en
-    nerdFontsVersion: "3"
-    skipDiscardChangeWarning: true
-    skipStashWarning: true
-    showRandomTip: false
-    splitDiff: auto
-    border: rounded
-    commitLength:
-        show: false
-    showCommandLog: false
-    showBottomLine: false
-    showPanelJumps: false
-    # Color attributes: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#color-attributes
-    theme:
-        activeBorderColor:
-            - "#af38ff"
-            - bold
+  windowSize: normal # normal is the best option
+  language: en
+  nerdFontsVersion: "3"
+  skipDiscardChangeWarning: true
+  skipStashWarning: true
+  showRandomTip: false
+  splitDiff: auto
+  border: rounded
+  commitLength:
+    show: false
+  showCommandLog: false
+  showBottomLine: false
+  showPanelJumps: false
+  # Color attributes: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#color-attributes
+  theme:
+    activeBorderColor:
+      - "#af38ff"
+      - bold
+
+git:
+  paging:
+    colorArg: always
+    # pager: delta --paging=never
+
+  merging:
+    # The commit message to use for a squash merge commit. Can contain "{{selectedRef}}" and "{{currentBranch}}" placeholders.
+    squashMergeMessage: Merge branch '{{selectedRef}}' into '{{currentBranch}}'
+  # 40 means disable truncation.
+  truncateCopiedCommitHashesTo: 40
 
 keybinding:
-    universal:
-        prevItem-alt: k # go one line up
-        nextItem-alt: l # go one line down
-        prevBlock-alt: j # goto the previous block / panel
-        nextBlock-alt: ; # goto the next block / panel
+  universal:
+    prevItem-alt: k # go one line up
+    nextItem-alt: l # go one line down
+    prevBlock-alt: j # goto the previous block / panel
+    nextBlock-alt: ; # goto the next block / panel
