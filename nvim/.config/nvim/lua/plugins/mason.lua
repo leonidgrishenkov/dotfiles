@@ -49,7 +49,7 @@ return {
                     "jsonls",
                     "taplo", -- LSP for toml files
                     -- "sqls", -- LSP for SQL
-                    "terraformls",
+                    -- "terraformls",
                     "bashls",
                 },
                 -- auto-install configured servers (with lspconfig)
