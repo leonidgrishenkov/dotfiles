@@ -137,7 +137,6 @@ zinit light zsh-users/zsh-autosuggestions
 # Enable vim mode support in CLI
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vi-mode
 zinit snippet OMZP::vi-mode
-zinit snippet OMZP::command-not-found
 
 # Load completions
 autoload -Uz compinit && compinit
