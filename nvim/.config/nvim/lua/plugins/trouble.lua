@@ -10,20 +10,15 @@ return {
             defaults = {
                 focus = false, -- Focus the window when opened
             },
+            modes = {
+                lsp_references = {
+                    -- some modes are configurable, see the source code for more details
+                    params = {
+                        include_declaration = false,
+                    },
+                },
+            },
         },
-        -- Keys for v2
-        -- keys = {
-        --     { "<leader>xx", "<cmd>TroubleToggle<CR>", desc = "Open/close trouble list" },
-        --     {
-        --         "<leader>xw",
-        --         "<cmd>TroubleToggle workspace_diagnostics<CR>",
-        --         desc = "Open trouble workspace diagnostics",
-        --     },
-        --     { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<CR>", desc = "Open trouble document diagnostics" },
-        --     { "<leader>xl", "<cmd>TroubleToggle loclist<CR>", desc = "Open trouble location list" },
-        --     { "<leader>xt", "<cmd>TodoTrouble<CR>", desc = "Open todos in trouble" },
-        -- },
-        -- Keys for v3
         keys = {
             {
                 "<leader>xw",
@@ -35,30 +30,30 @@ return {
                 ":Trouble diagnostics toggle filter.buf=0<cr>",
                 desc = "Toggle buffer diagnostics",
             },
-            -- {
-            --     "<leader>cs",
-            --     "<cmd>Trouble symbols toggle focus=false<cr>",
-            --     desc = "Symbols (Trouble)",
-            -- },
-            -- {
-            --     "<leader>cl",
-            --     "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-            --     desc = "LSP Definitions / references / ... (Trouble)",
-            -- },
+            {
+                "<leader>xs",
+                ":Trouble symbols toggle win.position=bottom<cr>",
+                desc = "Toggle Symbols",
+            },
+            {
+                "<leader>xS",
+                ":Trouble lsp toggle win.position=bottom<cr>",
+                desc = "Toggle LSP References",
+            },
             {
                 "<leader>xL",
                 ":Trouble loclist toggle<cr>",
-                desc = "Location List",
+                desc = "Toggle location List",
             },
             {
                 "<leader>xQ",
                 ":Trouble qflist toggle<cr>",
-                desc = "Quickfix List",
+                desc = "Toggle quickfix",
             },
             {
                 "<leader>xt",
-                ":TodoTrouble<CR>",
-                desc = "Open TODOs",
+                ":TodoTrouble toggle<cr>",
+                desc = "Toggle TODO",
             },
         },
     },

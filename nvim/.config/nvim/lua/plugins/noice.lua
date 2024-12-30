@@ -25,10 +25,8 @@ return {
             "rcarriga/nvim-notify",
         },
         config = function()
-            local noice = require("noice")
-
             -- `:h noice.nvim-noice-configuration`
-            noice.setup({
+            require("noice").setup({
                 cmdline = {
                     format = {
                         -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.

@@ -1,21 +1,24 @@
 return {
     {
-        -- Better notifications in UI.
-        -- https://github.com/rcarriga/nvim-notify
+        --[[
+        Better notifications in UI.
+        https://github.com/rcarriga/nvim-notify
+
+        Commands:
+              :Telescope notify - Search history with Telescope.
+        --]]
         "rcarriga/nvim-notify",
         config = function()
-            local notify = require("notify")
-
             --- @diagnostic disable: missing-fields
             -- :h notify.setup()
-            notify.setup({
+            require("notify").setup({
                 background_colour = "#000000",
                 timeout = 5000,
                 -- Max width of message UI.
                 max_width = 80,
                 -- Appearence of the message.
                 -- https://github.com/rcarriga/nvim-notify?tab=readme-ov-file#render-style
-                render = "wrapped-compact",
+                render = "minimal",
                 -- Animation of them message.
                 -- https://github.com/rcarriga/nvim-notify?tab=readme-ov-file#animation-style
                 stages = "static",
