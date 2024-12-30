@@ -119,22 +119,27 @@ return {
             })
 
             -- Ruff as linter and formatter for python.
-            lspconfig["ruff_lsp"].setup({
-                cmd = { "ruff-lsp" },
+            -- NOTE: Now ruff language server is include in main ruff binary.
+            -- That's why here I use just 'ruff' instead of deprecated 'ruff_lsp'.
+            -- See: https://docs.astral.sh/ruff/editors/
+            -- Neovim setup: https://docs.astral.sh/ruff/editors/setup/#neovim
+            lspconfig["ruff"].setup({
+                cmd = { "ruff", "server" },
                 filetypes = { "python" },
                 on_attach = function(client, bufnr)
                     -- Disable `textDocument/hover` in favor of Pyright
-                    if client.name == "ruff_lsp" then
+                    if client.name == "ruff" then
                         client.server_capabilities.hoverProvider = false
                     end
                 end,
-                -- Configure `ruff-lsp`.
+                -- Configure `ruff`.
                 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff_lsp
                 -- For the default config, along with instructions on how to customize the settings
                 init_options = {
                     settings = {
+                        configuration = os.getenv("XDG_CONFIG_HOME") .. "/ruff/ruff.toml",
                         -- Any extra CLI arguments for `ruff` go here.
-                        args = { "--config", os.getenv("XDG_CONFIG_HOME") .. "/ruff/ruff.toml" },
+                        -- args = { "--config", os.getenv("XDG_CONFIG_HOME") .. "/ruff/ruff.toml" },
                     },
                 },
             })

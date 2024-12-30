@@ -44,7 +44,7 @@ return {
                 ensure_installed = {
                     "lua_ls",
                     "pyright",
-                    "ruff_lsp",
+                    "ruff",
                     "yamlls",
                     "jsonls",
                     "taplo", -- LSP for toml files
