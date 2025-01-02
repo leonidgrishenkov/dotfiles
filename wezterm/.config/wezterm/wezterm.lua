@@ -68,8 +68,8 @@ config.enable_tab_bar = false
 -- If you set it to `NONE` tab bar will have no any functionality.
 config.window_decorations = "RESIZE"
 
-config.window_background_opacity = 1
-config.macos_window_background_blur = 40
+config.window_background_opacity = 0.95
+config.macos_window_background_blur = 99
 
 -- Disable bell sound.
 config.audible_bell = "Disabled"
