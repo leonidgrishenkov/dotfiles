@@ -18,7 +18,7 @@ return {
                 max_width = 80,
                 -- Appearence of the message.
                 -- https://github.com/rcarriga/nvim-notify?tab=readme-ov-file#render-style
-                render = "minimal",
+                render = "compact",
                 -- Animation of them message.
                 -- https://github.com/rcarriga/nvim-notify?tab=readme-ov-file#animation-style
                 stages = "static",
