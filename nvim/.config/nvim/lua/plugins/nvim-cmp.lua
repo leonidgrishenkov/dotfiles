@@ -118,6 +118,7 @@ return {
                 -- Docs: :h cmp-contig.matching
                 -- WARN: Order in this list will be used to prioritize cmp results.
                 sources = cmp.config.sources({
+                    { name = "copilot", group_index = 1, priority = 100 },
                     { name = "nvim_lsp" },
                     { name = "luasnip", keyword_length = 3 },
                     { name = "buffer", keyword_length = 3 },
@@ -165,6 +166,8 @@ return {
                             Event = "",
                             Operator = "󰆕",
                             TypeParameter = "",
+                            -- https://github.com/zbirenbaum/copilot-cmp?tab=readme-ov-file#highlighting--icon
+                            Copilot = "",
                         },
                         maxwidth = 60, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
                         -- can also be a function to dynamically calculate max width such as
