@@ -17,6 +17,7 @@ $kubernetes\
 $docker_context\
 $helm\
 $container\
+$status\
 $line_break\
 $character"""
 
@@ -72,7 +73,7 @@ discharging_symbol = "󰂃 "
 
 [[battery.display]]
 threshold = 20
-style = "red"
+style = "purple"
 
 [username]
 show_always = false
@@ -150,6 +151,7 @@ symbol = " "
 
 [docker_context]
 symbol = " "
+format = "[$symbol$context]($style) "
 
 [elixir]
 symbol = " "
@@ -180,6 +182,7 @@ deleted = '✘${count} '
 
 [golang]
 symbol = " "
+format = "[$symbol($version )]($style)"
 
 [guix_shell]
 symbol = " "
@@ -219,6 +222,7 @@ symbol = "󰆥 "
 
 [nix_shell]
 symbol = " "
+format = "[$symbol$state( \\($name\\))]($style) "
 
 [nodejs]
 symbol = " "
@@ -240,6 +244,7 @@ symbol = " "
 
 [python]
 symbol = " "
+format = "[${symbol}${pyenv_prefix}(${version} )(\\($virtualenv\\) )]($style)"
 
 [rlang]
 symbol = "󰟔 "
@@ -258,3 +263,7 @@ symbol = " "
 
 [zig]
 symbol = " "
+
+[status]
+disabled = false
+format = '[$symbol $status]($style)'
