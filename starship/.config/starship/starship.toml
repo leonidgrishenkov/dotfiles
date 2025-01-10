@@ -265,5 +265,7 @@ symbol = " "
 symbol = " "
 
 [status]
+# https://starship.rs/config/#status
 disabled = false
+symbol = ""
 format = '[$symbol $status]($style)'
