@@ -76,7 +76,7 @@ config.audible_bell = "Disabled"
 
 config.keys = {
 	{
-        -- Disable 'CMD + t' keybind.
+		-- Disable 'CMD + t' keybind.
 		key = "t",
 		mods = "CMD",
 		action = wezterm.action.DisableDefaultAssignment,
