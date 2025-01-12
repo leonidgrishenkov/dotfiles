@@ -25,6 +25,9 @@ Where:
         silent: define a mapping that will not be echoed on the command line
         noremap: disable recursive mapping
 
+
+Some usefull commands:
+    :map <Keys> - Display existing mappings for keys. Example: :map <C-Left>
 --]]
 
 -- Define the leader key for vim commands
@@ -74,6 +77,12 @@ vim.keymap.set("n", "<C-w>l", "<C-w>j", opts("Switch to bottom pane"))
 vim.keymap.set("n", "<C-w>k", "<C-w>k", opts("Switch to top pane"))
 vim.keymap.set("n", "<C-w>;", "<C-w>l", opts("Switch to right pane"))
 vim.keymap.set("n", "<C-w>j", "<C-w>h", opts("Switch to left pane"))
+
+
+vim.keymap.set("n", "<leader>pk", ":resize +2<CR>", opts("Increase pane size"))
+vim.keymap.set("n", "<leader>pl", ":resize -2<CR>", opts("Decrease pane size"))
+vim.keymap.set("n", "<leader>pj", ":vertical resize -2<CR>", opts("Decrease vertical pane size"))
+vim.keymap.set("n", "<leader>p;", ":vertical resize +2<CR>", opts("Increase vertical pane size"))
 
 -- Buffers
 vim.keymap.set("n", "t;", ":bnext<CR>", opts("Go to next buffer"))
