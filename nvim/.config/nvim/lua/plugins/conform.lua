@@ -22,10 +22,7 @@ return {
                     ["yaml"] = { "prettier" },
                     ["markdown"] = { "prettier" },
                     ["lua"] = { "stylua" },
-                    ["sql"] = {
-                        -- https://github.com/sqlfluff/sqlfluff
-                        "sqlfluff",
-                    },
+                    ["sql"] = { "sqlfluff" },
                     ["sh"] = { "shfmt" },
                     -- Use the "_" filetype to run formatters on filetypes that don't
                     -- have other formatters configured.
@@ -40,10 +37,14 @@ return {
                 -- Add extra options for formatters
                 formatters = {
                     shfmt = {
-                        prepend_args = { "-i", "2" },
+                        prepend_args = { "-i", "4" },
                     },
                     prettier = {
-                        prepend_args = { "--tab-width", "2", "--use-tabs", "true" },
+                        prepend_args = { "--tab-width", "4", "--use-tabs", "true" },
+                    },
+                    sqlfluff = {
+                        command = "sqlfluff",
+                        args = { "format", "--stdin-filename", "$FILENAME", "-"}
                     },
                 },
                 default_format_opts = {
