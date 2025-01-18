@@ -404,8 +404,8 @@ if command -v direnv &>/dev/null; then
     eval "$(direnv hook zsh)"
 fi
 
-if command -v terraform &>/dev/null;
-    then alias t="terraform"
+if command -v terraform &>/dev/null; then
+    alias t="terraform"
 fi
 
 if command -v uv &>/dev/null; then
@@ -415,6 +415,15 @@ fi
 # 1password-cli
 if command -v op &>/dev/null; then
     eval "$(op completion zsh)"
+fi
+
+if command -v stu &>/dev/null; then
+    alias smlts3="stu \
+        --endpoint-url https://minio.prod.lh.samoletgroup.ru:9000 \
+        --profile smlt-bdd-minio \
+        --bucket data \
+        --region us-east-1
+    "
 fi
 
 # Setting over ssh session

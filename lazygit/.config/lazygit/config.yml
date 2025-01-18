@@ -4,9 +4,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
 #
 # Default config: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#default
----
 gui:
-  windowSize: normal # normal is the best option
+  screenMode: normal # normal is the best option
   language: en
   nerdFontsVersion: "3"
   skipDiscardChangeWarning: true
@@ -24,18 +23,15 @@ gui:
     activeBorderColor:
       - "#af38ff"
       - bold
-
 git:
   paging:
     colorArg: always
     # pager: delta --paging=never
-
   merging:
     # The commit message to use for a squash merge commit. Can contain "{{selectedRef}}" and "{{currentBranch}}" placeholders.
     squashMergeMessage: Merge branch '{{selectedRef}}' into '{{currentBranch}}'
   # 40 means disable truncation.
   truncateCopiedCommitHashesTo: 40
-
 keybinding:
   universal:
     prevItem-alt: k # go one line up
