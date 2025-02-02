@@ -16,7 +16,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
-config.color_scheme = "Catppuccin Mocha" -- Available options: Macchiato, Frappe, Latte, Mocha
+config.color_scheme = "Catppuccin Macchiato" -- Available options: Macchiato, Frappe, Latte, Mocha
 
 FONT_FAMILY = "JetBrainsMonoNL Nerd Font Propo"
 
