@@ -4,7 +4,7 @@
   "simpleBrowser.focusLockIndicator.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
   // Updates
-  "update.mode": "none",
+  "update.mode": "default",
   "update.showReleaseNotes": false,
   // Extensions General Settings
   "extensions.ignoreRecommendations": true,
@@ -58,7 +58,7 @@
     "textMateRules": []
   },
   "editor.scrollbar.horizontal": "hidden",
-  "editor.lightbulb.enabled": false,
+  "editor.lightbulb.enabled": "off",
   "editor.find.addExtraSpaceOnTop": false,
   // Line
   "editor.lineNumbers": "relative",
@@ -81,7 +81,7 @@
   // Suggestions
   "editor.suggest.preview": true,
   "editor.quickSuggestions": {
-    "other": "off",
+    "other": "on",
     "comments": "off",
     "strings": "off"
   },
@@ -222,7 +222,7 @@
   "notebook.cellToolbarVisibility": "hover",
   "notebook.formatOnSave.enabled": true,
   "notebook.codeActionsOnSave": {
-    "notebook.source.fixAll": false,
+    "notebook.source.fixAll": "never",
     "notebook.source.organizeImports": true
   },
   "notebook.output.textLineLimit": 150,
@@ -245,7 +245,7 @@
   "errorLens.enabled": true,
   "errorLens.messageEnabled": true,
   "errorLens.fontFamily": "JetBrainsMonoNL Nerd Font Propo",
-  "errorLens.fontSize": 13,
+  "errorLens.fontSize": "13",
   "errorLens.gutterIconsEnabled": true,
   "errorLens.gutterIconSet": "circle",
   "errorLens.gutterIconSize": "75%",
@@ -260,9 +260,7 @@
   "task.quickOpen.history": 0,
   "redhat.telemetry.enabled": false,
   "[sql]": {
-    "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
+    "editor.defaultFormatter": "dorzey.vscode-sqlfluff"
   },
-  "sql-formatter.uppercase": true,
-  "sql-formatter.dialect": "sql",
   "gitlens.codeLens.enabled": false,
 }
