@@ -71,6 +71,9 @@ config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.95
 config.macos_window_background_blur = 99
 
+-- Whether to display a confirmation prompt when the window is closed by the windowing environment.
+config.window_close_confirmation = "NeverPrompt"
+
 -- Disable bell sound.
 config.audible_bell = "Disabled"
 
