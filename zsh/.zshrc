@@ -2,15 +2,9 @@
 # vim: set filetype=sh:
 # vim: set ts=4 sw=4 et:
 
-# XDG Paths
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
-
-# NOTE: This variable announced in alacritty config.
-# It's recommended here:
-# https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
-# export TERM=xterm-256color
 
 export SYSTEM="$(uname -s)"
 
@@ -18,10 +12,7 @@ export SYSTEM="$(uname -s)"
 export LC_ALL='en_US.UTF-8'
 export LC_CTYPE='en_US.UTF-8'
 
-# --------------------
-# `brew` configuration
-# --------------------
-# If `brew` installed
+# === brew ===
 if command -v /opt/homebrew/bin/brew &>/dev/null; then
     # Export all `brew` env vars. See `man brew` + `/shellenv`
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -43,7 +34,7 @@ if command -v /opt/homebrew/bin/brew &>/dev/null; then
     # compinit
 fi
 
-# Set one of the editor as `$EDITOR`
+# Set one of the editor as $EDITOR
 EDITORS="nvim,vim,vi"
 for editor in $(echo $EDITORS | sed "s/,/ /g"); do
     if command -v $editor &>/dev/null; then
@@ -103,10 +94,8 @@ if command -v jqp &>/dev/null; then
     alias jqp="jqp --theme catppuccin-frappe"
 fi
 
-# ----------------------
-# `zinit` configurations
+# === zinit ===
 # https://github.com/zdharma-continuum/zinit
-# ----------------------
 # Install zinit if it doesn't installed and create its direcory
 ZINIT_HOME="$XDG_DATA_HOME/zinit/zinit.git"
 if [ ! -d "$ZINIT_HOME" ]; then
@@ -162,27 +151,39 @@ DISABLE_UNTRACKED_FILES_DIRTY=true
 # Commands history settings
 # Number of commands that will be stored in history file
 HISTSIZE=2000
+
 # Path to history file
 HISTFILE="$ZSH_CACHE_DIR/history"
+
 SAVEHIST=$HISTSIZE
+
 # Erase duplicates in history file
 HISTDUP=erase
+
 # History options for zsh
 # Appned commands into history file instead of overwrite them
 setopt appendhistory
+
 # Share history across all zsh sessions
 setopt sharehistory
+
 # Don't write to history commands with space before it.
-# NOTE: This is usefull to prevent any sensetive command to be
-# written into history file.
+# This is usefull to prevent any sensetive command to be written into history file.
 setopt hist_ignore_space
-# All 3 commands below will prevent zsh to save and store
-# duplicates in history file.
+
+# All 3 commands below will prevent zsh to save and store duplicates in history file.
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
+
 # Don't show duplicates into prompt when cycle thought them.
 setopt hist_find_no_dups
+
+# Don't let > silently overwrite files. To overwrite, use >! instead.
+setopt no_clobber
+
+# Use modern file-locking mechanisms, for better safety & performance.
+setopt hist_fcntl_lock
 
 alias h="history | tail -n 50"
 
@@ -200,20 +201,14 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' menu no
 
-# ----------
-# `starship`
-# ----------
-# Init starship
-#
+# === starship ===
 if command -v starship &>/dev/null; then
     eval "$(starship init zsh)"
     # Set var with path to config file
     export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 fi
 
-# -------
-# `yazi`
-# -------
+# === yazi ===
 # Use `yy` as shell command wrapper that provides the ability
 # to change the current working directory when exiting Yazi.
 # Took from utility doc: https://yazi-rs.github.io/docs/quick-start#shell-wrapper
@@ -228,19 +223,13 @@ if command -v yazi &>/dev/null; then
     }
 fi
 
-# --------
-# `zoxide`
-# --------
-# Init zoxide
+# === zoxide ===
 if command -v zoxide &>/dev/null; then
     eval "$(zoxide init zsh)"
     alias cd="z"
 fi
 
-# ------
-# `fzf`
-# ------
-# Initialize `fzf`
+# === fzf ===
 # https://github.com/junegunn/fzf
 if command -v fzf &>/dev/null; then
     # Set up fzf key bindings and fuzzy completion
@@ -295,16 +284,14 @@ if command -v fzf &>/dev/null; then
     }
 fi
 
-# ---------------------------------
-# zsh plugins configuration
-# ---------------------------------
-# `zsh-autosuggestions`
+# === zsh plugins configuration ===
+# zsh-autosuggestions:
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 # Set bindkey to accept currently shown autosuggestion
 bindkey '^k' autosuggest-accept
 
-# `vi-mode`
+# vi-mode
 export KEYTIMEOUT=15
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 # Cursor style
@@ -369,10 +356,8 @@ if command -v zellij &>/dev/null; then
     # add-zsh-hook chpwd update_zellij_pane_name
 fi
 
-# -----------------------
-# `kubectl` configuration
-# -----------------------
-# If `kubectl` installed
+# === kubectl ===
+# If kubectl installed
 if command -v kubectl &>/dev/null; then
   alias k="kubectl"
 fi
@@ -383,7 +368,7 @@ alias mv="mv -iv"
 alias c="clear"
 
 
-# Only for MacOS
+# === MacOS only ===
 if [[ $SYSTEM = "Darwin" ]]; then
     # Yandex Cloud CLI - `yc`.
     # Add binary to PATH.
@@ -432,11 +417,3 @@ fi
 # else
 #   export EDITOR='vim'
 # fi
-
-
-# Other
-# Don't let > silently overwrite files. To overwrite, use >! instead.
-setopt NO_CLOBBER
-
-# Use modern file-locking mechanisms, for better safety & performance.
-# setopt HIST_FCNTL_LOCK
