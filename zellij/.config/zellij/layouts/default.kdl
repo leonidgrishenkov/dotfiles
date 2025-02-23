@@ -1,0 +1,41 @@
+layout {
+    pane split_direction="vertical" {
+        pane
+    }
+
+    pane size=1 borderless=true {
+        plugin location="file:~/Code/dotfiles/zellij/.config/zellij/plugins/zjstatus.wasm" {
+            hide_frame_for_single_pane "false"
+
+            format_left  "{mode}#[fg=#89B4FA] {tabs}"
+            format_right  "#[fg=#89b4fa]█#[bg=#89b4fa,fg=#1e2030]  {session} #[fg=#89b4fa]"
+            format_space ""
+            // https://github.com/dj95/zjstatus/wiki/3-%E2%80%90-Configuration#hiding-format-parts-on-over-length
+            format_hide_on_overlength "true"
+            format_precedence "crl"
+
+            // https://gitlab.com/hmajid2301/nixicle/-/blob/dd79861151e623b22bb4ef77d1b7ef07b048d4b5/modules/home/cli/multiplexers/zellij/default.nix#L165-217
+            mode_normal        "#[bg=#87B9F3,fg=#181926] NORMAL#[fg=#87B9F3]█"
+            mode_locked        "#[bg=#D2ABEB,fg=#181926]  #[fg=#D2ABEB]█"
+            mode_resize        "#[bg=#f38ba8,fg=#181926] RESIZE#[fg=#f38ba8]█"
+            mode_pane          "#[bg=#89b4fa,fg=#181926] PANE#[fg=#89b4fa]█"
+            mode_tab           "#[bg=#b4befe,fg=#181926] TAB#[fg=#b4befe]█"
+            mode_scroll        "#[bg=#f9e2af,fg=#181926] SCROLL#[fg=#f9e2af]█"
+            mode_enter_search  "#[bg=#ADD590,fg=#181926] ENT-SEARCH#[fg=#ADD590]█"
+            mode_search        "#[bg=#8aadf4,fg=#181926] SEARCHARCH#[fg=#8aadf4]█"
+            mode_rename_tab    "#[bg=#ADD590,fg=#181926] RENAME-TAB#[fg=#ADD590]█"
+            mode_rename_pane   "#[bg=#ADD590,fg=#181926] RENAME-PANE#[fg=#ADD590]█"
+            mode_session       "#[bg=#74c7ec,fg=#181926] SESSION#[fg=#74c7ec]█"
+            mode_move          "#[bg=#f5c2e7,fg=#181926] MOVE#[fg=#f5c2e7]█"
+            mode_prompt        "#[bg=#8aadf4,fg=#181926] PROMPT#[fg=#8aadf4]█"
+            mode_tmux          "#[bg=#f5a97f,fg=#181926] TMUX#[fg=#f5a97f]█"
+
+            tab_normal               "#[fg=#6C7086]○ {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+            tab_active               "#[fg=#9399B2,bold,italic]● {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+
+            tab_fullscreen_indicator "□ "
+            tab_sync_indicator       "  "
+            tab_floating_indicator   "  "
+        }
+    }
+}

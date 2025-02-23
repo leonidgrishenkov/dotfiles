@@ -228,7 +228,7 @@ keybinds clear-defaults=true {
                 "Move pane to left"     "Alt + h + j"
                 "Search"                "Alt + s + s"
                 "Go into edit mode"     "Alt + s + e"
-                "Detach session"        "Alt + o + w"
+                "Detach session"        "Alt + o + d"
                 "Open session manager"  "Alt + o + w"
                 "Quit zellij"           "Alt + q"
                 floating true
@@ -264,7 +264,7 @@ on_force_close "quit"
 //    - true
 //    - false (Default)
 //
-simplified_ui false
+// simplified_ui false
 
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
@@ -315,11 +315,11 @@ pane_frames true
 
 // Choose the theme that is specified in the themes section.
 // Default: default
-theme "tokyo-night-storm"
+// theme "tokyo-night-storm"
 
 // The name of the default layout to load on startup
 // Default: "default"
-default_layout "compact"
+// default_layout "compact"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal
