@@ -2,17 +2,13 @@
 # vim: set filetype=sh:
 # vim: set ts=4 sw=4 et:
 
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
-
 export SYSTEM="$(uname -s)"
 
 [[ ! -z $EDITOR ]] || export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 export LC_CTYPE='en_US.UTF-8'
 
-# === brew ===
+# ========= homebrew =========
 if command -v /opt/homebrew/bin/brew &>/dev/null; then
     # Export all `brew` env vars. See `man brew` + `/shellenv`
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -29,9 +25,6 @@ if command -v /opt/homebrew/bin/brew &>/dev/null; then
 
     # Add to FPATH completions installed by brew
     FPATH="/opt/homebrew/share/zsh/site-functions:$FPATH"
-    # TODO: Do we need here this command?
-    # autoload -U compinit
-    # compinit
 fi
 
 # Set one of the editor as $EDITOR
@@ -94,9 +87,11 @@ if command -v jqp &>/dev/null; then
     alias jqp="jqp --theme catppuccin-frappe"
 fi
 
-# === zinit ===
-# https://github.com/zdharma-continuum/zinit
-# Install zinit if it doesn't installed and create its direcory
+# ========= zinit =========
+#
+# Repo: https://github.com/zdharma-continuum/zinit
+#
+# Install zinit if it doesn't installed and create its directory
 ZINIT_HOME="$XDG_DATA_HOME/zinit/zinit.git"
 if [ ! -d "$ZINIT_HOME" ]; then
    mkdir -p "$(dirname $ZINIT_HOME)"
@@ -108,21 +103,30 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # Path to zsh cache
 export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
+
 # If it doesn't exists create one
 [[ -d $ZSH_CACHE_DIR ]] || mkdir -p $ZSH_CACHE_DIR
 
 # Path to completions cache
-ZSH_COMPDUMP="$ZSH_CACHE_DIR/zcompdump"
+# BUG: This doesn't work, cache stores in ~/.config/zsh/ directory
+ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump"
 
-# Install plugins for ZSH via zinit
+# Install zsh plugins via zinit
+#
 # https://github.com/zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-syntax-highlighting
+
 # https://github.com/zsh-users/zsh-completions
 zinit light zsh-users/zsh-completions
+
 # https://github.com/zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-autosuggestions
 
+# https://github.com/Aloxaf/fzf-tab
+zinit light Aloxaf/fzf-tab
+
 # Install plugins from oh-my-zsh repo.
+#
 # Enable vim mode support in CLI
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vi-mode
 zinit snippet OMZP::vi-mode
@@ -132,23 +136,38 @@ autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-# Autocompletion options
+# ========= Autocompletion options =========
+#
 # Display dots (or given format) when waiting for completions
 COMPLETION_WAITING_DOTS="%F{grey}waiting...%f"
+
 # COMPLETION_WAITING_DOTS="true"
 # Use case-sensitive autocompletion
 CASE_SENSITIVE=true
+
 # Auto set terminal tab title
 DISABLE_AUTO_TITLE=false
+
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE=false
+
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY=true
 
-# Commands history settings
+# Add colors for cd into directory competions
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Completions should be case-insensitive
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+
+# ========= History settings =========
+#
 # Number of commands that will be stored in history file
 HISTSIZE=2000
 
@@ -194,21 +213,14 @@ bindkey "^n" history-search-forward
 # Timestamp format in `history` output
 HIST_STAMPS="yyyy-mm-dd"
 
-
-# Add colors for cd into directory competions
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-# Completions should be case-insensitive
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' menu no
-
-# === starship ===
+# ========= starship =========
 if command -v starship &>/dev/null; then
     eval "$(starship init zsh)"
     # Set var with path to config file
     export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 fi
 
-# === yazi ===
+# ========= yazi =========
 # Use `yy` as shell command wrapper that provides the ability
 # to change the current working directory when exiting Yazi.
 # Took from utility doc: https://yazi-rs.github.io/docs/quick-start#shell-wrapper
@@ -223,13 +235,13 @@ if command -v yazi &>/dev/null; then
     }
 fi
 
-# === zoxide ===
+# ========= zoxide =========
 if command -v zoxide &>/dev/null; then
     eval "$(zoxide init zsh)"
     alias cd="z"
 fi
 
-# === fzf ===
+# ========= fzf =========
 # https://github.com/junegunn/fzf
 if command -v fzf &>/dev/null; then
     # Set up fzf key bindings and fuzzy completion
@@ -284,14 +296,14 @@ if command -v fzf &>/dev/null; then
     }
 fi
 
-# === zsh plugins configuration ===
+# ========= zsh plugins configuration =========
 # zsh-autosuggestions:
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 # Set bindkey to accept currently shown autosuggestion
 bindkey '^k' autosuggest-accept
 
-# vi-mode
+# ========= Vim mode =========
 export KEYTIMEOUT=15
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 # Cursor style
@@ -356,8 +368,7 @@ if command -v zellij &>/dev/null; then
     # add-zsh-hook chpwd update_zellij_pane_name
 fi
 
-# === kubectl ===
-# If kubectl installed
+# ========= kubectl =========
 if command -v kubectl &>/dev/null; then
   alias k="kubectl"
 fi
@@ -368,7 +379,7 @@ alias mv="mv -iv"
 alias c="clear"
 
 
-# === MacOS only ===
+# ========= macos only =========
 if [[ $SYSTEM = "Darwin" ]]; then
     # Yandex Cloud CLI - `yc`.
     # Add binary to PATH.
