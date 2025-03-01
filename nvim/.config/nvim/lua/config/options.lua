@@ -31,7 +31,9 @@ vim.opt.clipboard = "unnamed,unnamedplus"
 vim.opt.swapfile = false -- Don't use swapfile
 vim.opt.backup = false -- Creates a backup file
 vim.opt.undofile = true -- Enable/disable persistent undo
-vim.opt.writebackup = false -- If a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+-- If a file is being edited by another program (or was written to file while editing with another program),
+-- it is not allowed to be edited
+vim.opt.writebackup = false
 vim.opt.fileencoding = "utf-8" -- The encoding written to a file
 
 -- UI
@@ -71,6 +73,9 @@ vim.opt.sidescroll = 8 -- Columns of context
 -- opt.listchars+=precedes:<,extends:>
 -- Number of lines to keep if this is an up or down border
 vim.opt.scrolloff = 4
+
+-- Visiable line in editor which indicates end of line
+-- vim.opt.colorcolumn = "120"
 
 -- split windows
 vim.opt.splitright = true -- split vertical window to the right
