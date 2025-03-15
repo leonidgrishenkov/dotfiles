@@ -32,7 +32,7 @@ layout {
             mode_tmux          "#[bg=#f5a97f,fg=#181926] TMUX#[fg=#f5a97f]█"
 
             tab_normal               "#[fg=#6C7086]○ {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
-            tab_active               "#[fg=#9399B2,bold,italic]● {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+            tab_active               "#[fg=#FCC4EA,bold,italic]● {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
 
             tab_fullscreen_indicator "□ "
             tab_sync_indicator       "  "
