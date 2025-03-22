@@ -8,7 +8,7 @@ return {
         "stevearc/conform.nvim",
         lazy = true,
         dependencies = { "mason.nvim" },
-        event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
             local conform = require("conform")
 
@@ -17,10 +17,16 @@ return {
                 formatters_by_ft = {
                     -- All formatters: https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
                     -- Use a sub-list to run only the first available formatter
-                    ["json"] = { "prettier" },
-                    ["jsonc"] = { "prettier" },
-                    ["yaml"] = { "prettier" },
-                    ["markdown"] = { "prettier" },
+                    ["json"] = { "prettierd" },
+                    ["jsonc"] = { "prettierd" },
+                    ["yaml"] = function(bufnr)
+                        if conform.get_formatter_info("yamlfmt", bufnr).available then
+                            return { "yamlfmt" }
+                        else
+                            return { "prettierd" }
+                        end
+                    end,
+                    ["markdown"] = { "prettierd" },
                     ["lua"] = { "stylua" },
                     ["sql"] = { "sqlfluff" },
                     ["sh"] = { "shfmt" },
@@ -28,23 +34,17 @@ return {
                     -- have other formatters configured.
                     ["_"] = { "trim_whitespace" },
                 },
-                -- Autoformat on save option.
-                -- format_on_save = {
-                --     lsp_fallback = true,
-                --     async = false,
-                --     timeout_ms = 1000,
-                -- },
-                -- Add extra options for formatters
+                -- Extra options for formatters
                 formatters = {
                     shfmt = {
                         prepend_args = { "-i", "4" },
                     },
-                    prettier = {
-                        prepend_args = { "--tab-width", "4", "--use-tabs", "true" },
-                    },
                     sqlfluff = {
                         command = "sqlfluff",
-                        args = { "format", "--stdin-filename", "$FILENAME", "-"}
+                        args = { "format", "--stdin-filename", "$FILENAME", "-" },
+                    },
+                    yamlfmt = {
+                        prepend_args = { "-conf", os.getenv("XDG_CONFIG_HOME") .. "/yamlfmt/.yamlfmt" },
                     },
                 },
                 default_format_opts = {

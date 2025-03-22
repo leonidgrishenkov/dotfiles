@@ -46,7 +46,6 @@ return {
                     row = 0,
                     col = 1,
                 },
-                show_deleted = false, -- Show old version inline via virtual lines.
                 on_attach = function(bufnr)
                     local gs = package.loaded.gitsigns
 

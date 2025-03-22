@@ -49,7 +49,7 @@ return {
                     "jsonls",
                     "taplo", -- LSP for toml files
                     -- "sqls", -- LSP for SQL
-                    -- "terraformls",
+                    "terraformls",
                     "bashls",
                 },
                 -- auto-install configured servers (with lspconfig)
@@ -60,9 +60,10 @@ return {
                 -- Other tools for mason to install (linters, formatters etc.)
                 ensure_installed = {
                     "stylua",
-                    "prettier",
+                    "prettierd",
                     "sqlfluff",
                     "yamllint",
+                    "yamlfmt",
                     "shfmt",
                 },
                 auto_update = true,
