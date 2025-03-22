@@ -1,0 +1,8 @@
+---
+# vim: set filetype=yaml:
+
+formatter:
+    indent: 4
+    include_document_start: true
+    line_ending: lf
+    retain_line_breaks: true
