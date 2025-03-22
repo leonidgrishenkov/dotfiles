@@ -55,6 +55,26 @@
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "editor.unicodeHighlight.nonBasicASCII": false,
   "editor.tokenColorCustomizations": {
+    "[*Light*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#000"
+          }
+        }
+      ]
+    },
+    "[*Dark*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#fff"
+          }
+        }
+      ]
+    },
     "textMateRules": []
   },
   "editor.scrollbar.horizontal": "hidden",
@@ -207,8 +227,6 @@
   "autoDocstring.docstringFormat": "google",
   // Ruff Extension
   "ruff.trace.server": "messages",
-  "ruff.showNotifications": "onWarning",
-  "ruff.lint.run": "onSave",
   "ruff.codeAction.disableRuleComment": {
     "enable": true
   },

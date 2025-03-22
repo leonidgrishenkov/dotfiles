@@ -316,11 +316,11 @@ VI_MODE_CURSOR_OPPEND=0
 # Enter cmd mode from insert mode
 bindkey -M viins jf vi-cmd-mode
 # Movements
-bindkey -M vicmd j vi-backward-char
-bindkey -M visual j vi-backward-char
-bindkey -M vicmd l vi-down-line-or-history
+bindkey -M vicmd h vi-backward-char
+bindkey -M visual h vi-backward-char
+bindkey -M vicmd j vi-down-line-or-history
 bindkey -M vicmd k vi-up-line-or-history
-bindkey -M vicmd \; vi-forward-char
+bindkey -M vicmd l vi-forward-char
 bindkey -M vicmd ee edit-command-line
 
 if [[ $SYSTEM = "Darwin" ]]; then

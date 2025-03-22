@@ -44,6 +44,10 @@ local function opts(desc)
     return { desc = desc, noremap = true, silent = true }
 end
 
+-- Clear search highlights
+vim.keymap.set("n", "<leader>h", ":nohl<CR>", opts("Clear search highlights"))
+
+-- =============== Yank ===============
 -- Disable yank on delete word
 vim.keymap.set({ "n", "v" }, "d", '"_d', opts(nil))
 vim.keymap.set({ "n", "v" }, "D", '"_D', opts(nil))
@@ -58,42 +62,37 @@ vim.keymap.set("x", "p", "P", opts(nil))
 -- Remap exit modes to normal mode
 vim.keymap.set({ "v", "i" }, "jf", "<ESC>", opts(nil))
 
--- Movements
--- Unmap `h`
-vim.keymap.set("", "h", "<nop>")
-
-vim.keymap.set({ "n", "v" }, "l", "<Down>", opts(nil))
-vim.keymap.set({ "n", "v" }, "k", "<Up>", opts(nil))
-vim.keymap.set({ "n", "v" }, "j", "<Left>", opts(nil))
-vim.keymap.set({ "n", "v" }, ";", "<Right>", opts(nil))
-
--- Panes management
+-- =============== Panes ===============
 -- Unmap default keybind to split windows
 vim.keymap.set("", "<C-w>v", "<nop>")
 vim.keymap.set("", "<C-w>s", "<nop>")
 
 -- Switch panes
-vim.keymap.set("n", "<C-w>l", "<C-w>j", opts("Switch to bottom pane"))
-vim.keymap.set("n", "<C-w>k", "<C-w>k", opts("Switch to top pane"))
-vim.keymap.set("n", "<C-w>;", "<C-w>l", opts("Switch to right pane"))
-vim.keymap.set("n", "<C-w>j", "<C-w>h", opts("Switch to left pane"))
+vim.keymap.set("n", "<C-j>", "<C-w>j", opts("Switch to bottom pane"))
+vim.keymap.set("n", "<C-k>", "<C-w>k", opts("Switch to top pane"))
+vim.keymap.set("n", "<C-l>", "<C-w>l", opts("Switch to right pane"))
+vim.keymap.set("n", "<C-h>", "<C-w>h", opts("Switch to left pane"))
 
+-- Unmap defaults
+vim.keymap.set("", "<C-w>j", "<nop>")
+vim.keymap.set("", "<C-w>k", "<nop>")
+vim.keymap.set("", "<C-w>l", "<nop>")
+vim.keymap.set("", "<C-w>h", "<nop>")
 
-vim.keymap.set("n", "<leader>pk", ":resize +2<CR>", opts("Increase pane size"))
-vim.keymap.set("n", "<leader>pl", ":resize -2<CR>", opts("Decrease pane size"))
-vim.keymap.set("n", "<leader>pj", ":vertical resize -2<CR>", opts("Decrease vertical pane size"))
-vim.keymap.set("n", "<leader>p;", ":vertical resize +2<CR>", opts("Increase vertical pane size"))
+-- Control pane size
+vim.keymap.set("n", "<leader>pk", ":resize +5<CR>", opts("Increase pane size"))
+vim.keymap.set("n", "<leader>pj", ":resize -5<CR>", opts("Decrease pane size"))
+vim.keymap.set("n", "<leader>ph", ":vertical resize -5<CR>", opts("Decrease vertical pane size"))
+vim.keymap.set("n", "<leader>pl", ":vertical resize +5<CR>", opts("Increase vertical pane size"))
 
--- Buffers
-vim.keymap.set("n", "t;", ":bnext<CR>", opts("Go to next buffer"))
-vim.keymap.set("n", "tj", ":bprev<CR>", opts("Go to previous buffer"))
+-- =============== Buffers ===============
+vim.keymap.set("n", "tl", ":bnext<CR>", opts("Go to next buffer"))
+vim.keymap.set("n", "th", ":bprev<CR>", opts("Go to previous buffer"))
 vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", opts("Close current buffer"))
 vim.keymap.set("n", "<leader>ba", ":bufdo bd<CR>", opts("Close all buffers"))
 
--- Clear search highlights
-vim.keymap.set("n", "<leader>h", ":nohl<CR>", opts("Clear search highlights"))
-
--- `spectre` keymaps
+-- =============== Plugins ===============
+-- `spectre`
 vim.keymap.set("n", "<leader>st", ':lua require("spectre").toggle()<CR>', opts("Toggle Spectre"))
 vim.keymap.set(
     "n",
@@ -102,7 +101,7 @@ vim.keymap.set(
     opts("Search on current file")
 )
 
--- `conform` keymaps
+-- `conform`
 vim.keymap.set(
     "n",
     "<leader>lf",

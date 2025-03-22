@@ -1,0 +1,23 @@
+" Line numbers
+set number
+set relativenumber
+set numberwidth=2 " set number column width
+
+" Keymappings
+inoremap jf <Esc>
+vnoremap jf <Esc>
+
+" Not affected. Use `Vim: Use System Clipboard` in vscode settings
+set clipboard=unnamedplus
+
+set matchpairs
+
+nnoremap d "_d
+vnoremap d "_d
+
+" nnoremap p "_dp`[
+" vnoremap p "_dp`[
+
+" nnoremap P "_dP`[
+" vnoremap P "_dP`[
+

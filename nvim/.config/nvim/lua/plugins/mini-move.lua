@@ -8,9 +8,9 @@ return {
             mappings = {
                 -- Use "" (empty string) to disable one.
                 -- Move visual selection in Visual mode.
-                left = "J",
-                right = ":",
-                down = "L",
+                left = "H",
+                right = "L",
+                down = "J",
                 up = "K",
 
                 -- Move current line in Normal mode.

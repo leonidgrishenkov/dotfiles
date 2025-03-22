@@ -5,11 +5,11 @@
 prepend_keymap = [
     # Navigation
     # Up/Down
-    { on = ["l"], run = "arrow 1", desc = "Move cursor down" },
-    { on = ["L"], run = "arrow 5", desc = "Move cursor down 5 lines" },
+    { on = ["J"], run = "arrow 5", desc = "Move cursor down 5 lines" },
+    { on = ["K"], run = "arrow -5", desc = "Move cursor up 5 lines" },
     # Left/Right
-    { on = ["j"], run = "leave", desc = "Go back to the parent directory" },
-    { on = [";"], run = "enter", desc = "Enter the child directory" },
-    { on = ["J"], run = "back", desc = "Go back to the previous directory" },
-    { on = [":"], run = "forward", desc = "Go forward to the next directory" },
+    { on = ["h"], run = "leave", desc = "Go back to the parent directory" },
+    { on = ["l"], run = "enter", desc = "Enter the child directory" },
+    # { on = ["J"], run = "back", desc = "Go back to the previous directory" },
+    # { on = [":"], run = "forward", desc = "Go forward to the next directory" },
 ]

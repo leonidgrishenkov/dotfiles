@@ -8,10 +8,6 @@ set relativenumber
 inoremap jf <Esc>
 vnoremap jf <Esc>
 
-noremap j h
-noremap l j
-noremap ; l
-
 " Disable yank on delete operations
 nnoremap d "_d
 vnoremap d "_d

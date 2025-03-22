@@ -4,10 +4,18 @@ return {
         "yetone/avante.nvim",
         event = "VeryLazy",
         enabled = true,
-        lazy = false,
         version = false, -- set this if you want to always pull the latest change
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
         build = "make",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "stevearc/dressing.nvim",
+            "nvim-lua/plenary.nvim",
+            "MunifTanjim/nui.nvim",
+            "nvim-telescope/telescope.nvim",
+            "hrsh7th/nvim-cmp",
+            "nvim-tree/nvim-web-devicons",
+        },
         config = function()
             require("avante").setup({
                 provider = "claude",
@@ -18,6 +26,12 @@ return {
                     max_tokens = 10000,
                 },
                 hints = { enabled = false },
+                behaviour = {
+                    enable_claude_text_editor_tool_mode = false, -- Whether to enable Claude Text Editor Tool Mode.
+                },
+                windows = {
+                    width = 45, -- default % based on available width
+                },
             })
         end,
     },
