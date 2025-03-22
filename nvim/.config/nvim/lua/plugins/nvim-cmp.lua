@@ -195,6 +195,14 @@ return {
                     ghost_text = true,
                 },
             })
+
+            cmp.setup.filetype({ "sql" }, {
+                sources = {
+                    { name = "vim-dadbod-completion" },
+                    { name = "buffer" },
+                },
+            })
+
             -- TODO: Is all of  these are overwrited by noice?
             -- Completions for text inside vim command lines.
             -- Setup for `/` vim cmdline.
