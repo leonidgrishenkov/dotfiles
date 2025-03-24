@@ -92,7 +92,7 @@ vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", opts("Close current buffer"))
 vim.keymap.set("n", "<leader>ba", ":bufdo bd<CR>", opts("Close all buffers"))
 
 -- =============== Plugins ===============
--- `spectre`
+-- 'spectre'
 vim.keymap.set("n", "<leader>st", ':lua require("spectre").toggle()<CR>', opts("Toggle Spectre"))
 vim.keymap.set(
     "n",
@@ -101,10 +101,11 @@ vim.keymap.set(
     opts("Search on current file")
 )
 
--- `conform`
-vim.keymap.set(
-    "n",
-    "<leader>lf",
-    ":lua require('conform').format({ async = true, lsp_fallback = true })<CR>",
-    opts("Format current buffer")
-)
+-- 'todo-comments'
+vim.keymap.set("n", "]t", function()
+    require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function()
+    require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
