@@ -4,10 +4,11 @@ return {
         "nvim-lua/plenary.nvim",
         lazy = true,
     },
-    { -- measure startuptime
+    {
+        -- Measure startuptime
         "dstein64/vim-startuptime",
         cmd = "StartupTime",
-        config = function()
+        init = function()
             vim.g.startuptime_tries = 10
         end,
     },

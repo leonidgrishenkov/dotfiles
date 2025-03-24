@@ -2,14 +2,14 @@ return {
     {
         --[[
         Plugin to that will create annotations for diffetent languages.
-        Repo: https://github.com/danymat/neogen?tab=readme-ov-file
+        Repo: https://github.com/danymat/neogen
 
         Usage:
             :Neogen
             :Neogen func|class|type|...
         --]]
         "danymat/neogen",
-        -- config = true,
+        cmd = { "Neogen" },
         config = function()
             require("neogen").setup({
                 enabled = true,
@@ -24,7 +24,5 @@ return {
                 },
             })
         end,
-        -- Uncomment next line if you want to follow only stable versions
-        -- version = "*"
     },
 }

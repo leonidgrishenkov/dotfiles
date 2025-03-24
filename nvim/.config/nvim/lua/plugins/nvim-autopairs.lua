@@ -9,7 +9,7 @@ return {
         --]]
         "windwp/nvim-autopairs",
         event = {
-            "InsertEnter", -- Load plugins only on `InsertEnter`
+            "InsertEnter",
         },
         -- Example: https://github.com/josean-dev/dev-environment-files/blob/main/.config/nvim/lua/josean/plugins/nvim-autopairs.lua
         dependencies = {

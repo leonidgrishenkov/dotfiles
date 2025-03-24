@@ -9,10 +9,13 @@ return {
             :CursorWordEnable
         --]]
         "xiyaowong/nvim-cursorword",
-        event = "VeryLazy",
+        cmd = {
+            "CursorWordDisable",
+            "CursorWordEnable",
+        },
         config = function()
             -- Enable plugin only by manual trigger.
-            vim.api.nvim_create_user_command("EnableCursorWord", function()
+            vim.api.nvim_create_user_command("CursorWordEnable", function()
                 vim.g.cursorword_highlight = true
 
                 vim.g.cursorword_min_width = 2
@@ -28,7 +31,7 @@ return {
             end, {})
 
             -- Disable plugin by manual trigger.
-            vim.api.nvim_create_user_command("DisableCursorWord", function()
+            vim.api.nvim_create_user_command("CursorWordDisable", function()
                 vim.g.cursorword_highlight = false
                 vim.cmd("highlight! clear CursorWord")
             end, {})

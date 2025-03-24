@@ -2,10 +2,10 @@ return {
     {
         -- https://github.com/folke/trouble.nvim
         "folke/trouble.nvim",
-        -- cmd = { "TroubleToggle", "Trouble" },
+        cmd = { "Trouble" },
         dependencies = { "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
         opts = {
-            -- WARN: Sings defined in lsp config
+            -- NOTE: Sings defined in lsp config
             use_diagnostic_signs = true,
             defaults = {
                 focus = false, -- Focus the window when opened
@@ -54,6 +54,11 @@ return {
                 "<leader>xt",
                 ":TodoTrouble toggle<cr>",
                 desc = "Toggle TODO",
+            },
+            {
+                "<leader>xT",
+                ":TodoTelescope<cr>",
+                desc = "Toggle TODO in Telescope",
             },
         },
     },

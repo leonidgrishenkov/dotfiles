@@ -4,11 +4,11 @@ return {
         Highlights the current level of indentation, and animates the highlighting.
 
         Repo: https://github.com/echasnovski/mini.indentscope
-        Docs: `mini.indentscope`
+        Help: :h mini.indentscope
         ]]
         "echasnovski/mini.indentscope",
         version = false, -- see docs on github
-        event = "BufEnter",
+        event = { "BufEnter" },
         config = function()
             local indentscope = require("mini.indentscope")
 
