@@ -3,8 +3,8 @@ return {
         --[[
         Git decorations inside editor.
 
-        https://github.com/lewis6991/gitsigns.nvim
-        Doc: :help gitsigns
+        Repo: https://github.com/lewis6991/gitsigns.nvim
+        Help: :help gitsigns
         ]]
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPre", "BufNewFile" },
@@ -19,6 +19,11 @@ return {
                 highlight GitSignsChange guifg=#bbbb00 ctermfg=3
                 highlight GitSignsDelete guifg=#E78284
                 highlight GitSignsTopdelete guifg=#E78284
+
+                highlight GitSignsStagedAdd guifg=#1a471a ctermfg=2
+                highlight GitSignsStagedChange guifg=#696903 ctermfg=3
+                highlight GitSignsStagedDelete guifg=#6e3435
+                highlight GitSignsStagedTopdelete guifg=#6e3435
             ]])
 
             gitsigns.setup({
@@ -29,15 +34,29 @@ return {
                     topdelete = { text = icons.RemoveSign, show_count = true },
                     changedelete = { text = icons.ChangeRemoveSign },
                 },
-                signs_staged_enable = false,
+                signs_staged = {
+                    add = { text = icons.AddSign },
+                    change = { text = icons.AddSign },
+                    delete = { text = icons.RemoveSign, show_count = true },
+                    topdelete = { text = icons.RemoveSign, show_count = true },
+                    changedelete = { text = icons.ChangeRemoveSign },
+                },
+                signs_staged_enable = true,
+                attach_to_untracked = false,
                 watch_gitdir = {
                     follow_files = true,
                 },
-                signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-                numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-                linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-                word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-                current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+                -- You can toggle these options with corresponding commands:
+                --      :Gitsigns toggle_signs
+                --      :Gitsigns toggle_numhl
+                --      :Gitsigns toggle_linehl
+                --      :Gitsigns toggle_word_diff
+                --      :Gitsigns toggle_current_line_blame
+                signcolumn = true,
+                numhl = false,
+                linehl = false,
+                word_diff = false,
+                current_line_blame = false,
                 preview_config = {
                     -- Options passed to nvim_open_win
                     border = "rounded",
