@@ -42,10 +42,10 @@ keybinds clear-defaults=true {
         bind "Alt h" { SwitchToMode "Normal"; }
         bind "n" "Tab" { MovePane; }
         bind "p" { MovePaneBackwards; }
-        bind "j" "Left" { MovePane "Left"; }
-        bind "l" "Down" { MovePane "Down"; }
+        bind "h" "Left" { MovePane "Left"; }
+        bind "j" "Down" { MovePane "Down"; }
         bind "k" "Up" { MovePane "Up"; }
-        bind ";" "Right" { MovePane "Right"; }
+        bind "l" "Right" { MovePane "Right"; }
     }
     tab {
         bind "Alt t" { SwitchToMode "Normal"; }
@@ -74,7 +74,7 @@ keybinds clear-defaults=true {
         bind "e" { EditScrollback; SwitchToMode "Normal"; }
         bind "s" { SwitchToMode "EnterSearch"; SearchInput 0; }
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
-        bind "l" "Down" { ScrollDown; }
+        bind "j" "Down" { ScrollDown; }
         bind "k" "Up" { ScrollUp; }
         bind "Ctrl f" "PageDown" "Right" "l" { PageScrollDown; }
         bind "Ctrl b" "PageUp" "Left" "h" { PageScrollUp; }
@@ -223,9 +223,9 @@ keybinds clear-defaults=true {
                 "Decrease pane bottom"  "Alt + n + J"
                 "Decrease pane left"    "Alt + n + H"
                 "Move pane to top"      "Alt + h + k"
-                "Move pane to right"    "Alt + h + ;"
-                "Move pane to bottom"   "Alt + h + l"
-                "Move pane to left"     "Alt + h + j"
+                "Move pane to right"    "Alt + h + l"
+                "Move pane to bottom"   "Alt + h + j"
+                "Move pane to left"     "Alt + h + h"
                 "Search"                "Alt + s + s"
                 "Go into edit mode"     "Alt + s + e"
                 "Detach session"        "Alt + o + d"
