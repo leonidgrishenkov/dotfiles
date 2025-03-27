@@ -1,4 +1,4 @@
-This repository is addapted to work with [GNU stow](https://www.gnu.org/software/stow/).
+This repository is adapted to work with [GNU stow](https://www.gnu.org/software/stow/).
 
 To start syncing local machine configuration with this repo, for example, for `lazygit` execute this command:
 
@@ -41,7 +41,7 @@ stow --target=$HOME \
 
 # Clone repository
 
-To clone this repository localy:
+To clone this repository locally:
 
 ```sh
 git clone git@github-personal:leonidgrishenkov/dotfiles.git

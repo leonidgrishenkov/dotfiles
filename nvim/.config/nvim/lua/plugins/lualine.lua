@@ -2,10 +2,10 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function()
+        opts = function(_, opts)
             local icons = require("utils.icons")
 
-            require("lualine").setup({
+            return {
                 options = {
                     icons_enabled = true,
                     globalstatus = true,
@@ -65,17 +65,24 @@ return {
                                 NvimTree = "NvimTree",
                             },
                             symbols = {
-                                modified = " ", -- Text to show when the buffer is modified
+                                modified = " ●",
                                 alternate_file = "", -- Text to show to identify the alternate file
                                 directory = "", -- Text to show when the buffer is a directory
                             },
                         },
                     },
-                    lualine_x = {},
+                    lualine_x = {
+                        {
+                            "progress",
+                        },
+                        {
+                            "lsp_status",
+                        },
+                    },
                     lualine_y = {
                         {
                             "filename",
-                            file_status = true, -- Displays file status (readonly status, modified status)
+                            file_status = false, -- Displays file status (readonly status, modified status)
                             newfile_status = false, -- Display new file status (new file means no write after created)
                             --[[
                             Available options:
@@ -87,7 +94,7 @@ return {
                             --]]
                             path = 1,
                             symbols = {
-                                modified = "", -- Text to show when the file is modified.
+                                modified = " ●",
                                 readonly = "", -- Text to show when the file is non-modifiable or readonly.
                                 unnamed = "", -- Text to show for unnamed buffers.
                                 newfile = "󰎔", -- Text to show for newly created file before first write
@@ -102,7 +109,7 @@ return {
                         },
                     },
                 },
-            })
+            }
         end,
     },
 }

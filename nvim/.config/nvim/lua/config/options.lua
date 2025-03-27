@@ -1,8 +1,7 @@
 --[[
 General configurations.
 
-All options:
-    `:h options`
+Help: :h options
 --]]
 
 -- `vim.g` - Global options

@@ -4,13 +4,12 @@ return {
         Neovim file explorer.
 
         Repo: https://github.com/nvim-tree/nvim-tree.lua
-        Docs:
-            Seacrh: `:h nvim-tree.OPTION_NAME`
-            All commands: `:h nvim-tree-commands`
-            Keymapping: `h nvim-tree-mappings`. To see default section `:h nvim-tree-mappings-default`
-            Toggle help: `g?`
+        Help:
+            Seacrh: :h nvim-tree.OPTION_NAME
+            All commands: :h nvim-tree-commands
+            Keymapping: h nvim-tree-mappings. To see default section: :h nvim-tree-mappings-default
+            Toggle help in opened window: g?
 
-        https://www.youtube.com/watch?v=SpexCBrZ1pQ
         --]]
         "nvim-tree/nvim-tree.lua",
         dependencies = {
@@ -120,7 +119,7 @@ return {
                     -- Path at the top of the window.
                     -- `false` = don't show path.
                     root_folder_label = ":~:s?$?/..?", -- Default value: ":~:s?$?/..?",
-                    indent_width = 4,
+                    indent_width = 2,
                     special_files = {}, -- Default: { "Cargo.toml", "Makefile", "README.md", "readme.md" },
                     symlink_destination = true,
                     highlight_git = "name",

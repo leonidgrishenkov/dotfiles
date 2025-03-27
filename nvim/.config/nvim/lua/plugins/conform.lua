@@ -27,13 +27,14 @@ return {
                 -- Use a sub-list to run only the first available formatter
                 ["json"] = { "prettierd" },
                 ["jsonc"] = { "prettierd" },
-                ["yaml"] = function(bufnr)
-                    if require("conform").get_formatter_info("yamlfmt", bufnr).available then
-                        return { "yamlfmt" }
-                    else
-                        return { "prettierd" }
-                    end
-                end,
+                ["yaml"] = { "prettierd" },
+                -- ["yaml"] = function(bufnr)
+                --     if require("conform").get_formatter_info("yamlfmt", bufnr).available then
+                --         return { "yamlfmt" }
+                --     else
+                --         return { "prettierd" }
+                --     end
+                -- end,
                 ["markdown"] = { "prettierd" },
                 ["lua"] = { "stylua" },
                 ["sql"] = { "sqlfluff" },

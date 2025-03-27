@@ -1,7 +1,7 @@
 return {
     {
         -- Repo: https://github.com/catppuccin/nvim
-        -- Docs: `:h catppuccin`
+        -- Help: :h catppuccin
         "catppuccin/nvim",
         lazy = false, -- `false` means that we load this plugin during startup
         priority = 1000, -- make sure to load this before all the other start plugins
@@ -14,8 +14,24 @@ return {
             no_italic = false, -- Force no italic
             no_bold = false, -- Force no bold
             no_underline = false, -- Force no underline
+            highlight_overrides = {
+                frappe = function(frappe)
+                    return {
+                        LineNr = { fg = frappe.overlay0 },
+                        -- CursorLineNr = { fg = frappe.flamingo },
+                        FloatBorder = { fg = frappe.surface2 },
+                        TelescopeBorder = { fg = frappe.surface2 },
+                        NvimTreeWinSeparator = { fg = frappe.surface2 },
+                        -- NoiceCmdlinePopupBorder = { fg = frappe.surface2 },
+                        -- NoiceConfirmBorder = { fg = frappe.surface2 },
+                        LspInfoBorder = { fg = frappe.surface2 },
+                        -- CmpBorder = { fg = frappe.surface2 },
+                        WhichKeyBorder = { fg = frappe.surface2 },
+                    }
+                end,
+            },
             styles = {
-                -- To see all available values: `:h highlight-args`
+                -- To see all available values: :h highlight-args
                 comments = {},
                 conditionals = { "italic" },
                 loops = {},
