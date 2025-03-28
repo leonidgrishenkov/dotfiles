@@ -28,8 +28,9 @@ return {
                     lualine_a = { { "mode", icons_enabled = true } },
                     lualine_b = {
                         { "branch", icon = icons.git.Branch },
-                    },
-                    lualine_c = {
+                        {
+                            "progress",
+                        },
                         {
                             "diff",
                             symbols = { added = icons.git.Add, modified = icons.git.Mod, removed = icons.git.Remove },
@@ -44,6 +45,8 @@ return {
                             },
                             update_in_insert = true,
                         },
+                    },
+                    lualine_c = {
                         {
                             "buffers",
                             show_filename_only = true, -- Shows shortened relative path when set to false.
@@ -71,14 +74,7 @@ return {
                             },
                         },
                     },
-                    lualine_x = {
-                        {
-                            "progress",
-                        },
-                        {
-                            "lsp_status",
-                        },
-                    },
+                    lualine_x = {},
                     lualine_y = {
                         {
                             "filename",
