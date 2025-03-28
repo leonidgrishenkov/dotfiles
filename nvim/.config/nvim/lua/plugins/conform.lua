@@ -17,7 +17,9 @@ return {
                 desc = "Format current buffer",
             },
         },
-        dependencies = { "mason.nvim" },
+        dependencies = {
+            "williamboman/mason.nvim",
+        },
         ---@module "conform"
         ---@type conform.setupOpts
         opts = {
