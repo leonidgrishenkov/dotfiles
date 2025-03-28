@@ -54,8 +54,8 @@ return {
 
             telescope.setup({
                 defaults = {
-                    prompt_prefix = "   ",
-                    selection_caret = "  ",
+                    prompt_prefix = " ",
+                    selection_caret = " ",
                     -- With this mode telescope will start
                     initial_mode = "insert",
                     -- Determines what happens if you try to scroll past the view of the picker.
