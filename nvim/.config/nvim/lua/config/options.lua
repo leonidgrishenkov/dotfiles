@@ -123,24 +123,11 @@ vim.opt.formatoptions = "jcroqlnt" -- tcqj
 -- For keymaps see docs: :h fold opening and closing folds
 -- vim.opt.foldmethod = "indent" -- folds will be autodefined based on indents
 -- Recommended for `nvim-ufo` plugin: https://github.com/kevinhwang91/nvim-ufo?tab=readme-ov-file#minimal-configuration
-vim.o.foldcolumn = "0" -- Show fold infos in signcolomn
+-- Show fold infos in signcolomn. 0 - disable, 1 - enable. Looks too verbose, therefor I disabled it.
+vim.o.foldcolumn = "0"
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
--- opt.foldtext = " " -- ?
-
--- Characters to fill the statuslines, vertical separators and special
--- lines in the window.
-vim.opt.fillchars = {
-    vert = "│",
-    -- fold = "⠀",
-    eob = " ", -- suppress ~ at EndOfBuffer
-    -- diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
-    msgsep = "‾",
-    foldopen = "▾",
-    foldsep = "│",
-    foldclose = "▸",
-}
 
 -- Fix markdown indentation settings
--- vim.g.markdown_recommended_style = 0
+vim.g.markdown_recommended_style = 0

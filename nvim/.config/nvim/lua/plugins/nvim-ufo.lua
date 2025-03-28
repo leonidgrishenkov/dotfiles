@@ -1,6 +1,7 @@
 return {
     {
-        --[[
+        --[[foldopen = "",
+  foldclose = "",
         Better folding expirience.
 
         Repo: https://github.com/kevinhwang91/nvim-ufo
@@ -23,7 +24,7 @@ return {
                 enable_get_fold_virt_text = true,
                 fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
                     local newVirtText = {}
-                    local suffix = ("  %d "):format(endLnum - lnum) --    
+                    local suffix = ("  %d "):format(endLnum - lnum)
                     local sufWidth = vim.fn.strdisplaywidth(suffix)
                     local targetWidth = width - sufWidth
                     local curWidth = 0
