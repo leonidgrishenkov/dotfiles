@@ -1,5 +1,6 @@
 return {
     {
+        -- Repo: https://github.com/nvim-lualine/lualine.nvim
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = function(_, opts)
@@ -27,6 +28,8 @@ return {
                     lualine_a = { { "mode", icons_enabled = true } },
                     lualine_b = {
                         { "branch", icon = icons.git.Branch },
+                    },
+                    lualine_c = {
                         {
                             "diff",
                             symbols = { added = icons.git.Add, modified = icons.git.Mod, removed = icons.git.Remove },
@@ -41,14 +44,11 @@ return {
                             },
                             update_in_insert = true,
                         },
-                    },
-                    lualine_c = {
                         {
                             "buffers",
                             show_filename_only = true, -- Shows shortened relative path when set to false.
                             hide_filename_extension = false, -- Hide filename extension when set to true.
                             show_modified_status = true, -- Shows indicator when the buffer is modified.
-
                             mode = 0, -- 0: Shows buffer name
                             -- 1: Shows buffer index
                             -- 2: Shows buffer name + buffer index
