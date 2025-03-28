@@ -19,10 +19,14 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Default conf: https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
+-- Default conf: https://lazy.folke.io/configuration
 require("lazy").setup({ { import = "plugins" } }, {
     defaults = {
-        lazy = false, -- should plugins be lazy-loaded?
+        -- Set this to `true` to have all your plugins lazy-loaded by default.
+        -- Only do this if you know what you are doing, as it can lead to unexpected behavior.
+        lazy = false,
+        -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
+        -- have outdated releases, which may break your Neovim install.
         version = false,
     },
     install = {
@@ -36,15 +40,10 @@ require("lazy").setup({ { import = "plugins" } }, {
     -- automatically check for plugin updates
     checker = {
         enabled = false,
-        concurrency = nil, ---@type number? set to 1 to check for updates very slowly
-        notify = true, -- get a notification when new updates are found
-        frequency = 3600, -- check for updates every hour
-        check_pinned = false, -- check for pinned packages that can't be updated
     },
     -- automatically check for config file changes and reload the ui
     change_detection = {
         enabled = false,
-        notify = false, -- get a notification when changes are found
     },
     performance = {
         cache = {
@@ -52,17 +51,6 @@ require("lazy").setup({ { import = "plugins" } }, {
         },
         rtp = {
             reset = true, -- reset the runtime path to $VIMRUNTIME and your config directory
-            -- disable some rtp plugins
-            disabled_plugins = {
-                -- "gzip",
-                -- "matchit",
-                -- "matchparen",
-                -- "netrwPlugin",
-                -- "tarPlugin",
-                -- "tohtml",
-                -- "tutor",
-                -- "zipPlugin",
-            },
         },
     },
 })
