@@ -11,7 +11,6 @@ return {
             :MasonLog - opens the mason.nvim log file in a new tab window
         --]]
         "williamboman/mason.nvim",
-        cmd = "Mason",
         build = ":MasonUpdate",
         dependencies = {
             "williamboman/mason-lspconfig.nvim", -- https://github.com/williamboman/mason-lspconfig.nvim
