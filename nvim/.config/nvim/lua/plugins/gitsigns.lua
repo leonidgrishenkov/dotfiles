@@ -12,7 +12,7 @@ return {
             local gitsigns = require("gitsigns")
             local icons = require("utils.icons").git
 
-            -- Setup colors for symbols in signcolomn
+            -- Setup colors for symbols in signcolomn. For staged changes I set slightly dimmed colors.
             -- :help  gitsigns-highlight-groups
             vim.cmd([[
                 highlight GitSignsAdd    guifg=#009900 ctermfg=2
@@ -26,21 +26,18 @@ return {
                 highlight GitSignsStagedTopdelete guifg=#6e3435
             ]])
 
+            local sign_priority = 100
+            local signs = {
+                add = { text = icons.AddSign, priority = sign_priority },
+                change = { text = icons.AddSign, priority = sign_priority },
+                delete = { text = icons.RemoveSign, show_count = true, priority = sign_priority },
+                topdelete = { text = icons.RemoveSign, show_count = true, priority = sign_priority },
+                changedelete = { text = icons.ChangeRemoveSign, priority = sign_priority },
+            }
+
             gitsigns.setup({
-                signs = {
-                    add = { text = icons.AddSign },
-                    change = { text = icons.AddSign },
-                    delete = { text = icons.RemoveSign, show_count = true },
-                    topdelete = { text = icons.RemoveSign, show_count = true },
-                    changedelete = { text = icons.ChangeRemoveSign },
-                },
-                signs_staged = {
-                    add = { text = icons.AddSign },
-                    change = { text = icons.AddSign },
-                    delete = { text = icons.RemoveSign, show_count = true },
-                    topdelete = { text = icons.RemoveSign, show_count = true },
-                    changedelete = { text = icons.ChangeRemoveSign },
-                },
+                signs = signs,
+                signs_staged = signs,
                 signs_staged_enable = true,
                 attach_to_untracked = false,
                 watch_gitdir = {

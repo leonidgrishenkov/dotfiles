@@ -12,6 +12,7 @@ return {
         opts = {
             -- Default config: https://github.com/folke/todo-comments.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
             signs = true, -- show icons in the signs column
+            sign_priority = 2,
             -- highlighting of the line containing the todo comment
             -- * before: highlights before the keyword (typically comment characters)
             -- * keyword: highlights of the keyword

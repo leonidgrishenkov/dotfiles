@@ -15,6 +15,7 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
             { "folke/neodev.nvim", opts = {} }, -- will improve lua_ls functionality
             -- Add ops on files such as rename imports if file name was changed
             { "antosha417/nvim-lsp-file-operations", config = true },
@@ -28,11 +29,6 @@ return {
                 lineFoldingOnly = true,
             }
             local icons = require("utils.icons").diagnostics
-
-            -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
-            -- Enable border for LspInfo window
-            -- TODO: This is not working anymore. Find some workarround.
-            -- require("lspconfig.ui.windows").default_options.border = "single"
 
             -- On attach keymaps. When plugin connected to LSP server.
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -64,9 +60,6 @@ return {
 
                     opts.desc = "Show references of word"
                     vim.keymap.set("n", "<leader>lr", ":Telescope lsp_references<CR>", opts)
-
-                    opts.desc = "Search in buffer diagnostics"
-                    vim.keymap.set("n", "<leader>fd", ":Telescope diagnostics bufnr=0<CR>", opts)
 
                     -- Show diagnostics for current line
                     opts.desc = "Show line diagnostics"
@@ -145,6 +138,7 @@ return {
             })
 
             -- LSP for lua
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
             lspconfig["lua_ls"].setup({
                 capabilities = capabilities,
                 settings = {
@@ -193,11 +187,6 @@ return {
                 capabilities = capabilities,
             })
 
-            -- LSP for SQL
-            -- lspconfig["sqls"].setup({
-            --     capabilities = capabilities,
-            -- })
-
             -- LSP for Terraform
             -- https://github.com/hashicorp/terraform-ls
             -- Usage: https://github.com/hashicorp/terraform-ls/blob/main/docs/USAGE.md
@@ -213,7 +202,7 @@ return {
             })
 
             -- Setup Diagnostic signs and highlight
-            -- Docs: https://neovim.io/doc/user/diagnostic.html
+            -- https://neovim.io/doc/user/diagnostic.html
             -- :help vim.diagnostic.config
             vim.diagnostic.config({
                 virtual_text = {
@@ -231,10 +220,17 @@ return {
                         return diagnostic.message
                     end,
                 },
-                signs = true, -- Show symbols in sign column (gutter)
+                signs = {
+                    -- Set priority for all diagnostics signs
+                    priority = 5,
+                },
                 underline = true, -- Underline problem line
-                update_in_insert = true,
-                severity_sort = true,
+                -- Update diagnostics in Insert mode (if `false`, diagnostics are updated on `InsertLeave`)
+                update_in_insert = false,
+                -- Sort items in signcolumn by severity.
+                -- It will affect other items in signcolumn, therefore I disable it.
+                severity_sort = false,
+                -- Floating window configurations
                 float = {
                     -- Always show diagnostic source (LSP server or linter)
                     source = true,
@@ -250,6 +246,7 @@ return {
                 Hint = icons.Hint,
                 Info = icons.Info,
             }
+            -- FIX: Defining diagnostic signs with :sign-define or sign_define() is deprecated. Run ":checkhealth vim.deprecated" for more informat
             for type, icon in pairs(signs) do
                 local hl = "DiagnosticSign" .. type
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
