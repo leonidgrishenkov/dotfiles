@@ -236,7 +236,10 @@ return {
                 update_in_insert = true,
                 severity_sort = true,
                 float = {
+                    -- Always show diagnostic source (LSP server or linter)
                     source = true,
+                    -- Enable border for floating window
+                    border = "rounded",
                 },
             })
 
