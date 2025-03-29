@@ -79,15 +79,6 @@ return {
                     -- Actions
                     map("n", "<leader>gs", gs.stage_hunk, "Stage hunk")
                     map("n", "<leader>gr", gs.reset_hunk, "Reset hunk")
-                    -- Stage hunk in V mode
-                    map("v", "<leader>gs", function()
-                        gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-                    end, "Stage hunk")
-                    -- Reset hunk in V mode
-                    map("v", "<leader>gr", function()
-                        gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-                    end, "Reset hunk")
-
                     map("n", "<leader>gu", gs.undo_stage_hunk, "Undo stage hunk")
                     map("n", "<leader>gp", gs.preview_hunk, "Preview hunk")
                 end,
