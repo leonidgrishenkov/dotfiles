@@ -6,12 +6,10 @@ return {
         Repo: https://github.com/nvim-telescope/telescope.nvim
         Wiki: https://github.com/nvim-telescope/telescope.nvim/wiki
         Telescope extensions: https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions
+        Help: :h telescope
 
-        Usefull commands:
-            `checkhealth telescope`
-
-        Docs:
-            `telescope`
+        Commands:
+            :checkhealth telescope
         ]]
         "nvim-telescope/telescope.nvim",
         version = false, -- telescope did only one release, so use HEAD for now
@@ -29,20 +27,21 @@ return {
 
         config = function()
             local telescope = require("telescope")
-            -- All available actions - `:h telescope.actions`
+            -- All available actions - :h telescope.actions
             local actions = require("telescope.actions")
-            local builtin = require("telescope.builtin")
-            local themes = require("telescope.themes")
 
             -- Global keymappings
             -- All available pickers listed here: https://github.com/nvim-telescope/telescope.nvim#pickers
-            vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
-            vim.keymap.set("n", "<leader>fp", ":Telescope<CR>", { desc = "Panel" })
+            vim.keymap.set("n", "<leader>fk", ":Telescope keymaps<CR>", { desc = "Keymaps" })
+            vim.keymap.set("n", "<leader>fp", ":Telescope<CR>", { desc = "Builtin" })
             vim.keymap.set("n", "<leader>fc", ":Telescope commands<CR>", { desc = "Commands" })
             vim.keymap.set("n", "<leader>fo", ":Telescope vim_options<CR>", { desc = "Options" })
+
             -- Files
             vim.keymap.set("n", "<leader>fs", ":Telescope live_grep<CR>", { desc = "Files by string" })
+            vim.keymap.set("n", "<leader>fS", ":Telescope grep_string<CR>", { desc = "Grep string under cursor" })
             vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Files by file name" })
+
             -- Buffers
             vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "Buffers by file name" })
             vim.keymap.set(
@@ -51,10 +50,11 @@ return {
                 ":Telescope current_buffer_fuzzy_find<CR>",
                 { desc = "Fuzzy in current buffer" }
             )
+            vim.keymap.set("n", "<leader>xB", ":Telescope diagnostics<CR>", { desc = "Diagnostics in Telescope" })
 
             telescope.setup({
                 defaults = {
-                    prompt_prefix = " ",
+                    prompt_prefix = "  ",
                     selection_caret = " ",
                     -- With this mode telescope will start
                     initial_mode = "insert",
@@ -63,11 +63,11 @@ return {
                     -- `:h telescope.layout`
                     layout_strategy = "vertical",
                     path_display = {
+                        -- Truncates the start of the path when the whole path will not fit
                         "truncate",
                     },
                     color_devicons = true,
                     -- On attached to client keymapping (inside opened plugin window)
-
                     mappings = {
                         -- For normal mode
                         n = {
@@ -118,9 +118,18 @@ return {
                         hide_on_startup = false,
                     },
                 },
+                -- Configurations for builtin pickers
+                pickers = {
+                    -- Show list of builin pickers without preview
+                    builtin = {
+                        theme = "dropdown",
+                        previewer = false ,
+                    },
+                },
                 extensions = {
                     ["ui-select"] = {
-                        themes.get_dropdown({}),
+                        -- themes.get_dropdown({}),
+                        theme = "dropdown", -- WARN: I'm not sure if this correct. I used this before: `themes.get_dropdown({})`
                     },
                 },
             })
