@@ -41,7 +41,7 @@ return {
             -- no longer trigger the **nvim-treesitter** module to be loaded in time.
             -- Luckily, the only things that those plugins need are the custom queries, which we make available
             -- during startup.
-            -- From: https://www.lazyvim.org/plugins/treesitter#nvim-treesitter
+            -- Source: https://www.lazyvim.org/plugins/treesitter#nvim-treesitter
             require("lazy.core.loader").add_to_rtp(plugin)
             require("nvim-treesitter.query_predicates")
         end,

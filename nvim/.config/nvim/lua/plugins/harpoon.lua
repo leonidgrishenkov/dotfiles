@@ -20,6 +20,7 @@ return {
             -- end, { desc = "Toggle harpoon menu" })
 
             -- Configure Telescope as a UI for plugin
+            -- Source: github
             local conf = require("telescope.config").values
             local function toggle_telescope(harpoon_files)
                 local file_paths = {}
