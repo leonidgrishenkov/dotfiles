@@ -30,6 +30,7 @@ Some usefull commands:
     :map <Keys> - Display existing mappings for keys. Example: :map <C-Left>
 --]]
 
+-- =============== General ===============
 -- Define the leader key for vim commands
 vim.g.mapleader = " " -- <space>
 vim.g.maplocalleader = " "
@@ -43,6 +44,8 @@ vim.keymap.set("", "<Right>", "<nop>")
 local function opts(desc)
     return { desc = desc, noremap = true, silent = true }
 end
+
+vim.keymap.set("n", "<leader>Q", ":q<CR>", opts("Quit"))
 
 -- Clear search highlights
 vim.keymap.set("n", "<leader>h", ":nohl<CR>", opts("HI: Clear all"))
@@ -72,8 +75,9 @@ vim.keymap.set("n", "<leader>wl", ":vertical resize -5<CR>", opts("Resize: verti
 -- =============== Buffers ===============
 vim.keymap.set("n", "tl", ":bnext<CR>", opts("Switch buf: next"))
 vim.keymap.set("n", "th", ":bprev<CR>", opts("Switch buf: prev"))
-vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", opts("Close"))
-vim.keymap.set("n", "<leader>ba", ":bufdo bd<CR>", opts("Close all"))
+
+vim.keymap.set("n", "<leader>q", ":bdelete<CR>", opts("Buf: close"))
+vim.keymap.set("n", "<leader>w", ":w<CR>", opts("Buf: write"))
 
 -- =============== Plugins ===============
 -- 'spectre'
