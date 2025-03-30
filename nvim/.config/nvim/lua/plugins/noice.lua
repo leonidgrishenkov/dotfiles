@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
     {
         --[[
@@ -5,6 +6,7 @@ return {
 
         Repo: https://github.com/folke/noice.nvim
         Wiki: https://github.com/folke/noice.nvim/wiki
+        Help: :h noice
 
         Commands:
         - `:checkhealth noice` - Check health
@@ -24,69 +26,115 @@ return {
             "hrsh7th/nvim-cmp",
             "rcarriga/nvim-notify",
         },
-        config = function()
-            -- `:h noice.nvim-noice-configuration`
-            require("noice").setup({
-                cmdline = {
-                    format = {
-                        -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
-                        -- view: (default is cmdline view)
-                        -- opts: any options passed to the view
-                        -- icon_hl_group: optional hl_group for the icon
-                        -- title: set to anything or empty string to hide
-                        cmdline = { pattern = "^:", icon = "󱐋", lang = "vim" }, -- 󱐋 󰘳
-                        search_down = { kind = "search", pattern = "^/", icon = "", lang = "regex" }, -- 󰆌 󰆋   
-                        search_up = { kind = "search", pattern = "^%?", icon = "", lang = "regex" },
-                        filter = { pattern = "^:%s*!", icon = "", lang = "bash" },
-                        lua = {
-                            pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" },
-                            icon = "",
-                            lang = "lua",
+        -- :h noice.nvim-noice-configuration
+        opts = {
+            cmdline = {
+                ---@type table<string, CmdlineFormat>
+                format = {
+                    -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
+                    -- view: (default is cmdline view)
+                    -- opts: any options passed to the view
+                    -- icon_hl_group: optional hl_group for the icon
+                    -- title: set to anything or empty string to hide
+                    cmdline = { pattern = "^:", icon = "󱐋", lang = "vim" },
+                    search_down = { kind = "search", pattern = "^/", icon = "", lang = "regex" },
+                    search_up = { kind = "search", pattern = "^%?", icon = "", lang = "regex" },
+                    filter = { pattern = "^:%s*!", icon = "", lang = "bash" },
+                    lua = {
+                        pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" },
+                        icon = "",
+                        lang = "lua",
+                    },
+                    help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+                },
+            },
+            ---@type NoiceRouteConfig[]
+            routes = {
+                {
+                    -- Show @recording messages as a notify message.
+                    view = "notify",
+                    filter = { event = "msg_showmode" },
+                },
+                {
+                    -- Always route any messages with more than 20 lines to the split view
+                    view = "split",
+                    filter = { event = "msg_show", min_height = 20 },
+                },
+                {
+                    -- Hide all messages about written files
+                    filter = {
+                        event = "msg_show",
+                        kind = "",
+                        find = "written",
+                    },
+                    opts = { skip = true },
+                },
+            },
+            lsp = {
+                -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+                },
+                hover = {
+                    silent = true, -- set to true to not show a message if hover is not available
+                },
+            },
+            ---@type NoiceConfigViews
+            views = {
+                notify = {
+                    -- When true, messages routing to the same notify
+                    -- instance will replace existing messages instead of
+                    -- pushing a new notification every time.
+                    replace = true,
+                },
+                -- The following line are configure to display the Cmdline and Popupmenu together.
+                cmdline_popup = {
+                    position = {
+                        row = 5,
+                        col = "50%",
+                    },
+                    size = {
+                        width = 60,
+                        height = "auto",
+                    },
+                    win_options = {
+                        winhighlight = {
+                            NormalFloat = "NormalFloat",
+                            FloatBorder = "FloatBorder",
                         },
-                        help = { pattern = "^:%s*he?l?p?%s+", icon = "" }, -- 󰋖 󰞋 󰮥 󰘥 󰌵    󰋗 󰆋
-                        -- input = { view = "cmdline_input", icon = "󰥻 " }, -- Used by input()
                     },
                 },
-                routes = {
-                    {
-                        -- Show @recording messages as a notify message.
-                        view = "notify",
-                        filter = { event = "msg_showmode" },
+                popupmenu = {
+                    relative = "editor",
+                    position = {
+                        row = 8,
+                        col = "50%",
                     },
-                    {
-                        -- Always route any messages with more than 20 lines to the split view
-                        view = "split",
-                        filter = { event = "msg_show", min_height = 20 },
+                    size = {
+                        width = 60,
+                        height = 10,
                     },
-                },
-                lsp = {
-                    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-                    -- took from plugin repo
-                    override = {
-                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                        ["vim.lsp.util.stylize_markdown"] = true,
-                        ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+                    border = {
+                        style = "rounded",
+                        padding = { 0, 1 },
                     },
-                    hover = {
-                        silent = true, -- set to true to not show a message if hover is not available
-                    },
-                },
-                views = {
-                    notify = {
-                        -- When true, messages routing to the same notify
-                        -- instance will replace existing messages instead of
-                        -- pushing a new notification every time.
-                        replace = true,
+                    -- nui options
+                    win_options = {
+                        winhighlight = {
+                            -- UI text highlight group
+                            Normal = "Normal",
+                            -- UI menu border highlight group
+                            FloatBorder = "FloatBorder",
+                        },
                     },
                 },
-                presets = {
-                    bottom_search = false, -- use a classic bottom cmdline for search
-                    command_palette = true, -- position the cmdline and popupmenu together
-                    long_message_to_split = true, -- long messages will be sent to a split
-                    inc_rename = true, -- enables an input dialog for inc-rename.nvim
-                    lsp_doc_border = true, -- add a border to hover docs and signature help
-                },
-            })
-        end,
+            },
+            presets = {
+                -- inc_rename = true, -- enables an input dialog for inc-rename.nvim
+                lsp_doc_border = true, -- add a border to hover docs and signature help
+            },
+        },
     },
 }
