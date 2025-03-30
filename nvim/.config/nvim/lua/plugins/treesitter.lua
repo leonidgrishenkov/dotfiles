@@ -37,7 +37,6 @@ return {
                 ensure_installed = {
                     "lua",
                     "luadoc",
-                    "ninja",
                     "rst",
                     "python",
                     "bash",
@@ -58,14 +57,12 @@ return {
                     "ssh_config",
                     "toml",
                     "make",
-                    "tmux",
                     "hcl", -- terraform HCL
+                    "terraform",
                     "kdl", -- KDL
                     "nginx",
                     "nix",
-                    "xml",
-                    "html",
-                    -- "just", -- JustFile
+                    "jinja",
                 },
                 -- Install parsers synchronously (only applied to `ensure_installed`).
                 -- false = install async
@@ -97,7 +94,7 @@ return {
                 rainbow = {
                     enable = true,
                     extended_mode = true,
-                    max_file_lines = 300,
+                    max_file_lines = 1000,
                 },
                 pairs = {
                     enable = true,
