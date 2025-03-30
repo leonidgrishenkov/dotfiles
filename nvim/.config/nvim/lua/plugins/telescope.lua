@@ -78,9 +78,10 @@ return {
                             ["<C-b>"] = actions.move_selection_better,
 
                             ["<C-k>"] = actions.preview_scrolling_up,
-                            ["<C-l>"] = actions.preview_scrolling_down,
+                            ["<C-j>"] = actions.preview_scrolling_down,
 
                             ["<esc>"] = actions.close,
+                            ["q"] = actions.close,
 
                             -- This is which key for telescope itself
                             ["?"] = actions.which_key,
@@ -94,7 +95,7 @@ return {
                             ["<C-b>"] = actions.move_selection_better,
 
                             ["<C-k>"] = actions.preview_scrolling_up,
-                            ["<C-l>"] = actions.preview_scrolling_down,
+                            ["<C-j>"] = actions.preview_scrolling_down,
 
                             ["<esc>"] = actions.close,
                         },
