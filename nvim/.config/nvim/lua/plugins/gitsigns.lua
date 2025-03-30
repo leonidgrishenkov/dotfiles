@@ -70,8 +70,8 @@ return {
                     end
 
                     -- Navigations
-                    map("n", "]h", gs.next_hunk, "Next Hunk")
-                    map("n", "[h", gs.prev_hunk, "Prev Hunk")
+                    map("n", "]h", gs.next_hunk, "Git: next hunk")
+                    map("n", "[h", gs.prev_hunk, "Git: prev hunk")
 
                     -- Actions
                     map("n", "<leader>gs", gs.stage_hunk, "Stage/unstage hunk")

@@ -34,7 +34,7 @@ return {
                 { "<leader>f", group = "Find" },
                 { "<leader>g", group = "Git" },
                 { "<leader>l", group = "LSP" },
-                { "<leader>p", group = "Panes" },
+                { "<leader>w", group = "Windows" },
                 { "<leader>s", group = "Search & Replace" },
                 { "<leader>x", group = "Diagnostics" },
                 { "<leader>a", group = "Avante" },

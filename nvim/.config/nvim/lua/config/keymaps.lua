@@ -62,32 +62,13 @@ vim.keymap.set("x", "p", "P", opts(nil))
 -- Remap exit modes to normal mode
 vim.keymap.set({ "v", "i" }, "jf", "<ESC>", opts(nil))
 
--- =============== Panes ===============
--- Unmap default keybind to split windows
-vim.keymap.set("", "<C-w>v", "<nop>")
-vim.keymap.set("", "<C-w>s", "<nop>")
+-- =============== Windows ===============
 
--- Switch panes
-vim.keymap.set("n", "<C-j>", "<C-w>j", opts("Switch pane: bottom"))
-vim.keymap.set("n", "<C-k>", "<C-w>k", opts("Switch pane: top"))
-vim.keymap.set("n", "<C-l>", "<C-w>l", opts("Switch pane: right"))
-vim.keymap.set("n", "<C-h>", "<C-w>h", opts("Switch pane: left"))
-
--- Unmap defaults
-vim.keymap.set("", "<C-w>j", "<nop>")
-vim.keymap.set("", "<C-w>k", "<nop>")
-vim.keymap.set("", "<C-w>l", "<nop>")
-vim.keymap.set("", "<C-w>h", "<nop>")
-
--- Control pane size
-vim.keymap.set("n", "<leader>pk", ":resize +5<CR>", opts("Resize: horiz +5"))
-vim.keymap.set("n", "<leader>pj", ":resize -5<CR>", opts("Resize: horiz -5"))
-vim.keymap.set("n", "<leader>ph", ":vertical resize +5<CR>", opts("Resize: vertical +5"))
-vim.keymap.set("n", "<leader>pl", ":vertical resize -5<CR>", opts("Resize: vertical -5"))
-
--- Split window
-vim.keymap.set("n", "<leader>pv", ":vsplit<CR>", opts("Split: vertical"))
-vim.keymap.set("n", "<leader>ps", ":split<CR>", opts("Split: horiz"))
+-- Control window size
+vim.keymap.set("n", "<leader>wk", ":resize +5<CR>", opts("Resize: horiz +5"))
+vim.keymap.set("n", "<leader>wj", ":resize -5<CR>", opts("Resize: horiz -5"))
+vim.keymap.set("n", "<leader>wh", ":vertical resize +5<CR>", opts("Resize: vertical +5"))
+vim.keymap.set("n", "<leader>wl", ":vertical resize -5<CR>", opts("Resize: vertical -5"))
 
 -- =============== Buffers ===============
 vim.keymap.set("n", "tl", ":bnext<CR>", opts("Switch buf: next"))
@@ -97,12 +78,12 @@ vim.keymap.set("n", "<leader>ba", ":bufdo bd<CR>", opts("Close all"))
 
 -- =============== Plugins ===============
 -- 'spectre'
-vim.keymap.set("n", "<leader>st", ':lua require("spectre").toggle()<CR>', opts("Toggle Spectre"))
+vim.keymap.set("n", "<leader>st", ':lua require("spectre").toggle()<CR>', opts("Spectre: toggle"))
 vim.keymap.set(
     "n",
     "<leader>sf",
     ':lua require("spectre").open_file_search({select_word=true})<CR>',
-    opts("Search on current file")
+    opts("Spectre: toggle on current file")
 )
 
 -- 'todo-comments'
