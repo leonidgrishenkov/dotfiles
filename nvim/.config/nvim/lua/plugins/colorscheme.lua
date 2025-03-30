@@ -72,6 +72,7 @@ return {
                 mini = true,
                 semantic_tokens = true,
                 fidget = true,
+                nvim_surround = true,
                 native_lsp = {
                     enabled = true,
                     -- To see all available values: :h highlight-args
