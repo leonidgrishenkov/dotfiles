@@ -25,12 +25,12 @@ return {
             claude = {
                 endpoint = "https://api.anthropic.com",
                 model = "claude-3-7-sonnet-20250219",
-                temperature = 0,
-                max_tokens = 10000,
+                temperature = 0.5,
+                max_tokens = 20000,
             },
             hints = { enabled = false },
             behaviour = {
-                enable_claude_text_editor_tool_mode = false, -- Whether to enable Claude Text Editor Tool Mode.
+                enable_claude_text_editor_tool_mode = true, -- Whether to enable Claude Text Editor Tool Mode.
             },
             windows = {
                 width = 45, -- default % based on available width

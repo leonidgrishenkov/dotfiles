@@ -1,10 +1,13 @@
+--- @diagnostic disable: missing-fields
 return {
     {
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
         dependencies = { "nvim-lua/plenary.nvim" },
+        --TODO: diable persistence
         init = function()
             local harpoon = require("harpoon")
+            -- It's required because of autocmds. See docs.
             harpoon.setup({})
 
             vim.keymap.set("n", "<leader>na", function()
