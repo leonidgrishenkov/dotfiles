@@ -45,7 +45,7 @@ local function opts(desc)
 end
 
 -- Clear search highlights
-vim.keymap.set("n", "<leader>h", ":nohl<CR>", opts("Clear search highlights"))
+vim.keymap.set("n", "<leader>h", ":nohl<CR>", opts("HI: Clear all"))
 
 -- =============== Yank ===============
 -- Disable yank on delete word
@@ -68,10 +68,10 @@ vim.keymap.set("", "<C-w>v", "<nop>")
 vim.keymap.set("", "<C-w>s", "<nop>")
 
 -- Switch panes
-vim.keymap.set("n", "<C-j>", "<C-w>j", opts("Switch to bottom pane"))
-vim.keymap.set("n", "<C-k>", "<C-w>k", opts("Switch to top pane"))
-vim.keymap.set("n", "<C-l>", "<C-w>l", opts("Switch to right pane"))
-vim.keymap.set("n", "<C-h>", "<C-w>h", opts("Switch to left pane"))
+vim.keymap.set("n", "<C-j>", "<C-w>j", opts("Switch pane: bottom"))
+vim.keymap.set("n", "<C-k>", "<C-w>k", opts("Switch pane: top"))
+vim.keymap.set("n", "<C-l>", "<C-w>l", opts("Switch pane: right"))
+vim.keymap.set("n", "<C-h>", "<C-w>h", opts("Switch pane: left"))
 
 -- Unmap defaults
 vim.keymap.set("", "<C-w>j", "<nop>")
@@ -80,16 +80,20 @@ vim.keymap.set("", "<C-w>l", "<nop>")
 vim.keymap.set("", "<C-w>h", "<nop>")
 
 -- Control pane size
-vim.keymap.set("n", "<leader>pk", ":resize +5<CR>", opts("Increase pane size"))
-vim.keymap.set("n", "<leader>pj", ":resize -5<CR>", opts("Decrease pane size"))
-vim.keymap.set("n", "<leader>ph", ":vertical resize -5<CR>", opts("Decrease vertical pane size"))
-vim.keymap.set("n", "<leader>pl", ":vertical resize +5<CR>", opts("Increase vertical pane size"))
+vim.keymap.set("n", "<leader>pk", ":resize +5<CR>", opts("Resize: horiz +5"))
+vim.keymap.set("n", "<leader>pj", ":resize -5<CR>", opts("Resize: horiz -5"))
+vim.keymap.set("n", "<leader>ph", ":vertical resize +5<CR>", opts("Resize: vertical +5"))
+vim.keymap.set("n", "<leader>pl", ":vertical resize -5<CR>", opts("Resize: vertical -5"))
+
+-- Split window
+vim.keymap.set("n", "<leader>pv", ":vsplit<CR>", opts("Split: vertical"))
+vim.keymap.set("n", "<leader>ps", ":split<CR>", opts("Split: horiz"))
 
 -- =============== Buffers ===============
-vim.keymap.set("n", "tl", ":bnext<CR>", opts("Go to next buffer"))
-vim.keymap.set("n", "th", ":bprev<CR>", opts("Go to previous buffer"))
-vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", opts("Close current buffer"))
-vim.keymap.set("n", "<leader>ba", ":bufdo bd<CR>", opts("Close all buffers"))
+vim.keymap.set("n", "tl", ":bnext<CR>", opts("Switch buf: next"))
+vim.keymap.set("n", "th", ":bprev<CR>", opts("Switch buf: prev"))
+vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", opts("Close"))
+vim.keymap.set("n", "<leader>ba", ":bufdo bd<CR>", opts("Close all"))
 
 -- =============== Plugins ===============
 -- 'spectre'
@@ -104,8 +108,8 @@ vim.keymap.set(
 -- 'todo-comments'
 vim.keymap.set("n", "]t", function()
     require("todo-comments").jump_next()
-end, { desc = "Next todo comment" })
+end, { desc = "TODO: go next" })
 
 vim.keymap.set("n", "[t", function()
     require("todo-comments").jump_prev()
-end, { desc = "Previous todo comment" })
+end, { desc = "TODO: go prev" })
