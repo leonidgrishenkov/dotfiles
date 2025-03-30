@@ -22,8 +22,8 @@ return {
                         FloatBorder = { fg = frappe.surface2 },
                         TelescopeBorder = { fg = frappe.surface2 },
                         NvimTreeWinSeparator = { fg = frappe.surface2 },
-                        -- NoiceCmdlinePopupBorder = { fg = frappe.surface2 },
-                        -- NoiceConfirmBorder = { fg = frappe.surface2 },
+                        NoiceCmdlinePopupBorder = { fg = frappe.surface2 },
+                        NoiceConfirmBorder = { fg = frappe.surface2 },
                         LspInfoBorder = { fg = frappe.surface2 },
                         -- CmpBorder = { fg = frappe.surface2 },
                         WhichKeyBorder = { fg = frappe.surface2 },
@@ -74,6 +74,7 @@ return {
                 fidget = true,
                 native_lsp = {
                     enabled = true,
+                    -- To see all available values: :h highlight-args
                     virtual_text = {
                         errors = { "italic" },
                         hints = { "italic" },
@@ -81,15 +82,18 @@ return {
                         information = { "italic" },
                     },
                     underlines = {
-                        errors = {},
+                        errors = { "undercurl" },
                         hints = {},
                         warnings = {},
                         information = {},
+                        ok = {},
                     },
                     inlay_hints = {
                         background = true,
                     },
                 },
+                render_markdown = true,
+                rainbow_delimiters = true,
                 --- @diagnostic disable: assign-type-mismatch
                 indent_blankline = {
                     enabled = true,
