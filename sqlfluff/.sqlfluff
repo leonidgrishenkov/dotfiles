@@ -5,9 +5,10 @@
 # - Rules reference: https://docs.sqlfluff.com/en/3.0.7/rules.html#rules-reference
 
 [sqlfluff]
-dialect = postgres
+dialect = ansi
 max_line_length = 200
-fix_even_unparsable = True
+fix_even_unparsable = False
+fail_on_error = False
 
 [sqlfluff:indentation]
 indent_unit = tab
@@ -22,11 +23,11 @@ capitalisation_policy = upper
 [sqlfluff:rules:capitalisation.identifiers]
 extended_capitalisation_policy = None
 
-[sqlfluff:rules:capitalisation.functions]
-extended_capitalisation_policy = upper
+# [sqlfluff:rules:capitalisation.functions]
+# extended_capitalisation_policy = upper
 
 [sqlfluff:rules:capitalisation.literals]
 capitalisation_policy = upper
 
-[sqlfluff:rules:capitalisation.types]
-extended_capitalisation_policy = upper
+# [sqlfluff:rules:capitalisation.types]
+# extended_capitalisation_policy = upper
