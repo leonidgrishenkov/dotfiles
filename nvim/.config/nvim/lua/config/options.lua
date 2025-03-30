@@ -18,11 +18,6 @@ vim.opt.mousefocus = true -- ?
 -- Learn about `modeline`
 -- opt.modeline = true
 
--- Enable LazyVim auto format.
--- What does it do?
--- https://www.lazyvim.org/configuration/general
--- g.autoformat = true
-
 -- https://neovim.io/doc/user/provider.html#provider-clipboard
 -- `unnamedplus` - Sync with system clipboard
 vim.opt.clipboard = "unnamed,unnamedplus"
@@ -80,7 +75,7 @@ vim.opt.scrolloff = 4
 vim.opt.splitright = true -- split vertical window to the right
 vim.opt.splitbelow = true -- split horizontal window to the bottom
 
-vim.opt.spelllang = { "en" }
+vim.opt.spelllang = "en,ru"
 vim.opt.splitkeep = "screen"
 vim.opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 -- opt.winminwidth = 5 -- Minimum window width

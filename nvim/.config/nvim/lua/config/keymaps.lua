@@ -63,7 +63,6 @@ vim.keymap.set("x", "p", "P", opts(nil))
 vim.keymap.set({ "v", "i" }, "jf", "<ESC>", opts(nil))
 
 -- =============== Windows ===============
-
 -- Control window size
 vim.keymap.set("n", "<leader>wk", ":resize +5<CR>", opts("Resize: horiz +5"))
 vim.keymap.set("n", "<leader>wj", ":resize -5<CR>", opts("Resize: horiz -5"))
