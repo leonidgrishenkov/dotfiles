@@ -24,6 +24,10 @@ return {
             "BufNewFile",
         },
         cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+        keys = {
+            { "<c-space>", desc = "Increment Selection" },
+            { "<bs>", desc = "Decrement Selection", mode = "x" },
+        },
         dependencies = {
             {
                 -- https://github.com/nvim-treesitter/nvim-treesitter-refactor
@@ -118,6 +122,15 @@ return {
                 highlight_definitions = { enable = false, clear_on_cursor_move = true },
                 -- Highlights the block from the current scope where the cursor is.
                 highlight_current_scope = { enable = false },
+            },
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = "<C-space>",
+                    node_incremental = "<C-space>",
+                    scope_incremental = false,
+                    node_decremental = "<bs>",
+                },
             },
         },
         ---@param opts TSConfig

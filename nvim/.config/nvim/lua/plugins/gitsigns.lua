@@ -74,9 +74,9 @@ return {
                     map("n", "[h", gs.prev_hunk, "Prev Hunk")
 
                     -- Actions
-                    map("n", "<leader>gs", gs.stage_hunk, "Stage hunk")
+                    map("n", "<leader>gs", gs.stage_hunk, "Stage/unstage hunk")
                     map("n", "<leader>gr", gs.reset_hunk, "Reset hunk")
-                    map("n", "<leader>gu", gs.undo_stage_hunk, "Undo stage hunk")
+                    map("n", "<leader>gu", gs.undo_stage_hunk, "Undo prev stage hunk")
                     map("n", "<leader>gp", gs.preview_hunk, "Preview hunk")
                 end,
             })
