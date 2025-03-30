@@ -1,13 +1,9 @@
 return {
     {
-        --[[foldopen = "",
-  foldclose = "",
+        --[[
         Better folding expirience.
 
         Repo: https://github.com/kevinhwang91/nvim-ufo
-
-        About:
-        https://www.youtube.com/watch?v=f_f08KnAJOQ
         ]]
         "kevinhwang91/nvim-ufo",
         event = "BufEnter",
@@ -17,9 +13,13 @@ return {
         config = function()
             local ufo = require("ufo")
             --- @diagnostic disable: unused-local
+            local ftProviderMap = {
+                python = { "treesitter", "indent" },
+                git = "",
+            }
             ufo.setup({
                 provider_selector = function(bufnr, filetype, buftype)
-                    return { "lsp", "indent" }
+                    return ftProviderMap[filetype] or {'lsp', 'indent'}
                 end,
                 enable_get_fold_virt_text = true,
                 fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)

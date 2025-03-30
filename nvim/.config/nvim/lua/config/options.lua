@@ -116,13 +116,16 @@ vim.opt.formatoptions = "jcroqlnt" -- tcqj
 
 -- Folding.
 -- For keymaps see docs: :h fold opening and closing folds
--- vim.opt.foldmethod = "indent" -- folds will be autodefined based on indents
+vim.opt.foldmethod = "indent" -- folds will be autodefined based on indents
 -- Recommended for `nvim-ufo` plugin: https://github.com/kevinhwang91/nvim-ufo?tab=readme-ov-file#minimal-configuration
 -- Show fold infos in signcolomn. 0 - disable, 1 - enable. Looks too verbose, therefor I disabled it.
-vim.o.foldcolumn = "0"
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
+vim.opt.foldcolumn = "0"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+
+if vim.fn.has("nvim-0.10") == 1 then
+  vim.opt.smoothscroll = true
+end
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
