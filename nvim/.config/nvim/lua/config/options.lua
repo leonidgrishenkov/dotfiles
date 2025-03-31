@@ -1,3 +1,9 @@
+-- Enable highlighting of the current line
+vim.opt.cursorline = true
+
+-- Size of an indent
+vim.opt.shiftwidth = 4
+
 -- LazyVim auto format
 vim.g.autoformat = false
 
