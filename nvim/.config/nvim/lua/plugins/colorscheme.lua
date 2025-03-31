@@ -1,10 +1,14 @@
 return {
     {
-        -- Repo: https://github.com/catppuccin/nvim
-        -- Help: :h catppuccin
+        "LazyVim/LazyVim",
+        opts = {
+            colorscheme = "catppuccin",
+        },
+    },
+    {
         "catppuccin/nvim",
-        lazy = false, -- `false` means that we load this plugin during startup
-        priority = 1000, -- make sure to load this before all the other start plugins
+        lazy = false,
+        priority = 1000,
         name = "catppuccin",
         opts = {
             flavour = "frappe", -- Can be one of: latte, frappe, macchiato, mocha
@@ -14,97 +18,55 @@ return {
             no_italic = false, -- Force no italic
             no_bold = false, -- Force no bold
             no_underline = false, -- Force no underline
-            highlight_overrides = {
-                frappe = function(frappe)
-                    return {
-                        LineNr = { fg = frappe.overlay0 },
-                        -- CursorLineNr = { fg = frappe.flamingo },
-                        FloatBorder = { fg = frappe.surface2 },
-                        TelescopeBorder = { fg = frappe.surface2 },
-                        NvimTreeWinSeparator = { fg = frappe.surface2 },
-                        NoiceCmdlinePopupBorder = { fg = frappe.surface2 },
-                        NoiceConfirmBorder = { fg = frappe.surface2 },
-                        LspInfoBorder = { fg = frappe.surface2 },
-                        -- CmpBorder = { fg = frappe.surface2 },
-                        WhichKeyBorder = { fg = frappe.surface2 },
-                    }
-                end,
-            },
-            styles = {
-                -- To see all available values: :h highlight-args
-                comments = {},
-                conditionals = { "italic" },
-                loops = {},
-                functions = {},
-                keywords = {},
-                strings = {},
-                variables = {},
-                numbers = {},
-                booleans = {},
-                properties = {},
-                types = {},
-                operators = {},
-            },
-            -- About integrations: https://github.com/catppuccin/nvim#integrations
             integrations = {
-                barbecue = {
-                    dim_dirname = true, -- directory name is dimmed by default
-                    bold_basename = true,
-                    dim_context = false,
-                    alt_background = false,
-                },
-                nvimtree = true,
+                aerial = true,
+                alpha = true,
                 cmp = true,
-                treesitter = true,
-                ufo = true,
-                treesitter_context = true,
-                telescope = {
-                    enabled = true,
-                    style = "nvchad",
-                },
-                notify = true,
-                lsp_trouble = true,
+                dashboard = true,
+                flash = true,
+                fzf = true,
+                grug_far = true,
                 gitsigns = true,
-                which_key = true,
+                headlines = true,
+                illuminate = true,
+                indent_blankline = { enabled = true },
+                leap = true,
+                lsp_trouble = true,
                 mason = true,
                 markdown = true,
-                noice = true,
                 mini = true,
-                semantic_tokens = true,
-                fidget = true,
-                nvim_surround = true,
                 native_lsp = {
                     enabled = true,
-                    -- To see all available values: :h highlight-args
-                    virtual_text = {
-                        errors = { "italic" },
-                        hints = { "italic" },
-                        warnings = { "italic" },
-                        information = { "italic" },
-                    },
                     underlines = {
                         errors = { "undercurl" },
-                        hints = {},
-                        warnings = {},
-                        information = {},
-                        ok = {},
-                    },
-                    inlay_hints = {
-                        background = true,
+                        hints = { "undercurl" },
+                        warnings = { "undercurl" },
+                        information = { "undercurl" },
                     },
                 },
-                render_markdown = true,
-                rainbow_delimiters = true,
-                --- @diagnostic disable: assign-type-mismatch
-                indent_blankline = {
-                    enabled = true,
-                    scope_color = "", -- catppuccin color (eg. `lavender`) Default: text
-                    colored_indent_levels = false,
-                },
+                navic = { enabled = true, custom_bg = "lualine" },
+                neotest = true,
+                neotree = true,
+                noice = true,
+                notify = true,
+                semantic_tokens = true,
+                snacks = true,
+                telescope = true,
+                treesitter = true,
+                treesitter_context = true,
+                which_key = true,
             },
         },
-        init = function()
-            vim.cmd("colorscheme catppuccin")
-        end,
+        specs = {
+            {
+                "akinsho/bufferline.nvim",
+                optional = true,
+                opts = function(_, opts)
+                    if (vim.g.colors_name or ""):find("catppuccin") then
+                        opts.highlights = require("catppuccin.groups.integrations.bufferline").get()
+                    end
+                end,
+            },
+        },
     },
 }
