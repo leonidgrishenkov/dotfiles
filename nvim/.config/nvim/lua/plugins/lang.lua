@@ -20,4 +20,17 @@ return {
             },
         },
     },
+    {
+        "neovim/nvim-lspconfig",
+        opts = function(_, opts)
+            opts.diagnostics = vim.tbl_extend("force", opts.diagnostics, {
+                float = {
+                    -- Always show diagnostic source (LSP server or linter)
+                    source = true,
+                    -- Enable border for floating window
+                    border = "rounded",
+                },
+            })
+        end,
+    },
 }

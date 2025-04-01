@@ -1,6 +1,8 @@
 -- Enable highlighting of the current line
 vim.opt.cursorline = false
 
+-- Number of spaces tabs count for
+vim.opt.tabstop = 4
 -- Size of an indent
 vim.opt.shiftwidth = 4
 
