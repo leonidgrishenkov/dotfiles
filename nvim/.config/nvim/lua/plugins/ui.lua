@@ -24,4 +24,16 @@ return {
             },
         },
     },
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        opts = {
+            filesystem = {
+                filtered_items = {
+                    -- Show all dot and gitignore files as normal ones
+                    hide_dotfiles = false,
+                    hide_gitignored = false,
+                },
+            },
+        },
+    },
 }
