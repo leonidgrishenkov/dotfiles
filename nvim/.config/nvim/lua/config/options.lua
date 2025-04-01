@@ -1,5 +1,5 @@
 -- Enable highlighting of the current line
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 -- Size of an indent
 vim.opt.shiftwidth = 4
