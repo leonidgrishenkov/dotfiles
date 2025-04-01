@@ -1,5 +1,6 @@
 -- Enable highlighting of the current line
-vim.opt.cursorline = false
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number" -- highlight the line number
 
 -- Number of spaces tabs count for
 vim.opt.tabstop = 4
