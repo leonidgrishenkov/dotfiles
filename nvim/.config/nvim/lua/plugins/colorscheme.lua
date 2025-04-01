@@ -16,6 +16,23 @@ return {
             integrations = {
                 rainbow_delimiters = true,
                 blink_cmp = true,
+                native_lsp = {
+                    enabled = true,
+                    -- To see all available values: :h highlight-args
+                    virtual_text = {
+                        errors = { "italic" },
+                        hints = { "italic" },
+                        warnings = { "italic" },
+                        information = { "italic" },
+                    },
+                    underlines = {
+                        errors = { "undercurl" },
+                        hints = {},
+                        warnings = { "undercurl" },
+                        information = {},
+                        ok = {},
+                    },
+                },
             },
         },
     },
