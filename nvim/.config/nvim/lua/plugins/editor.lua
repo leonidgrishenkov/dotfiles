@@ -18,5 +18,12 @@ return {
             },
         },
     },
+    {
+         "folke/todo-comments.nvim",
+        opts = function (_, opts)
+            -- Disable all items in signcolumn
+            opts.signs = false
+        end
+    }
 }
 
