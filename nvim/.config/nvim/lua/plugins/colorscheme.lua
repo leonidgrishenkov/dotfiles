@@ -14,7 +14,8 @@ return {
             no_bold = false, -- Force no bold
             no_underline = false, -- Force no underline
             integrations = {
-                 rainbow_delimiters = true,
+                rainbow_delimiters = true,
+                blink_cmp = true,
             },
         },
     },
