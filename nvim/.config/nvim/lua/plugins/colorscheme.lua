@@ -1,11 +1,7 @@
 return {
+    { "folke/tokyonight.nvim", enabled = false },
     {
-        -- Repo: https://github.com/catppuccin/nvim
-        -- Help: :h catppuccin
         "catppuccin/nvim",
-        lazy = false, -- `false` means that we load this plugin during startup
-        priority = 1000, -- make sure to load this before all the other start plugins
-        name = "catppuccin",
         opts = {
             flavour = "frappe", -- Can be one of: latte, frappe, macchiato, mocha
             transparent_background = true, -- disables setting the background color.
@@ -14,65 +10,9 @@ return {
             no_italic = false, -- Force no italic
             no_bold = false, -- Force no bold
             no_underline = false, -- Force no underline
-            highlight_overrides = {
-                frappe = function(frappe)
-                    return {
-                        LineNr = { fg = frappe.overlay0 },
-                        -- CursorLineNr = { fg = frappe.flamingo },
-                        FloatBorder = { fg = frappe.surface2 },
-                        TelescopeBorder = { fg = frappe.surface2 },
-                        NvimTreeWinSeparator = { fg = frappe.surface2 },
-                        NoiceCmdlinePopupBorder = { fg = frappe.surface2 },
-                        NoiceConfirmBorder = { fg = frappe.surface2 },
-                        LspInfoBorder = { fg = frappe.surface2 },
-                        -- CmpBorder = { fg = frappe.surface2 },
-                        WhichKeyBorder = { fg = frappe.surface2 },
-                    }
-                end,
-            },
-            styles = {
-                -- To see all available values: :h highlight-args
-                comments = {},
-                conditionals = { "italic" },
-                loops = {},
-                functions = {},
-                keywords = {},
-                strings = {},
-                variables = {},
-                numbers = {},
-                booleans = {},
-                properties = {},
-                types = {},
-                operators = {},
-            },
-            -- About integrations: https://github.com/catppuccin/nvim#integrations
             integrations = {
-                barbecue = {
-                    dim_dirname = true, -- directory name is dimmed by default
-                    bold_basename = true,
-                    dim_context = false,
-                    alt_background = false,
-                },
-                nvimtree = true,
-                cmp = true,
-                treesitter = true,
-                ufo = true,
-                treesitter_context = true,
-                telescope = {
-                    enabled = true,
-                    style = "nvchad",
-                },
-                notify = true,
-                lsp_trouble = true,
-                gitsigns = true,
-                which_key = true,
-                mason = true,
-                markdown = true,
-                noice = true,
-                mini = true,
-                semantic_tokens = true,
-                fidget = true,
-                nvim_surround = true,
+                rainbow_delimiters = true,
+                blink_cmp = true,
                 native_lsp = {
                     enabled = true,
                     -- To see all available values: :h highlight-args
@@ -85,26 +25,12 @@ return {
                     underlines = {
                         errors = { "undercurl" },
                         hints = {},
-                        warnings = {},
+                        warnings = { "undercurl" },
                         information = {},
                         ok = {},
                     },
-                    inlay_hints = {
-                        background = true,
-                    },
-                },
-                render_markdown = true,
-                rainbow_delimiters = true,
-                --- @diagnostic disable: assign-type-mismatch
-                indent_blankline = {
-                    enabled = true,
-                    scope_color = "", -- catppuccin color (eg. `lavender`) Default: text
-                    colored_indent_levels = false,
                 },
             },
         },
-        init = function()
-            vim.cmd("colorscheme catppuccin")
-        end,
     },
 }
