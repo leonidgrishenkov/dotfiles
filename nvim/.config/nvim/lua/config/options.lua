@@ -19,7 +19,7 @@ vim.g.lazyvim_python_ruff = "ruff"
 -- Set to `true` to follow the main branch
 -- you need to have a working rust toolchain to build the plugin
 -- in this case.
-vim.g.lazyvim_blink_main = true
+vim.g.lazyvim_blink_main = false
 
 -- Snacks animations
 -- Set to `false` to globally disable all snacks animations
