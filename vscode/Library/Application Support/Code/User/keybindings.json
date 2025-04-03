@@ -460,7 +460,7 @@
         "when": "listFocus && !inputFocus"
     },
     {
-        "key": "l",
+        "key": "j",
         "command": "list.focusDown",
         "when": "listFocus && !inputFocus"
     },
