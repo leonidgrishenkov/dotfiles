@@ -3,20 +3,17 @@ This repository is adapted to work with [GNU stow](https://www.gnu.org/software/
 To start syncing local machine configuration with this repo, for example, for `lazygit` execute this command:
 
 ```sh
-stow --target=$HOME \
-    --stow lazygit \
-    --verbose
+stow --stow lazygit
 ```
 
 This command will create a symlinks with files structure corresponding to specified app name in this repo, in this example `lazygit`.
 
+Additional configuration options can be found in `.stowrc` file.
 
 Several items can be listed separated by space like that:
 
 ```sh
-stow --target=$HOME \
-    --stow lazygit zsh zellij \
-    --verbose
+stow --stow lazygit zsh zellij
 ```
 
 # Recreate symlinks
@@ -24,9 +21,7 @@ stow --target=$HOME \
 To recreate symlinks, for example there were made some changes in directories names:
 
 ```sh
-stow --target=$HOME \
-    --restow lazygit \
-    --verbose
+stow --restow lazygit
 ```
 
 # Delete symlinks
@@ -34,9 +29,7 @@ stow --target=$HOME \
 To delete symlinks:
 
 ```sh
-stow --target=$HOME \
-    --delete lazygit \
-    --verbose
+stow --delete lazygit
 ```
 
 # Clone repository

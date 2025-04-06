@@ -18,12 +18,12 @@ _darcs
 \.git
 \.gitignore
 
-.+~          # emacs backup files
-\#.*\#       # emacs autosave files
-
 ^/README.*
 ^/LICENSE.*
 ^/COPYING
 
 scripts
 iterm
+
+\.stowrc
+\.stow-local-ignore
