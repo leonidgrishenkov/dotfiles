@@ -2,6 +2,7 @@
 # vim: set filetype=sh:
 # vim: set ts=4 sw=4 et:
 
+# ========== bat / batcat ==========
 # https://github.com/sharkdp/bat
 if command -v bat &>/dev/null; then
 
@@ -14,7 +15,7 @@ if command -v bat &>/dev/null; then
 
     # Use bat to show man pages output.
     # https://github.com/sharkdp/bat#man
-    export MANPAGER="sh -c 'col -bx | bat --language=man --style=plain'"
+    export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 
     # Use bat to show help pages output.
     # https://github.com/sharkdp/bat?tab=readme-ov-file#highlighting---help-messages
@@ -22,7 +23,7 @@ if command -v bat &>/dev/null; then
     alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 fi
 
-# ========= fzf =========
+# ========== fzf ==========
 # https://github.com/junegunn/fzf
 if command -v fzf &>/dev/null; then
     # Set up fzf key bindings and fuzzy completion
