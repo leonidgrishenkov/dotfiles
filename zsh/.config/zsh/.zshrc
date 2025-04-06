@@ -150,13 +150,13 @@ bindkey "^n" history-search-forward
 HIST_STAMPS="yyyy-mm-dd"
 
 
-source "$XDG_CONFIG_HOME/shell/aliases"
-source "$XDG_CONFIG_HOME/shell/tools/common"
-source "$XDG_CONFIG_HOME/shell/tools/lang"
-
 if [[ $SYSTEM = "Darwin" ]]; then
     source "$XDG_CONFIG_HOME/shell/tools/macos"
 fi
+
+source "$XDG_CONFIG_HOME/shell/tools/common"
+source "$XDG_CONFIG_HOME/shell/tools/lang"
+source "$XDG_CONFIG_HOME/shell/aliases"
 
 # ========= zsh plugins configuration =========
 # zsh-autosuggestions:
