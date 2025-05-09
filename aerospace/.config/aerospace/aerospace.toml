@@ -144,7 +144,8 @@ cmd-ctrl-right = 'workspace --wrap-around next'
 # alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-# alt-shift-semicolon = 'mode service'
+# Toggle service mode
+cmd-ctrl-semicolon = 'mode service'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -168,3 +169,26 @@ cmd-ctrl-shift-l = ['join-with right', 'mode main']
 down = 'volume down'
 up = 'volume up'
 shift-down = ['volume set 0', 'mode main']
+
+# https://nikitabobko.github.io/AeroSpace/guide#on-window-detected-callback
+[[on-window-detected]]
+# Exact app id. You can get id by running: `osascript -e 'id of app "1Password"'`
+if.app-id = 'com.1password.1password'
+# Make this app window floating by default.
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.todoist.mac.Todoist'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.docker.docker'
+run = ['layout floating']
