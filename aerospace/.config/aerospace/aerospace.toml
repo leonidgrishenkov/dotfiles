@@ -192,3 +192,7 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'com.docker.docker'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.flexibits.fantastical2.mac'
+run = ['layout floating']
