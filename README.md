@@ -31,13 +31,3 @@ To delete symlinks:
 ```sh
 stow --delete lazygit
 ```
-
-# Clone repository
-
-To clone this repository locally:
-
-```sh
-git clone git@github-personal:leonidgrishenkov/dotfiles.git
-```
-
-Where `github-personal` is the name of corresponding ssh key configuration in `~/.ssh/config`.
