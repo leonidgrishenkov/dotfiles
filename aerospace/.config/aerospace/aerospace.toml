@@ -200,3 +200,11 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'ru.yandex.desktop.music'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'ru.keepcoder.Telegram'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'zoom.us'
+run = ['layout floating']
