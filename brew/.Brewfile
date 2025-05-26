@@ -29,6 +29,7 @@ brew "crunch"
 brew "csvkit"
 brew "direnv"
 brew "docutils"
+brew "duckdb"
 brew "eza"
 brew "fd"
 brew "fzf"
@@ -49,6 +50,7 @@ brew "htop"
 brew "httpie"
 brew "iperf3"
 brew "jq"
+brew "k9s"
 brew "kcat"
 brew "kubernetes-cli"
 brew "lazydocker"
@@ -96,7 +98,6 @@ brew "yq"
 brew "zellij"
 brew "zip"
 brew "zoxide"
-brew "derailed/k9s/k9s"
 brew "go-task/tap/go-task"
 brew "lusingander/tap/stu"
 brew "noahgorstein/tap/jqp"
@@ -113,14 +114,16 @@ cask "docker"
 cask "firefox"
 cask "font-jetbrains-mono-nerd-font"
 cask "iterm2"
+cask "lens"
 cask "obsidian"
 cask "postman"
 cask "shadowsocksx-ng"
 cask "warp"
 cask "wezterm"
-cask "zen-browser"
+cask "zen"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
+mas "AmneziaWG", id: 6478942365
 mas "Bitwarden", id: 1352778147
 mas "Cubox", id: 1113361350
 mas "Cubox for Safari", id: 1550721541
@@ -138,11 +141,9 @@ mas "Noir", id: 1592917505
 mas "Notability", id: 360593530
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "Save to Raindrop.io", id: 1549370672
-mas "superagent", id: 1568262835
+mas "Super Agent", id: 1568262835
 mas "Telegram", id: 747648890
 mas "Toggl Track", id: 1291898086
-mas "Translatium", id: 6541750489
 mas "Windows App", id: 1295203466
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835

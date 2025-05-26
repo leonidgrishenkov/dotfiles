@@ -1,4 +1,4 @@
-Install `homebrew/bundle` if not already installed:
+Install `homebrew/bundle` if it not already installed:
 
 ```sh
 brew tap homebrew/bundle
