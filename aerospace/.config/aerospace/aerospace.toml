@@ -139,19 +139,19 @@ cmd-ctrl-shift-9 = 'move-node-to-workspace 9'
 cmd-ctrl-left = 'workspace --wrap-around prev'
 cmd-ctrl-right = 'workspace --wrap-around next'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-# alt-tab = 'workspace-back-and-forth'
-# See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
-# alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
-
+# Switch to another next/previous monitor.
+cmd-ctrl-shift-n = 'focus-monitor next'
+cmd-ctrl-shift-p = 'focus-monitor prev'
+ 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 # Toggle service mode
 cmd-ctrl-semicolon = 'mode service'
+cmd-ctrl-m = 'mode move'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
-esc = ['reload-config', 'mode main']
+esc = ['mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
 f = [
     'layout floating tiling',
@@ -159,17 +159,18 @@ f = [
 ] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
 
-# sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
-#s = ['layout sticky tiling', 'mode main']
-
 cmd-ctrl-shift-h = ['join-with left', 'mode main']
 cmd-ctrl-shift-j = ['join-with down', 'mode main']
 cmd-ctrl-shift-k = ['join-with up', 'mode main']
 cmd-ctrl-shift-l = ['join-with right', 'mode main']
 
-down = 'volume down'
-up = 'volume up'
-shift-down = ['volume set 0', 'mode main']
+# 'move' binding mode declaration.
+[mode.move.binding]
+esc = ['mode main']
+# Move current workspace to the next/previouse monitor.
+# See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
+n = ['move-workspace-to-monitor next', 'mode main']
+p = ['move-workspace-to-monitor prev', 'mode main']
 
 # https://nikitabobko.github.io/AeroSpace/guide#on-window-detected-callback
 [[on-window-detected]]
