@@ -138,6 +138,7 @@ cmd-ctrl-shift-7 = 'move-node-to-workspace 7'
 cmd-ctrl-shift-8 = 'move-node-to-workspace 8'
 cmd-ctrl-shift-9 = 'move-node-to-workspace 9'
 
+# Switch to left/right workspace
 cmd-ctrl-left = 'workspace --wrap-around prev'
 cmd-ctrl-right = 'workspace --wrap-around next'
 
