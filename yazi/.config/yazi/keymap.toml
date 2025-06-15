@@ -1,7 +1,7 @@
 # Doc: https://yazi-rs.github.io/docs/configuration/keymap
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
-[manager]
+[mgr]
 prepend_keymap = [
     # Navigation
     # Up/Down
