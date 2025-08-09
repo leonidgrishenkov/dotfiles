@@ -118,6 +118,7 @@ cask "lens"
 cask "obsidian"
 cask "postman"
 cask "shadowsocksx-ng"
+cask "tor-browser"
 cask "warp"
 cask "wezterm"
 cask "zen"
@@ -130,6 +131,7 @@ mas "Cubox for Safari", id: 1550721541
 mas "Dark Night", id: 1592844577
 mas "Fantastical", id: 975937182
 mas "Gestimer", id: 6447125648
+mas "Happ", id: 6746188973
 mas "Hidden Bar", id: 1452453066
 mas "Highlights", id: 1498912833
 mas "Keynote", id: 409183694
@@ -140,6 +142,7 @@ mas "Microsoft Word", id: 462054704
 mas "Noir", id: 1592917505
 mas "Notability", id: 360593530
 mas "Numbers", id: 409203825
+mas "Outline", id: 1356178125
 mas "Pages", id: 409201541
 mas "Super Agent", id: 1568262835
 mas "Telegram", id: 747648890
