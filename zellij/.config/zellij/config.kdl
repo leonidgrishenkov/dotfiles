@@ -3,7 +3,15 @@
 keybinds clear-defaults=true {
     normal {
         // uncomment this and adjust key if using copy_on_select=false
-        // bind "Alt c" { Copy; }
+        bind "Alt c" { Copy; }
+        // Switch between panes with Alt + arrow keys
+        bind "Alt Left" { MoveFocus "Left"; }
+        bind "Alt Right" { MoveFocus "Right"; }
+        bind "Alt Up" { MoveFocus "Up"; }
+        bind "Alt Down" { MoveFocus "Down"; }
+        // Switch between tabs with Alt + Shift + arrow keys
+        bind "Alt Shift Left" { GoToPreviousTab; }
+        bind "Alt Shift Right" { GoToNextTab; }
     }
     locked {
         bind "Alt g" { SwitchToMode "Normal"; }
@@ -181,9 +189,9 @@ keybinds clear-defaults=true {
     shared_except "move" "locked" {
         bind "Alt h" { SwitchToMode "Move"; }
     }
-    shared_except "tmux" "locked" {
-        bind "Alt b" { SwitchToMode "Tmux"; }
-    }
+    // shared_except "tmux" "locked" {
+    //     bind "Alt b" { SwitchToMode "Tmux"; }
+    // }
     // Configuraions for plugin: 'zellij forgot'
     // https://github.com/karimould/zellij-forgot
     shared_except "locked" {
@@ -315,7 +323,7 @@ pane_frames true
 
 // Choose the theme that is specified in the themes section.
 // Default: default
-theme "tokyo-night-storm"
+theme "iceberg-dark"
 
 // The name of the default layout to load on startup
 // Default: "default"
@@ -349,7 +357,7 @@ scroll_buffer_size 10000
 //
 // copy_command "xclip -selection clipboard" // x11
 // copy_command "wl-copy"                    // wayland
-// copy_command "pbcopy"                     // osx
+copy_command "pbcopy"                     // osx
 
 // Choose the destination for copied text
 // Allows using the primary selection buffer (on x11/wayland) instead of the system clipboard.
@@ -362,7 +370,7 @@ scroll_buffer_size 10000
 
 // Enable or disable automatic copy (and clear) of selection when releasing mouse
 // Default: true
-copy_on_select true
+copy_on_select false
 
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
