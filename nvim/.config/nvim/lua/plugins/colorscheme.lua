@@ -2,6 +2,7 @@ return {
     { "folke/tokyonight.nvim", enabled = false },
     {
         "catppuccin/nvim",
+        tag = "v1.10.0",
         opts = {
             flavour = "frappe", -- Can be one of: latte, frappe, macchiato, mocha
             transparent_background = true, -- disables setting the background color.
