@@ -33,4 +33,12 @@ return {
             })
         end,
     },
+    {
+        "mfussenegger/nvim-lint",
+        opts = function(_, opts)
+            -- Remove SQL linters
+            opts.linters_by_ft = opts.linters_by_ft or {}
+            opts.linters_by_ft.sql = {}
+        end,
+    },
 }
