@@ -1,3 +1,5 @@
+# https://ghostty.org/docs/config
+
 theme = catppuccin-macchiato
 
 font-size = 14
@@ -16,7 +18,7 @@ window-padding-x = 4
 window-padding-y = 2
 
 background-opacity = 0.9
-background-blur-radius = 90
+background-blur-radius = 95
 
 keybind = super+alt+w=unbind
 keybind = super+alt+right=unbind
