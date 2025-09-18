@@ -14,11 +14,5 @@ return {
             },
             signature = { window = { border = "rounded" } },
         },
-        init = function()
-            -- Change blink menu hl groups to regular ones to match base theme colors.
-            -- https://cmp.saghen.dev/configuration/appearance.html#highlight-groups
-            vim.api.nvim_set_hl(0, "BlinkCmpMenu", { link = "NormalFloat" })
-            vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { link = "NormalFloat" })
-        end,
     },
 }

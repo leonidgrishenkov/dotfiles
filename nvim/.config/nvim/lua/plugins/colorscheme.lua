@@ -2,10 +2,13 @@ return {
     { "folke/tokyonight.nvim", enabled = false },
     {
         "catppuccin/nvim",
-        tag = "v1.10.0",
         opts = {
             flavour = "frappe", -- Can be one of: latte, frappe, macchiato, mocha
             transparent_background = true,
+            float = {
+                transparent = true,
+                solid = false,
+            },
             term_colors = false,
             show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
             no_italic = false, -- Force no italic
@@ -13,6 +16,7 @@ return {
             no_underline = false, -- Force no underline
             auto_integrations = true,
             integrations = {
+                blink_cmp =true,
                 native_lsp = {
                     enabled = true,
                     -- To see all available values: :h highlight-args
