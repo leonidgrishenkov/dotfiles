@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+# vim: set filetype=sh:
+# vim: set ts=4 sw=4 et:
+
+# === UV (python) ===
+eval "$(uv generate-shell-completion zsh)"
+
+# === Rustup ====
+source "$HOME/.cargo/env"
+
+# === GO ===
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH="$GOBIN:$PATH"

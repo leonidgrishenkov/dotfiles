@@ -1,8 +1,20 @@
-# Path to zsh configurations
-export ZDOTDIR=~/.config/zsh
+#!/usr/bin/env zsh
+# vim: set filetype=zsh:
+# vim: set ts=4 sw=4 et:
+
+# https://github.com/htr3n/zsh-config/blob/master/zshenv
+skip_global_compinit=1
+setopt noglobalrcs
+
+export ZDOTDIR="$HOME/.config/zsh" # Path to zsh configurations
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
 export SYSTEM="$(uname -s)"
+
+if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "$ZDOTDIR/.zprofile" ]]; then
+  source "$ZDOTDIR/.zprofile"
+fi
+
