@@ -81,6 +81,8 @@ source <(fzf --zsh)
 # === UV (python) ===
 # eval "$(uv generate-shell-completion zsh)"
 
+export IPYTHONDIR=~/.config/ipython
+
 # === Rustup ====
 # source "$HOME/.cargo/env"
 
