@@ -584,7 +584,7 @@ c.TerminalInteractiveShell.auto_match = True
 
 ## The part of the banner to be printed before the profile
 #  See also: InteractiveShell.banner1
-# c.TerminalInteractiveShell.banner1 = "Python 3.12.8 (main, Dec  6 2024, 19:42:06) [Clang 18.1.8 ]\nType 'copyright', 'credits' or 'license' for more information\nIPython 8.32.0 -- An enhanced Interactive Python. Type '?' for help.\n"
+c.TerminalInteractiveShell.banner1 = "Type '?' for help.\n"
 
 ## The part of the banner to be printed after the profile
 #  See also: InteractiveShell.banner2
@@ -606,7 +606,7 @@ c.TerminalInteractiveShell.auto_match = True
 #  Control-Z/Enter in Windows). By typing 'exit' or 'quit', you can force a
 #  direct exit without any confirmation.
 #  Default: True
-# c.TerminalInteractiveShell.confirm_exit = True
+c.TerminalInteractiveShell.confirm_exit = False
 
 #  See also: InteractiveShell.debug
 # c.TerminalInteractiveShell.debug = False
@@ -763,6 +763,9 @@ class SimplePrompt(Prompts):
 
     def continuation_prompt_tokens(self, width=None):
         return [(Token.Prompt, "... ")]
+
+    def out_prompt_tokens(self):
+        return [(Token.Prompt, "")]
 
 
 c.TerminalInteractiveShell.prompts_class = SimplePrompt
