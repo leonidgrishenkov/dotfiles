@@ -668,7 +668,8 @@ c.TerminalInteractiveShell.extra_open_editor_shortcuts = True
 ## The name or class of a Pygments style to use for syntax
 #          highlighting. To see available styles, run `pygmentize -L styles`.
 #  Default: traitlets.Undefined
-c.TerminalInteractiveShell.highlighting_style = "nord-darker"
+# WARN: this setting was deprecated
+# c.TerminalInteractiveShell.highlighting_style = "nord-darker"
 
 ## Override highlighting format for specific tokens
 #  Default: {}
@@ -769,6 +770,18 @@ class SimplePrompt(Prompts):
 
 
 c.TerminalInteractiveShell.prompts_class = SimplePrompt
+
+from IPython.utils.PyColorize import linux_theme, theme_table
+from copy import deepcopy
+
+theme = deepcopy(linux_theme)
+
+theme_name = "nord-darker"
+theme.base = theme_name
+theme_table[theme_name] = theme
+
+c.TerminalInteractiveShell.true_color = True
+c.TerminalInteractiveShell.colors = theme_name
 
 #  See also: InteractiveShell.quiet
 # c.TerminalInteractiveShell.quiet = False
