@@ -30,11 +30,3 @@ alias zj="zellij"
 # if [ -f "$HOME/.yandex-cloud/completion.zsh.inc" ]; then # Enable zsh completions
 #     source "$HOME/.yandex-cloud/completion.zsh.inc"
 # fi
-
-# === STU ===
-alias smlts3="stu \
-    --endpoint-url https://minio.prod.lh.samoletgroup.ru:9000 \
-    --profile smlt-bdd-minio \
-    --bucket data \
-    --region us-east-1
-"
