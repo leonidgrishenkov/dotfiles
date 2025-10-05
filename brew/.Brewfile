@@ -112,22 +112,20 @@ brew "go-task/tap/go-task"
 brew "lusingander/tap/stu"
 cask "1password-cli"
 cask "adobe-acrobat-reader"
-cask "aerospace"
 cask "alt-tab"
 cask "brave-browser"
-cask "cursor"
 cask "devtoys"
 cask "docker-desktop"
 cask "firefox"
 cask "font-jetbrains-mono-nerd-font"
 cask "ghostty"
-cask "iterm2"
 cask "lens"
 cask "obsidian"
 cask "postman"
+cask "raycast"
 cask "shadowsocksx-ng"
 cask "tor-browser"
-cask "warp"
+cask "visual-studio-code"
 cask "wezterm"
 cask "zen"
 mas "1Password for Safari", id: 1569813296
@@ -142,7 +140,6 @@ mas "Fantastical", id: 975937182
 mas "Gestimer", id: 6447125648
 mas "Happ", id: 6746188973
 mas "Hidden Bar", id: 1452453066
-mas "Highlights", id: 1498912833
 mas "Keynote", id: 409183694
 mas "Microsoft Excel", id: 462058435
 mas "Microsoft Outlook", id: 985367838
