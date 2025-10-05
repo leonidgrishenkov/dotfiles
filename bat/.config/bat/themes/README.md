@@ -1,4 +1,4 @@
-GitHub: https://github.com/catppuccin/bat/tree/main
+[GitHub page](https://github.com/catppuccin/bat/tree/main)
 
 Download theme file:
 

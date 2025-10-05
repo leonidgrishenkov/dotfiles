@@ -1,6 +1,5 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-export HOMEBREW_INSTALL_BADGE=""
 export HOMEBREW_NO_ENV_HINTS=1 # Don't show hints for env vatialbes
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_ANALYTICS=1  # disables statistics that brew collects
