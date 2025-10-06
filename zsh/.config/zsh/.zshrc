@@ -71,7 +71,6 @@ export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
-
 # === fzf ===
 # https://github.com/junegunn/fzf
 # Set up fzf key bindings and fuzzy completion
@@ -81,15 +80,16 @@ source <(fzf --zsh)
 # === UV (python) ===
 # eval "$(uv generate-shell-completion zsh)"
 
+# IPython configurations dir
 export IPYTHONDIR=~/.config/ipython
 
 # === Rustup ====
 # source "$HOME/.cargo/env"
 
-# === GO ===
-# export GOPATH=$HOME/go
-# export GOBIN=$GOPATH/bin
-# export PATH="$GOBIN:$PATH"
+# === Golang ===
+export GOPATH=$HOME/.go
+export GOBIN=$GOPATH/bin
+export PATH="$GOBIN:$PATH"
 
 # === direnv ===
 # eval "$(direnv hook zsh)"
