@@ -1,8 +1,4 @@
 # Basic
-alias rm="rm -Iv"
-alias cp="cp -iv"
-alias mv="mv -iv"
-alias h="history | tail -n 50"
 alias c="clear"
 
 alias k="kubectl"

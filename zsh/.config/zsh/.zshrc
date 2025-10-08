@@ -38,16 +38,15 @@ bindkey '^M' autosuggest-accept # Key to accept currently shown autosuggestion. 
 # more about autosuggest keymaps here: https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#key-bindings
 
 # === YAZI ===
-# Use 'yy' as shell command wrapper that provides the ability
+# Use 'y' as shell command wrapper that provides the ability
 # to change the current working directory when exiting Yazi.
-# Took from utility doc: https://yazi-rs.github.io/docs/quick-start#shell-wrapper
-function yy() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-    yazi "$@" --cwd-file="$tmp"
-    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-        cd -- "$cwd"
-    fi
-    rm -f -- "$tmp"
+# https://yazi-rs.github.io/docs/quick-start#shell-wrapper
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
 }
 
 # === zoxide ===
@@ -73,7 +72,7 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
 # === fzf ===
 # https://github.com/junegunn/fzf
-# Set up fzf key bindings and fuzzy completion
+
 # https://github.com/junegunn/fzf?tab=readme-ov-file#setting-up-shell-integration
 source <(fzf --zsh)
 
@@ -102,6 +101,11 @@ export PATH="$GOBIN:$PATH"
 export DOCKER_CLI_HINTS=false  # disable ads in CLI
 
 # === atuin ===
+export ATUIN_NOBIND="true"
 eval "$(atuin init zsh)"
+
+# https://docs.atuin.sh/configuration/key-binding/#zsh
+bindkey '^r' atuin-search
+bindkey -M vicmd '^r' atuin-search-vicmd
 
 compinit
