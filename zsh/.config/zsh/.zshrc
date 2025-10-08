@@ -76,14 +76,15 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 # https://github.com/junegunn/fzf?tab=readme-ov-file#setting-up-shell-integration
 source <(fzf --zsh)
 
-# === UV (python) ===
-# eval "$(uv generate-shell-completion zsh)"
+# === Python ===
+function load-python() {
+    echo -e "\033[32mLoading Python environment\033[0m"
 
-# IPython configurations dir
-export IPYTHONDIR=~/.config/ipython
-
-# === Rustup ====
-# source "$HOME/.cargo/env"
+    # Load UV completions into shell
+    eval "$(uv generate-shell-completion zsh)"
+    # IPython configurations dir
+    export IPYTHONDIR=~/.config/ipython
+}
 
 # === Golang ===
 export GOPATH=$HOME/.go
