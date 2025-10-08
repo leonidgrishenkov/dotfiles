@@ -1,0 +1,10 @@
+# All config options described here: https://docs.atuin.sh/configuration/config
+
+# If enabled, upon hitting enter Atuin will immediately execute the command. Press tab to return to the shell and edit.
+enter_accept = false
+
+keymap_mode = "vim-insert"
+
+[theme]
+# Available options: "default", "autumn" and "marine".
+name = "default"
