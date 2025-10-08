@@ -7,13 +7,14 @@
 Download binary:
 
 ```sh
-ZJSTATUS_VERSION="v0.20.2"
+ZJSTATUS_VERSION="v0.21.1"
+DOTFILES_DIR="$HOME/Code/dotfiles"
 
-wget -O \
-    $HOME/Code/dotfiles/zellij/.config/zellij/plugins/zjframes.wasm \
-    https://github.com/dj95/zjstatus/releases/download/$ZJSTATUS_VERSION/zjframes.wasm
+wget -q --show-progress -O \
+    "$DOTFILES_DIR/zellij/.config/zellij/plugins/zjframes.wasm" \
+    "https://github.com/dj95/zjstatus/releases/download/$ZJSTATUS_VERSION/zjframes.wasm"
 
-wget -O \
-    $HOME/Code/dotfiles/zellij/.config/zellij/plugins/zjstatus.wasm \
-    https://github.com/dj95/zjstatus/releases/download/$ZJSTATUS_VERSION/zjstatus.wasm
+wget -q --show-progress -O \
+    "$DOTFILES_DIR/zellij/.config/zellij/plugins/zjstatus.wasm" \
+    "https://github.com/dj95/zjstatus/releases/download/$ZJSTATUS_VERSION/zjstatus.wasm"
 ```
