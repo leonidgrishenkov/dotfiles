@@ -23,11 +23,6 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
 
 defaults write NSGlobalDomain AppleLocale -string "en_RU"
 
-# Enable tap to click (Trackpad) for this user and for the login screen
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-
 # === Dock ===
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
@@ -100,6 +95,12 @@ defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
+# === Trackpad ===
+# Enable tap to click
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
 # === Menu Bar ===
 # Menu bar clock appearance
 defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
@@ -128,3 +129,7 @@ defaults write NSGlobalDomain "com.apple.keyboard.fnState" -bool true
 
 killall Finder
 killall Dock
+
+# In order to some settings take precedence you need either logout-login or run command below.
+# Discusssed here: https://apple.stackexchange.com/questions/48112/how-to-change-tap-to-click-using-defaults-write-from-command-line/48126#48126
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
