@@ -1,5 +1,5 @@
 # Number of commands that will be stored in history file
-export HISTSIZE=10000
+export HISTSIZE=1000000
 
 # Path to history file
 export HISTFILE="$ZSH_CACHE_DIR/history"

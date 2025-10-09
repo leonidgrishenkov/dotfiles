@@ -1,0 +1,5 @@
+--max-columns=120
+--max-columns-preview
+
+# Search hidden files / directories (e.g. dotfiles) by default
+--hidden
