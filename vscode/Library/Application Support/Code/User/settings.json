@@ -281,4 +281,8 @@
     "editor.defaultFormatter": "dorzey.vscode-sqlfluff"
   },
   "gitlens.codeLens.enabled": false,
+  "containers.containers.description": [
+    "Status"
+  ],
+  "containers.containers.label": "ContainerName",
 }

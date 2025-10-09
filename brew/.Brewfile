@@ -146,11 +146,9 @@ mas "Cubox for Safari", id: 1550721541
 mas "Dark Night", id: 1592844577
 mas "DuckDuckGo", id: 663592361
 mas "Fantastical", id: 975937182
-mas "GarageBand", id: 682658836
 mas "Gestimer", id: 6447125648
 mas "Happ", id: 6746188973
 mas "Hidden Bar", id: 1452453066
-mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "Microsoft Excel", id: 462058435
 mas "Microsoft Outlook", id: 985367838
