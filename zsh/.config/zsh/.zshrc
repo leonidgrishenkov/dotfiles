@@ -57,16 +57,10 @@ eval "$(zoxide init zsh)"
 
 # === bat / batcat ===
 # https://github.com/sharkdp/bat
-# Set zsh-syntax-highlighting theme
-export BAT_THEME="catppuccin-frappe"
-# Setup output elements to show
-export BAT_STYLE="header,numbers,grid"
-export BAT_PAGING="always"
-export BAT_PAGER="less -RF"
 
 # Use bat to show man pages output.
 # https://github.com/sharkdp/bat#man
-export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
 
 # Use bat to show help pages output.
 # https://github.com/sharkdp/bat?tab=readme-ov-file#highlighting---help-messages
@@ -75,7 +69,6 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
 # === fzf ===
 # https://github.com/junegunn/fzf
-
 # https://github.com/junegunn/fzf?tab=readme-ov-file#setting-up-shell-integration
 source <(fzf --zsh)
 

@@ -8,7 +8,7 @@ export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
 
 # === zsh-vi-mode ===
 # https://github.com/jeffreytse/zsh-vi-mode
-source "$HOMEBREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh" # Init plugin
+source "$HOMEBREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 
 # === zsh-syntax-highlighting ===
 # https://github.com/zsh-users/zsh-syntax-highlighting
