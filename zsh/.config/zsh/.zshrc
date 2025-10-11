@@ -7,14 +7,14 @@ autoload -Uz compinit
 export EDITOR="nvim"
 export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
-export PAGER="less"
-
-source "$ZDOTDIR/conf/history.zsh"
-source "$ZDOTDIR/conf/aliases.zsh"
 
 if [[ $SYSTEM = "Darwin" ]]; then
     source "$ZDOTDIR/conf/macos.zsh"
 fi
+
+source "$ZDOTDIR/conf/history.zsh"
+source "$ZDOTDIR/conf/aliases.zsh"
+source "$ZDOTDIR/conf/completion.zsh"
 
 export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh" # Path to zsh cache
 [[ -d $ZSH_CACHE_DIR ]] || mkdir -p $ZSH_CACHE_DIR # If it doesn't exists create one
@@ -35,7 +35,7 @@ ZVM_VI_INSERT_ESCAPE_BINDKEY=jf
 ZVM_VI_EDITOR=$EDITOR # when invoking command line editing with 'vv'
 
 # === zsh-autosuggestions ===
-ZSH_AUTOSUGGEST_STRATEGY=(completion history) # https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#suggestion-strategy
+ZSH_AUTOSUGGEST_STRATEGY=(history) # https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#suggestion-strategy
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 bindkey '^M' autosuggest-accept # Key to accept currently shown autosuggestion. 'M' stands for Enter key
 # more about autosuggest keymaps here: https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#key-bindings
@@ -105,4 +105,4 @@ eval "$(atuin init zsh)"
 bindkey '^r' atuin-search
 bindkey -M vicmd '^r' atuin-search-vicmd
 
-compinit
+compinit -i

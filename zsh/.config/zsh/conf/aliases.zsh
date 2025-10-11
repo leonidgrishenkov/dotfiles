@@ -1,6 +1,3 @@
-# Basic
-alias c="clear"
-
 alias k="kubectl"
 alias d="docker"
 alias t="terraform"
