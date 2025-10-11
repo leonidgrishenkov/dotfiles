@@ -71,13 +71,13 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 source <(fzf --zsh)
 
 # === Python ===
+# IPython configurations dir
+export IPYTHONDIR=~/.config/ipython
+
 function load-python() {
     echo -e "\033[32mLoading Python environment\033[0m"
-
     # Load UV completions into shell
     eval "$(uv generate-shell-completion zsh)"
-    # IPython configurations dir
-    export IPYTHONDIR=~/.config/ipython
 }
 
 # === Golang ===
