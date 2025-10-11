@@ -2,8 +2,6 @@
 # vim: set filetype=zsh:
 # vim: set ts=4 sw=4 et:
 
-autoload -Uz compinit
-
 export EDITOR="nvim"
 export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
@@ -105,4 +103,4 @@ eval "$(atuin init zsh)"
 bindkey '^r' atuin-search
 bindkey -M vicmd '^r' atuin-search-vicmd
 
-compinit -i
+autoload -Uz compinit; compinit -i

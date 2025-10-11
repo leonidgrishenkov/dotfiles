@@ -19,10 +19,6 @@ source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # 'fast-syntax-highlighting' has a better appearance but takes ~0.1 sec on startup.
 # Repo: https://github.com/zdharma-continuum/fast-syntax-highlighting
 source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-# Set particular theme.
-# To list all themes: fast-theme --list
-# To test particular theme in current terminal: fast-theme --test <name>
-fast-theme -q "safari"
 
 # 'zsh-syntax-highlighting' quite old plugin but loads much faster then 'fast-syntax-highlighting'.
 # Repo: https://github.com/zsh-users/zsh-syntax-highlighting
