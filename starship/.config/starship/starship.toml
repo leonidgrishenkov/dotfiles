@@ -330,11 +330,12 @@ style = 'fg:red'
 
 [direnv]
 disabled = false
-symbol = " "
 style = "fg:lavender"
-format = '[$symbol$loaded/$allowed]($style) '
-not_allowed_msg = "not-allowed"
-unloaded_msg = "not-loaded"
+format = '[$loaded]($style) '
+allowed_msg = ""
+not_allowed_msg = ""
+loaded_msg = " loaded"
+unloaded_msg = "󰉐 not-loaded"
 
 [cmd_duration]
 format = 'took [$duration]($style) '
