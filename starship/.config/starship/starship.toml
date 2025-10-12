@@ -340,4 +340,4 @@ unloaded_msg = "not-loaded"
 format = 'took [$duration]($style) '
 style = "rg:rosewater"
 # Shortest duration to show time for (in milliseconds).
-min_time = 5_000
+min_time = 30_000
