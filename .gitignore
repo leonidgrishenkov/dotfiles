@@ -58,3 +58,6 @@ zsh/.config/zsh/.zcompdump
 
 # sqlite db files
 *.sqlite
+
+# exclude private git config files
+git/.config/git/private/

@@ -1,0 +1,21 @@
+[init]
+    defaultBranch = main
+[core]
+    editor = nvim
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+; [delta]
+    ; Side by side diff view
+    ; side-by-side = true
+[merge]
+    conflictStyle = zdiff3
+[diff]
+    colorMoved = default
+[pull]
+    rebase = true
+[commit]
+    gpgSign = true
+
+[include]
+    path = ~/.config/git/private/main

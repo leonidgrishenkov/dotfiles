@@ -19,3 +19,5 @@ if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "$ZDOTDIR/.zprofile" ]]; then
 fi
 
 export DOTFILES_DIR="$HOME/Code/dotfiles"
+
+export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/config"
