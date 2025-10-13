@@ -12,7 +12,7 @@
 [pull]
     rebase = false
 [commit]
-    gpgSign = false
+    gpgSign = true
 
 [include]
     path = ~/.config/git/private/main
