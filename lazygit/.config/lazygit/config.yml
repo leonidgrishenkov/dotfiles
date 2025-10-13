@@ -18,15 +18,18 @@ gui:
   showCommandLog: false
   showBottomLine: false
   showPanelJumps: false
-  # Color attributes: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#color-attributes
-  theme:
-    activeBorderColor:
-      - "#af38ff"
-      - bold
+
 git:
   paging:
     colorArg: always
-    # pager: delta --paging=never
+    pager: |
+      delta --no-gitconfig --paging=never \
+        --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}" \
+        --line-numbers \
+        --syntax-theme="catppuccin-frappe" \
+        --file-style="brightyellow bold" \
+        --file-decoration-style="none"
+
   merging:
     # The commit message to use for a squash merge commit. Can contain "{{selectedRef}}" and "{{currentBranch}}" placeholders.
     squashMergeMessage: Merge branch '{{selectedRef}}' into '{{currentBranch}}'
@@ -38,3 +41,5 @@ keybinding:
     nextItem-alt: j # go one line down
     prevBlock-alt: h # goto the previous block / panel
     nextBlock-alt: l # goto the next block / panel
+
+promptToReturnFromSubprocess: false

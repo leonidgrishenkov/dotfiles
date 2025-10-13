@@ -5,17 +5,17 @@
     pager = delta
 [interactive]
     diffFilter = delta --color-only
-; [delta]
-    ; Side by side diff view
-    ; side-by-side = true
 [merge]
     conflictStyle = zdiff3
 [diff]
     colorMoved = default
 [pull]
-    rebase = true
+    rebase = false
 [commit]
-    gpgSign = true
+    gpgSign = false
 
 [include]
     path = ~/.config/git/private/main
+
+[include]
+    path = ~/.config/delta/config

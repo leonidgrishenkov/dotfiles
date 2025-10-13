@@ -1,0 +1,8 @@
+# vim: set filetype=gitconfig:
+
+[delta]
+    line-numbers = true
+    syntax-theme = catppuccin-frappe
+    side-by-side = true
+    file-style = brightyellow bold
+    file-decoration-style = none
