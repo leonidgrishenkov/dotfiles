@@ -7,11 +7,11 @@ brew tap homebrew/bundle
 Dump brewfile overwriting existing one:
 
 ```sh
-brew bundle dump --force --file $HOME/Code/dotfiles/brew/.Brewfile
+brew bundle dump --force --file $DOTFILES_DIR/brew/.Brewfile
 ```
 
 Install deps from brewfile:
 
 ```sh
-brew bundle install --file $HOME/Code/dotfiles/brew/.Brewfile
+brew bundle install --file $DOTFILES_DIR/brew/.Brewfile
 ```
