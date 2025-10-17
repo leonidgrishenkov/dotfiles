@@ -1,0 +1,9 @@
+.prompt '🦆 '
+
+SET memory_limit = '5GB';
+SET threads TO 6;
+
+SET temp_directory = concat(getenv('XDG_CACHE_HOME'), '/duckdb');
+SET max_temp_directory_size = '5GB';
+
+.timer on
