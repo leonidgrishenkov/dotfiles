@@ -2,6 +2,11 @@
 # vim: set filetype=zsh:
 # vim: set ts=4 sw=4 et:
 
+ERROR='\033[0;31m' # red color
+SUCCESS='\033[0;32m' # green
+WARNING='\033[1;33m' # yellow
+NORMAL='\033[0m' # no Color
+
 export EDITOR="nvim"
 export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
@@ -35,8 +40,8 @@ ZVM_VI_EDITOR=$EDITOR # when invoking command line editing with 'vv'
 # === zsh-autosuggestions ===
 ZSH_AUTOSUGGEST_STRATEGY=(history) # https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#suggestion-strategy
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
-bindkey '^M' autosuggest-accept # Key to accept currently shown autosuggestion. 'M' stands for Enter key
 # more about autosuggest keymaps here: https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#key-bindings
+bindkey '^F' autosuggest-accept # Key to accept currently shown autosuggestion. 
 
 # === YAZI ===
 # Use 'y' as shell command wrapper that provides the ability
@@ -75,16 +80,16 @@ source <(fzf --zsh)
 export IPYTHONDIR=~/.config/ipython
 
 function load-python() {
-    echo -e "\033[32mLoading Python environment\033[0m"
+    echo -e "${SUCCESS}Loading Python environment"
     # Load UV completions into shell
     eval "$(uv generate-shell-completion zsh)"
 
     function load-venv() {
         if [ -d "./.venv" ]; then
             . .venv/bin/activate
-            echo "\033[32mVirtual environment activated\033[0m"
+            echo "${SUCCESS}Virtual environment activated"
         else
-            echo "No .venv directory found in current directory"
+            echo "${WARNING}No .venv directory found in current directory\!"
             return 1
         fi
     }
@@ -109,8 +114,13 @@ export DOCKER_CLI_HINTS=false  # disable ads in CLI
 export ATUIN_NOBIND="true"
 eval "$(atuin init zsh)"
 
-# https://docs.atuin.sh/configuration/key-binding/#zsh
-bindkey '^r' atuin-search
-bindkey -M vicmd '^r' atuin-search-vicmd
+# zsh-vi-mode overrides keybindings after it loads, including ^r binding for atuin. In order to avoid it here I use
+# zvm_after_init hook that zsh-vi-mode provides. This hook runs after zsh-vi-mode finishes setting up its
+# keybindings, so my custom bindings won't get overwritten.
+function zvm_after_init() {
+    # https://docs.atuin.sh/configuration/key-binding/#zsh
+    bindkey '^r' atuin-search
+    bindkey -M vicmd '^r' atuin-search-vicmd
+}
 
 autoload -Uz compinit; compinit -i
