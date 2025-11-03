@@ -35,3 +35,10 @@ alias zj="zellij"
 # if [ -f "$HOME/.yandex-cloud/completion.zsh.inc" ]; then # Enable zsh completions
 #     source "$HOME/.yandex-cloud/completion.zsh.inc"
 # fi
+
+# === DataGrip ===
+# Run DataGrip from the shell.
+# https://www.jetbrains.com/help/datagrip/working-with-the-ide-features-from-command-line.html#standalone
+function datagrip() {
+    open -a "DataGrip.app" --args "$@"
+}
