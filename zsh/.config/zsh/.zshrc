@@ -78,6 +78,16 @@ function load-python() {
     echo -e "\033[32mLoading Python environment\033[0m"
     # Load UV completions into shell
     eval "$(uv generate-shell-completion zsh)"
+
+    function load-venv() {
+        if [ -d "./.venv" ]; then
+            . .venv/bin/activate
+            echo "\033[32mVirtual environment activated\033[0m"
+        else
+            echo "No .venv directory found in current directory"
+            return 1
+        fi
+    }
 }
 
 # === Golang ===
