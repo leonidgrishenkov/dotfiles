@@ -19,11 +19,30 @@ return {
         },
     },
     {
-         "folke/todo-comments.nvim",
-        opts = function (_, opts)
+        "folke/todo-comments.nvim",
+        opts = function(_, opts)
             -- Disable all items in signcolumn
             opts.signs = false
-        end
-    }
-}
+        end,
+    },
+    {
+        "nvim-mini/mini.move",
+        event = "VeryLazy",
+        opts = {
+            -- Module mappings. Use `''` (empty string) to disable one.
+            mappings = {
+                -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+                left = "<C-h>",
+                right = "<C-l>",
+                down = "<C-j>",
+                up = "<C-k>",
 
+                -- Move current line in Normal mode
+                line_left = "",
+                line_right = "",
+                line_down = "",
+                line_up = "",
+            },
+        },
+    },
+}
