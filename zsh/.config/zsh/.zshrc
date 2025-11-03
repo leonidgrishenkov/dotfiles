@@ -75,6 +75,35 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 # https://github.com/junegunn/fzf?tab=readme-ov-file#setting-up-shell-integration
 source <(fzf --zsh)
 
+# Catppuccin frappe theme, took from here: https://github.com/catppuccin/fzf
+# But note that I removed here background color in order to make fzf UI transparent.
+export FZF_DEFAULT_OPTS=" \
+    --color=fg:#C6D0F5,header:#E78284,info:#CA9EE6,pointer:#F2D5CF \
+    --color=marker:#BABBF1,fg+:#C6D0F5,prompt:#CA9EE6,hl+:#E78284 \
+    --color=border:#737994,label:#C6D0F5 \
+    --style=minimal \
+    --cycle \
+    --border=rounded"
+
+_show_file_preview="bat -n --line-range :500 {}"
+_show_dir_preview="eza --tree --icons --all {} | head -200"
+_show_file_or_dir_preview="if [ -d {} ]; then $_show_dir_preview; else $_show_file_preview; fi"
+
+_fzf_comprun() {
+    local command=$1
+    shift
+
+    case "$command" in
+    vim | nvim | v | code | open) fzf --preview "$_show_file_or_dir_preview" "$@" ;;
+    ls | eza | cd) fd --type d | fzf --preview "$_show_dir_preview" "$@" ;;
+    cat | bat) fd --type f | fzf --preview "$_show_file_preview" "$@" ;;
+    export | unset) fzf --preview "eval 'echo \$'{}" "$@" ;;
+    ssh | telnet) fzf --preview 'dig {}' "$@" ;;
+    kill | pkill) fzf --preview 'ps -f -p {}' --preview-window=down:3:wrap "$@" ;;
+    *) fzf "$@" ;;
+    esac
+}
+
 # === Python ===
 # IPython configurations dir
 export IPYTHONDIR=~/.config/ipython
@@ -87,9 +116,9 @@ function load-python() {
     function load-venv() {
         if [ -d "./.venv" ]; then
             . .venv/bin/activate
-            echo "${SUCCESS}Virtual environment activated"
+            echo -e "${SUCCESS}Virtual environment activated"
         else
-            echo "${WARNING}No .venv directory found in current directory\!"
+            echo -e "${WARNING}No .venv directory found in current directory\!"
             return 1
         fi
     }
