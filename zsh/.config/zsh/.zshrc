@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
-# vim: set filetype=zsh:
+# vim: set filetype=sh:
 # vim: set ts=4 sw=4 et:
 
-ERROR='\033[0;31m' # red color
+ERROR='\033[0;31m'   # red color
 SUCCESS='\033[0;32m' # green
 WARNING='\033[1;33m' # yellow
-NORMAL='\033[0m' # no Color
+NORMAL='\033[0m'     # no Color
 
 export EDITOR="nvim"
 export VISUAL=$EDITOR
@@ -19,7 +19,7 @@ source "$ZDOTDIR/conf/history.zsh"
 source "$ZDOTDIR/conf/aliases.zsh"
 source "$ZDOTDIR/conf/completion.zsh"
 
-export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh" # Path to zsh cache
+export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"         # Path to zsh cache
 [[ -d $ZSH_CACHE_DIR ]] || mkdir -p $ZSH_CACHE_DIR # If it doesn't exists create one
 # BUG: this doesn't work, zsh still dump into ~/.config/zsh/.zcompdump
 export ZSH_COMPDUMP="$ZSH_CACHE_DIR" # Path to completions cache file
@@ -41,18 +41,18 @@ ZVM_VI_EDITOR=$EDITOR # when invoking command line editing with 'vv'
 ZSH_AUTOSUGGEST_STRATEGY=(history) # https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#suggestion-strategy
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 # more about autosuggest keymaps here: https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#key-bindings
-bindkey '^F' autosuggest-accept # Key to accept currently shown autosuggestion. 
+bindkey '^F' autosuggest-accept # Key to accept currently shown autosuggestion.
 
 # === YAZI ===
 # Use 'y' as shell command wrapper that provides the ability
 # to change the current working directory when exiting Yazi.
 # https://yazi-rs.github.io/docs/quick-start#shell-wrapper
 function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd <"$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
 }
 
 # === zoxide ===
@@ -108,7 +108,7 @@ eval "$(direnv hook zsh)"
 # alias jqp="jqp --theme catppuccin-frappe"
 
 # === docker ===
-export DOCKER_CLI_HINTS=false  # disable ads in CLI
+export DOCKER_CLI_HINTS=false # disable ads in CLI
 
 # === atuin ===
 export ATUIN_NOBIND="true"
@@ -123,4 +123,5 @@ function zvm_after_init() {
     bindkey -M vicmd '^r' atuin-search-vicmd
 }
 
-autoload -Uz compinit; compinit -i
+autoload -Uz compinit
+compinit -i
