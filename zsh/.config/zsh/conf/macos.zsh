@@ -31,7 +31,6 @@ alias zj="zellij"
 # eval "$(op completion zsh)"
 
 # === Yandex Cloud CLI ===
-# export PATH="$HOME/.yandex-cloud/bin:${PATH}" # Path to binary
 # if [ -f "$HOME/.yandex-cloud/completion.zsh.inc" ]; then # Enable zsh completions
 #     source "$HOME/.yandex-cloud/completion.zsh.inc"
 # fi

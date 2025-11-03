@@ -108,8 +108,8 @@ _fzf_comprun() {
 # IPython configurations dir
 export IPYTHONDIR=~/.config/ipython
 
-function load-python() {
-    echo -e "${SUCCESS}Loading Python environment"
+function enable-python() {
+    echo -e "${SUCCESS}Enabling Python features"
     # Load UV completions into shell
     eval "$(uv generate-shell-completion zsh)"
 
