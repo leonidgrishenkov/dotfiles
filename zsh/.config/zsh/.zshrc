@@ -19,11 +19,6 @@ source "$ZDOTDIR/conf/history.zsh"
 source "$ZDOTDIR/conf/aliases.zsh"
 source "$ZDOTDIR/conf/completion.zsh"
 
-export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"         # Path to zsh cache
-[[ -d $ZSH_CACHE_DIR ]] || mkdir -p $ZSH_CACHE_DIR # If it doesn't exists create one
-# BUG: this doesn't work, zsh still dump into ~/.config/zsh/.zcompdump
-export ZSH_COMPDUMP="$ZSH_CACHE_DIR" # Path to completions cache file
-
 # === Rip Grep ===
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
 
