@@ -27,6 +27,24 @@ source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highligh
 # === Zellij ===
 alias zj="zellij"
 
+# === zoxide ===
+eval "$(zoxide init zsh)"
+
+# === Golang ===
+export GOPATH=$HOME/.go
+export GOBIN=$GOPATH/bin
+export PATH="$GOBIN:$PATH"
+
+# === direnv ===
+eval "$(direnv hook zsh)"
+
+# === jqp ===
+# https://github.com/noahgorstein/jqp?tab=readme-ov-file#configuration
+# alias jqp="jqp --theme catppuccin-frappe"
+
+# === docker ===
+export DOCKER_CLI_HINTS=false # disable ads in CLI
+
 # === 1password CLI ===
 # eval "$(op completion zsh)"
 

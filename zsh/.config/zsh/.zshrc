@@ -55,9 +55,6 @@ function y() {
     rm -f -- "$tmp"
 }
 
-# === zoxide ===
-eval "$(zoxide init zsh)"
-
 # === bat / batcat ===
 # https://github.com/sharkdp/bat
 
@@ -123,21 +120,6 @@ function enable-python() {
         fi
     }
 }
-
-# === Golang ===
-export GOPATH=$HOME/.go
-export GOBIN=$GOPATH/bin
-export PATH="$GOBIN:$PATH"
-
-# === direnv ===
-eval "$(direnv hook zsh)"
-
-# === jqp ===
-# https://github.com/noahgorstein/jqp?tab=readme-ov-file#configuration
-# alias jqp="jqp --theme catppuccin-frappe"
-
-# === docker ===
-export DOCKER_CLI_HINTS=false # disable ads in CLI
 
 # === atuin ===
 export ATUIN_NOBIND="true"

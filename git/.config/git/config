@@ -1,3 +1,5 @@
+# vim: set filetype=gitconfig:
+
 [init]
     defaultBranch = main
 [core]
