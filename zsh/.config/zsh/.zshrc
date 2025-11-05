@@ -13,6 +13,8 @@ export GIT_EDITOR=$EDITOR
 
 if [[ $SYSTEM = "Darwin" ]]; then
     source "$ZDOTDIR/conf/macos.zsh"
+elif [[ $SYSTEM = "Linux" ]]; then
+    source "$ZDOTDIR/conf/linux.zsh"
 fi
 
 source "$ZDOTDIR/conf/history.zsh"
