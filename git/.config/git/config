@@ -16,6 +16,9 @@
 [commit]
     gpgSign = true
 
+[url "github-personal:"]
+    insteadOf = https://github.com/
+
 [include]
     path = ~/.config/git/private/main
 
