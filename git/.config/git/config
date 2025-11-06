@@ -16,11 +16,17 @@
 [commit]
     gpgSign = true
 
-[url "github-personal:"]
-    insteadOf = https://github.com/
+[url "github-personal:leonidgrishenkov"]
+    insteadOf = https://github.com/leonidgrishenkov
 
-[include]
-    path = ~/.config/git/private/main
+[url "gitlab-samolet:"]
+    insteadOf = ssh://git@ssh.git.samoletgroup.ru:2222/
+
+[includeIf "hasconfig:remote.*.url:https://github.com/leonidgrishenkov/**"]
+    path = ~/.config/git/private/personal
+
+[includeIf "hasconfig:remote.*.url:*git@ssh.git.samoletgroup.ru:2222/cspb/**"]
+    path = ~/.config/git/private/samolet
 
 [include]
     path = ~/.config/delta/config
