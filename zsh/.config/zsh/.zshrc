@@ -118,6 +118,9 @@ function enable-python() {
     }
 }
 
+# === docker ===
+export DOCKER_CLI_HINTS=false # disable ads in CLI
+
 # === atuin ===
 export ATUIN_NOBIND="true"
 eval "$(atuin init zsh)"

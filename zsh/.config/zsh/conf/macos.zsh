@@ -42,9 +42,6 @@ eval "$(direnv hook zsh)"
 # https://github.com/noahgorstein/jqp?tab=readme-ov-file#configuration
 # alias jqp="jqp --theme catppuccin-frappe"
 
-# === docker ===
-export DOCKER_CLI_HINTS=false # disable ads in CLI
-
 # === 1password CLI ===
 # eval "$(op completion zsh)"
 
