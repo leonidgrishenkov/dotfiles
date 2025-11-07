@@ -9,12 +9,30 @@
     diffFilter = delta --color-only
 [merge]
     conflictStyle = zdiff3
+    tool = nvimdiff
+[mergetool]
+	prompt = false
+	keepBackup = false
 [diff]
     colorMoved = default
+[diff]
+	algorithm = histogram
+	colorMoved = default
+	tool = nvimdiff
+    submodule = log
+[difftool]
+	prompt = false
 [pull]
-    rebase = false
+    rebase = true
+[rebase]
+	autoStash = true
+	autoSquash = true
+	updateRefs = true
 [commit]
     gpgSign = true
+    verbose = true
+[tag]
+	gpgsign = true
 
 [includeIf "hasconfig:remote.*.url:https://github.com/leonidgrishenkov/**"]
     path = ~/.config/git/private/personal
