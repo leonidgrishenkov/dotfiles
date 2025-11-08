@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://json.schemastore.org/lazydocker.json
+
+# Config doc: https://github.com/jesseduffield/lazydocker/blob/master/docs/Config.md
+
+gui:
+  language: en
+  screenMode: normal # I've set the same as for lazygit
+  border: rounded
+  # Determines whether we show the bottom line (the one containing keybinding info and the status of the app).
+  showBottomLine: false
+  # When true, increases vertical space used by focused side panel, creating an accordion effect.
+  expandFocusedSidePanel: true
+  theme:
+    activeBorderColor:
+      - green
+      - bold
+    inactiveBorderColor:
+      - white
+    selectedLineBgColor:
+      - black
+      - bold
+    optionsTextColor:
+      - blue
+logs:
+  timestamps: false
+  since: ""
