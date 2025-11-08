@@ -3,8 +3,8 @@
 # Documentation: https://starship.rs/config/#configuration
 
 format = """
-$os\
 $directory\
+$hostname\
 $git_branch\
 $git_status\
 $battery\
@@ -13,7 +13,6 @@ $rust\
 $golang \
 $python\
 $docker_context\
-$helm\
 $container\
 $direnv\
 $status\
@@ -22,7 +21,7 @@ $line_break\
 $character"""
 
 
-palette = 'catppuccin_mocha'
+palette = 'catppuccin_frappe'
 
 # https://github.com/catppuccin/starship/tree/main/themes
 [palettes.catppuccin_mocha]
@@ -252,7 +251,11 @@ symbol = " "
 symbol = " "
 
 [hostname]
+disabled = false
 ssh_symbol = " "
+ssh_only = true
+format = '[$ssh_symbol$hostname]($style)'
+style = 'green dimmed'
 
 [java]
 symbol = " "
@@ -342,3 +345,9 @@ format = 'took [$duration]($style) '
 style = "rg:rosewater"
 # Shortest duration to show time for (in milliseconds).
 min_time = 30_000
+
+[container]
+# The container module displays a symbol and container name, if inside a container.
+format = '[$symbol $name]($style) '
+style = 'red dimmed'
+
