@@ -24,3 +24,12 @@ gui:
 logs:
   timestamps: false
   since: ""
+customCommands:
+  images:
+    - name: run-simple
+      command: docker run -d -it {{ .Image.ID }} tail -f /dev/null
+  containers:
+    - name: attach-bash
+      attach: true
+      command: docker exec -it {{ .Container.ID }} /bin/bash
+      serviceNames: []
