@@ -1,10 +1,14 @@
-# Catppuccin theme
+#!/bin/sh
 
-[GitHub](https://github.com/catppuccin/bat/tree/main)
+echo "Updating bat catppuccin theme"
 
-Download theme file:
+if [ -z "$DOTFILES_DIR" ]; then
+    echo 'DOTFILES_DIR env var is required'
+    exit 1
+fi
 
-```sh
+set -euo pipefail
+
 wget -q --show-progress \
     -O "$DOTFILES_DIR/bat/.config/bat/themes/catppuccin-latte.tmTheme" \
    "https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme"
@@ -20,18 +24,7 @@ wget -q --show-progress \
 wget -q --show-progress \
     -O "$DOTFILES_DIR/bat/.config/bat/themes/catppuccin-mocha.tmTheme" \
     "https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme"
-```
 
-Make sure `DOTFILES_DIR` environment variable is set.
+echo "Building bat cache"
 
-Rebuild bat's cache:
-
-```sh
 bat cache --build
-```
-
-Now this theme is accessed, you can see it in the list of themes:
-
-```sh
-bat --list-themes
-```
