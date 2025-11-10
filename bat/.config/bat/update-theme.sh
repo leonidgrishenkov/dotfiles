@@ -1,17 +1,19 @@
 #!/bin/sh
 
-echo "Updating bat catppuccin theme"
+# https://github.com/catppuccin/bat
+
+set -euo pipefail
+
+echo "Installing bat catppuccin theme"
 
 if [ -z "$DOTFILES_DIR" ]; then
     echo 'DOTFILES_DIR env var is required'
     exit 1
 fi
 
-set -euo pipefail
-
 wget -q --show-progress \
     -O "$DOTFILES_DIR/bat/.config/bat/themes/catppuccin-latte.tmTheme" \
-   "https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme"
+    "https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme"
 
 wget -q --show-progress \
     -O "$DOTFILES_DIR/bat/.config/bat/themes/catppuccin-frappe.tmTheme" \

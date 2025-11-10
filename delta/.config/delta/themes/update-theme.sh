@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# https://github.com/catppuccin/delta
+
 set -euo pipefail
 
 echo "Updating delta catppuccin theme"
