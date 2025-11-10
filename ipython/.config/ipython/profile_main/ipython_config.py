@@ -49,14 +49,29 @@ class SimplePrompt(Prompts):
 
 c.TerminalInteractiveShell.prompts_class = SimplePrompt
 
+c.TerminalInteractiveShell.true_color = True
+
 from IPython.utils.PyColorize import linux_theme, theme_table
 from copy import deepcopy
 
-theme = deepcopy(linux_theme)
+try:
+    # WARN: In order to use this theme 'catppuccin[pygments]' has to be installed in the ipython environment.
+    # For adhock scenario use this approach: uv run --with ipython --with "catppuccin[pygments]" ipython --profile=main
+    theme = deepcopy(linux_theme)
 
-theme_name = "nord-darker"
-theme.base = theme_name
-theme_table[theme_name] = theme
+    theme_name = "catppuccin-frappe"
+    theme.base = theme_name
+    theme_table[theme_name] = theme
 
-c.TerminalInteractiveShell.true_color = True
-c.TerminalInteractiveShell.colors = theme_name
+    c.TerminalInteractiveShell.colors = theme_name
+
+except Exception as err:
+    print(err, "Using default theme settings")
+
+    theme = deepcopy(linux_theme)
+
+    theme_name = "nord-darker"
+    theme.base = theme_name
+    theme_table[theme_name] = theme
+
+    c.TerminalInteractiveShell.colors = theme_name
