@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -euo pipefail
+
 arch=$(uname -m)
 
 echo "Installing mise via apt for $arch arch"
