@@ -1,35 +1,28 @@
-#!/bin/sh
+#!/bin/bash
 
-echo "Installing zsh plugins"
+set -euo pipefail
 
-if [ -z "$XDG_DATA_HOME" ]; then
-    echo 'XDG_DATA_HOME env var is required'
-    exit 1
-fi
+function install_plugin() {
+    repo_url="$1"
 
-echo "Installing zsh-vi-mode"
-if [ -d "$XDG_DATA_HOME/zsh-vi-mode" ]; then
-    echo "zsh-vi-mode already installed, pulling"
-    cd "$XDG_DATA_HOME/zsh-vi-mode"
-    git pull
-else
-    git clone https://github.com/jeffreytse/zsh-vi-mode.git "$XDG_DATA_HOME/zsh-vi-mode"
-fi
+    plugin_name=$(basename "$repo_url" .git)
+    echo "Installing zsh plugin: $plugin_name"
 
-echo "Installing zsh-autosuggestions"
-if [ -d "$XDG_DATA_HOME/zsh-autosuggestions" ]; then
-    echo "zsh-autosuggestions already installed, pulling"
-    cd "$XDG_DATA_HOME/zsh-autosuggestions"
-    git pull
-else
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$XDG_DATA_HOME/zsh-autosuggestions"
-fi
+    plugin_dir="$XDG_DATA_HOME/$plugin_name"
 
-echo "Installing fast-syntax-highlighting"
-if [ -d "$XDG_DATA_HOME/fast-syntax-highlighting" ]; then
-    echo "fast-syntax-highlighting already installed, pulling"
-    cd "$XDG_DATA_HOME/fast-syntax-highlighting"
-    git pull
-else
-    git clone https://github.com/zdharma-continuum/fast-syntax-highlighting "$XDG_DATA_HOME/fast-syntax-highlighting"
-fi
+    if [ -z "$XDG_DATA_HOME" ]; then
+        echo 'XDG_DATA_HOME env var is required'
+        exit 1
+    fi
+
+    if [ -d "$plugin_dir" ]; then
+        echo "$plugin_name had already been installed into $plugin_dir, pulling updates"
+        git -C "$plugin_dir" pull
+    else
+        git clone "$repo_url" "$plugin_dir"
+    fi
+}
+
+install_plugin https://github.com/jeffreytse/zsh-vi-mode.git
+install_plugin https://github.com/zdharma-continuum/fast-syntax-highlighting.git
+install_plugin https://github.com/zsh-users/zsh-autosuggestions.git
