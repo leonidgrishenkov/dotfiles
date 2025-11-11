@@ -40,7 +40,7 @@ eval "$(direnv hook zsh)"
 
 # === jqp ===
 # https://github.com/noahgorstein/jqp?tab=readme-ov-file#configuration
-# alias jqp="jqp --theme catppuccin-frappe"
+alias jqp="jqp --theme catppuccin-frappe"
 
 # === 1password CLI ===
 # eval "$(op completion zsh)"
