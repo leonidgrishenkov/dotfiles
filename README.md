@@ -3,7 +3,7 @@ This repository is adapted to work with [GNU stow](https://www.gnu.org/software/
 To start syncing local machine configuration with this repo, for example, for `lazygit` execute this command:
 
 ```sh
-stow --stow lazygit
+stow lazygit
 ```
 
 This command will create a symlinks with files structure corresponding to specified app name in this repo, in this example `lazygit`.
@@ -13,7 +13,7 @@ Additional configuration options can be found in `.stowrc` file.
 Several items can be listed separated by space like that:
 
 ```sh
-stow --stow lazygit zsh zellij
+stow lazygit zsh zellij
 ```
 
 # Recreate symlinks
