@@ -1,4 +1,4 @@
-eval "$($HOME/.local/bin/mise activate zsh)"
+eval "$(mise activate zsh)"
 
 # === VI mode ===
 # https://github.com/jeffreytse/zsh-vi-mode
