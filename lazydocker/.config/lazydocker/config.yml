@@ -10,6 +10,7 @@ gui:
   showBottomLine: false
   # When true, increases vertical space used by focused side panel, creating an accordion effect.
   expandFocusedSidePanel: true
+  returnImmediately: true
   theme:
     activeBorderColor:
       - green
