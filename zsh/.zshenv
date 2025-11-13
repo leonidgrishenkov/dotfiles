@@ -18,9 +18,13 @@ if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "$ZDOTDIR/.zprofile" ]]; then
   source "$ZDOTDIR/.zprofile"
 fi
 
-export DOTFILES_DIR="$HOME/Code/dotfiles"
-
 export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/config"
 
 export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"         # Path to zsh cache
 [[ -d $ZSH_CACHE_DIR ]] || mkdir -p $ZSH_CACHE_DIR # If it doesn't exists create one
+
+if [[ $SYSTEM = "Darwin" ]]; then
+    export DOTFILES_DIR="$HOME/Code/dotfiles"
+elif [[ $SYSTEM = "Linux" ]]; then
+    export DOTFILES_DIR="$HOME/dotfiles"
+fi
