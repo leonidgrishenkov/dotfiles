@@ -16,7 +16,7 @@ return {
             no_underline = false, -- Force no underline
             auto_integrations = true,
             integrations = {
-                blink_cmp =true,
+                blink_cmp = true,
                 native_lsp = {
                     enabled = true,
                     -- To see all available values: :h highlight-args
@@ -35,6 +35,26 @@ return {
                     },
                 },
             },
+            custom_highlights = function(colors)
+                return {
+                    -- Standard Neovim completion menu groups
+                    Pmenu = { bg = colors.none },
+                    PmenuSel = { bg = colors.surface0, fg = colors.text },
+                    PmenuBorder = { bg = colors.none },
+                    PmenuSbar = { bg = colors.none },
+                    PmenuThumb = { bg = colors.overlay0 },
+                    NormalFloat = { bg = colors.none },
+                    TabLineSel = { bg = colors.pink },
+                    CmpBorder = { fg = colors.surface2 },
+                    -- Blink.cmp specific groups
+                    BlinkCmpMenu = { bg = colors.none },
+                    BlinkCmpMenuBorder = { bg = colors.none },
+                    BlinkCmpDoc = { bg = colors.none },
+                    BlinkCmpDocBorder = { bg = colors.none },
+                    BlinkCmpMenuSelection = { bg = colors.none },
+                    BlinkCmpLabel = { bg = colors.none },
+                }
+            end,
         },
     },
 }

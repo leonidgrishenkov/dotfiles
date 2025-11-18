@@ -9,7 +9,12 @@ return {
                 use_nvim_cmp_as_default = true,
             },
             completion = {
-                menu = { border = "rounded" },
+                menu = {
+                    border = "rounded",
+                    draw = {
+                        treesitter = { "lsp" },
+                    },
+                },
                 documentation = { window = { border = "rounded" } },
             },
             signature = { window = { border = "rounded" } },
