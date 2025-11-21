@@ -20,10 +20,10 @@ return {
     },
     {
         "folke/todo-comments.nvim",
-        opts = function(_, opts)
+        opts = {
             -- Disable all items in signcolumn
-            opts.signs = false
-        end,
+            signs = false,
+        },
     },
     {
         "nvim-mini/mini.move",

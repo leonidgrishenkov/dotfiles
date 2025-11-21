@@ -24,6 +24,7 @@ return {
                     border = "rounded",
                 },
             })
+            return opts
         end,
     },
     {
@@ -32,6 +33,7 @@ return {
             -- Remove SQL linters
             opts.linters_by_ft = opts.linters_by_ft or {}
             opts.linters_by_ft.sql = {}
+            return opts
         end,
     },
 }
