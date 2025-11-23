@@ -1,5 +1,3 @@
-source ~/.config/zsh/conf/utils.zsh
-
 # === Homebrew ===
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -50,16 +48,6 @@ alias jqp="jqp --theme catppuccin-frappe"
 
 # === 1password CLI ===
 # eval "$(op completion zsh)"
-
-# === Yandex Cloud CLI ===
-function enable-yc() {
-    # Enable zsh completions
-    echo -e "${SUCCESS}Enabling YC completions"
-
-    if [ -f "$HOME/.yandex-cloud/completion.zsh.inc" ]; then
-        source "$HOME/.yandex-cloud/completion.zsh.inc"
-    fi
-}
 
 # === DataGrip ===
 # Run DataGrip from the shell.
