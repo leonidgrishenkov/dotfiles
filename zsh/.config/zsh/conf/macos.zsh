@@ -1,3 +1,5 @@
+source ~/.config/zsh/conf/utils.zsh
+
 # === Homebrew ===
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -24,6 +26,10 @@ source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highligh
 # Repo: https://github.com/zsh-users/zsh-syntax-highlighting
 # source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
+# === Additional ZSH completions ===
+# Repo: https://github.com/zsh-users/zsh-completions
+export FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
+
 # === Zellij ===
 alias zj="zellij"
 
@@ -46,9 +52,14 @@ alias jqp="jqp --theme catppuccin-frappe"
 # eval "$(op completion zsh)"
 
 # === Yandex Cloud CLI ===
-# if [ -f "$HOME/.yandex-cloud/completion.zsh.inc" ]; then # Enable zsh completions
-#     source "$HOME/.yandex-cloud/completion.zsh.inc"
-# fi
+function enable-yc() {
+    # Enable zsh completions
+    echo -e "${SUCCESS}Enabling YC completions"
+
+    if [ -f "$HOME/.yandex-cloud/completion.zsh.inc" ]; then
+        source "$HOME/.yandex-cloud/completion.zsh.inc"
+    fi
+}
 
 # === DataGrip ===
 # Run DataGrip from the shell.

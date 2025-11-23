@@ -14,3 +14,7 @@ source $XDG_DATA_HOME/zsh-autosuggestions/zsh-autosuggestions.zsh
 # https://github.com/zdharma-continuum/fast-syntax-highlighting
 # Install: git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $XDG_DATA_HOME/fast-syntax-highlighting
 source $XDG_DATA_HOME/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# === Additional ZSH completions ===
+# https://github.com/zsh-users/zsh-completions
+export FPATH="$XDG_DATA_HOME/zsh-completions:$FPATH"
