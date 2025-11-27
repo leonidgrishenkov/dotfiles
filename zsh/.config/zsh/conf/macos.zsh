@@ -39,9 +39,6 @@ export GOPATH=$HOME/.go
 export GOBIN=$GOPATH/bin
 export PATH="$GOBIN:$PATH"
 
-# === direnv ===
-eval "$(direnv hook zsh)"
-
 # === jqp ===
 # https://github.com/noahgorstein/jqp?tab=readme-ov-file#configuration
 alias jqp="jqp --theme catppuccin-frappe"
