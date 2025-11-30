@@ -52,3 +52,6 @@ alias jqp="jqp --theme catppuccin-frappe"
 function datagrip() {
     open -a "DataGrip.app" --args "$@"
 }
+
+# This helps to find docker related executables installed by docker desktop.
+export "PATH=/Applications/Docker.app/Contents/Resources/bin:$PATH"
