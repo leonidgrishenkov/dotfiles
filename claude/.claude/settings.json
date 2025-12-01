@@ -12,5 +12,5 @@
       "Read(credentials.json)"
     ]
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": false
 }
