@@ -1,6 +1,7 @@
 alias k="kubectl"
 alias d="docker"
-alias t="terraform"
+alias t="terragrunt"
+alias g="git"
 
 alias ls="eza --icons=auto --group-directories-first --time-style=long-iso"
 
