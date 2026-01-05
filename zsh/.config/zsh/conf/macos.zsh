@@ -28,6 +28,9 @@ source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highligh
 # Repo: https://github.com/zsh-users/zsh-completions
 export FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
 
+# === zsh-you-should-use ===
+source "$HOMEBREW_PREFIX/share/zsh-you-should-use/you-should-use.plugin.zsh"
+
 # === Zellij ===
 alias zj="zellij"
 
@@ -58,3 +61,5 @@ function datagrip() {
 
 # This helps to find docker related executables installed by docker desktop.
 export "PATH=/Applications/Docker.app/Contents/Resources/bin:$PATH"
+
+alias yccl="yc compute instance list"
