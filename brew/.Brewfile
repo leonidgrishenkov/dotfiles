@@ -1,4 +1,5 @@
 tap "birdayz/kaf"
+tap "amir20/dtop"
 tap "derailed/k9s"
 tap "felixkratz/formulae"
 tap "go-task/tap"
