@@ -37,7 +37,7 @@ return {
             -- Set path to md linter config which is currently used by lazyvim.
             -- https://github.com/LazyVim/LazyVim/discussions/4094#discussioncomment-10178217
             opts.linters["markdownlint-cli2"] = {
-                args = { "--config", vim.fn.expand("$HOME/.markdownlint-cli2.yaml"), "--" },
+                args = { "--config", os.getenv("XDG_CONFIG_HOME") .. "/markdownlint-cli2/config.yaml", "--" },
             }
 
             return opts
