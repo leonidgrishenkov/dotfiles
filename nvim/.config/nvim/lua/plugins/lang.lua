@@ -33,6 +33,13 @@ return {
             -- Remove SQL linters
             opts.linters_by_ft = opts.linters_by_ft or {}
             opts.linters_by_ft.sql = {}
+
+            -- Set path to md linter config which is currently used by lazyvim.
+            -- https://github.com/LazyVim/LazyVim/discussions/4094#discussioncomment-10178217
+            opts.linters["markdownlint-cli2"] = {
+                args = { "--config", vim.fn.expand("$HOME/.markdownlint-cli2.yaml"), "--" },
+            }
+
             return opts
         end,
     },
