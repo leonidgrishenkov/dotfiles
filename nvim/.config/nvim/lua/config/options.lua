@@ -24,3 +24,7 @@ vim.g.lazyvim_blink_main = false
 -- Snacks animations
 -- Set to `false` to globally disable all snacks animations
 vim.g.snacks_animate = false
+
+-- display all thing that are usually concealed (such as backticks in Markdown files)
+vim.opt.conceallevel = 0
+
