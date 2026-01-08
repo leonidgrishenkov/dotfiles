@@ -36,4 +36,5 @@ return {
             return opts
         end,
     },
+    { "MeanderingProgrammer/render-markdown.nvim", enabled = false },
 }
