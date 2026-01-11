@@ -63,3 +63,16 @@ function datagrip() {
 export "PATH=/Applications/Docker.app/Contents/Resources/bin:$PATH"
 
 alias yccl="yc compute instance list"
+
+# YC completions are quite expensive to load on each ZSH startup, so I prefer to load it manually when it's necessary.
+function enable-yc() {
+    echo -e "${SUCCESS}Loading yc completions"
+
+    cask_name="yandex-cloud-cli"
+    yc_installed_version=$(brew info --cask $cask_name --json=v2 | jq -r '.casks[0].version')
+
+    comp_source_file="$HOMEBREW_PREFIX/Caskroom/$cask_name/${yc_installed_version}/$cask_name/completion.zsh.inc"
+
+    echo -e "${SUCCESS}Using file: $comp_source_file"
+    source $comp_source_file
+}
