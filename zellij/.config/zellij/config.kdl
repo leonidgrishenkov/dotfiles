@@ -39,6 +39,7 @@ keybinds clear-defaults=true {
         bind "n" { NewPane; SwitchToMode "Normal"; }
         bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "r" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "s" { NewPane "stacked"; SwitchToMode "Normal"; }
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
         bind "f" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
         // bind "z" { TogglePaneFrames; SwitchToMode "Normal"; }
@@ -75,7 +76,7 @@ keybinds clear-defaults=true {
         bind "7" { GoToTab 7; SwitchToMode "Normal"; }
         bind "8" { GoToTab 8; SwitchToMode "Normal"; }
         bind "9" { GoToTab 9; SwitchToMode "Normal"; }
-        bind "Tab" { ToggleTab; }
+        // bind "Tab" { ToggleTab; }
     }
     scroll {
         bind "Alt s" { SwitchToMode "Normal"; }
@@ -198,28 +199,28 @@ keybinds clear-defaults=true {
         bind "Alt y" {
             LaunchOrFocusPlugin "file:~/Code/dotfiles/zellij/.config/zellij/plugins/zellij_forgot.wasm" {
                 "LOAD_ZELLIJ_BINDINGS" "false"
-                "Lock"                  "Alt + g"
-                "Unlock"                "Alt + g"
+
+                // PANES
+                // new panes
                 "New pane"              "Alt + p + n"
-                "Change focus of pane"  "Alt + p + Arrow key"
-                "Close pane"            "Alt + p + x"
+                "Open right pane"       "Alt + p + r"
+                "Open stacked pane"     "Alt + p + s"
+                "Open down pane"        "Alt + p + d"
+
+                "Destroy pane"          "Alt + p + x"
                 "Rename pane"           "Alt + p + c"
                 "Toggle fullscreen"     "Alt + p + f"
                 "Toggle floating pane"  "Alt + p + w"
                 "Toggle embed pane"     "Alt + p + e"
-                "Choose right pane"     "Alt + p + l"
-                "Choose left pane"      "Alt + p + r"
-                "Choose upper pane"     "Alt + p + k"
-                "Choose lower pane"     "Alt + p + j"
-                "New tab"               "Alt + t + n"
-                "Close tab"             "Alt + t + x"
-                "Change focus of tab"   "Alt + t + Arrow key"
-                "Rename tab"            "Alt + t + r"
-                "Sync tab"              "Alt + t + s"
-                "Brake pane to new tab" "Alt + t + b"
-                "Brake pane left"       "Alt + t + ["
-                "Brake pane right"      "Alt + t + ]"
-                "Toggle tab"            "Alt + t + Tab"
+                //"Brake pane to new tab" "Alt + t + b" doesn't work
+                "Move pane to left tab"   "Alt + t + ["
+                "Move pane to right tab"  "Alt + t + ]"
+                // move
+                "Move pane to top"      "Alt + h + k"
+                "Move pane to right"    "Alt + h + l"
+                "Move pane to bottom"   "Alt + h + j"
+                "Move pane to left"     "Alt + h + h"
+                // size
                 "Increase pane size"    "Alt + n + +"
                 "Decrease pane size"    "Alt + n + -"
                 "Increase pane top"     "Alt + n + k"
@@ -230,15 +231,26 @@ keybinds clear-defaults=true {
                 "Decrease pane right"   "Alt + n + L"
                 "Decrease pane bottom"  "Alt + n + J"
                 "Decrease pane left"    "Alt + n + H"
-                "Move pane to top"      "Alt + h + k"
-                "Move pane to right"    "Alt + h + l"
-                "Move pane to bottom"   "Alt + h + j"
-                "Move pane to left"     "Alt + h + h"
-                "Search"                "Alt + s + s"
-                "Go into edit mode"     "Alt + s + e"
+
+                // TABS
+                "New tab"               "Alt + t + n"
+                "Destroy tab"           "Alt + t + x"
+                "Change focus of tab"   "Alt + t + Arrow key"
+                "Rename tab"            "Alt + t + r"
+                "Sync tab"              "Alt + t + s" // what does this mean?
+
+                // GLOBALS
+                "Toggle Locked mode"    "Alt + g"
+                "Quit zellij"           "Alt + q"
+
+                // SCROLLBACK
+                "Search in scrollback"          "Alt + s + s"
+                "Open scrollback in $EDITOR"    "Alt + s + e"
+
+                // SESSION
                 "Detach session"        "Alt + o + d"
                 "Open session manager"  "Alt + o + w"
-                "Quit zellij"           "Alt + q"
+
                 floating true
             }
         }
@@ -288,7 +300,7 @@ on_force_close "quit"
 //   - true (default)
 //   - false
 //
-pane_frames false
+pane_frames true
 
 // Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
 // Options:
@@ -302,19 +314,19 @@ pane_frames false
 //   - true (default)
 //   - false
 //
-// session_serialization false
+session_serialization true
 
 // Whether pane viewports are serialized along with the session, default is false
 // Options:
 //   - true
 //   - false (default)
-// serialize_pane_viewport true
+serialize_pane_viewport true
 
 // Scrollback lines to serialize along with the pane viewport when serializing sessions, 0
 // defaults to the scrollback size. If this number is higher than the scrollback size, it will
 // also default to the scrollback size. This does nothing if `serialize_pane_viewport` is not true.
 //
-// scrollback_lines_to_serialize 10000
+scrollback_lines_to_serialize 10000
 
 // Define color themes for Zellij
 // For more examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
