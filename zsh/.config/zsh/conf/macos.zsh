@@ -34,6 +34,48 @@ source "$HOMEBREW_PREFIX/share/zsh-you-should-use/you-should-use.plugin.zsh"
 # === Zellij ===
 alias zj="zellij"
 
+# Helper function to send the title update to Zellij
+function change_pane_title() {
+  local title=$1
+  command nohup zellij action rename-pane $title >/dev/null 2>&1
+}
+
+function set_pane_to_command_line() {
+  local cmdline=$1
+  local max_length=15 
+
+  if [[ ${#cmdline} -gt $max_length ]]; then
+    # Slice from character 1 to max_length and add "..." at the end
+    local truncated_title="${cmdline[1,$max_length]}..."
+    change_pane_title $truncated_title
+  else
+    change_pane_title $cmdline
+  fi
+}
+
+function clear_title_on_failure() {
+  # Save the exit code of the last command immediately
+  local last_status=$?
+
+  if [[ -n $ZELLIJ ]]; then
+    if [[ $last_status -ne 0 ]]; then
+      # Command failed: Clear the title (resets to default Zellij name)
+      command nohup zellij action undo-rename-pane >/dev/null 2>&1
+    # else
+    #   # Optional: Set the title to the current directory name on success
+    #   local dir_name=$(basename "$PWD")
+    #   command nohup zellij action rename-pane "$dir_name" >/dev/null 2>&1
+    fi
+  fi
+}
+
+if [[ -n $ZELLIJ ]]; then
+  # Use the preexec hook to get the command line before it runs
+  add-zsh-hook preexec set_pane_to_command_line
+  # autoload -Uz add-zsh-hook
+  add-zsh-hook precmd clear_title_on_failure
+fi
+
 # === zoxide ===
 eval "$(zoxide init zsh)"
 
