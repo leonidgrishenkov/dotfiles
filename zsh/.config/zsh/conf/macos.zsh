@@ -42,11 +42,11 @@ function change_pane_title() {
 
 function set_pane_to_command_line() {
   local cmdline=$1
-  local max_length=15 
+  local max_length=20
 
   if [[ ${#cmdline} -gt $max_length ]]; then
-    # Slice from character 1 to max_length and add "..." at the end
-    local truncated_title="${cmdline[1,$max_length]}..."
+    # Slice from character 1 to max_length and add ".." at the end
+    local truncated_title="${cmdline[1,$max_length]} .."
     change_pane_title $truncated_title
   else
     change_pane_title $cmdline
