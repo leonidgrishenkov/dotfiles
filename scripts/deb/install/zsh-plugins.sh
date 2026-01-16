@@ -27,3 +27,4 @@ install_plugin https://github.com/jeffreytse/zsh-vi-mode.git
 install_plugin https://github.com/zdharma-continuum/fast-syntax-highlighting.git
 install_plugin https://github.com/zsh-users/zsh-autosuggestions.git
 install_plugin https://github.com/zsh-users/zsh-completions.git
+install_plugin https://github.com/MichaelAquilina/zsh-you-should-use.git

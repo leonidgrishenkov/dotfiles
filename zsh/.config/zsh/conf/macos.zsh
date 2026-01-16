@@ -28,7 +28,7 @@ source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highligh
 # Repo: https://github.com/zsh-users/zsh-completions
 export FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
 
-# === zsh-you-should-use ===
+# === Plugin that reminds to use aliases ===
 source "$HOMEBREW_PREFIX/share/zsh-you-should-use/you-should-use.plugin.zsh"
 
 # === Zellij ===

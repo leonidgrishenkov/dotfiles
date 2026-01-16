@@ -15,6 +15,11 @@ source $XDG_DATA_HOME/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Install: git clone https://github.com/zdharma-continuum/fast-syntax-highlighting $XDG_DATA_HOME/fast-syntax-highlighting
 source $XDG_DATA_HOME/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
+# === Plugin that reminds to use aliases ===
+# https://github.com/MichaelAquilina/zsh-you-should-use
+# Install: git clone https://github.com/MichaelAquilina/zsh-you-should-use.git
+source $XDG_DATA_HOME/zsh-you-should-use/you-should-use.plugin.zsh
+
 # === Additional ZSH completions ===
 # https://github.com/zsh-users/zsh-completions
 export FPATH="$XDG_DATA_HOME/zsh-completions:$FPATH"
