@@ -42,7 +42,7 @@ function change_pane_title() {
 
 function set_pane_to_command_line() {
   local cmdline=$1
-  local max_length=20
+  local max_length=50
 
   if [[ ${#cmdline} -gt $max_length ]]; then
     # Slice from character 1 to max_length and add ".." at the end
@@ -92,7 +92,11 @@ eval "$(direnv hook zsh)"
 alias jqp="jqp --theme catppuccin-frappe"
 
 # === 1password CLI ===
-# eval "$(op completion zsh)"
+function enable-1password() {
+    echo -e "${SUCCESS}Loading 1password completions"
+
+    eval "$(op completion zsh)"
+}
 
 # === DataGrip ===
 # Run DataGrip from the shell.
