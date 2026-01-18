@@ -26,13 +26,23 @@ return {
         },
     },
     {
-        "nvim-neo-tree/neo-tree.nvim",
+        "folke/snacks.nvim",
+        ---@type snacks.Config
         opts = {
-            filesystem = {
-                filtered_items = {
-                    -- Show all dot and gitignore files as normal ones
-                    hide_dotfiles = false,
-                    hide_gitignored = false,
+            ---@class snacks.explorer.Config
+            explorer = {
+                trash = true, -- Use the system trash when deleting files
+            },
+            picker = {
+                sources = {
+                    explorer = {
+                        hidden = true, -- show dotfiles in explorer
+                        ignored = true, -- show gitignore files in explorer
+                    },
+                    files = {
+                        hidden = true, -- show dotfiles in finder
+                        ignored = true, -- show gitignored files in finder
+                    },
                 },
             },
         },
