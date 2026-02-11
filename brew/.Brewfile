@@ -159,8 +159,6 @@ mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
 mas "AmneziaWG", id: 6478942365
 mas "Bitwarden", id: 1352778147
-mas "Cubox", id: 1113361350
-mas "Cubox for Safari", id: 1550721541
 mas "Dark Night", id: 1592844577
 mas "DuckDuckGo", id: 663592361
 mas "Fantastical", id: 975937182
@@ -177,10 +175,8 @@ mas "Notability", id: 360593530
 mas "Numbers", id: 409203825
 mas "Outline", id: 1356178125
 mas "Pages", id: 409201541
-mas "Super Agent", id: 1568262835
 mas "Telegram", id: 747648890
 mas "Toggl Track", id: 1291898086
-mas "Windows App", id: 1295203466
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
 vscode "aaron-bond.better-comments"
