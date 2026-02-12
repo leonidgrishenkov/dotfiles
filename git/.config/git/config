@@ -28,11 +28,6 @@
 	autoStash = true
 	autoSquash = true
 	updateRefs = true
-[commit]
-    gpgSign = true
-    verbose = true
-[tag]
-    gpgsign = true
 
 [include]
     path = ~/.config/delta/config
@@ -42,3 +37,6 @@
 
 [includeIf "hasconfig:remote.*.url:ssh://git@ssh.git.samoletgroup.ru:2222/cspb/**"]
     path = ~/.config/git/private/samolet
+
+[includeIf "hasconfig:remote.*.url:ssh://git@bitbucket.playteam.ru/**"]
+    path = ~/.config/git/private/okko
