@@ -3,7 +3,7 @@
 keybinds clear-defaults=true {
     normal {
         // uncomment this and adjust key if using copy_on_select=false
-        // bind "Alt c" { Copy; }
+        bind "Alt c" { Copy; }
         // Switch between panes with Alt + arrow keys
         bind "Alt Left" { MoveFocus "Left"; }
         bind "Alt Right" { MoveFocus "Right"; }
@@ -382,7 +382,7 @@ copy_command "pbcopy"                     // osx
 
 // Enable or disable automatic copy (and clear) of selection when releasing mouse
 // Default: true
-copy_on_select true
+copy_on_select false
 
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
