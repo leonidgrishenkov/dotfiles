@@ -1,5 +1,5 @@
-tap "birdayz/kaf"
 tap "amir20/dtop"
+tap "birdayz/kaf"
 tap "derailed/k9s"
 tap "domcyrus/rustnet"
 tap "felixkratz/formulae"
@@ -54,8 +54,8 @@ brew "gnutls"
 brew "gnupg"
 brew "go"
 brew "gopass"
-brew "grex"
 brew "graphviz"
+brew "grex"
 brew "helm"
 brew "htop"
 brew "httpie"
@@ -122,7 +122,6 @@ brew "zsh-completions"
 brew "zsh-fast-syntax-highlighting"
 brew "zsh-syntax-highlighting"
 brew "zsh-vi-mode"
-brew "birdayz/kaf/kaf"
 brew "zsh-you-should-use"
 brew "birdayz/kaf/kaf"
 brew "domcyrus/rustnet/rustnet"
@@ -147,6 +146,7 @@ cask "firefox"
 cask "font-jetbrains-mono-nerd-font"
 cask "ghostty"
 cask "iina"
+cask "kontur-talk"
 cask "lens"
 cask "mattermost"
 cask "obsidian"
@@ -160,10 +160,13 @@ cask "visual-studio-code"
 cask "warp"
 cask "yandex-cloud-cli"
 cask "zen"
+cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
 mas "AmneziaWG", id: 6478942365
 mas "Bitwarden", id: 1352778147
+mas "Cubox", id: 1113361350
+mas "Cubox for Safari", id: 1550721541
 mas "Dark Night", id: 1592844577
 mas "DuckDuckGo", id: 663592361
 mas "Fantastical", id: 975937182
@@ -180,6 +183,7 @@ mas "Notability", id: 360593530
 mas "Numbers", id: 409203825
 mas "Outline", id: 1356178125
 mas "Pages", id: 409201541
+mas "Super Agent", id: 1568262835
 mas "Telegram", id: 747648890
 mas "Toggl Track", id: 1291898086
 mas "WireGuard", id: 1451685025
