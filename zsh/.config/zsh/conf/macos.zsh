@@ -98,3 +98,9 @@ function enable-yc() {
     echo -e "${SUCCESS}Using file: $comp_source_file"
     source $comp_source_file
 }
+
+# === Filen Drive ===
+# This is a filen drive CLI.
+# I installed it manually bacause they built a new rust version which is not available via homebrew yet.
+# https://github.com/FilenCloudDienste/filen-rs/tree/main/filen-cli
+export PATH="$PATH:$HOME/.filen-cli/bin"
