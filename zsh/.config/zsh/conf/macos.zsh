@@ -83,7 +83,7 @@ function datagrip() {
 }
 
 # This helps to find docker related executables installed by docker desktop.
-export "PATH=/Applications/Docker.app/Contents/Resources/bin:$PATH"
+export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin"
 
 alias yccl="yc compute instance list"
 
@@ -113,3 +113,7 @@ function notifyMe() {
     osascript -e 'display notification "The command failed" with title "Terminal" sound name "Bubble"'
   fi
 }
+
+# === Obsidian ===
+# To be able to use obsidian CLI
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
