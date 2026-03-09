@@ -104,3 +104,11 @@ function enable-yc() {
 # I installed it manually bacause they built a new rust version which is not available via homebrew yet.
 # https://github.com/FilenCloudDienste/filen-rs/tree/main/filen-cli
 export PATH="$PATH:$HOME/.filen-cli/bin"
+
+function notifyMe() {
+  if [ $? -eq 0 ]; then
+    osascript -e 'display notification "The command succeeds" with title "Terminal" sound name "Bubble"'
+  else
+    osascript -e 'display notification "The command failed" with title "Terminal" sound name "Bubble"'
+  fi
+}
