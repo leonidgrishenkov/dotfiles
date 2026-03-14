@@ -48,9 +48,9 @@ function preexec() {
   # Use $2 to show the actual command that will run (with aliases expanded)
   local cmd="${2:-$1}"  # Fallback to $1 if $2 is empty
 
-  # Show command with current directory: "command args < ~/path"
+  # Show command with current directory: "command args | /any/path"
   # %~ expands to current directory with ~ for home
-  print -Pn "\e]2;$cmd < %~\a"
+  print -Pn "\e]2;$cmd | %~\a"
 }
 
 # === zoxide ===
