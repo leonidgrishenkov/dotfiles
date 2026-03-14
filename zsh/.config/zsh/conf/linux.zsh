@@ -1,3 +1,6 @@
+# vim: set filetype=sh:
+# vim: set ts=4 sw=4 et:
+
 eval "$(mise activate zsh)"
 
 # === VI mode ===

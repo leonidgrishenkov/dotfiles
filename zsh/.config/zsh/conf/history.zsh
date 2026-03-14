@@ -1,3 +1,6 @@
+# vim: set filetype=sh:
+# vim: set ts=4 sw=4 et:
+
 # Number of commands that will be stored in history file
 export HISTSIZE=1000000
 

@@ -1,3 +1,6 @@
+# vim: set filetype=sh:
+# vim: set ts=4 sw=4 et:
+
 alias k="kubectl"
 alias d="docker"
 alias t="terragrunt"

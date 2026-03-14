@@ -1,9 +1,12 @@
+# vim: set filetype=sh:
+# vim: set ts=4 sw=4 et:
+
 # === Homebrew ===
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export HOMEBREW_NO_ENV_HINTS=1 # Don't show hints for env vatialbes
 export HOMEBREW_NO_AUTO_UPDATE=1
-export HOMEBREW_NO_ANALYTICS=1  # disables statistics that brew collects
+export HOMEBREW_NO_ANALYTICS=1                             # disables statistics that brew collects
 export HOMEBREW_BUNDLE_FILE="$DOTFILES_DIR/brew/.Brewfile" # path to bundle file
 
 export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
@@ -38,19 +41,19 @@ alias zj="zellij"
 # Configure terminal title updates for Zellij to automatically detect
 # Zellij reads the terminal title and uses it for pane names
 function precmd() {
-  # Set terminal title to current directory when prompt is displayed
-  # %~ expands to current directory with ~ for home
-  print -Pn "\e]2;%~\a"
+    # Set terminal title to current directory when prompt is displayed
+    # %~ expands to current directory with ~ for home
+    print -Pn "\e]2;%~\a"
 }
 
 function preexec() {
-  # preexec receives: $1 = typed command, $2 = expanded command (aliases resolved), $3 = after history expansion
-  # Use $2 to show the actual command that will run (with aliases expanded)
-  local cmd="${2:-$1}"  # Fallback to $1 if $2 is empty
+    # preexec receives: $1 = typed command, $2 = expanded command (aliases resolved), $3 = after history expansion
+    # Use $2 to show the actual command that will run (with aliases expanded)
+    local cmd="${2:-$1}" # Fallback to $1 if $2 is empty
 
-  # Show command with current directory: "command args | /any/path"
-  # %~ expands to current directory with ~ for home
-  print -Pn "\e]2;$cmd | %~\a"
+    # Show command with current directory: "command args | /any/path"
+    # %~ expands to current directory with ~ for home
+    print -Pn "\e]2;$cmd | %~\a"
 }
 
 # === zoxide ===
@@ -107,11 +110,12 @@ function enable-yc() {
 export PATH="$PATH:$HOME/.filen-cli/bin"
 
 function notifyMe() {
-  if [ $? -eq 0 ]; then
-    osascript -e 'display notification "The command succeeds" with title "Terminal" sound name "Bubble"'
-  else
-    osascript -e 'display notification "The command failed" with title "Terminal" sound name "Bubble"'
-  fi
+
+    if [ $? -eq 0 ]; then
+        osascript -e 'display notification "The command succeeds" with title "Terminal" sound name "Pop"'
+    else
+        osascript -e 'display notification "The command failed" with title "Terminal" sound name "Pop"'
+    fi
 }
 
 # === Obsidian ===
