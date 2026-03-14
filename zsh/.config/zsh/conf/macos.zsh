@@ -110,12 +110,30 @@ function enable-yc() {
 export PATH="$PATH:$HOME/.filen-cli/bin"
 
 function notifyMe() {
+    local -A opts
+    zparseopts -A opts -title:: -msg::
+
+    if [ ${opts[--title]+x} ]; then
+        local title="${opts[--title]}"
+    else
+        local title="Terminal"
+    fi
 
     if [ $? -eq 0 ]; then
-        osascript -e 'display notification "The command succeeds" with title "Terminal" sound name "Pop"'
-    else
-        osascript -e 'display notification "The command failed" with title "Terminal" sound name "Pop"'
+        local subtitle="Succeeds"
+    else 
+        local subtitle="Failed"
     fi
+
+    if [ ${opts[--msg]+x} ]; then
+        local msg="${opts[--msg]}"
+    else
+        local msg="The command finished"
+    fi
+
+    osascript -e 'on run argv
+    display notification (item 1 of argv) with title (item 2 of argv) subtitle (item 3 of argv) sound name "Pop"
+    end run' "$msg" "$title" "$subtitle"
 }
 
 # === Obsidian ===
