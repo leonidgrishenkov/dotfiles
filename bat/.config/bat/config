@@ -19,6 +19,7 @@
 # Determine which pager is used. This option will override the PAGER and BAT_PAGER environment variables.
 --pager="less --RAW-CONTROL-CHARS --quit-if-one-screen --quit-on-intr --chop-long-lines --mouse"
 
+--set-terminal-title
 # Enable this to use italic text on the terminal. This is not supported on all
 # terminal emulators (like tmux, by default):
 #--italic-text=always
