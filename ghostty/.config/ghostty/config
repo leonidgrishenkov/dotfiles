@@ -36,4 +36,7 @@ macos-titlebar-style = transparent
 macos-titlebar-proxy-icon = hidden
 
 # Disable title
-title = " "
+title = ""
+
+# I turned this off in favor of setting title via zsh hooks.
+shell-integration=none
