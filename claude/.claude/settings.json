@@ -2,15 +2,22 @@
   "env": {
     "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
     "DISABLE_AUTOUPDATER": "1",
-    "CLAUDE_CODE_DISABLE_TERMINAL_TITLE": "1"
+    "CLAUDE_CODE_DISABLE_TERMINAL_TITLE": "0"
   },
   "permissions": {
     "deny": [
       "Read(.env)",
       "Read(.env.*)",
-      "Read(secrets/**)",
-      "Read(credentials.json)"
-    ]
+      "Read(*.env)",
+      "Read(env/**)",
+      "Read(**/credentials)",
+      "Read(**/credentials/**)",
+      "Read(**/secret)",
+      "Read(**/secret/**)",
+      "Read(**/secrets)",
+      "Read(**/secrets/**)"
+    ],
+    "defaultMode": "default"
   },
   "alwaysThinkingEnabled": false
 }
