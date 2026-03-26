@@ -3,7 +3,12 @@ return {
     {
         "catppuccin/nvim",
         opts = {
-            flavour = "frappe", -- Can be one of: latte, frappe, macchiato, mocha
+            -- flavor can be one of: latte, frappe, macchiato, mocha
+            flavour = "auto",
+            background = {
+                light = "latte",
+                dark = "macchiato",
+            },
             transparent_background = true,
             float = {
                 transparent = true,
