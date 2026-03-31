@@ -16,5 +16,8 @@ history_filter = [
     "^.+\\s(-h|--help)\\s*$"
 ]
 
+# https://docs.atuin.sh/cli/configuration/config/#fuzzy-search-syntax
+search_mode = "fuzzy"
+
 [theme]
 name = "catppuccin-frappe-lavender"
