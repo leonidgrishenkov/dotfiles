@@ -13,8 +13,11 @@ history_filter = [
     "^(nvim|vim|vi|v)?\\s*\\.?\\s*$",
     "^ls\\s*-*(l|a|la|al)?\\s*\\.?\\s*$",
     "^(z|zoxide)\\s*.*$",
-    "^.+\\s(-h|--help)\\s*$"
+    "^.+\\s(-h|--help)\\s*$",
 ]
+
+# whether to store commands that returned non-zero exit code.
+store_failed = false
 
 # https://docs.atuin.sh/cli/configuration/config/#fuzzy-search-syntax
 search_mode = "fuzzy"
