@@ -18,8 +18,8 @@ window-decoration = true
 window-padding-x = 4
 window-padding-y = 2
 
-background-opacity = 0.90
-background-blur-radius = 95
+background-opacity = 0.75
+background-blur-radius = 10
 background-blur=macos-glass-regular
 
 keybind = super+alt+w=unbind
