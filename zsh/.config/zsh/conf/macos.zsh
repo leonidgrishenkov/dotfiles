@@ -62,7 +62,7 @@ eval "$(zoxide init zsh)"
 # === Golang ===
 export GOPATH=$HOME/.go
 export GOBIN=$GOPATH/bin
-export PATH="$GOBIN:$PATH"
+export PATH="$PATH:$GOBIN"
 
 # === direnv ===
 eval "$(direnv hook zsh)"
@@ -109,33 +109,10 @@ function enable-yc() {
 # https://github.com/FilenCloudDienste/filen-rs/tree/main/filen-cli
 export PATH="$PATH:$HOME/.filen-cli/bin"
 
-function notifyMe() {
-    local -A opts
-    zparseopts -A opts -title:: -msg::
-
-    if [ ${opts[--title]+x} ]; then
-        local title="${opts[--title]}"
-    else
-        local title="Terminal"
-    fi
-
-    if [ $? -eq 0 ]; then
-        local subtitle="Succeeds"
-    else 
-        local subtitle="Failed"
-    fi
-
-    if [ ${opts[--msg]+x} ]; then
-        local msg="${opts[--msg]}"
-    else
-        local msg="The command finished"
-    fi
-
-    osascript -e 'on run argv
-    display notification (item 1 of argv) with title (item 2 of argv) subtitle (item 3 of argv) sound name "Pop"
-    end run' "$msg" "$title" "$subtitle"
-}
-
 # === Obsidian ===
 # To be able to use obsidian CLI
 export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+
+# === OrbStack ===
+# Add path to binary into the PATH and enable shell completions
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
