@@ -18,6 +18,13 @@ source "$ZDOTDIR/conf/history.zsh"
 source "$ZDOTDIR/conf/aliases.zsh"
 source "$ZDOTDIR/conf/completion.zsh"
 
+if [[ -d "$ZDOTDIR/conf/extra" ]]; then
+    files=($ZDOTDIR/conf/extra/*.zsh(N))
+    for extra_file in $files; do 
+        source "$extra_file"
+    done
+fi
+
 # === Rip Grep ===
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
 

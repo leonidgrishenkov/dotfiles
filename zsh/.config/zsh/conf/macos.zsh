@@ -64,6 +64,9 @@ export GOPATH=$HOME/.go
 export GOBIN=$GOPATH/bin
 export PATH="$PATH:$GOBIN"
 
+# === Rust ===
+export PATH="$PATH:$HOME/.cargo/bin"
+
 # === direnv ===
 eval "$(direnv hook zsh)"
 
@@ -94,13 +97,17 @@ alias yccl="yc compute instance list"
 function enable-yc() {
     echo -e "${SUCCESS}Loading yc completions"
 
-    cask_name="yandex-cloud-cli"
-    yc_installed_version=$(brew info --cask $cask_name --json=v2 | jq -r '.casks[0].version')
+    local cask_name="yandex-cloud-cli"
+    local yc_installed_version=$(brew info --cask $cask_name --json=v2 | jq -r '.casks[0].version')
 
-    comp_source_file="$HOMEBREW_PREFIX/Caskroom/$cask_name/${yc_installed_version}/$cask_name/completion.zsh.inc"
+    local comp_source_file="$HOMEBREW_PREFIX/Caskroom/$cask_name/${yc_installed_version}/$cask_name/completion.zsh.inc"
 
-    echo -e "${SUCCESS}Using file: $comp_source_file"
-    source $comp_source_file
+    if [ -f $comp_source_file ]; then
+        echo -e "${SUCCESS}Using file: $comp_source_file"
+        source $comp_source_file
+    else
+        echo -e "${ERROR}Can't find completions file. Expected file doen't not exist: $comp_source_file"
+    fi
 }
 
 # === Filen Drive ===
