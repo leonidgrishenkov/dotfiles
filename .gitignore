@@ -14,3 +14,5 @@ zsh/.config/zsh/.zcompdump
 
 # exclude private git config files
 git/.config/git/private/
+
+zsh/.config/zsh/conf/extra/*.zsh
