@@ -20,7 +20,7 @@ source "$ZDOTDIR/conf/completion.zsh"
 
 if [[ -d "$ZDOTDIR/conf/extra" ]]; then
     files=($ZDOTDIR/conf/extra/*.zsh(N))
-    for extra_file in $files; do 
+    for extra_file in $files; do
         source "$extra_file"
     done
 fi
@@ -39,7 +39,7 @@ ZVM_VI_INSERT_ESCAPE_BINDKEY=jf
 ZVM_VI_EDITOR=$EDITOR # when invoking command line editing with 'vv'
 
 # === zsh-autosuggestions ===
-ZSH_AUTOSUGGEST_STRATEGY=(history) # https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#suggestion-strategy
+ZSH_AUTOSUGGEST_STRATEGY=(history completion) # https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#suggestion-strategy
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 # more about autosuggest keymaps here: https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#key-bindings
 bindkey '^F' autosuggest-accept # Key to accept currently shown autosuggestion.
