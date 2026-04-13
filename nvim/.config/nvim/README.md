@@ -1,3 +1,3 @@
 # TODO
 
-- [ ] - Disable show `Neo-tree` title in neo-tree
+Nothing to do. Awesome, isn't it? 🍺

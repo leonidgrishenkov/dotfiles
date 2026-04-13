@@ -2,11 +2,6 @@
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number" -- highlight the line number
 
--- Number of spaces tabs count for
-vim.opt.tabstop = 4
--- Size of an indent
-vim.opt.shiftwidth = 4
-
 -- LazyVim auto format
 vim.g.autoformat = false
 
