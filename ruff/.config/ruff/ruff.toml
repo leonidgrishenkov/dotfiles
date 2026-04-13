@@ -6,7 +6,7 @@ cache-dir = "~/.cache/ruff"
 indent-width = 4
 
 # The length is determined by the number of characters per line.
-line-length = 100 # Allow lines to be as long as 100
+line-length = 120 # Allow lines to be as long as 100
 
 [lint]
 # https://docs.astral.sh/ruff/settings/#lint_select
@@ -33,6 +33,7 @@ select = [
 
 # https://docs.astral.sh/ruff/settings/#lint_ignore
 ignore = ["RUF001", "RUF002", "RUF003", "PD901", "PD010", "E501", "F821", "F841", "F401"]
+
 
 [lint.pydocstyle]
 convention = "google"
