@@ -29,7 +29,7 @@ fi
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
 
 # === Starship ===
-export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml" # Set path to config file
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.zsh.toml" # Set path to config file
 eval "$(starship init zsh)"
 
 # === zsh-vi-mode ===
