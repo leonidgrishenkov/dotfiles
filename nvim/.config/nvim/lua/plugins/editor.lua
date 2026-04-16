@@ -22,7 +22,7 @@ return {
         "folke/todo-comments.nvim",
         opts = {
             -- Disable all items in signcolumn
-            signs = false,
+            signs = true,
         },
     },
     {
