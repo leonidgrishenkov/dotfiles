@@ -2,6 +2,9 @@ return {
     {
         "mason-org/mason.nvim",
         opts = {
+            ensure_installed = {
+                "yamlfmt",
+            },
             ui = {
                 icons = {
                     package_installed = "✓",

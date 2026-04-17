@@ -1,8 +1,13 @@
 ---
 # vim: set filetype=yaml:
 
+# Docs: https://github.com/google/yamlfmt/blob/main/docs/config-file.md
+
 formatter:
-    indent: 4
+    indent: 2
     include_document_start: true
     line_ending: lf
     retain_line_breaks: true
+    force_array_style: block
+    force_quote_style: double
+    max_line_length: 120
