@@ -1,0 +1,15 @@
+---
+
+version: "3"
+
+tasks:
+  my-ip-info:
+    desc: Show full json returned by ifconfig.me
+    cmd: curl -s ifconfig.me/all.json | jq {{ .CLI_ARGS }}
+
+  my-ip:
+    desc: Show only my IP
+    cmd: curl -s ifconfig.me/ip
+
+
+
