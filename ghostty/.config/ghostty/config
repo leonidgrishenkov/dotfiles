@@ -10,6 +10,7 @@ font-family-bold-italic = JetBrainsMono Nerd Font Propo Bold Italic
 
 cursor-text = 000000
 cursor-style-blink = true
+cursor-click-to-move = true
 
 mouse-hide-while-typing = true
 macos-auto-secure-input=true
@@ -36,10 +37,15 @@ keybind = alt+h=goto_split:left
 keybind = alt+l=goto_split:right
 keybind = alt+k=goto_split:up
 keybind = alt+j=goto_split:down
-keybind = alt+p=toggle_quick_terminal
+# Global key to toggle quick terminal inside Ghostty from everywhere.
+# WARN: currently it works only on macOS.
+keybind = global:super+g=toggle_quick_terminal
+
+# jump backwards/forwards through prompt boundaries in the scrollback
+keybind = shift+up=jump_to_prompt:-1
+keybind = shift+down=jump_to_prompt:1
 
 # Pass Alt key combinations to applications like Zellij
-macos-option-as-alt = true
 macos-titlebar-style = transparent
 macos-titlebar-proxy-icon = hidden
 
@@ -47,8 +53,10 @@ macos-titlebar-proxy-icon = hidden
 title = ""
 
 shell-integration=detect
-# I turned 'title' feature off in favor of setting title via zsh hooks.
-shell-integration-features=no-title
+# I turned 'title' feature off in favor of setting title via zsh hooks, because I configured its format differently.
+shell-integration-features=no-title,ssh-env,ssh-terminfo
+
+scrollback-limit = 100000
 
 quick-terminal-screen=mouse
 quick-terminal-position=center
