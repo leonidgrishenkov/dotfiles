@@ -55,9 +55,10 @@
 		// External directories
 		"external_directory": {
 			"*": "ask",
-			"~/Code/dotfiles/**": "allow",
-			"~/code/dotfiles/**": "allow",
+			"~/Code/dotfiles/**": "ask",
+			"~/code/dotfiles/**": "ask",
 			"~/Downloads/**": "allow",
+			"~/Filen/Obsidian/main-vault/**": "allow",
 			"/tmp/**": "allow"
 		},
 		"doom_loop": "ask"
