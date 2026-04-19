@@ -11,5 +11,10 @@ tasks:
     desc: Show only my IP
     cmd: curl -s ifconfig.me/ip
 
+  stop-gp:
+    desc: Stop GlobalProject service
+    cmd: launchctl unload /Library/LaunchAgents/com.paloaltonetworks.gp.pangp*
 
-
+  start-gp:
+    desc: Start GlobalProject service
+    cmd: launchctl load /Library/LaunchAgents/com.paloaltonetworks.gp.pangp*
