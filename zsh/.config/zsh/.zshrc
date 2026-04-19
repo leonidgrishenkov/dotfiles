@@ -129,6 +129,9 @@ export DOCKER_CLI_HINTS=false # disable ads in CLI
 export ATUIN_NOBIND="true"
 eval "$(atuin init zsh)"
 
+# === GPG ===
+export GPG_TTY=$(tty)
+
 # zsh-vi-mode overrides keybindings after it loads, including ^r binding for atuin. In order to avoid it here I use
 # zvm_after_init hook that zsh-vi-mode provides. This hook runs after zsh-vi-mode finishes setting up its
 # keybindings, so my custom bindings won't get overwritten.
