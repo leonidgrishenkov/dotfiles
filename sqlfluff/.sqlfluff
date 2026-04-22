@@ -1,33 +1,79 @@
 # vim: set filetype=toml:
 
 # Documentation:
-# - Default configuration: https://docs.sqlfluff.com/en/3.0.7/configuration.html#default-configuration
-# - Rules reference: https://docs.sqlfluff.com/en/3.0.7/rules.html#rules-reference
+# - Default configuration: https://docs.sqlfluff.com/en/stable/configuration.html#default-configuration
+# - Rules reference: https://docs.sqlfluff.com/en/stable/rules.html#rules-reference
 
 [sqlfluff]
 dialect = ansi
-max_line_length = 200
-fix_even_unparsable = False
+max_line_length = 120
+# Allow formatting even when template variables (e.g. Jinja/dbt) cannot be resolved
+fix_even_unparsable = True
+# Do not abort the process on parse errors — let sqlfluff do its best
 fail_on_error = False
+# Ignore templating errors (e.g. unresolvable Airflow params/macros objects)
+ignore = templating
+# Templater: use jinja if you use dbt/Jinja templates, otherwise "raw"
+templater = raw
+# Exclude rules that are noisy or conflict with each other in a base config
+# RF05: no trailing commas on single-item (too strict)
+# CP03: function capitalisation — ClickHouse functions are camelCase and case-sensitive
+exclude_rules = RF05, CP03
 
 [sqlfluff:indentation]
-indent_unit = tab
+indent_unit = space
 tab_space_size = 4
-indented_joins = True
+indented_joins = False
 indented_using_on = True
-allow_implicit_indents = True
+implicit_indents = forbid
 
 [sqlfluff:rules:capitalisation.keywords]
-capitalisation_policy = upper
+capitalisation_policy = lower
 
 [sqlfluff:rules:capitalisation.identifiers]
-extended_capitalisation_policy = None
+# lower is the safest default: avoids quoting issues across dialects
+extended_capitalisation_policy = lower
 
-# [sqlfluff:rules:capitalisation.functions]
-# extended_capitalisation_policy = upper
+[sqlfluff:rules:capitalisation.functions]
+extended_capitalisation_policy = consistent
 
 [sqlfluff:rules:capitalisation.literals]
-capitalisation_policy = upper
+capitalisation_policy = consistent
 
-# [sqlfluff:rules:capitalisation.types]
-# extended_capitalisation_policy = upper
+[sqlfluff:rules:capitalisation.types]
+extended_capitalisation_policy = consistent
+
+[sqlfluff:rules:layout.long_lines]
+# Ignore long lines that cannot be shortened (comments, long strings)
+ignore_comment_lines = True
+ignore_comment_clauses = True
+
+[sqlfluff:rules:ambiguous.column_references]
+# GROUP BY 1 style: "consistent" allows either, "qualified" requires column names
+group_by_and_order_by_style = consistent
+
+[sqlfluff:layout:type:statement_terminator]
+# Place the semicolon on its own new line
+spacing_before = touch
+line_position = alone
+
+[sqlfluff:rules:layout.newlines]
+# Trim excessive blank lines
+maximum_empty_lines_between_statements = 1
+maximum_empty_lines_inside_statements = 0
+maximum_empty_lines_between_batches = 1
+
+# Jinja context: dummy values for Airflow runtime variables that cannot be resolved at lint time.
+# These let sqlfluff partially render templates that use simple variable substitution.
+# Note: object methods like params.get(...) or macros.datetime.strptime(...) still cannot
+# be resolved — use --FIX-EVEN-UNPARSABLE and --ignore=templating CLI flags for those files.
+# [sqlfluff:templating:jinja:context]
+# data_interval_start = "2024-01-01 00:00:00"
+# data_interval_end = "2024-01-02 00:00:00"
+# ds = "2024-01-01"
+# ds_nodash = "20240101"
+# ts = "2024-01-01T00:00:00+00:00"
+# next_ds = "2024-01-02"
+# prev_ds = "2023-12-31"
+# run_id = "scheduled__2024-01-01T00:00:00+00:00"
+# dag_run_id = "scheduled__2024-01-01T00:00:00+00:00"
