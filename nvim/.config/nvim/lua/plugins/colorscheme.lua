@@ -22,25 +22,38 @@ return {
             no_bold = false, -- Force no bold
             no_underline = false, -- Force no underline
             auto_integrations = true,
-            integrations = {
-                blink_cmp = true,
-                navic = { enabled = true, custom_bg = "lualine" },
-                native_lsp = {
-                    enabled = true,
-                    -- To see all available values: :h highlight-args
-                    virtual_text = {
-                        errors = { "italic" },
-                        hints = { "italic" },
-                        warnings = { "italic" },
-                        information = { "italic" },
-                    },
-                    underlines = {
-                        errors = { "undercurl" },
-                        hints = {},
-                        warnings = { "undercurl" },
-                        information = {},
-                        ok = {},
-                    },
+            styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+                comments = { "italic" }, -- Change the style of comments
+                conditionals = {},
+                loops = {},
+                functions = {},
+                keywords = {},
+                strings = {},
+                variables = {},
+                numbers = {},
+                booleans = {},
+                properties = {},
+                types = {},
+                operators = {},
+                -- miscs = {}, -- Uncomment to turn off hard-coded styles
+            },
+            lsp_styles = { -- Handles the style of specific lsp hl groups (see `:h lsp-highlight`).
+                virtual_text = {
+                    errors = { "italic" },
+                    hints = { "italic" },
+                    warnings = { "italic" },
+                    information = { "italic" },
+                    ok = { "italic" },
+                },
+                underlines = {
+                    errors = { "undercurl", "italic" },
+                    hints = { "italic" },
+                    warnings = { "italic" },
+                    information = { "italic" },
+                    ok = {},
+                },
+                inlay_hints = {
+                    background = true,
                 },
             },
             custom_highlights = function(colors)
