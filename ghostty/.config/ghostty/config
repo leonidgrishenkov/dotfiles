@@ -41,6 +41,9 @@ keybind = alt+j=goto_split:down
 # WARN: currently it works only on macOS.
 keybind = global:super+g=toggle_quick_terminal
 
+# Use left Option key as an Alt key on macOS.
+macos-option-as-alt=left
+
 # jump backwards/forwards through prompt boundaries in the scrollback
 keybind = shift+up=jump_to_prompt:-1
 keybind = shift+down=jump_to_prompt:1
