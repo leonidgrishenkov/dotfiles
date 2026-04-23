@@ -2,6 +2,8 @@ return {
     { "folke/tokyonight.nvim", enabled = false },
     {
         "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000,
         opts = {
             -- flavor can be one of: latte, frappe, macchiato, mocha
             flavour = "auto",
@@ -22,6 +24,7 @@ return {
             auto_integrations = true,
             integrations = {
                 blink_cmp = true,
+                navic = { enabled = true, custom_bg = "lualine" },
                 native_lsp = {
                     enabled = true,
                     -- To see all available values: :h highlight-args
@@ -51,15 +54,27 @@ return {
                     NormalFloat = { bg = colors.none },
                     TabLineSel = { bg = colors.pink },
                     CmpBorder = { fg = colors.surface2 },
+
                     -- Blink.cmp specific groups
                     BlinkCmpMenu = { bg = colors.none },
                     BlinkCmpMenuBorder = { bg = colors.none },
                     BlinkCmpDoc = { bg = colors.none },
                     BlinkCmpDocBorder = { bg = colors.none },
-                    BlinkCmpMenuSelection = { bg = colors.none },
+                    BlinkCmpMenuSelection = { bg = colors.grey, fg = colors.text },
                     BlinkCmpLabel = { bg = colors.none },
                 }
             end,
+        },
+        specs = {
+            {
+                "akinsho/bufferline.nvim",
+                optional = true,
+                opts = function(_, opts)
+                    if (vim.g.colors_name or ""):find("catppuccin") then
+                        opts.highlights = require("catppuccin.special.bufferline").get_theme()
+                    end
+                end,
+            },
         },
     },
 }
