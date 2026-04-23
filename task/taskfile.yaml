@@ -24,8 +24,13 @@ tasks:
 
   connect-okko:
     desc: Connect to Okko VPN via OpenConnect
-    cmd: sudo openconnect --authgroup "GW03" --user "l.grishenkov" --background --pid-file {{ .OPENCONNECT_OKKO_PID_FILE }} --protocol=gp
-      plato.okko.team
+    cmd: >
+      sudo openconnect
+      --authgroup "GW03"
+      --user "l.grishenkov"
+      --background
+      --pid-file {{ .OPENCONNECT_OKKO_PID_FILE }}
+      --protocol=gp plato.okko.team
 
   disconnect-okko:
     desc: Disconnect from OpenConnect Okko VPN
