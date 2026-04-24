@@ -19,6 +19,11 @@ return {
     {
         "neovim/nvim-lspconfig",
         opts = function(_, opts)
+            opts.servers = opts.servers or {}
+            opts.servers.bashls = {
+                filetypes = { "sh", "bash", "zsh" },
+            }
+
             opts.diagnostics = vim.tbl_extend("force", opts.diagnostics, {
                 float = {
                     -- Always show diagnostic source (LSP server or linter)
