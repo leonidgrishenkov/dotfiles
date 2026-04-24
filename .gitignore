@@ -12,7 +12,7 @@ zsh/.config/zsh/.zcompdump
 # sqlite db files
 *.sqlite
 
-# exclude private git config files
-git/.config/git/private/
+# exclude extra git config files which are mostly private
+git/.config/git/include/
 
 zsh/.config/zsh/conf/extra/*.zsh
