@@ -9,6 +9,7 @@ return {
                 use_nvim_cmp_as_default = true,
             },
             completion = {
+                list = { selection = { preselect = false, auto_insert = false } },
                 menu = {
                     border = "rounded",
                     draw = {
