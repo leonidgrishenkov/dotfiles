@@ -1,3 +1,4 @@
+# vim: ft=ghostty
 # https://ghostty.org/docs/config
 
 theme = light:Catppuccin Latte,dark:Catppuccin Macchiato
