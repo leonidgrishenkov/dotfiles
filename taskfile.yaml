@@ -1,0 +1,9 @@
+---
+
+version: "3"
+
+tasks:
+  nvim-lazy-sync:
+    desc: Execute Lazyvim update, clean and install commands in headless mode.
+    cmd: nvim --headless -c 'Lazy sync' -c "qall"
+
