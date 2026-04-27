@@ -46,10 +46,10 @@ return {
                     ok = { "italic" },
                 },
                 underlines = {
-                    errors = { "undercurl", "italic" },
-                    hints = { "italic" },
-                    warnings = { "italic" },
-                    information = { "italic" },
+                    errors = { "undercurl" },
+                    hints = { "undercurl" },
+                    warnings = {},
+                    information = {},
                     ok = {},
                 },
                 inlay_hints = {
