@@ -59,7 +59,8 @@ shell-integration=detect
 # I turned 'title' feature off in favor of setting title via zsh hooks, because I configured its format differently.
 shell-integration-features=no-title,ssh-env,ssh-terminfo
 
-scrollback-limit = 100000
+# 100 MB
+scrollback-limit = 100000000
 
 quick-terminal-screen=mouse
 quick-terminal-position=center
