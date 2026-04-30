@@ -1,70 +1,70 @@
 {
-	"$schema": "https://opencode.ai/config.json",
-	"default_agent": "plan",
-	// Permissions - require approval for specific operations
-	"permission": {
-		// Global wildcard - applies to all tools not explicitly configured
-		"*": "allow",
-		"edit": {
-			"*": "allow",
-			"package.json": "ask",
-			"package-lock.json": "deny",
-			"pyproject.toml": "ask",
-			"uv.lock": "deny",
-			"yarn.lock": "deny",
-			".git/**": "deny",
-			"node_modules/**": "deny"
-		},
-		// Shell commands - granular control
-		"bash": {
-			"*": "ask",
-			"git status*": "allow",
-			"git diff*": "allow",
-			"git log*": "allow",
-			"git push*": "deny",
-			"npm run test": "allow",
-			"npm run build": "allow",
-			"rm -rf*": "deny",
-			"grep*": "allow",
-			"find*": "allow"
-		},
-		"read": {
-			"*": "allow",
-			"*.env": "deny",
-			"*.env.*": "deny",
-			"*.env.example": "allow",
-			"config/secrets.json": "deny",
-			"**/*.key": "deny",
-			"**/*.pem": "deny"
-		},
-		"grep": {
-			"*": "allow",
-			"password": "ask",
-			"api[_-]?key": "ask"
-		},
-		"glob": {
-			"*": "allow",
-			"**/.env*": "deny"
-		},
-		"list": {
-			"*": "allow",
-			"~/.ssh": "deny",
-			"~/.aws": "deny",
-			"~/.gnupg": "deny"
-		},
-		// External directories
-		"external_directory": {
-			"*": "ask",
-			"~/Code/dotfiles/**": "ask",
-			"~/code/dotfiles/**": "ask",
-			"~/Downloads/**": "allow",
-			"~/Filen/Obsidian/main-vault/**": "allow",
-			"/tmp/**": "allow"
-		},
-		"doom_loop": "ask"
-	},
-	// MCP servers configuration
-	"mcp": {
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "plan",
+  // Permissions - require approval for specific operations
+  "permission": {
+    // Global wildcard - applies to all tools not explicitly configured
+    "*": "allow",
+    "edit": {
+      "*": "allow",
+      "package.json": "ask",
+      "package-lock.json": "deny",
+      "pyproject.toml": "ask",
+      "uv.lock": "deny",
+      "yarn.lock": "deny",
+      ".git/**": "deny",
+      "node_modules/**": "deny"
+    },
+    // Shell commands - granular control
+    "bash": {
+      "*": "ask",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git push*": "deny",
+      "npm run test": "allow",
+      "npm run build": "allow",
+      "rm -rf*": "deny",
+      "grep*": "allow",
+      "find*": "allow"
+    },
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow",
+      "config/secrets.json": "deny",
+      "**/*.key": "deny",
+      "**/*.pem": "deny"
+    },
+    "grep": {
+      "*": "allow",
+      "password": "ask",
+      "api[_-]?key": "ask"
+    },
+    "glob": {
+      "*": "allow",
+      "**/.env*": "deny"
+    },
+    "list": {
+      "*": "allow",
+      "~/.ssh": "deny",
+      "~/.aws": "deny",
+      "~/.gnupg": "deny"
+    },
+    // External directories
+    "external_directory": {
+      "*": "ask",
+      "~/Code/dotfiles/**": "ask",
+      "~/code/dotfiles/**": "ask",
+      "~/Downloads/**": "allow",
+      "~/Filen/Obsidian/main-vault/**": "allow",
+      "/tmp/**": "allow"
+    },
+    "doom_loop": "ask"
+  },
+  // MCP servers configuration
+  "mcp": {
     "clickhouse-docs": {
       "type": "remote",
       "url": "https://clickhouse.mcp.kapa.ai/",
@@ -72,6 +72,6 @@
       "headers": {}
     }
   },
-	// Plugins
-	"plugin": []
+  // Plugins
+  "plugin": []
 }
