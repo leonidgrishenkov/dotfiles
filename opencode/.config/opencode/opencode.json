@@ -64,8 +64,14 @@
 		"doom_loop": "ask"
 	},
 	// MCP servers configuration
-	"mcp": {},
-
+	"mcp": {
+    "clickhouse-docs": {
+      "type": "remote",
+      "url": "https://clickhouse.mcp.kapa.ai/",
+      "enabled": true,
+      "headers": {}
+    }
+  },
 	// Plugins
 	"plugin": []
 }
