@@ -68,7 +68,7 @@
     "clickhouse-docs": {
       "type": "remote",
       "url": "https://clickhouse.mcp.kapa.ai/",
-      "enabled": true,
+      "enabled": false,
       "headers": {}
     }
   },
