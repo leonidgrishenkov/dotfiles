@@ -93,8 +93,8 @@ _fzf_comprun() {
 
     case "$command" in
     vim | nvim | v | code | open) fzf --preview "$_show_file_or_dir_preview" "$@" ;;
-    ls | eza | cd) fd --type d -H | fzf --preview "$_show_dir_preview" "$@" ;;
-    cat | bat) fd --type f -H | fzf --preview "$_show_file_preview" "$@" ;;
+    ls | eza | cd) fd --type d -H -E .git | fzf --preview "$_show_dir_preview" "$@" ;;
+    cat | bat) fd --type f -H -E .git | fzf --preview "$_show_file_preview" "$@" ;;
     export | unset) fzf --preview "eval 'echo \$'{}" "$@" ;;
     ssh | telnet) fzf --preview 'dig {}' "$@" ;;
     kill | pkill) fzf --preview 'ps -f -p {}' --preview-window=down:3:wrap "$@" ;;
