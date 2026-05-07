@@ -7,7 +7,7 @@ function install_theme() {
 
     base_url=https://github.com/catppuccin/yazi/raw/main/themes
     theme_name="$1" # NOTE: actually subpath to theme in repo, like: frappe/catppuccin-frappe-blue.toml
-    output_path=/tmp/theme.toml
+    output_path="$DOTFILES_DIR/yazi/.config/yazi/theme.toml"
 
     echo "Installing catppuccin theme: $theme_name"
 

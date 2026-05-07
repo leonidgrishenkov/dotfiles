@@ -1,5 +1,5 @@
 # Doc: https://yazi-rs.github.io/docs/configuration/keymap
-"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+#"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
 [mgr]
 prepend_keymap = [
