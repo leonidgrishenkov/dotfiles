@@ -19,5 +19,7 @@
     ],
     "defaultMode": "default"
   },
-  "alwaysThinkingEnabled": false
+  "alwaysThinkingEnabled": false,
+  "editorMode": "vim",
+  "preferredNotifChannel": "ghostty"
 }
