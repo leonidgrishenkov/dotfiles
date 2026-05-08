@@ -23,4 +23,4 @@ store_failed = false
 search_mode = "fuzzy"
 
 [theme]
-name = "catppuccin-frappe-lavender"
+name = "frappe/catppuccin-frappe-lavender"

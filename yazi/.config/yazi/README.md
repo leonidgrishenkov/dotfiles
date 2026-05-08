@@ -27,5 +27,5 @@ wget -O ~/Code/dotfiles/yazi/.config/yazi/theme.toml https://github.com/catppucc
 Replace `syntect_theme ` key value with the path to the `bat` theme for `bat` preview:
 
 ```toml
-syntect_theme = "~/.config/bat/themes/catppuccin-frappe.tmTheme"
+syntect_theme = "~/.config/bat/themes/Catppuccin Frappe.tmTheme"
 ```
