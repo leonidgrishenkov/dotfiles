@@ -1,3 +1,6 @@
 [submodule "bat/.config/bat/themes"]
 	path = bat/.config/bat/themes
 	url = https://github.com/catppuccin/bat
+[submodule "external/bat"]
+	path = external/bat
+	url = https://github.com/catppuccin/bat.git
