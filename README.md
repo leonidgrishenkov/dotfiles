@@ -1,3 +1,7 @@
+# Dotfiles
+
+## Create symlinks with `stow`
+
 This repository is adapted to work with [GNU stow](https://www.gnu.org/software/stow/).
 
 To start syncing local machine configuration with this repo, for example, for `lazygit` execute this command:
@@ -16,18 +20,30 @@ Several items can be listed separated by space like that:
 stow lazygit zsh zellij
 ```
 
-# Recreate symlinks
-
 To recreate symlinks, for example there were made some changes in directories names:
 
 ```sh
 stow --restow lazygit
 ```
 
-# Delete symlinks
-
 To delete symlinks:
 
 ```sh
 stow --delete lazygit
+```
+
+## Submodules
+
+There are a few git submodules in `./external` directory, dedicated for that.
+
+To clone on a fresh machine:
+
+```sh
+git clone --recurse-submodules URL
+```
+
+To update on existing one:
+
+```sh
+git submodule update --init --recursive
 ```
