@@ -25,7 +25,7 @@ git:
         delta --no-gitconfig --paging=never \
           --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}" \
           --line-numbers \
-          --syntax-theme="catppuccin-frappe" \
+          --syntax-theme="Catppuccin Frappe" \
           --file-style="brightyellow bold" \
           --file-decoration-style="none"
   merging:
