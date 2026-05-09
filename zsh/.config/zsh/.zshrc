@@ -106,22 +106,6 @@ _fzf_comprun() {
 # IPython configurations dir
 export IPYTHONDIR=~/.config/ipython
 
-function enable-python() {
-    echo -e "${SUCCESS}Enabling Python features"
-    # Load UV completions into shell
-    eval "$(uv generate-shell-completion zsh)"
-
-    function load-venv() {
-        if [ -d "./.venv" ]; then
-            . .venv/bin/activate
-            echo -e "${SUCCESS}Virtual environment activated"
-        else
-            echo -e "${WARNING}No .venv directory found in current directory\!"
-            return 1
-        fi
-    }
-}
-
 # === docker ===
 export DOCKER_CLI_HINTS=false # disable ads in CLI
 

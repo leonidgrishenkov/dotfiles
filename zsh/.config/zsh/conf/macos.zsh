@@ -74,13 +74,6 @@ eval "$(direnv hook zsh)"
 # https://github.com/noahgorstein/jqp?tab=readme-ov-file#configuration
 alias jqp="jqp --theme catppuccin-frappe"
 
-# === 1password CLI ===
-function enable-1password() {
-    echo -e "${SUCCESS}Loading 1password completions"
-
-    eval "$(op completion zsh)"
-}
-
 # === DataGrip ===
 # Run DataGrip from the shell.
 # https://www.jetbrains.com/help/datagrip/working-with-the-ide-features-from-command-line.html#standalone

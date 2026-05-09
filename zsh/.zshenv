@@ -19,6 +19,8 @@ if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "$ZDOTDIR/.zprofile" ]]; then
   source "$ZDOTDIR/.zprofile"
 fi
 
+export FPATH="$FPATH:$XDG_DATA_HOME/zsh/site-functions"
+
 export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/config"
 
 export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"         # Path to zsh cache

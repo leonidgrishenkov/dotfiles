@@ -6,3 +6,12 @@ tasks:
   bat-cache-build:
     desc: Build or rebuild bat cache
     cmd: bat cache --build
+
+  generate-extra-completions:
+    vars:
+      COMPLETIONS_DIR:
+        sh: echo "$XDG_DATA_HOME/zsh/site-functions"
+    cmds:
+      - if [[ ! -d {{.COMPLETIONS_DIR}} ]]; then mkdir -p {{.COMPLETIONS_DIR}}; fi
+      - uv generate-shell-completion zsh > {{.COMPLETIONS_DIR}}/_uv
+      - op completion zsh > {{.COMPLETIONS_DIR}}/_op
