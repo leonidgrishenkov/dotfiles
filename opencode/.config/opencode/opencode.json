@@ -13,7 +13,12 @@
       "uv.lock": "deny",
       "yarn.lock": "deny",
       ".git/**": "deny",
-      "node_modules/**": "deny"
+      "node_modules/**": "deny",
+      "**/.terragrunt-cache/*": "deny",
+      "**/.terraform.lock.hcl": "deny",
+      "*.tfstate.*": "deny",
+      "*.tfstate": "deny",
+      "**/.terraform/*": "deny"
     },
     // Shell commands - granular control
     "bash": {
@@ -35,7 +40,12 @@
       "*.env.example": "allow",
       "config/secrets.json": "deny",
       "**/*.key": "deny",
-      "**/*.pem": "deny"
+      "**/*.pem": "deny",
+      "**/.terragrunt-cache/*": "deny",
+      "**/.terraform.lock.hcl": "deny",
+      "*.tfstate.*": "deny",
+      "*.tfstate": "deny",
+      "**/.terraform/*": "deny"
     },
     "grep": {
       "*": "allow",
@@ -50,7 +60,10 @@
       "*": "allow",
       "~/.ssh": "deny",
       "~/.aws": "deny",
-      "~/.gnupg": "deny"
+      "~/.gnupg": "deny",
+      "**/.terragrunt-cache/*": "deny",
+      "*.tfstate.*": "deny",
+      "**/.terraform/*": "deny"
     },
     // External directories
     "external_directory": {
