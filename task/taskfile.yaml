@@ -40,3 +40,8 @@ tasks:
       else
         echo "PID file doesn't exist"
       fi
+
+  py-venv:
+    desc: Activate Python Virtual environment
+    cmd: . .venv/bin/activate
+
