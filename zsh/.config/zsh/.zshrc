@@ -104,7 +104,10 @@ _fzf_comprun() {
 
 # === Python ===
 # IPython configurations dir
-export IPYTHONDIR=~/.config/ipython
+export IPYTHONDIR=$XDG_CONFIG_HOME/ipython
+
+# For uv tools
+export PATH="$XDG_DATA_HOME/../bin:$PATH"
 
 # === docker ===
 export DOCKER_CLI_HINTS=false # disable ads in CLI
