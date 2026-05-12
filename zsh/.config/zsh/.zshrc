@@ -83,11 +83,11 @@ export FZF_DEFAULT_OPTS=" \
     --cycle \
     --border=rounded"
 
-_show_file_preview="bat -n --line-range :500 {}"
+_show_file_preview="bat --line-range :500 {}"
 _show_dir_preview="eza --tree --icons --all --color=always {} | head -200"
 _show_file_or_dir_preview="if [ -d {} ]; then $_show_dir_preview; else $_show_file_preview; fi"
 
-_fzf_comprun() {
+function _fzf_comprun() {
     local command=$1
     shift
 
@@ -118,6 +118,11 @@ eval "$(atuin init zsh)"
 
 # === GPG ===
 export GPG_TTY=$(tty)
+
+function command_not_found_handler() {
+    print -P "%F{red}✘%f command not found: $1"
+    return 127
+}
 
 # zsh-vi-mode overrides keybindings after it loads, including ^r binding for atuin. In order to avoid it here I use
 # zvm_after_init hook that zsh-vi-mode provides. This hook runs after zsh-vi-mode finishes setting up its
