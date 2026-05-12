@@ -6,72 +6,34 @@
     // Global wildcard - applies to all tools not explicitly configured
     "*": "allow",
     "edit": {
-      "*": "allow",
-      "package.json": "ask",
-      "package-lock.json": "deny",
-      "pyproject.toml": "ask",
-      "uv.lock": "deny",
-      "yarn.lock": "deny",
-      ".git/**": "deny",
-      "node_modules/**": "deny",
-      "**/.terragrunt-cache/*": "deny",
-      "**/.terraform.lock.hcl": "deny",
-      "*.tfstate.*": "deny",
-      "*.tfstate": "deny",
-      "**/.terraform/*": "deny"
+      "*": "ask"
     },
-    // Shell commands - granular control
     "bash": {
       "*": "ask",
       "git status*": "allow",
       "git diff*": "allow",
       "git log*": "allow",
+      // Always deny
       "git push*": "deny",
-      "npm run test": "allow",
-      "npm run build": "allow",
       "rm -rf*": "deny",
-      "grep*": "allow",
-      "find*": "allow"
+      "gopass*": "deny",
+      "pass*": "deny",
     },
     "read": {
-      "*": "allow",
-      "*.env": "deny",
-      "*.env.*": "deny",
-      "*.env.example": "allow",
-      "config/secrets.json": "deny",
-      "**/*.key": "deny",
-      "**/*.pem": "deny",
-      "**/.terragrunt-cache/*": "deny",
-      "**/.terraform.lock.hcl": "deny",
-      "*.tfstate.*": "deny",
-      "*.tfstate": "deny",
-      "**/.terraform/*": "deny"
+      "*": "ask"
     },
     "grep": {
-      "*": "allow",
-      "password": "ask",
-      "api[_-]?key": "ask"
+      "*": "ask"
     },
     "glob": {
-      "*": "allow",
-      "**/.env*": "deny"
+      "*": "ask"
     },
     "list": {
-      "*": "allow",
-      "~/.ssh": "deny",
-      "~/.aws": "deny",
-      "~/.gnupg": "deny",
-      "**/.terragrunt-cache/*": "deny",
-      "*.tfstate.*": "deny",
-      "**/.terraform/*": "deny"
+      "*": "ask"
     },
     // External directories
     "external_directory": {
       "*": "ask",
-      "~/Code/dotfiles/**": "ask",
-      "~/code/dotfiles/**": "ask",
-      "~/Downloads/**": "allow",
-      "~/Filen/Obsidian/main-vault/**": "allow",
       "/tmp/**": "allow"
     },
     "doom_loop": "ask"
