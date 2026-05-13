@@ -1,9 +1,6 @@
 ---
-
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
 version: "3"
-
-vars:
-  OPENCONNECT_OKKO_PID_FILE: /tmp/OPENCONNECT_OKKO_PID
 
 tasks:
   my-ip-info:
@@ -13,33 +10,6 @@ tasks:
   my-ip:
     desc: Show only my IP
     cmd: curl -s ifconfig.me/ip
-
-  stop-gp:
-    desc: Stop GlobalProject service
-    cmd: launchctl unload /Library/LaunchAgents/com.paloaltonetworks.gp.pangp*
-
-  start-gp:
-    desc: Start GlobalProject service
-    cmd: launchctl load /Library/LaunchAgents/com.paloaltonetworks.gp.pangp*
-
-  connect-okko:
-    desc: Connect to Okko VPN via OpenConnect
-    cmd: >
-      sudo openconnect
-      --authgroup "GW03"
-      --user "l.grishenkov"
-      --background
-      --pid-file {{ .OPENCONNECT_OKKO_PID_FILE }}
-      --protocol=gp plato.okko.team
-
-  disconnect-okko:
-    desc: Disconnect from OpenConnect Okko VPN
-    cmd: |
-      if [ -f "{{ .OPENCONNECT_OKKO_PID_FILE }}" ]; then
-          sudo kill -TERM $(cat "{{ .OPENCONNECT_OKKO_PID_FILE }}")
-      else
-        echo "PID file doesn't exist"
-      fi
 
   py-venv:
     desc: Activate Python Virtual environment
