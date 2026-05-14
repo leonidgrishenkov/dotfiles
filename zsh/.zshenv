@@ -31,3 +31,5 @@ if [[ $SYSTEM = "Darwin" ]]; then
 elif [[ $SYSTEM = "Linux" ]]; then
     export DOTFILES_DIR="$HOME/dotfiles"
 fi
+
+if [[ -f ~/.extra.zshenv ]]; then source ~/.extra.zshenv; fi
