@@ -4,11 +4,11 @@
 
 # Specify desired highlighting theme (e.g. "TwoDark"). Run `bat --list-themes`
 # for a list of all available themes
---theme="Catppuccin Frappe"
+# --theme="Catppuccin Frappe"
 # Bat can also use different themes based on system appearance:
-# --theme="auto:system"
-# --theme-light="catppuccin-latte"
-# --theme-dark="catppuccin-frappe"
+--theme="auto:system"
+--theme-light="Catppuccin Latte"
+--theme-dark="Catppuccin Frappe"
 
 # Configure which elements (line numbers, file headers, grid borders, Git modifications, ..) to display in addition to
 # the file contents.
@@ -17,7 +17,7 @@
 # When to use the pager.
 --paging="auto"
 # Determine which pager is used. This option will override the PAGER and BAT_PAGER environment variables.
---pager="less --RAW-CONTROL-CHARS --quit-if-one-screen --quit-on-intr --chop-long-lines --mouse"
+--pager="less -M --RAW-CONTROL-CHARS --quit-if-one-screen --quit-on-intr --chop-long-lines -g"
 
 --set-terminal-title
 # Enable this to use italic text on the terminal. This is not supported on all
