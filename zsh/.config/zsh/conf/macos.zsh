@@ -35,9 +35,6 @@ export FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
 # === Plugin that reminds to use aliases ===
 source "$HOMEBREW_PREFIX/share/zsh-you-should-use/you-should-use.plugin.zsh"
 
-# === Zellij ===
-alias zj="zellij"
-
 # Configure terminal title updates for Zellij to automatically detect
 # Zellij reads the terminal title and uses it for pane names
 function precmd() {
@@ -98,12 +95,6 @@ function enable-yc() {
         echo -e "${ERROR}Can't find completions file. Expected file doen't not exist: $comp_source_file"
     fi
 }
-
-# === Filen Drive ===
-# This is a filen drive CLI.
-# I installed it manually bacause they built a new rust version which is not available via homebrew yet.
-# https://github.com/FilenCloudDienste/filen-rs/tree/main/filen-cli
-export PATH="$PATH:$HOME/.filen-cli/bin"
 
 # === Obsidian ===
 # To be able to use obsidian CLI
