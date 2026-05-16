@@ -32,16 +32,17 @@ return {
             ---@class snacks.explorer.Config
             explorer = {
                 trash = true, -- Use the system trash when deleting files
+                -- exclude = { "**/node_modules/**" }, -- ignore node_modules completely
             },
             picker = {
                 sources = {
                     explorer = {
                         hidden = true, -- show dotfiles in explorer
-                        ignored = true, -- show gitignore files in explorer
+                        ignored = false, -- show gitignore files in explorer
                     },
                     files = {
                         hidden = true, -- show dotfiles in finder
-                        ignored = true, -- show gitignored files in finder
+                        ignored = false, -- show gitignored files in finder
                     },
                 },
             },
