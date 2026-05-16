@@ -50,6 +50,6 @@ function notify(title: string, body: string): void {
 
 export default function (pi: ExtensionAPI) {
 	pi.on("agent_end", async () => {
-		notify("Pi", "Ready for input");
+		notify("Pi", "Agent is Ready");
 	});
 }

@@ -7,6 +7,7 @@
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
+//TODO: это не будет работать в такой ситуации: `echo "anything" > .env`. Нужно обработать подобные сценарии тоже.
 const PROTECTED_PATHS = [".env", ".git/", "node_modules/", '.envrc'];
 
 export default function (pi: ExtensionAPI) {

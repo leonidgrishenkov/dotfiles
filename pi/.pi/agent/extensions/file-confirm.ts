@@ -16,9 +16,8 @@ export default function (pi: ExtensionAPI) {
 				return { block: true, reason: "write tool blocked (no UI for confirmation)" };
 			}
 
-			const path = event.input.path as string;
 			const choice = await ctx.ui.select(
-				`Confirm write file: ${path}`,
+				`Confirm write?`,
 				["Yes", "No"]
 			);
 
@@ -34,9 +33,8 @@ export default function (pi: ExtensionAPI) {
 				return { block: true, reason: "edit tool blocked (no UI for confirmation)" };
 			}
 
-			const path = event.input.path as string;
 			const choice = await ctx.ui.select(
-				`Confirm edit file: ${path}`,
+				`Confirm edit?`,
                 ["Yes", "No"]
 			);
 
