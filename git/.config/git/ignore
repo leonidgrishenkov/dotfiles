@@ -250,3 +250,5 @@ pyrightconfig.json
 
 # Direnv
 .envrc
+
+node_modules/
