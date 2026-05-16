@@ -8,6 +8,7 @@ keymap_mode = "vim-insert"
 style = 'compact'
 invert = true
 
+# regex that will be completly excluded from history
 history_filter = [
     "^cd",
     "^(nvim|vim|vi|v)?\\s*\\.?\\s*$",
@@ -18,6 +19,10 @@ history_filter = [
 
 # whether to store commands that returned non-zero exit code.
 store_failed = false
+
+secrets_filter = false
+
+keymap_cursor = { vim_insert = "blink-bar", vim_normal = "blink-block" }
 
 # https://docs.atuin.sh/cli/configuration/config/#fuzzy-search-syntax
 search_mode = "fuzzy"
