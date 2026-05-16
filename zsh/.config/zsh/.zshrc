@@ -83,7 +83,7 @@ export FZF_DEFAULT_OPTS=" \
     --cycle \
     --border=rounded"
 
-_show_file_preview="bat --line-range :500 {}"
+_show_file_preview="bat -pp --line-range :500 --force-colorization {}"
 _show_dir_preview="eza --tree --icons --all --color=always {} | head -200"
 _show_file_or_dir_preview="if [ -d {} ]; then $_show_dir_preview; else $_show_file_preview; fi"
 
