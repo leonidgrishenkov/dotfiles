@@ -34,6 +34,8 @@ stow --delete lazygit
 
 ## Submodules
 
+### Clone
+
 There are a few git submodules in `./external` directory, dedicated for that.
 
 To clone on a fresh machine:
@@ -46,4 +48,12 @@ To update on existing one:
 
 ```sh
 git submodule update --init --recursive
+```
+
+### Add a new one
+
+To add new submodule:
+
+```sh
+git submodule add URL ./external/SUBMODULE_NAME
 ```
