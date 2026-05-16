@@ -70,10 +70,6 @@ export PATH="$PATH:$HOME/.cargo/bin"
 # === direnv ===
 eval "$(direnv hook zsh)"
 
-# === jqp ===
-# https://github.com/noahgorstein/jqp?tab=readme-ov-file#configuration
-alias jqp="jqp --theme catppuccin-frappe"
-
 # === DataGrip ===
 # Run DataGrip from the shell.
 # https://www.jetbrains.com/help/datagrip/working-with-the-ide-features-from-command-line.html#standalone
