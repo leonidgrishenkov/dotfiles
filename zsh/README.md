@@ -1,4 +1,3 @@
-
 # Performance
 
 In order to check current zsh startup time execute this:

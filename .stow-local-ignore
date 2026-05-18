@@ -13,3 +13,5 @@ taskfile\.yaml
 \.claude
 
 external
+
+scripts
