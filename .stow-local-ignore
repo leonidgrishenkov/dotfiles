@@ -17,3 +17,8 @@ external
 scripts
 
 \.DS_Store
+
+^/README.*
+^/LICENSE.*
+
+^/\.DS_Store
