@@ -10,3 +10,6 @@
 [submodule "external/catpuccin-k9s"]
 	path = external/catpuccin-k9s
 	url = https://github.com/catppuccin/k9s
+[submodule "external/catppuccin-fsh"]
+	path = external/catppuccin-fsh
+	url = https://github.com/catppuccin/zsh-fsh.git
