@@ -24,8 +24,8 @@ tasks:
   stow-essential:
     desc: Run stow with essential entities
     cmds:
-      - cmd: stow -n stow
-      - cmd: cat ./stow/darwin-essential | xargs -I {} stow -n {}
+      - cmd: stow stow
+      - cmd: cat ./stow/darwin-essential | xargs -I {} stow {}
         platforms: [darwin]
       - cmd: echo "Not implemented yet"
         platforms: [linux]
