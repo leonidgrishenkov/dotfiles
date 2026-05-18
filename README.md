@@ -20,6 +20,14 @@ Several items can be listed separated by space like that:
 stow lazygit zsh zellij
 ```
 
+For dry-run execute:
+
+```sh
+stow -n lazygit
+```
+
+Is will only show the changes.
+
 To recreate symlinks, for example there were made some changes in directories names:
 
 ```sh
@@ -38,7 +46,7 @@ stow --delete lazygit
 
 There are a few git submodules in `./external` directory, dedicated for that.
 
-To clone on a fresh machine:
+To clone entire repository with submodules included on a fresh machine:
 
 ```sh
 git clone --recurse-submodules URL
@@ -56,4 +64,16 @@ To add new submodule:
 
 ```sh
 git submodule add URL ./external/SUBMODULE_NAME
+```
+
+After adding submodule you might need to create a symlink. In order to do it correctly, first, go to the package folder:
+
+```sh
+cd ./atuin/.config/atuin
+```
+
+And from there create a syblink using relative path, like that:
+
+```sh
+ln -s ../../../external/catpuccin-atuin/themes ./themes
 ```
