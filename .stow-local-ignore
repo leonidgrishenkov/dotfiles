@@ -15,3 +15,5 @@ taskfile\.yaml
 external
 
 scripts
+
+\.DS_Store
