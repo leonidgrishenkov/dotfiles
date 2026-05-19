@@ -41,6 +41,17 @@ keybind = alt+j=goto_split:down
 # WARN: currently it works only on macOS.
 keybind = global:super+g=toggle_quick_terminal
 
+keybind = super+ctrl+arrow_up=unbind
+keybind = super+ctrl+arrow_down=unbind
+keybind = super+ctrl+arrow_left=unbind
+keybind = super+ctrl+arrow_right=unbind
+
+keybind = super+alt+arrow_up=resize_split:up,10
+keybind = super+alt+arrow_down=resize_split:down,10
+keybind = super+alt+arrow_left=resize_split:left,10
+keybind = super+alt+arrow_right=resize_split:right,10
+
+
 # Use left Option key as an Alt key on macOS.
 macos-option-as-alt=left
 
@@ -48,7 +59,6 @@ macos-option-as-alt=left
 keybind = shift+up=jump_to_prompt:-1
 keybind = shift+down=jump_to_prompt:1
 
-# Pass Alt key combinations to applications like Zellij
 macos-titlebar-style = transparent
 macos-titlebar-proxy-icon = hidden
 
