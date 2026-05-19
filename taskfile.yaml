@@ -27,6 +27,6 @@ tasks:
       - cmd: stow stow
       - cmd: cat ./stow/darwin-essential | xargs -I {} stow {}
         platforms: [darwin]
-      - cmd: echo "Not implemented yet"
+      - cmd: cat ./stow/linux-essential | xargs -I {} stow {}
         platforms: [linux]
 
