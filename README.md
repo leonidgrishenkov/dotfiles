@@ -77,3 +77,4 @@ And from there create a syblink using relative path, like that:
 ```sh
 ln -s ../../../external/catpuccin-atuin/themes ./themes
 ```
+
