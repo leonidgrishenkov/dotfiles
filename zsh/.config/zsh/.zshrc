@@ -120,6 +120,10 @@ eval "$(atuin init zsh)"
 export PI_SKIP_VERSION_CHECK=1 # disables version check on startups
 export PI_OFFLINE=1 # disables all startup network operations
 
+# === JQ ===
+# https://jqlang.org/manual/#colors
+export JQ_COLORS="0;90:0;35:0;35:0;31:0;32:0;39:0;39:0;34"
+
 function command_not_found_handler() {
     print -P "%F{red}✘%f command not found: $1"
     return 127
