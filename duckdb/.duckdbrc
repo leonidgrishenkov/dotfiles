@@ -1,4 +1,4 @@
-.prompt '🦆 '
+.prompt '󰇥 '
 
 SET memory_limit = '5GB';
 SET threads TO 6;
