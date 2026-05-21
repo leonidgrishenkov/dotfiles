@@ -116,8 +116,9 @@ export DOCKER_CLI_HINTS=false # disable ads in CLI
 export ATUIN_NOBIND="true"
 eval "$(atuin init zsh)"
 
-# === GPG ===
-export GPG_TTY=$(tty)
+# === PI Coding Agent ===
+export PI_SKIP_VERSION_CHECK=1 # disables version check on startups
+export PI_OFFLINE=1 # disables all startup network operations
 
 function command_not_found_handler() {
     print -P "%F{red}✘%f command not found: $1"

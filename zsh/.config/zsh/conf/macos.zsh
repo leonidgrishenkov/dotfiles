@@ -103,3 +103,6 @@ export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
 # === OrbStack ===
 # Add path to binary into the PATH and enable shell completions
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+
+# === GPG ===
+export GPG_TTY=$(tty)
