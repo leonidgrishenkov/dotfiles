@@ -1,0 +1,5 @@
+[ui]
+theme = 'default'
+
+[ui.status_bar]
+hidden = false
