@@ -1,0 +1,12 @@
+{
+  "lastChangelogVersion": "0.74.1",
+  "theme": "catppuccin-frappe",
+  "enableInstallTelemetry": false,
+  "quietStartup": false,
+  "defaultProvider": "openrouter",
+  "defaultModel": "minimax/minimax-m2.7",
+  "defaultThinkingLevel": "medium",
+  "terminal": {
+    "showTerminalProgress": true
+  }
+}
