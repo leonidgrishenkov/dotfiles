@@ -1,0 +1,21 @@
+{
+  "providers": {
+    "okko-litellm": {
+      "name": "Okko LiteLLM",
+      "baseUrl": "https://openwebui.preanalytics.sbc.qq/api",
+      "api": "openai-completions",
+      "apiKey": "!op read 'op://Okko/okko.ai.openweb-ui/token'",
+      "authHeader": true,
+      "models": [
+        {
+          "id": "GLM-5.1-FP8",
+          "name": "GLM-5.1-FP8"
+        },
+        {
+          "id": "Gemma-4-31B-IT",
+          "name": "Gemma-4-31B-IT"
+        }
+      ]
+    }
+  }
+}
