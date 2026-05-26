@@ -9,11 +9,11 @@
       "models": [
         {
           "id": "GLM-5.1-FP8",
-          "name": "GLM-5.1-FP8"
+          "name": "GLM-5.1-FP8 (Okko)"
         },
         {
           "id": "Gemma-4-31B-IT",
-          "name": "Gemma-4-31B-IT"
+          "name": "Gemma-4-31B-IT (Okko)"
         }
       ]
     }
