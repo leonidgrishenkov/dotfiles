@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.75.3",
+  "lastChangelogVersion": "0.75.5",
   "theme": "catppuccin-frappe",
   "enableInstallTelemetry": false,
   "hideThinkingBlock": false,
@@ -8,8 +8,8 @@
     "enabled": true
   },
   "defaultProvider": "openrouter",
-  "defaultModel": "minimax/minimax-m2.7",
-  "defaultThinkingLevel": "low",
+  "defaultModel": "anthropic/claude-sonnet-4.6",
+  "defaultThinkingLevel": "medium",
   "terminal": {
     "showTerminalProgress": true
   },
