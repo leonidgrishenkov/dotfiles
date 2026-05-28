@@ -10,8 +10,3 @@ tasks:
   my-ip:
     desc: Show only my IP
     cmd: curl -s ifconfig.me/ip
-
-  py-venv:
-    desc: Activate Python Virtual environment
-    cmd: . .venv/bin/activate
-
