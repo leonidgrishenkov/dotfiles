@@ -16,3 +16,7 @@ zsh/.config/zsh/.zcompdump
 git/.config/git/include/
 
 zsh/.config/zsh/conf/extra/*.zsh
+
+pi/.pi/agent/auth.json
+pi/.pi/agent/settings.json
+pi/.pi/agent/sessions/
