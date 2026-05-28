@@ -2,9 +2,11 @@
 
 ## Themes
 
-I took them from here: https://github.com/otahontas/pi-coding-agent-catppuccin.
+Source: https://github.com/otahontas/pi-coding-agent-catppuccin.
 
 ## Extensions
+
+### Examples and Pre-defined
 
 There are lots of examples here:
 
