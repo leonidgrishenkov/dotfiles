@@ -2,7 +2,7 @@
 
 ## Themes
 
-I took them from here: https://github.com/otahontas/pi-coding-agent-catppuccin.
+Source: https://github.com/otahontas/pi-coding-agent-catppuccin.
 
 ## Extensions
 
