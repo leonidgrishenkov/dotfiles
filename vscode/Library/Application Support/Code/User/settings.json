@@ -109,7 +109,7 @@
   "editor.tabCompletion": "on",
   "editor.suggest.showSnippets": true,
   "editor.snippetSuggestions": "top",
-  "editor.hover.enabled": true,
+  "editor.hover.enabled": "on",
   "editor.hover.above": true,
   "editor.parameterHints.enabled": true,
   "editor.parameterHints.cycle": true,
