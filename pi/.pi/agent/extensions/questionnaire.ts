@@ -140,7 +140,7 @@ export default function questionnaire(pi: ExtensionAPI) {
 					if (!q) return [];
 					const opts: RenderOption[] = [...q.options];
 					if (q.allowOther) {
-						opts.push({ value: "__other__", label: "Type something.", isOther: true });
+						opts.push({ value: "__other__", label: "Type something", isOther: true });
 					}
 					return opts;
 				}
