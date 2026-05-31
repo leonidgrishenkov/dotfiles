@@ -1,8 +1,10 @@
+# `fsh`
+
 This is a config for 'fast-syntax-highlighting' zsh plugin.
 
-# Catppuccin theme
+## Themes
 
-[GitHub](https://github.com/catppuccin/zsh-fsh)
+Source: https://github.com/catppuccin/zsh-fsh
 
 Tell plugin to use this file as theme:
 
