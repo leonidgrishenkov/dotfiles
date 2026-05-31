@@ -47,6 +47,7 @@ const webSearchTool = defineTool({
 	promptGuidelines: [
 		"Use web_search when the user asks about recent events, current library/API versions, or facts that may be newer than your training data.",
 		"Cite source URLs from web_search results when reporting findings.",
+		"Do not append years (e.g. 2024, 2025) to a web_search query to bias toward recency; pass the user's intent verbatim and use the recency parameter when a time window matters.",
 	],
 	parameters: Type.Object({
 		query: Type.String({ description: "Search query." }),

@@ -46,7 +46,22 @@ export interface SearchExecResult {
 	text: string;
 }
 
+/**
+ * Strip recency-padding years that LLMs habitually append to "latest version"
+ * style queries (e.g. `latest Python version 2024 2025`). Only trailing,
+ * standalone year tokens are removed, so meaningful years inside the question
+ * (e.g. `python release history 2008`) are preserved. Time filtering should
+ * use the `recency` param instead.
+ */
+export function cleanQuery(query: string): string {
+	const cleaned = query.replace(/\s+(?:19|20)\d{2}(?=(?:\s+(?:19|20)\d{2})*\s*$)/g, "");
+	const trimmed = cleaned.trim();
+	// Never reduce the query to empty (e.g. a query that was only a year).
+	return trimmed.length > 0 ? trimmed : query.trim();
+}
+
 export async function executeSearch(params: SearchParams): Promise<SearchExecResult> {
+	params = { ...params, query: cleanQuery(params.query) };
 	const chain = resolveChain();
 	const failures: string[] = [];
 	let attempted = false;
