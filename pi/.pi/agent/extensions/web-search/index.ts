@@ -28,6 +28,16 @@ interface WebSearchDetails {
 	error?: string;
 }
 
+/** Compact, human-readable summary of the search params the LLM submitted. */
+function formatQuery(args: { query?: string; recency?: string; limit?: number }): string {
+	const query = typeof args.query === "string" ? args.query : "";
+	const flags: string[] = [];
+	if (args.recency) flags.push(`recency=${args.recency}`);
+	if (typeof args.limit === "number") flags.push(`limit=${args.limit}`);
+	const suffix = flags.length > 0 ? ` (${flags.join(", ")})` : "";
+	return `"${query}"${suffix}`;
+}
+
 const webSearchTool = defineTool({
 	name: "web_search",
 	label: "Web Search",
@@ -70,10 +80,26 @@ const webSearchTool = defineTool({
 		};
 	},
 
-	renderResult(result, _options, theme) {
+	renderCall(args, theme) {
+		return new Text(
+			`${theme.fg("toolTitle", theme.bold("web_search"))} ${theme.fg("text", formatQuery(args))}`,
+			0,
+			0,
+		);
+	},
+
+	renderResult(result, _options, theme, context) {
 		const details = result.details as WebSearchDetails | undefined;
+		const query = formatQuery(context.args);
 		if (!details || details.error) {
-			return new Text(theme.fg("error", details?.error ?? "Web search failed"), 0, 0);
+			return new Text(
+				[
+					theme.fg("toolTitle", theme.bold("web_search")) + theme.fg("muted", `  ${query}`),
+					theme.fg("error", details?.error ?? "Web search failed"),
+				].join("\n"),
+				0,
+				0,
+			);
 		}
 		const r = details.response;
 		const lines = [
