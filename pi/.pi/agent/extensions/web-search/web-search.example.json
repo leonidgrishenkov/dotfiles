@@ -1,0 +1,9 @@
+{
+  "provider": "auto",
+  "op": {
+    "tavily": "op://Personal/Tavily/credential",
+    "brave": "op://Personal/Brave Search/credential",
+    "perplexity": "op://Personal/Perplexity/credential",
+    "exa": "op://Personal/Exa/credential"
+  }
+}
