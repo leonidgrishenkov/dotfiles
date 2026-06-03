@@ -46,11 +46,14 @@ const webSearchTool = defineTool({
 	promptSnippet: "Search the web for current information and source URLs",
 	promptGuidelines: [
 		"Use web_search when the user asks about recent events, current library/API versions, or facts that may be newer than your training data.",
+        // WARN: models completly ignores this instuction
+        "Do not append years (e.g. 2024, 2025) to a web_search query to bias toward recency; pass the user's intent verbatim and use the recency parameter when a time window matters.",
 		"Cite source URLs from web_search results when reporting findings.",
-		"Do not append years (e.g. 2024, 2025) to a web_search query to bias toward recency; pass the user's intent verbatim and use the recency parameter when a time window matters.",
 	],
 	parameters: Type.Object({
 		query: Type.String({ description: "Search query." }),
+        // TODO: Why we have this types here: `Type.Literal`? It's perhaps should be a liternal number?
+        // Anyway, we need to search what is the correct way to specify year in search APIs.
 		recency: Type.Optional(
 			Type.Union(
 				[

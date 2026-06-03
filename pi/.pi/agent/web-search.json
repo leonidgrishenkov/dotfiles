@@ -1,0 +1,6 @@
+{
+  "provider": "tavily",
+  "op": {
+    "tavily": "op://Dev/tavily.api-auth/api-key"
+  }
+}
