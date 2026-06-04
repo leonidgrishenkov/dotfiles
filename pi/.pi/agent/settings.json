@@ -1,0 +1,11 @@
+{
+  "lastChangelogVersion": "0.78.0",
+  "theme": "catppuccin-macchiato",
+  "warnings": {
+    "anthropicExtraUsage": true
+  },
+  "editorPaddingX": 1,
+  "defaultProvider": "openrouter",
+  "defaultModel": "qwen/qwen3.7-max",
+  "defaultThinkingLevel": "high"
+}
