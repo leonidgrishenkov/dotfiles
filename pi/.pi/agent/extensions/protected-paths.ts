@@ -19,10 +19,10 @@ class ProtectedPath {
 }
 
 const PROTECTED_PATHS = [
-	new ProtectedPath(".envrc", false, false),
-	new ProtectedPath(".env", false, false),
-	new ProtectedPath(".git/", true, false),
-	new ProtectedPath("node_modules/", true, false),
+	new ProtectedPath(".envrc", false),
+	new ProtectedPath(".env", false),
+	new ProtectedPath(".git/"),
+	new ProtectedPath("node_modules/")
 ];
 
 export default function (pi: ExtensionAPI) {
