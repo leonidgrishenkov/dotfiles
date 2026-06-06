@@ -47,12 +47,16 @@ export default function (pi: ExtensionAPI) {
 		if (rule) {
 			ctx.hasUI &&
 				ctx.ui.notify(
-					`Blocked ${toolName} on protected path: ${path}`,
+					`Blocked '${toolName}' tool on protected path: ${path}`,
 					"warning",
 				);
 			return {
 				block: true,
-				reason: `Path "${path}" is protected (${operation})`,
+				reason: [
+					`Path "${path}" is protected from '${operation}' operation.`,
+					`Do NOT attempt to access this path using the bash tool (e.g. cat, echo etc).`,
+                    `Tell user that you can't do that, even if they asked.`
+				].join(" "),
 			};
 		}
 
