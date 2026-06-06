@@ -1,34 +1,64 @@
 /**
  * Protected Paths Extension
  *
- * Blocks write and edit operations to protected paths.
- * Useful for preventing accidental modifications to sensitive files.
+ * Blocks access to paths based on a single configuration list.
+ * Each entry specifies which operations to block:
+ *   - read  → blocks the `read` tool
+ *   - write → blocks the `write` and `edit` tools
  */
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
-//TODO: это не будет работать в такой ситуации: `echo "anything" > .env`. Нужно обработать подобные сценарии тоже.
-const PROTECTED_PATHS = [".envrc", ".env", ".git/", "node_modules/"];
+// true means being able to read/write, false - not, protect it from read/write
+class ProtectedPath {
+	constructor(
+		public readonly pattern: string,
+		public readonly read: boolean = true,
+		public readonly write: boolean = false,
+	) {}
+}
 
-// Tools that accept a file path argument
-const TOOLS = ["read", "write", "edit"];
+const PROTECTED_PATHS = [
+	new ProtectedPath(".envrc", false, false),
+	new ProtectedPath(".env", false, false),
+	new ProtectedPath(".git/", true, false),
+	new ProtectedPath("node_modules/", true, false),
+];
 
 export default function (pi: ExtensionAPI) {
 	pi.on("tool_call", async (event, ctx) => {
-		if (!TOOLS.includes(event.toolName)) {
-			return undefined;
-		}
+		const { toolName } = event;
 
-		const path = event.input.path as string;
+        // quit fast if it's not a tool we're lookin' for
+        if (!['read', 'write', 'edit'].includes(toolName)) return undefined;
+
+		let operation: "read" | "write" | null = null;
+		if (toolName === "read") operation = "read";
+		else if (toolName === "write" || toolName === "edit") operation = "write";
+
+		if (!operation) return undefined;
+
+		const path = (event.input as { path?: string }).path;
 		if (!path) return undefined;
 
-		const isProtected = PROTECTED_PATHS.some((p) => path.includes(p));
+		const rule = PROTECTED_PATHS.find(
+			(p) => path.includes(p.pattern) && !p[operation],
+		);
 
-		if (isProtected) {
-			if (ctx.hasUI) {
-				ctx.ui.notify(`Blocked ${event.toolName} on protected path: ${path}`, "warning");
-			}
-			return { block: true, reason: `Path "${path}" is protected` };
+		if (rule) {
+			ctx.hasUI &&
+				ctx.ui.notify(
+					`Blocked '${toolName}' tool on protected path: ${path}`,
+					"warning",
+				);
+			return {
+				block: true,
+				reason: [
+					`Path "${path}" is protected from '${operation}' operation.`,
+					`Do NOT attempt to access this path using the bash tool (e.g. cat, echo, etc.).`,
+                    `Tell user that you can't do that, even if they asked.`
+				].join(" "),
+			};
 		}
 
 		return undefined;
