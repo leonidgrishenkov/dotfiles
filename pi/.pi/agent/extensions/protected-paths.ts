@@ -9,19 +9,20 @@
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
+// true means being able to read/write, false - not, protect it from read/write
 class ProtectedPath {
 	constructor(
 		public readonly pattern: string,
-		public readonly read: boolean = true, // true means protect from reading
+		public readonly read: boolean = true,
 		public readonly write: boolean = false,
 	) {}
 }
 
 const PROTECTED_PATHS = [
-	new ProtectedPath(".envrc", true, true),
-	new ProtectedPath(".env", true, true),
-	new ProtectedPath(".git/", false, true),
-	new ProtectedPath("node_modules/", false, true),
+	new ProtectedPath(".envrc", false, false),
+	new ProtectedPath(".env", false, false),
+	new ProtectedPath(".git/", true, false),
+	new ProtectedPath("node_modules/", true, false),
 ];
 
 export default function (pi: ExtensionAPI) {
@@ -41,7 +42,7 @@ export default function (pi: ExtensionAPI) {
 		if (!path) return undefined;
 
 		const rule = PROTECTED_PATHS.find(
-			(p) => path.includes(p.pattern) && p[operation],
+			(p) => path.includes(p.pattern) && !p[operation],
 		);
 
 		if (rule) {
@@ -54,7 +55,7 @@ export default function (pi: ExtensionAPI) {
 				block: true,
 				reason: [
 					`Path "${path}" is protected from '${operation}' operation.`,
-					`Do NOT attempt to access this path using the bash tool (e.g. cat, echo etc).`,
+					`Do NOT attempt to access this path using the bash tool (e.g. cat, echo, etc.).`,
                     `Tell user that you can't do that, even if they asked.`
 				].join(" "),
 			};
