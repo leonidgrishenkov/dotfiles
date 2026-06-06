@@ -9,20 +9,27 @@
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
-const PROTECTED_PATHS: Array<{
-	pattern: string;
-	read: boolean;
-	write: boolean;
-}> = [
-	{ pattern: ".envrc", read: true, write: true },
-	{ pattern: ".env", read: true, write: true },
-	{ pattern: ".git/", read: false, write: true },
-	{ pattern: "node_modules/", read: false, write: true },
+class ProtectedPath {
+	constructor(
+		public readonly pattern: string,
+		public readonly read: boolean = true, // true means protect from reading
+		public readonly write: boolean = false,
+	) {}
+}
+
+const PROTECTED_PATHS = [
+	new ProtectedPath(".envrc", true, true),
+	new ProtectedPath(".env", true, true),
+	new ProtectedPath(".git/", false, true),
+	new ProtectedPath("node_modules/", false, true),
 ];
 
 export default function (pi: ExtensionAPI) {
 	pi.on("tool_call", async (event, ctx) => {
 		const { toolName } = event;
+
+        // quit fast if it's not a tool we're lookin' for
+        if (!['read', 'write', 'edit'].includes(toolName)) return undefined;
 
 		let operation: "read" | "write" | null = null;
 		if (toolName === "read") operation = "read";
