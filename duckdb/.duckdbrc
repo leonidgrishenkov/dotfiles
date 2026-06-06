@@ -7,3 +7,4 @@ SET temp_directory = concat(getenv('XDG_CACHE_HOME'), '/duckdb');
 SET max_temp_directory_size = '5GB';
 
 .timer on
+.pager "less -M --RAW-CONTROL-CHARS --quit-if-one-screen --quit-on-intr --chop-long-lines -g"
