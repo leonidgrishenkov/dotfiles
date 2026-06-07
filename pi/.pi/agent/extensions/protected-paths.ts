@@ -22,7 +22,9 @@ const PROTECTED_PATHS = [
 	new ProtectedPath(".envrc", false),
 	new ProtectedPath(".env", false),
 	new ProtectedPath(".git/"),
-	new ProtectedPath("node_modules/")
+	new ProtectedPath("node_modules/"),
+    new ProtectedPath(".terraform", false),
+    new ProtectedPath(".tfstate", false),
 ];
 
 export default function (pi: ExtensionAPI) {
