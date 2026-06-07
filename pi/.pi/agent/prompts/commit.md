@@ -6,4 +6,4 @@ For commit message use Conventional Commits Message style.
 Keep it short, do not dive too deep into details when describing.
 If there are a few good variants for the message, ask the user to pick one, use Questionnaire tool when questioning.
 After that, commit changes with picked commit message.
-If GPG signing failed, stop operation and warn user about it, do not commit without signing if its enabled.
+If GPG signing failed, stop operation and warn user about it.
