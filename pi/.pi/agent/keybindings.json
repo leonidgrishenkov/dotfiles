@@ -3,6 +3,5 @@
   "tui.select.down": ["down", "ctrl+n"],
   "app.model.cycleForward": ["ctrl+right"],
   "app.session.togglePath": [],
-  "app.session.toggleNamedFilter": [],
-  "app.editor.external": ["ctrl+e"]
+  "app.session.toggleNamedFilter": []
 }
