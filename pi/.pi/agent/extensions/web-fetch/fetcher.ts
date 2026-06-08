@@ -11,7 +11,7 @@
  *  - Cross-host redirect detection and explicit notification
  *  - Content-length / size guard (5 MB)
  *  - Sensible timeouts (default 30 s, max 120 s)
- *  - Identified User-Agent so site operators can see bot traffic
+ *  - Two-tier User-Agent: browser UA first, honest fallback on Cloudflare 403
  */
 
 import {
@@ -22,7 +22,8 @@ import {
 	MAX_BYTES,
 	MAX_TIMEOUT_MS,
 	DEFAULT_TIMEOUT_MS,
-	USER_AGENT,
+	USER_AGENT_BROWSER,
+	USER_AGENT_HONEST,
 } from "./types.ts";
 
 // ---------------------------------------------------------------------------
@@ -82,6 +83,46 @@ function acceptHeader(format: OutputFormat): string {
 }
 
 // ---------------------------------------------------------------------------
+// Fetch helpers
+// ---------------------------------------------------------------------------
+
+interface DoFetchOptions {
+	signal?: AbortSignal;
+	userAgent: string;
+	accept: string;
+}
+
+/** Single fetch attempt. Throws FetchError on network failures. */
+async function doFetch(url: string, opts: DoFetchOptions): Promise<Response> {
+	try {
+		return await fetch(url, {
+			signal: opts.signal,
+			redirect: "follow",
+			headers: {
+				"User-Agent": opts.userAgent,
+				Accept: opts.accept,
+				"Accept-Language": "en-US,en;q=0.9",
+			},
+		});
+	} catch (err) {
+		if (opts.signal?.aborted) {
+			// Distinguish timeout abort from explicit abort (e.g. Esc key).
+			const reason = opts.signal.reason;
+			if (reason instanceof Error && /timed out/i.test(reason.message)) {
+				throw new FetchError(reason.message);
+			}
+			throw new FetchError("Aborted.");
+		}
+		throw new FetchError(`Network error: ${(err as Error).message}`);
+	}
+}
+
+/** True when a response is a Cloudflare bot-detection challenge. */
+function isCloudflareChallenge(res: Response): boolean {
+	return res.status === 403 && res.headers.get("cf-mitigated") === "challenge";
+}
+
+// ---------------------------------------------------------------------------
 // Main entry point
 // ---------------------------------------------------------------------------
 
@@ -114,27 +155,26 @@ export async function fetchUrl(params: FetchParams): Promise<FetchResult> {
 	}
 	const timer = setTimeout(() => controller.abort(new Error(`Request timed out after ${timeout / 1000}s`)), timeout);
 
-	let response: Response;
-	try {
-		response = await fetch(originalUrl.toString(), {
+	const accept = acceptHeader(format);
+
+	// First attempt: browser-like UA to pass standard bot gates.
+	let response = await doFetch(originalUrl.toString(), {
+		signal: controller.signal,
+		userAgent: USER_AGENT_BROWSER,
+		accept,
+	});
+
+	// Retry with honest UA when Cloudflare blocks the browser UA via
+	// TLS fingerprint mismatch (403 + cf-mitigated: challenge).
+	if (isCloudflareChallenge(response)) {
+		response = await doFetch(originalUrl.toString(), {
 			signal: controller.signal,
-			redirect: "follow",
-			headers: {
-				"User-Agent": USER_AGENT,
-				Accept: acceptHeader(format),
-				"Accept-Language": "en-US,en;q=0.9",
-			},
+			userAgent: USER_AGENT_HONEST,
+			accept,
 		});
-	} catch (err) {
-		const msg = (err as Error).message;
-		if (controller.signal.aborted && msg.includes("timed out")) {
-			throw new FetchError(`Request timed out after ${timeout / 1000}s`);
-		}
-		if (signal?.aborted) throw new FetchError("Aborted.");
-		throw new FetchError(`Network error: ${msg}`);
-	} finally {
-		clearTimeout(timer);
 	}
+
+	clearTimeout(timer);
 
 	// -- Resolve the actual final URL (after redirects) ----------------------
 	const finalUrl = new URL(response.url);

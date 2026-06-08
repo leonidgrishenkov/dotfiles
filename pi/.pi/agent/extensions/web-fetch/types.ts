@@ -49,6 +49,17 @@ export const DEFAULT_TIMEOUT_MS = 30_000;
 export const MAX_TIMEOUT_MS = 120_000;
 /** Maximum response body in bytes (5 MB). */
 export const MAX_BYTES = 5 * 1024 * 1024;
-/** User-Agent identifying this tool to site operators. */
-export const USER_AGENT =
-	"Mozilla/5.0 (compatible; pi-web-fetch/1.0; +https://github.com/earendil-works/pi-coding-agent)";
+/**
+ * Default User-Agent disguised as a real browser. Most sites serve content
+ * normally when they see this; Cloudflare and similar WAFs block "bot" UAs
+ * by default, so a polished browser UA gets us through the door.
+ */
+export const USER_AGENT_BROWSER =
+	"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
+
+/**
+ * Fallback honest User-Agent used when Cloudflare rejects the browser UA
+ * with a 403 + cf-mitigated challenge. Some sites accept an identifier UA
+ * on retry where the browser UA fails TLS fingerprint inspection.
+ */
+export const USER_AGENT_HONEST = "pi-coding-agent";
