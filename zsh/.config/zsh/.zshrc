@@ -131,7 +131,7 @@ if [ -f "$HOME/.openclaw/completions/openclaw.zsh" ]; then
 fi
 
 function command_not_found_handler() {
-    print -P "%F{red}✘%f command not found: $1"
+    print -P "%F{red} %fcommand not found: $1"
     return 127
 }
 
