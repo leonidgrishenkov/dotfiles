@@ -106,3 +106,9 @@ source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
 # === GPG ===
 export GPG_TTY=$(tty)
+
+# === 1Password ===
+# Shell integrations
+if [[ -f "$XDG_CONFIG_HOME/op/plugins.sh" ]]; then
+    source ~/.config/op/plugins.sh
+fi
