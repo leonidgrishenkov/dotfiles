@@ -18,4 +18,5 @@ git/.config/git/include/
 zsh/.config/zsh/conf/extra/*.zsh
 
 pi/.pi/agent/auth.json
+pi/.pi/agent/trust.json
 pi/.pi/agent/sessions/

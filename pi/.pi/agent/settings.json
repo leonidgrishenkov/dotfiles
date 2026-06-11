@@ -6,6 +6,6 @@
   },
   "editorPaddingX": 1,
   "defaultProvider": "openrouter",
-  "defaultModel": "~anthropic/claude-sonnet-latest",
+  "defaultModel": "qwen/qwen3.7-max",
   "defaultThinkingLevel": "high"
 }
