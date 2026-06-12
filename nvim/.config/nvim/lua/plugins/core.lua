@@ -1,20 +1,13 @@
+local icons = require("utils.icons")
+
 return {
     {
         "LazyVim/LazyVim",
         opts = {
             colorscheme = "catppuccin-nvim",
             icons = {
-                diagnostics = {
-                    Error = " ",
-                    Warn = " ",
-                    Hint = " ",
-                    Info = " ",
-                },
-                git = {
-                    added = " ",
-                    modified = " ",
-                    removed = " ",
-                },
+                diagnostics = icons.diagnostics,
+                git = icons.git,
             },
         },
     },

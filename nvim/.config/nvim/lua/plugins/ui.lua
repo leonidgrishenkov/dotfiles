@@ -1,3 +1,5 @@
+local icons = require("utils.icons")
+
 return {
     {
         "folke/noice.nvim",
@@ -35,6 +37,9 @@ return {
                 -- exclude = { "**/node_modules/**" }, -- ignore node_modules completely
             },
             picker = {
+                icons = {
+                    diagnostics = icons.diagnostics,
+                },
                 sources = {
                     explorer = {
                         hidden = true, -- show dotfiles in explorer
