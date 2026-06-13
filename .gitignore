@@ -21,4 +21,4 @@ pi/.pi/agent/auth.json
 pi/.pi/agent/trust.json
 pi/.pi/agent/sessions/
 
-node_modules/
+pi/.pi/agent/extensions/web-fetch/node_modules/
