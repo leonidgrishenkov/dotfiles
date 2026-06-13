@@ -1,5 +1,9 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Documentation: https://starship.rs/config/#configuration
+
+add_newline = true
+
 format = """
 $directory\
 $hostname\
@@ -13,11 +17,16 @@ $python\
 $docker_context\
 $container\
 $direnv\
-$status\
-$cmd_duration\
+$terraform\
+$jobs\
 $line_break\
 $character"""
 
+right_format = """
+$status\
+$cmd_duration\
+$time
+"""
 
 palette = 'catppuccin_frappe'
 
@@ -206,7 +215,7 @@ symbol = " "
 
 [docker_context]
 symbol = " "
-format = "[$symbol$context]($style) "
+format = "via [$symbol$context]($style) "
 style = "fg:blue"
 
 [elixir]
@@ -222,13 +231,16 @@ symbol = " "
 symbol = " "
 
 [git_branch]
-symbol = " "
+symbol = "󰊢 "
 style = "fg:peach"
 only_attached = true
 
 [git_status]
 style = 'fg:maroon'
 format = '([$all_status$ahead_behind]($style) )'
+
+[git_commit]
+tag_symbol = '  '
 
 [golang]
 symbol = " "
@@ -299,7 +311,7 @@ symbol = " "
 
 [python]
 symbol = " "
-format = "[${symbol}${pyenv_prefix}(${version} )(\\($virtualenv\\) )]($style)"
+format = "via [${symbol}${pyenv_prefix}(${version} )(\\[$virtualenv\\] )]($style)"
 style = 'fg:yellow'
 
 [rlang]
@@ -329,7 +341,7 @@ format = '[$symbol $status]($style) '
 style = 'fg:red'
 
 [direnv]
-disabled = false
+disabled = true
 style = "fg:lavender"
 format = '[$loaded]($style) '
 allowed_msg = ""
@@ -347,3 +359,19 @@ min_time = 30_000
 # The container module displays a symbol and container name, if inside a container.
 format = '[$symbol $name]($style) '
 style = 'red dimmed'
+
+[time]
+disabled = false
+style = 'fg:blue'
+
+[jobs]
+disabled = false
+style = 'fg:blue'
+
+[terraform]
+disabled = true
+symbol = " "
+
+[kubernetes]
+symbol = "󱃾 "
+
