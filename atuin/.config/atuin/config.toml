@@ -27,5 +27,7 @@ keymap_cursor = { vim_insert = "blink-bar", vim_normal = "blink-block" }
 # https://docs.atuin.sh/cli/configuration/config/#fuzzy-search-syntax
 search_mode = "fuzzy"
 
+sync_address = "https://do-ubuntu-2204-ams-1.tail372fc0.ts.net/atuin"
+
 [theme]
 name = "frappe/catppuccin-frappe-lavender"
