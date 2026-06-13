@@ -154,8 +154,8 @@ export default function (pi: ExtensionAPI) {
             const fmt = (n: number) => (n < 1000 ? `${n}` : `${(n / 1000).toFixed(1)}k`);
             rightParts.push(
               ` ${theme.fg("muted", `↑${fmt(inputTok)}`)}`,
-              ` ${theme.fg("success", `↓${fmt(outputTok)}`)}`,
-              ` ${theme.fg("warning", `$${totalCost.toFixed(3)}`)}`,
+              ` ${theme.fg("muted", `↓${fmt(outputTok)}`)}`,
+              ` ${theme.fg("success", `$${totalCost.toFixed(3)}`)}`,
             );
           }
 
