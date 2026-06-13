@@ -16,7 +16,7 @@ return {
         "nvim-lualine/lualine.nvim",
         opts = {
             sections = {
-                lualine_b = { { "branch", icon = " " } },
+                lualine_b = { { "branch", icon = "󰊢 " } },
                 lualine_z = {
                     {
                         "filetype",

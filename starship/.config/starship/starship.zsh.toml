@@ -232,7 +232,7 @@ symbol = " "
 symbol = " "
 
 [git_branch]
-symbol = " "
+symbol = "󰊢 "
 style = "fg:peach"
 only_attached = true
 
