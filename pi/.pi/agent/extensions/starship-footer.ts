@@ -139,7 +139,7 @@ export default function (pi: ExtensionAPI) {
           }
 
           if (thinkingLevel !== "off") {
-            rightParts.push(" " + dim("◆ ") + cyan(thinkingLevel));
+            rightParts.push(" " + dim(" ") + cyan(thinkingLevel));
           }
 
           let inputTok = 0,
