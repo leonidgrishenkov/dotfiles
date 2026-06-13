@@ -33,3 +33,7 @@ tasks:
       - cmd: cat ./stow/linux-essential | xargs -I {} stow {}
         platforms: [linux]
 
+  atuin-sync:
+    desc: Sync local atuin history with the server
+    cmd: atuin sync
+
