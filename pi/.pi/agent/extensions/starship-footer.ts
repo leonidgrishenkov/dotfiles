@@ -7,7 +7,7 @@
  * Left side  — delegates to `starship prompt` so colours, icons, and segments
  *              match your shell exactly. Uses your STARSHIP_CONFIG if set.
  *
- * Right side — provider → Model Name ◆ thinking  ↑12k ↓4k $0.042
+ * Right side — provider → Model Name - thinking  ↑12k ↓4k $0.042
  *
  * Prerequisites: starship must be in PATH. The extension is a no-op otherwise.
  */
@@ -19,15 +19,6 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
-
-// ── Helpers ──────────────────────────────────────────────────────────────────
-
-const bold = (s: string) => `\x1b[1m${s}\x1b[22m`;
-const dim = (s: string) => `\x1b[2m${s}\x1b[22m`;
-const magenta = (s: string) => `\x1b[95m${s}\x1b[39m`;
-const cyan = (s: string) => `\x1b[96m${s}\x1b[39m`;
-const green = (s: string) => `\x1b[92m${s}\x1b[39m`;
-const yellow = (s: string) => `\x1b[93m${s}\x1b[39m`;
 
 function isStarshipAvailable(): boolean {
   try {
@@ -112,7 +103,7 @@ export default function (pi: ExtensionAPI) {
     thinkingLevel = pi.getThinkingLevel();
     refreshStarship(ctx.cwd, lastRenderWidth);
 
-    ctx.ui.setFooter((tui, _theme, footerData) => {
+    ctx.ui.setFooter((tui, theme, footerData) => {
       requestRender = () => tui.requestRender();
 
       // Re-fetch when git branch changes
@@ -131,15 +122,20 @@ export default function (pi: ExtensionAPI) {
           // ── Left: starship output ──────────────────────────────────────
           const left = starshipPrompt ?? "";
 
-          // ── Right: model ◆ thinking  ↑in ↓out $cost ───────────────────
+          // ── Right: model - thinking  ↑in ↓out $cost ───────────────────
+          // All colors come from the active pi theme so they update
+          // automatically when the theme changes.
           const rightParts: string[] = [];
 
           if (ctx.model) {
-            rightParts.push(dim(ctx.model.provider + " → ") + bold(magenta(ctx.model.name)));
+            rightParts.push(
+              theme.fg("dim", ctx.model.provider + " → ") +
+                theme.fg("accent", ctx.model.name),
+            );
           }
 
           if (thinkingLevel !== "off") {
-            rightParts.push(" " + dim(" ") + cyan(thinkingLevel));
+            rightParts.push(" " + theme.fg("dim", " ") + theme.fg("accent", thinkingLevel));
           }
 
           let inputTok = 0,
@@ -157,9 +153,9 @@ export default function (pi: ExtensionAPI) {
           if (inputTok > 0 || outputTok > 0) {
             const fmt = (n: number) => (n < 1000 ? `${n}` : `${(n / 1000).toFixed(1)}k`);
             rightParts.push(
-              ` ${cyan(`↑${fmt(inputTok)}`)}`,
-              ` ${green(`↓${fmt(outputTok)}`)}`,
-              ` ${yellow(`$${totalCost.toFixed(3)}`)}`,
+              ` ${theme.fg("muted", `↑${fmt(inputTok)}`)}`,
+              ` ${theme.fg("success", `↓${fmt(outputTok)}`)}`,
+              ` ${theme.fg("warning", `$${totalCost.toFixed(3)}`)}`,
             );
           }
 
