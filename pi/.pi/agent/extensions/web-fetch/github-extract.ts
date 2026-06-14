@@ -12,8 +12,8 @@
  * The result is a `FetchResult` so the caller can format it with the
  * same pipeline used for plain HTTP fetches.
  *
- * Configuration is read from `~/.pi/web-search.json` under the
- * `"githubClone"` key, with sensible defaults when absent.
+ * Configuration is defined in `DEFAULT_GITHUB_CONFIG` in `types.ts` —
+ * edit that constant to change thresholds and paths.
  */
 
 import {
@@ -28,7 +28,6 @@ import {
 	realpathSync,
 } from "node:fs";
 import { execFile } from "node:child_process";
-import { homedir } from "node:os";
 import { extname, join, resolve as resolvePath, sep as pathSep } from "node:path";
 import type { FetchResult, GitHubCloneConfig, GitHubUrlInfo } from "./types.ts";
 import {
@@ -36,7 +35,6 @@ import {
 	MAX_TREE_ENTRIES,
 	MAX_INLINE_FILE_CHARS,
 	MAX_README_CHARS,
-	FetchError,
 } from "./types.ts";
 import { fetchViaApi, checkGhAuthenticated, checkRepoSize } from "./github-api.ts";
 
@@ -178,58 +176,13 @@ export function parseGitHubUrl(url: string): GitHubUrlInfo | null {
 // Configuration
 // ---------------------------------------------------------------------------
 
-const CONFIG_PATH = join(homedir(), ".pi", "web-search.json");
-
-let cachedConfig: GitHubCloneConfig | null = null;
-
-function normalizeEnabled(value: unknown, fallback: boolean): boolean {
-	return typeof value === "boolean" ? value : fallback;
-}
-
-function normalizePositiveNumber(value: unknown, fallback: number): number {
-	if (typeof value !== "number" || !Number.isFinite(value)) return fallback;
-	return value > 0 ? value : fallback;
-}
-
-function normalizeClonePath(value: unknown, fallback: string): string {
-	if (typeof value !== "string") return fallback;
-	const trimmed = value.trim();
-	return trimmed.length > 0 ? trimmed : fallback;
-}
-
-/** Load GitHub config from `~/.pi/web-search.json` (falls back to defaults). */
-export function loadGitHubConfig(): GitHubCloneConfig {
-	if (cachedConfig) return cachedConfig;
-
-	if (!existsSync(CONFIG_PATH)) {
-		cachedConfig = { ...DEFAULT_GITHUB_CONFIG };
-		return cachedConfig;
-	}
-
-	let raw: { githubClone?: Partial<GitHubCloneConfig> };
-	try {
-		const text = readFileSync(CONFIG_PATH, "utf-8");
-		raw = JSON.parse(text) as { githubClone?: Partial<GitHubCloneConfig> };
-	} catch (err) {
-		const message = err instanceof Error ? err.message : String(err);
-		throw new FetchError(`Failed to parse ${CONFIG_PATH}: ${message}`);
-	}
-
-	const gc = raw.githubClone ?? {};
-	cachedConfig = {
-		enabled: normalizeEnabled(gc.enabled, DEFAULT_GITHUB_CONFIG.enabled),
-		maxRepoSizeMB: normalizePositiveNumber(
-			gc.maxRepoSizeMB,
-			DEFAULT_GITHUB_CONFIG.maxRepoSizeMB,
-		),
-		cloneTimeoutSeconds: normalizePositiveNumber(
-			gc.cloneTimeoutSeconds,
-			DEFAULT_GITHUB_CONFIG.cloneTimeoutSeconds,
-		),
-		clonePath: normalizeClonePath(gc.clonePath, DEFAULT_GITHUB_CONFIG.clonePath),
-	};
-
-	return cachedConfig;
+/**
+ * GitHub clone behaviour. Edit `DEFAULT_GITHUB_CONFIG` in `types.ts` to
+ * change thresholds and paths — this is a personal-config extension with
+ * no external config file dependency.
+ */
+function getGitHubConfig() {
+	return { ...DEFAULT_GITHUB_CONFIG };
 }
 
 // ---------------------------------------------------------------------------
@@ -659,7 +612,7 @@ export async function fetchGitHubUrl(
 	if (!info) return null;
 	if (signal?.aborted) return null;
 
-	const config = loadGitHubConfig();
+	const config = getGitHubConfig();
 	if (!config.enabled) return null;
 
 	const { owner, repo } = info;
@@ -774,5 +727,4 @@ function buildResult(
  */
 export function clearGitHubCloneCache(): void {
 	cachedCloneCache.clear();
-	cachedConfig = null;
 }

@@ -94,7 +94,7 @@ export interface GitHubCloneConfig {
 export const DEFAULT_GITHUB_CONFIG: Readonly<GitHubCloneConfig> = {
 	enabled: true,
 	maxRepoSizeMB: 350,
-	cloneTimeoutSeconds: 30,
+	cloneTimeoutSeconds: 60,
 	clonePath: "/tmp/pi-github-repos",
 };
 
