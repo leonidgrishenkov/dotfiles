@@ -1,13 +1,9 @@
 /**
  * Starship Footer Extension
  *
- * Replaces the pi TUI footer with a starship-powered prompt on the left side
- * and pi-specific context (model, tokens, cost, thinking level) on the right.
- *
- * Left side  — delegates to `starship prompt` so colours, icons, and segments
- *              match your shell exactly. Uses your STARSHIP_CONFIG if set.
- *
- * Right side — provider → Model Name - thinking  ↑12k ↓4k $0.042
+ * Replaces the pi TUI footer with a two-line layout:
+ *   Line 1 — starship prompt (directory, git branch/status, language versions, etc.)
+ *   Line 2 — pi usage info right-aligned (model, thinking level, tokens, cost)
  *
  * Prerequisites: starship must be in PATH. The extension is a no-op otherwise.
  */
@@ -119,10 +115,10 @@ export default function (pi: ExtensionAPI) {
             refreshStarship(ctx.cwd, width);
           }
 
-          // ── Left: starship output ──────────────────────────────────────
-          const left = starshipPrompt ?? "";
+          // ── Line 1: starship prompt (full width) ───────────────────────
+          const line1 = starshipPrompt ?? "";
 
-          // ── Right: model - thinking  ↑in ↓out $cost ───────────────────
+          // ── Line 2: pi usage info (right-aligned) ──────────────────────
           // All colors come from the active pi theme so they update
           // automatically when the theme changes.
           const rightParts: string[] = [];
@@ -159,10 +155,9 @@ export default function (pi: ExtensionAPI) {
             );
           }
 
-          const right = rightParts.join("");
-          const gap = " ".repeat(Math.max(1, width - visibleWidth(left) - visibleWidth(right)));
+          const line2 = rightParts.join("");
 
-          return [truncateToWidth(left + gap + right, width)];
+          return [truncateToWidth(line1, width), truncateToWidth(line2, width)];
         },
       };
     });
