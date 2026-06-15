@@ -1,13 +1,9 @@
 /**
  * Starship Footer Extension
  *
- * Replaces the pi TUI footer with a starship-powered prompt on the left side
- * and pi-specific context (model, tokens, cost, thinking level) on the right.
- *
- * Left side  — delegates to `starship prompt` so colours, icons, and segments
- *              match your shell exactly. Uses your STARSHIP_CONFIG if set.
- *
- * Right side — provider → Model Name - thinking  ↑12k ↓4k $0.042
+ * Replaces the pi TUI footer with a two-line layout:
+ *   Line 1 — starship prompt (directory, git branch/status, language versions, etc.)
+ *   Line 2 — pi usage info right-aligned (model, thinking level, tokens, cost)
  *
  * Prerequisites: starship must be in PATH. The extension is a no-op otherwise.
  */
@@ -66,15 +62,13 @@ async function fetchStarshipPrompt(cwd: string, width: number): Promise<string |
     // inside them, so just strip the markers.
     // zsh format: %{ and %} wrap content WITHOUT ESC; add ESC when stripping.
     const ansi = firstLine
-      .replace(/\\\[/g, "")        // bash: remove \[ (ESC already inside)
-      .replace(/\\\]/g, "")        // bash: remove \]
-      .replace(/%\{/g, "\x1b")     // zsh:  %{ → ESC
-      .replace(/%\}/g, "");         // zsh:  remove %}
+      .replace(/\\\[/g, "") // bash: remove \[ (ESC already inside)
+      .replace(/\\\]/g, "") // bash: remove \]
+      .replace(/%\{/g, "\x1b") // zsh:  %{ → ESC
+      .replace(/%\}/g, ""); // zsh:  remove %}
 
     // Strip trailing ANSI reset codes, then trim trailing whitespace
-    const clean = ansi
-      .replace(/(\x1b\[[0-9;]*m)+$/g, "")
-      .trimEnd();
+    const clean = ansi.replace(/(\x1b\[[0-9;]*m)+$/g, "").trimEnd();
 
     return clean || null;
   } catch {
@@ -119,23 +113,21 @@ export default function (pi: ExtensionAPI) {
             refreshStarship(ctx.cwd, width);
           }
 
-          // ── Left: starship output ──────────────────────────────────────
-          const left = starshipPrompt ?? "";
+          const line1 = starshipPrompt ?? "";
 
-          // ── Right: model - thinking  ↑in ↓out $cost ───────────────────
+          // ── Build pi usage info ─────────────────────────────────────────
           // All colors come from the active pi theme so they update
           // automatically when the theme changes.
           const rightParts: string[] = [];
 
           if (ctx.model) {
             rightParts.push(
-              theme.fg("dim", ctx.model.provider + " → ") +
-                theme.fg("accent", ctx.model.name),
+              theme.fg("accent", ` ${ctx.model.name}`) + theme.fg("dim", " via ") + theme.fg("dim", ctx.model.provider),
             );
           }
 
           if (thinkingLevel !== "off") {
-            rightParts.push(" " + theme.fg("dim", " ") + theme.fg("accent", thinkingLevel));
+            rightParts.push(" " + theme.fg("text", " ") + theme.fg("border", thinkingLevel));
           }
 
           let inputTok = 0,
@@ -153,16 +145,25 @@ export default function (pi: ExtensionAPI) {
           if (inputTok > 0 || outputTok > 0) {
             const fmt = (n: number) => (n < 1000 ? `${n}` : `${(n / 1000).toFixed(1)}k`);
             rightParts.push(
-              ` ${theme.fg("muted", `↑${fmt(inputTok)}`)}`,
-              ` ${theme.fg("muted", `↓${fmt(outputTok)}`)}`,
-              ` ${theme.fg("success", `$${totalCost.toFixed(3)}`)}`,
+              ` ${theme.fg("warning", `↑${fmt(inputTok)}`)}`,
+              ` ${theme.fg("warning", `↓${fmt(outputTok)}`)}`,
+              ` ${theme.fg("mdHeading", `${totalCost.toFixed(3)}`)}`,
             );
           }
 
-          const right = rightParts.join("");
-          const gap = " ".repeat(Math.max(1, width - visibleWidth(left) - visibleWidth(right)));
+          const usage = rightParts.join("");
 
-          return [truncateToWidth(left + gap + right, width)];
+          // Single line when starship + usage fit (usage right-aligned).
+          // Two lines when they don't (usage moves below, left-aligned).
+          const fitsOnOneLine =
+            visibleWidth(line1) + 1 + visibleWidth(usage) <= width;
+
+          if (fitsOnOneLine) {
+            const gap = Math.max(1, width - visibleWidth(line1) - visibleWidth(usage));
+            return [truncateToWidth(line1 + " ".repeat(gap) + usage, width)];
+          }
+
+          return [truncateToWidth(line1, width), truncateToWidth(usage, width)];
         },
       };
     });

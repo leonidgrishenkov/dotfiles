@@ -6,7 +6,7 @@
   },
   "editorPaddingX": 1,
   "defaultProvider": "openrouter",
-  "defaultModel": "qwen/qwen3.7-max",
+  "defaultModel": "qwen/qwen-2.5-72b-instruct",
   "defaultThinkingLevel": "high",
   "terminal": {
     "showTerminalProgress": true
