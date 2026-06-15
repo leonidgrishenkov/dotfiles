@@ -123,7 +123,7 @@ export default function (pi: ExtensionAPI) {
 
           if (ctx.model) {
             rightParts.push(
-              theme.fg("accent", ctx.model.name) + theme.fg("dim", " via ") + theme.fg("dim", ctx.model.provider),
+              theme.fg("accent", ` ${ctx.model.name}`) + theme.fg("dim", " via ") + theme.fg("dim", ctx.model.provider),
             );
           }
 
@@ -148,7 +148,7 @@ export default function (pi: ExtensionAPI) {
             rightParts.push(
               ` ${theme.fg("warning", `↑${fmt(inputTok)}`)}`,
               ` ${theme.fg("warning", `↓${fmt(outputTok)}`)}`,
-              ` ${theme.fg("mdHeading", `$${totalCost.toFixed(3)}`)}`,
+              ` ${theme.fg("mdHeading", `${totalCost.toFixed(3)}`)}`,
             );
           }
 
