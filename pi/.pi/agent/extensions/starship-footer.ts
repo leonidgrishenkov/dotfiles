@@ -128,7 +128,7 @@ export default function (pi: ExtensionAPI) {
           }
 
           if (thinkingLevel !== "off") {
-            rightParts.push(" " + theme.fg("dim", " ") + theme.fg("accent", thinkingLevel));
+            rightParts.push(" " + theme.fg("text", " ") + theme.fg("border", thinkingLevel));
           }
 
           let inputTok = 0,
@@ -146,9 +146,9 @@ export default function (pi: ExtensionAPI) {
           if (inputTok > 0 || outputTok > 0) {
             const fmt = (n: number) => (n < 1000 ? `${n}` : `${(n / 1000).toFixed(1)}k`);
             rightParts.push(
-              ` ${theme.fg("muted", `↑${fmt(inputTok)}`)}`,
-              ` ${theme.fg("muted", `↓${fmt(outputTok)}`)}`,
-              ` ${theme.fg("success", `$${totalCost.toFixed(3)}`)}`,
+              ` ${theme.fg("warning", `↑${fmt(inputTok)}`)}`,
+              ` ${theme.fg("warning", `↓${fmt(outputTok)}`)}`,
+              ` ${theme.fg("mdHeading", `$${totalCost.toFixed(3)}`)}`,
             );
           }
 
