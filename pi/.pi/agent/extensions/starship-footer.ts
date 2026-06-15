@@ -62,15 +62,13 @@ async function fetchStarshipPrompt(cwd: string, width: number): Promise<string |
     // inside them, so just strip the markers.
     // zsh format: %{ and %} wrap content WITHOUT ESC; add ESC when stripping.
     const ansi = firstLine
-      .replace(/\\\[/g, "")        // bash: remove \[ (ESC already inside)
-      .replace(/\\\]/g, "")        // bash: remove \]
-      .replace(/%\{/g, "\x1b")     // zsh:  %{ → ESC
-      .replace(/%\}/g, "");         // zsh:  remove %}
+      .replace(/\\\[/g, "") // bash: remove \[ (ESC already inside)
+      .replace(/\\\]/g, "") // bash: remove \]
+      .replace(/%\{/g, "\x1b") // zsh:  %{ → ESC
+      .replace(/%\}/g, ""); // zsh:  remove %}
 
     // Strip trailing ANSI reset codes, then trim trailing whitespace
-    const clean = ansi
-      .replace(/(\x1b\[[0-9;]*m)+$/g, "")
-      .trimEnd();
+    const clean = ansi.replace(/(\x1b\[[0-9;]*m)+$/g, "").trimEnd();
 
     return clean || null;
   } catch {
@@ -125,8 +123,7 @@ export default function (pi: ExtensionAPI) {
 
           if (ctx.model) {
             rightParts.push(
-              theme.fg("dim", ctx.model.provider + " → ") +
-                theme.fg("accent", ctx.model.name),
+              theme.fg("accent", ctx.model.name) + theme.fg("dim", " via ") + theme.fg("dim", ctx.model.provider),
             );
           }
 
