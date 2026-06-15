@@ -107,7 +107,7 @@ const webSearchTool = defineTool({
 		}
 		const r = details.response;
 		const lines = [
-			theme.fg("toolTitle", theme.bold(`web_search via ${r.provider}`)),
+			theme.fg("toolTitle", theme.fg('muted',`via ${r.provider}`)),
 			theme.fg("muted", `${r.sources.length} source(s)`),
 		];
 		r.sources.slice(0, 8).forEach((s, i) => {
