@@ -94,3 +94,5 @@ TBD
 - Never modify files in `Template/`, `Attachments/`, or `Excalidraw/`
 - Always read the note before editing it
 - Keep new note filenames concise and descriptive
+
+NOTE: for inspiration: https://github.com/mattpocock/skills/blob/main/skills/personal/obsidian-vault/SKILL.md
