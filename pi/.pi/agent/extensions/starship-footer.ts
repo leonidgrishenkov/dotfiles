@@ -113,10 +113,9 @@ export default function (pi: ExtensionAPI) {
             refreshStarship(ctx.cwd, width);
           }
 
-          // ── Line 1: starship prompt (full width) ───────────────────────
           const line1 = starshipPrompt ?? "";
 
-          // ── Line 2: pi usage info (right-aligned) ──────────────────────
+          // ── Build pi usage info ─────────────────────────────────────────
           // All colors come from the active pi theme so they update
           // automatically when the theme changes.
           const rightParts: string[] = [];
@@ -152,9 +151,19 @@ export default function (pi: ExtensionAPI) {
             );
           }
 
-          const line2 = rightParts.join("");
+          const usage = rightParts.join("");
 
-          return [truncateToWidth(line1, width), truncateToWidth(line2, width)];
+          // Single line when starship + usage fit (usage right-aligned).
+          // Two lines when they don't (usage moves below, left-aligned).
+          const fitsOnOneLine =
+            visibleWidth(line1) + 1 + visibleWidth(usage) <= width;
+
+          if (fitsOnOneLine) {
+            const gap = Math.max(1, width - visibleWidth(line1) - visibleWidth(usage));
+            return [truncateToWidth(line1 + " ".repeat(gap) + usage, width)];
+          }
+
+          return [truncateToWidth(line1, width), truncateToWidth(usage, width)];
         },
       };
     });
