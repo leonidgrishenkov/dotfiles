@@ -9,20 +9,9 @@ return {
                 use_nvim_cmp_as_default = true,
             },
             sources = {
-                default = { "lsp", "buffer", "path", "minuet" },
-                providers = {
-                    minuet = {
-                        name = "minuet",
-                        module = "minuet.blink",
-                        async = true,
-                        timeout_ms = 3000,
-                        score_offset = 100,
-                    },
-                },
+                default = { "lsp", "buffer", "path" },
             },
-            -- recommended: avoid unnecessary LLM requests on insert
             completion = {
-                trigger = { prefetch_on_insert = false },
                 list = { selection = { preselect = false, auto_insert = false } },
                 menu = {
                     border = "rounded",
@@ -31,14 +20,6 @@ return {
                     },
                 },
                 documentation = { window = { border = "rounded" } },
-            },
-            -- manual invoke minuet with Alt+y
-            keymap = {
-                ["<A-y>"] = {
-                    function(cmp)
-                        cmp.show({ providers = { "minuet" } })
-                    end,
-                },
             },
             signature = { window = { border = "rounded" } },
         },
