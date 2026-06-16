@@ -26,7 +26,7 @@ return {
                         model = "deepseek/deepseek-v4-flash",
                         name = "Openrouter",
                         optional = {
-                            max_tokens = 56,
+                            max_tokens = 128,
                             top_p = 0.9,
                             provider = {
                                 sort = "throughput",
@@ -62,13 +62,6 @@ return {
             },
             completion = {
                 trigger = { prefetch_on_insert = false },
-            },
-            keymap = {
-                ["<C-y>"] = {
-                    function(cmp)
-                        cmp.show({ providers = { "minuet" } })
-                    end,
-                },
             },
         },
     },
