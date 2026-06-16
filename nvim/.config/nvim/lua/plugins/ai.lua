@@ -1,19 +1,27 @@
+-- AI inline completions via minuet-ai.nvim + OpenRouter
+-- https://github.com/milanglacier/minuet-ai.nvim
+--
+-- Uses virtual text (ghost text) frontend, not blink.cmp menu.
+--
+-- Virtual text keymaps (insert mode):
+--   <A-A>     accept whole completion
+--   <A-a>     accept one line
+--   <A-z>     accept N lines (prompts for count, e.g. "A-z 3 CR")
+--   <A-]>     next suggestion / manually invoke
+--   <A-[>     prev suggestion / manually invoke
+--   <A-e>     dismiss suggestion
+--
+-- Runtime commands:
+--   :Minuet virtualtext toggle   -- enable/disable ghost text in current buffer
+--   :Minuet change_provider       -- switch LLM provider
+--   :Minuet change_model          -- switch model interactively
+--
+-- lazy.nvim plugin management:
+--   :Lazy disable minuet-ai.nvim  -- prevent from loading at startup
+--   :Lazy enable minuet-ai.nvim   -- re-enable loading
+--   :Lazy clear minuet-ai.nvim    -- uninstall plugin
 return {
     {
-        -- AI inline completions via minuet-ai.nvim + OpenRouter
-        -- https://github.com/milanglacier/minuet-ai.nvim
-        --
-        -- Runtime commands:
-        --   :Minuet blink toggle     -- enable/disable autocomplete in blink.cmp
-        --   :Minuet blink enable     -- force enable
-        --   :Minuet blink disable    -- force disable
-        --   :Minuet change_provider  -- switch LLM provider (claude, gemini, openai, etc.)
-        --   :Minuet change_model     -- switch model interactively
-        --
-        -- lazy.nvim plugin management:
-        --   :Lazy disable minuet-ai.nvim  -- prevent from loading at startup
-        --   :Lazy enable minuet-ai.nvim   -- re-enable loading
-        --   :Lazy clear minuet-ai.nvim    -- uninstall plugin
         "milanglacier/minuet-ai.nvim",
         event = "InsertEnter",
         config = function()
@@ -38,31 +46,24 @@ return {
                 throttle = 1500,
                 debounce = 600,
                 request_timeout = 2.5,
+                -- disable blink auto-complete (we use virtualtext instead)
                 blink = {
-                    enable_auto_complete = true,
+                    enable_auto_complete = false,
+                },
+                virtualtext = {
+                    -- auto-trigger in all filetypes; set e.g. { "lua", "python" }
+                    -- to restrict, or use auto_trigger_ignore_ft to exclude
+                    auto_trigger_ft = { "*" },
+                    keymap = {
+                        accept = "<A-A>",
+                        accept_line = "<A-a>",
+                        accept_n_lines = "<A-z>",
+                        next = "<A-]>",
+                        prev = "<A-[>",
+                        dismiss = "<A-e>",
+                    },
                 },
             })
         end,
-    },
-    {
-        "saghen/blink.cmp",
-        optional = true,
-        opts = {
-            sources = {
-                default = { "lsp", "buffer", "path", "minuet" },
-                providers = {
-                    minuet = {
-                        name = "minuet",
-                        module = "minuet.blink",
-                        async = true,
-                        timeout_ms = 3000,
-                        score_offset = 100,
-                    },
-                },
-            },
-            completion = {
-                trigger = { prefetch_on_insert = false },
-            },
-        },
     },
 }
