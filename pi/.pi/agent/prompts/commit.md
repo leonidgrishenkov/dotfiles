@@ -1,17 +1,16 @@
 ---
-description: Review and commit staged git changes
+description: Review staged git changes, create a commit message and commit
 ---
 
-Review the staged changes (`git diff --cached`) and summarize them.
+# Git Commit
 
-After that, commit changes with picked commit message.
+## Workflow
 
-# Message Style
+- Review the staged changes (`git diff --cached`) and create a commit message based on them.
+Use Conventional Commits Message style. Keep it short and descriptive.
+- Commit changes with picked commit message.
 
-For commit message use Conventional Commits Message style. Keep it short, do not dive too deep into details when
-describing. If there are a few good variants for the message, ask the user to pick one, use Questionnaire tool
-when questioning.
+## Rules
 
-# GPG Signing
-
-If GPG signing failed, stop operation and warn user about it.
+- Do not sign commit message with GPG explicitly. It should only happen automatically if configured so.
+- When any error occured, stop current operation, describe error to the user and let them decide what to do next.
