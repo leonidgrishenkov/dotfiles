@@ -1,6 +1,6 @@
 ---
 name: obsidian
-description: Search, create, and manage notes in the Obsidian vault. Use when user wants to find, create, or organize notes in Obsidian.
+description: Search, create, and manage notes in the Obsidian vault. Use when user wants to find, create, or organize their personal notes in Obsidian.
 ---
 
 # Obsidian
@@ -22,12 +22,18 @@ Vault consists of there folders:
 legacy, do not place new images there.
 - `Excalidraw/` — Excalidraw diagram files (do not edit)
 
+## Workflows
+
+### Search for Notes
+
+Or use Grep/Glob tools directly on the vault path.
+
 ## Note Format
 
 ### Title
 
 - Title case for all note names
-- No folders for organization - use links
+- No folders for notes organization - use links.
 
 ### Frontmatter
 
@@ -37,8 +43,8 @@ Every note uses this YAML frontmatter structure:
 ---
 title:
 aliases: []
-created-at: YYYY-MM-DD HH:mm:ssZ
-modified-at: YYYY-MM-DD HH:mm:ssZ
+created-at: YYYY-MM-DDTHH:mm:ssZ
+modified-at: YYYY-MM-DDTHH:mm:ssZ
 parent: []
 extras: []
 categories: []
@@ -50,13 +56,15 @@ Field rules:
 
 - `title`: the note's human-readable title (matches the file name)
 - `aliases`: DO NOT FILL
-- `created-at` / `modified-at`: format `2026-04-18 14:30:00+03:00` (in Europe/Moscow timezone)
+- `created-at` / `modified-at`: current date and time in ISO 8601 format (e.g. `2026-04-18T14:30:00+03:00`).
 - `parent`: DO NOT FILL
 - `categories`: DO NOT FILL
 - `description`: DO NOT FILL
 
 When creating a new note always fill `created-at` and `modified-at` with current date and time. When editing an existing
 note, always update `modified-at` to the current date/time.
+
+To get current datetime value run (plaform independent): `date -Iseconds`.
 
 ### Headings
 
