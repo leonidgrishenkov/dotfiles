@@ -1,5 +1,5 @@
 ---
-name: obsidian
+name: obsidian-notes
 description: Search, create, and manage notes in the Obsidian vault. Use when user wants to find, create, or organize their personal notes in Obsidian.
 ---
 
@@ -27,6 +27,20 @@ legacy, do not place new images there.
 ### Search for Notes
 
 Or use Grep/Glob tools directly on the vault path.
+
+### Create new Notes
+
+1. Create the file in `Base/` unless a different folder is clearly appropriate
+2. Keep new note filenames concise and descriptive
+3. Check whether a note on the topic already exists before creating one
+4. Update frontmatter fields
+Follow Note Format rules for note content
+Never modify files in `Template/`, `Attachments/`, or `Excalidraw/`
+
+### Managing Notes
+
+1. Always read the note before editing it
+- If you plan to delete/replace existing note or content in the note - ask for user approaval.
 
 ## Note Format
 
@@ -88,19 +102,3 @@ To get current datetime value run (plaform independent): `date -Iseconds`.
     ```python
     print('hey there!')
     ```
-
-## Workflows
-
-TBD
-
-
-# Rules
-
-- Create the file in `Base/` unless a different folder is clearly appropriate
-- Check whether a note on the topic already exists before creating one (use glob)
-- Never delete content without an explicit instruction to do so
-- Never modify files in `Template/`, `Attachments/`, or `Excalidraw/`
-- Always read the note before editing it
-- Keep new note filenames concise and descriptive
-
-NOTE: for inspiration: https://github.com/mattpocock/skills/blob/main/skills/personal/obsidian-vault/SKILL.md
