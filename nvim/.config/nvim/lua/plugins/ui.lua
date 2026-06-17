@@ -43,11 +43,11 @@ return {
                 sources = {
                     explorer = {
                         hidden = true, -- show dotfiles in explorer
-                        ignored = false, -- show gitignore files in explorer
+                        ignored = true, -- show gitignore files in explorer
                     },
                     files = {
                         hidden = true, -- show dotfiles in finder
-                        ignored = false, -- show gitignored files in finder
+                        ignored = true, -- show gitignored files in finder
                     },
                 },
             },
