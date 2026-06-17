@@ -39,6 +39,9 @@ return {
             picker = {
                 icons = {
                     diagnostics = icons.diagnostics,
+                    git = {
+                        ignored =" ",
+                    },
                 },
                 sources = {
                     explorer = {
