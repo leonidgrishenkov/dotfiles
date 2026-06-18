@@ -1,9 +1,11 @@
 ---
 name: obsidian-notes
-description: Search, create, and manage notes in the Obsidian vault. Use when user wants to find, create, or organize their personal notes in Obsidian.
+description: >
+  Search, create, and manage notes in the Obsidian vault. Use when user wants to find, create, or organize their
+  personal notes in Obsidian.
 ---
 
-# Obsidian Notes
+# Obsidian
 
 ## Vault
 
@@ -18,26 +20,23 @@ Vault consists of these folders:
 - `Base/` — all knowledge notes (primary location for new notes)
 - `Daily/` — daily journal and log notes
 - `Template/` — note templates (do not edit)
-- `Attachments/` — images and binary files (do not edit). Some legacy images are located in `Base/Attachments/`, do not place new images there.
+- `Attachments/` — images and binary files (do not edit). Some legacy images are located in `Base/Attachments/`, do not
+  place new images there.
 - `Excalidraw/` — Excalidraw diagram files (do not edit)
 
 ## Workflows
 
-### Decision flow
-
-- *"Write a note about X"* → check existing → create in `Base/`
-- *"Summarize our discussion as a note"* → extract key points → create note
-- *"Find notes about X"* → search vault → present results
-- *"Update note X"* → read first → edit with user approval for deletions
-- *"Organize / categorize notes"* → read targets → propose actions, confirm before executing
-
 ### Search for notes
 
-Before creating or referencing a note, check if one already exists:
+Always use `--no-ignore` to bypass foot `.gitignore` rules.
 
-1. Search by filename: `fd -e md "<keyword>" ~/Filen/Obsidian/main-vault/`
-2. Search by content: `rg "<keyword>" ~/Filen/Obsidian/main-vault/ -l`
-3. If a matching note exists, link to it instead of creating a duplicate.
+```bash
+# Search by filename (case-insensitive substring match)
+fd -i "git worktree" -e md --no-ignore  ~/Filen/Obsidian/main-vault
+
+# Search by content (returns filenames with matches)
+rg -i "keyword" --no-ignore -l  ~/Filen/Obsidian/main-vault
+```
 
 ### Create new notes
 
@@ -64,7 +63,7 @@ Before creating or referencing a note, check if one already exists:
 
 - Use title case for all note names and filenames:
   - Capitalize major words: **Running Pi Coding Agent with Extensions**
-  - Lowercase articles, prepositions, conjunctions: *a, an, the, in, with, of, on, for*
+  - Lowercase articles, prepositions, conjunctions: _a, an, the, in, with, of, on, for_
 - No folders for notes organization — use links.
 
 ### Frontmatter
@@ -76,10 +75,10 @@ Every note uses this YAML frontmatter structure:
 title:
 created-at: YYYY-MM-DDTHH:mm:ss±HH:mm
 modified-at: YYYY-MM-DDTHH:mm:ss±HH:mm
-aliases: []          # DO NOT FILL — reserved
-parent: []           # DO NOT FILL — reserved
-categories: []       # DO NOT FILL — reserved
-description:         # DO NOT FILL — use only when explicitly requested
+aliases: [] # DO NOT FILL — reserved
+parent: [] # DO NOT FILL — reserved
+categories: [] # DO NOT FILL — reserved
+description: # DO NOT FILL — use only when explicitly requested
 ---
 ```
 
@@ -92,7 +91,8 @@ Field rules:
 - `aliases`, `parent`, `categories` — DO NOT FILL; reserved fields
 - `description` — leave empty unless the user explicitly requests it
 
-When creating a new note, always fill `created-at` and `modified-at` with the current date and time. When editing an existing note, always update `modified-at` to the current date/time.
+When creating a new note, always fill `created-at` and `modified-at` with the current date and time. When editing an
+existing note, always update `modified-at` to the current date/time.
 
 ### Headings
 
@@ -119,6 +119,6 @@ When creating a new note, always fill `created-at` and `modified-at` with the cu
 
 - Surround inline code with backticks
 - For code-blocks use standard markdown syntax, for example:
-    ```python
-    print("hey there!")
-    ```
+  ```python
+  print("hey there!")
+  ```
