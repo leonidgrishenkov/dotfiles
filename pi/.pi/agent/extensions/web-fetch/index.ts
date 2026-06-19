@@ -160,7 +160,7 @@ const webFetchTool = defineTool({
 		if (!details || details.error) {
 			return new Text(
 				[
-					theme.fg("toolTitle", theme.bold("web_fetch")) + theme.fg("muted", `  ${label}`),
+					theme.fg("muted", label),
 					theme.fg("error", details?.error ?? "Web fetch failed"),
 				].join("\n"),
 				0,
@@ -169,24 +169,15 @@ const webFetchTool = defineTool({
 		}
 
 		const r = details.result!;
-		const lines = [
-			theme.fg("toolTitle", theme.bold("web_fetch")),
-		];
+		const lines: string[] = [];
 
 		if (details.githubRepo) {
-			// GitHub fetch — show repo badge + path
-			const { owner, repo, path } = details.githubRepo;
-			const badge = theme.fg("accent", `⎇ ${owner}/${repo}`);
-			lines.push(badge);
-			if (path) {
-				lines.push(theme.fg("text", `  ${path}`));
-			}
-		} else {
-			// Plain HTTP fetch
-			lines.push(theme.fg("text", r.url));
-			if (r.crossHost) {
-				lines.push(theme.fg("muted", `(redirected from ${r.originalUrl})`));
-			}
+			// GitHub fetch — show a clear label instead of the repo badge
+			lines.push(theme.fg("text", "Fetching GitHub"));
+		} else if (r.crossHost) {
+			// Plain HTTP fetch — only note cross-host redirects, since the
+			// URL itself is already shown on the renderCall line above.
+			lines.push(theme.fg("muted", `(redirected from ${r.originalUrl})`));
 		}
 
 		const sizeLabel = r.content.length >= 1024
