@@ -1,6 +1,6 @@
 # web-fetch
 
-A `web_fetch` tool for the [pi coding agent](https://github.com/earendil-works/pi). It fetches content from a URL and converts it into a clean, LLM-friendly representation.
+A `web_fetch` tool fetches content from a URL and converts it into a clean, LLM-friendly representation.
 
 What makes it more than a plain HTTP client:
 
