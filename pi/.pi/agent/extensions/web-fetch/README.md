@@ -89,15 +89,6 @@ Non-code GitHub paths (`/issues`, `/pull`, `/discussions`, etc.) are intentional
 
 ## Configuration
 
-All configuration is defined in code — there is no external config file. Edit `DEFAULT_GITHUB_CONFIG` in [`types.ts`](./types.ts) to change GitHub behaviour:
-
-```ts
-export const DEFAULT_GITHUB_CONFIG: Readonly<GitHubCloneConfig> = {
-    enabled: true,            // GitHub extraction on/off
-    maxRepoSizeMB: 350,       // repos above this use the API instead of cloning
-    cloneTimeoutSeconds: 60,  // hard timeout for a git clone
-    clonePath: "/tmp/pi-github-repos", // where shallow clones are stored
-};
-```
+All configuration is defined in code — there is no external config file. Edit `DEFAULT_GITHUB_CONFIG` in [`types.ts`](./types.ts) to change GitHub behaviour.
 
 HTTP-fetch defaults (timeout, max bytes, User-Agents) are also constants in `types.ts`.
