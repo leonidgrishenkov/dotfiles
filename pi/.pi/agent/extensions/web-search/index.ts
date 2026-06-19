@@ -66,14 +66,14 @@ const webSearchTool = defineTool({
 			),
 		),
 		limit: Type.Optional(
-			Type.Number({ description: "Max number of sources to return (default 8).", default: 8 }),
+			Type.Number({ description: "Max number of sources to return (default 10).", default: 10 }),
 		),
 	}),
 
 	async execute(_toolCallId, params, signal) {
 		const result = await executeSearch({
 			query: params.query,
-			limit: typeof params.limit === "number" ? params.limit : 8,
+			limit: typeof params.limit === "number" ? params.limit : 10,
 			recency: params.recency,
 			signal,
 		});
@@ -110,7 +110,7 @@ const webSearchTool = defineTool({
 			theme.fg("toolTitle", theme.fg('muted',`via ${r.provider}`)),
 			theme.fg("muted", `${r.sources.length} source(s)`),
 		];
-		r.sources.slice(0, 8).forEach((s, i) => {
+		r.sources.slice(0, 10).forEach((s, i) => {
 			lines.push(theme.fg("text", `${i + 1}. ${s.title ?? s.url}`));
 			lines.push(theme.fg("muted", `   ${s.url}`));
 		});
