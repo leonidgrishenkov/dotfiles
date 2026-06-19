@@ -63,3 +63,46 @@ export const USER_AGENT_BROWSER =
  * on retry where the browser UA fails TLS fingerprint inspection.
  */
 export const USER_AGENT_HONEST = "pi-coding-agent";
+
+// ---------------------------------------------------------------------------
+// GitHub types & constants
+// ---------------------------------------------------------------------------
+
+/** Parsed representation of a github.com/owner/repo URL. */
+export interface GitHubUrlInfo {
+	owner: string;
+	repo: string;
+	ref?: string;
+	/** True when ref is a full 40-char commit SHA (cannot shallow-clone). */
+	refIsFullSha: boolean;
+	path?: string;
+	type: "root" | "blob" | "tree";
+}
+
+/** Configuration for GitHub clone behaviour (read from web-search.json). */
+export interface GitHubCloneConfig {
+	/** Whether GitHub extraction is enabled at all. */
+	enabled: boolean;
+	/** Repos larger than this (MB) use the API view instead of cloning. */
+	maxRepoSizeMB: number;
+	/** Hard timeout for a `git clone` operation (seconds). */
+	cloneTimeoutSeconds: number;
+	/** Base directory where shallow clones are stored. */
+	clonePath: string;
+}
+
+export const DEFAULT_GITHUB_CONFIG: Readonly<GitHubCloneConfig> = {
+	enabled: true,
+	maxRepoSizeMB: 350,
+	cloneTimeoutSeconds: 60,
+	clonePath: "/tmp/pi-github-repos",
+};
+
+/** Maximum tree entries returned in a single listing. */
+export const MAX_TREE_ENTRIES = 200;
+
+/** Maximum characters for a single inlined file. */
+export const MAX_INLINE_FILE_CHARS = 100_000;
+
+/** Maximum characters for an inlined README. */
+export const MAX_README_CHARS = 8192;
