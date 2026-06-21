@@ -1,6 +1,6 @@
 ---
 name: modern-cli
-description: Preferred modern CLI alternatives for shell commands. Use whenever running file search, text search, or code refactoring. Prefer ripgrep over grep, fd over find, and ast-grep (sg) for structural code edits.
+description: Preferred modern CLI alternatives for commono shell commands. Use whenever running file, text or code search, code refactoring etc.
 ---
 
 # Modern CLI Tools
