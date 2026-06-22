@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "fs": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/tmp/pi-mcp-smoke"]
+    },
+    "everything": { "command": "npx", "args": ["-y", "@modelcontextprotocol/server-everything"] }
+  }
+}
