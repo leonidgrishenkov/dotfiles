@@ -13,6 +13,16 @@ This guide covers essential PDF processing operations using Python libraries and
 features, JavaScript libraries, and detailed examples, see [reference.md](reference.md). If you need to fill out a PDF
 form, read [forms.md](forms.md) and follow its instructions.
 
+## Running Scripts
+
+Use `uv run` for all Python scripts in this skill's `scripts/` directory:
+
+```bash
+uv run scripts/check_fillable_fields.py <file.pdf>
+```
+
+The `pyproject.toml` declares all dependencies; `uv sync` installs them once.
+
 ## Quick Start
 
 ```python

@@ -24,3 +24,6 @@ pi/.pi/agent/sessions/
 
 pi/.pi/agent/extensions/web-fetch/node_modules/
 pi/.pi/agent/extensions/mcp/node_modules/
+
+
+agents/.agents/skills/pdf/.venv/
