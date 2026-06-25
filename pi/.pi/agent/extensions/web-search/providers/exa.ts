@@ -4,12 +4,14 @@
  * top result summaries (mirrors oh-my-pi's exa adapter behavior).
  */
 
-import { resolveKey } from "../config.ts";
 import { clamp, fetchJson, type Provider, type SearchSource } from "../types.ts";
 
 export const exaProvider: Provider = {
 	name: "exa",
-	getKey: (signal) => resolveKey(["EXA_API_KEY"], "exa", signal),
+	credentials: {
+		envVars: ["EXA_API_KEY"],
+		// command: "op read op://Personal/Exa/credential",
+	},
 	async search(key, params) {
 		const data = (await fetchJson("exa", "https://api.exa.ai/search", {
 			method: "POST",

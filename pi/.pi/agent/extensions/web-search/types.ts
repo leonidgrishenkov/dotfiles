@@ -28,10 +28,22 @@ export interface SearchParams {
 	signal?: AbortSignal;
 }
 
+/**
+ * How a provider obtains its API key.
+ *
+ * When `command` is set it is the sole source — env vars are ignored.
+ * Otherwise `envVars` are tried in order.
+ */
+export interface CredentialSource {
+	/** Env var names tried in order (when no `command` is set). */
+	envVars: string[];
+	/** Arbitrary shell command whose stdout is the API key. When present, `envVars` is ignored. */
+	command?: string;
+}
+
 export interface Provider {
 	name: ProviderName;
-	/** Resolve the API key (env -> op). Returns undefined when unavailable. */
-	getKey(signal?: AbortSignal): Promise<string | undefined>;
+	credentials: CredentialSource;
 	search(key: string, params: SearchParams): Promise<SearchResponse>;
 }
 

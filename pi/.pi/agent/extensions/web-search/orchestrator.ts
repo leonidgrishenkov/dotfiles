@@ -1,21 +1,19 @@
 /**
  * Provider chain resolution and sequential fallback execution.
  *
- * Inspired by oh-my-pi's `resolveProviderChain()` / `executeSearch()`:
- * try the preferred provider first, then the rest in order; skip providers
- * without a key; on the first success return its formatted result; if all
- * configured providers fail, return a normalized error string (never throw,
- * except on abort).
+ * Cycles through all providers in order, skipping those whose credentials
+ * can't be resolved (no env var and no working command). On the first
+ * success returns its formatted result; if all fail, returns a normalized
+ * error string (never throws, except on abort).
  */
 
-import { loadConfig } from "./config.ts";
+import { resolveKey } from "./credentials.ts";
 import { formatForLLM } from "./format.ts";
 import { braveProvider } from "./providers/brave.ts";
 import { exaProvider } from "./providers/exa.ts";
 import { perplexityProvider } from "./providers/perplexity.ts";
 import { tavilyProvider } from "./providers/tavily.ts";
 import {
-	type Provider,
 	type ProviderName,
 	type SearchParams,
 	type SearchResponse,
@@ -30,15 +28,6 @@ const PROVIDERS: Record<ProviderName, Provider> = {
 };
 
 const PROVIDER_ORDER: ProviderName[] = ["tavily", "brave", "perplexity", "exa"];
-
-export function resolveChain(): ProviderName[] {
-	const preferred = loadConfig().provider;
-	if (preferred && preferred !== "auto" && preferred in PROVIDERS) {
-		const p = preferred as ProviderName;
-		return [p, ...PROVIDER_ORDER.filter((n) => n !== p)];
-	}
-	return PROVIDER_ORDER;
-}
 
 export interface SearchExecResult {
 	response: SearchResponse;
@@ -62,15 +51,14 @@ export function cleanQuery(query: string): string {
 
 export async function executeSearch(params: SearchParams): Promise<SearchExecResult> {
 	params = { ...params, query: cleanQuery(params.query) };
-	const chain = resolveChain();
 	const failures: string[] = [];
 	let attempted = false;
 
-	for (const name of chain) {
+	for (const name of PROVIDER_ORDER) {
 		if (params.signal?.aborted) throw new Error("aborted");
 		const provider = PROVIDERS[name];
-		const key = await provider.getKey(params.signal);
-		if (!key) continue; // not configured -> skip silently
+		const key = await resolveKey(provider.credentials, params.signal);
+		if (!key) continue; // no credentials -> skip silently
 		attempted = true;
 		try {
 			const response = await provider.search(key, params);
@@ -83,7 +71,7 @@ export async function executeSearch(params: SearchParams): Promise<SearchExecRes
 	}
 
 	const error = !attempted
-		? "No web search provider configured (set TAVILY_API_KEY / BRAVE_API_KEY / PERPLEXITY_API_KEY / EXA_API_KEY, or configure op refs in ~/.pi/agent/web-search.json)."
+		? "No web search provider configured. Set an env var (TAVILY_API_KEY, BRAVE_API_KEY, PERPLEXITY_API_KEY, EXA_API_KEY) or uncomment the `command` field in the provider file under providers/*.ts."
 		: failures.length > 1
 			? `All web search providers failed: ${failures.join("; ")}`
 			: (failures[0] ?? "Web search failed.");

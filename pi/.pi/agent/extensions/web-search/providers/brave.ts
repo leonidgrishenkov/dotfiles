@@ -3,12 +3,14 @@
  * Returns sources only (no synthesized answer). `recency` maps to `freshness`.
  */
 
-import { resolveKey } from "../config.ts";
 import { clamp, fetchJson, type Provider, type SearchSource } from "../types.ts";
 
 export const braveProvider: Provider = {
 	name: "brave",
-	getKey: (signal) => resolveKey(["BRAVE_API_KEY"], "brave", signal),
+	credentials: {
+		envVars: ["BRAVE_API_KEY"],
+		// command: "op read op://Personal/Brave Search/credential",
+	},
 	async search(key, params) {
 		const freshness = ({ day: "pd", week: "pw", month: "pm", year: "py" } as const)[
 			params.recency ?? ("" as never)

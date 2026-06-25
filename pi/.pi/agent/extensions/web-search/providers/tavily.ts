@@ -3,12 +3,14 @@
  * Returns an LLM-ready answer plus sources. Great default.
  */
 
-import { resolveKey } from "../config.ts";
 import { clamp, fetchJson, type Provider, type SearchSource } from "../types.ts";
 
 export const tavilyProvider: Provider = {
 	name: "tavily",
-	getKey: (signal) => resolveKey(["TAVILY_API_KEY"], "tavily", signal),
+	credentials: {
+		envVars: ["TAVILY_API_KEY"],
+		// command: "op read op://Dev/tavily.api-auth/api-key",
+	},
 	async search(key, params) {
 		const data = (await fetchJson("tavily", "https://api.tavily.com/search", {
 			method: "POST",
