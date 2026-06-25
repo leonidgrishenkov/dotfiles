@@ -18,7 +18,7 @@ history_filter = [
 ]
 
 # whether to store commands that returned non-zero exit code.
-store_failed = false
+store_failed = true
 
 secrets_filter = false
 
