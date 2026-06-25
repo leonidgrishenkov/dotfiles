@@ -4,7 +4,7 @@
       "name": "Okko LiteLLM",
       "baseUrl": "https://openwebui.preanalytics.sbc.qq/api",
       "api": "openai-completions",
-      "apiKey": "!op read 'op://Okko/okko.ai.openweb-ui/token'",
+      "apiKey": "OKKO_LITELLM_API_TOKEN",
       "authHeader": true,
       "models": [
         {
