@@ -3,12 +3,14 @@
  * API-key mode only (no OAuth/cookie flow). Uses sonar-pro with web search.
  */
 
-import { resolveKey } from "../config.ts";
 import { fetchJson, type Provider, type SearchSource } from "../types.ts";
 
 export const perplexityProvider: Provider = {
 	name: "perplexity",
-	getKey: (signal) => resolveKey(["PERPLEXITY_API_KEY", "PPLX_API_KEY"], "perplexity", signal),
+	credentials: {
+		envVars: ["PERPLEXITY_API_KEY", "PPLX_API_KEY"],
+		// command: "op read op://Personal/Perplexity/credential",
+	},
 	async search(key, params) {
 		const data = (await fetchJson("perplexity", "https://api.perplexity.ai/chat/completions", {
 			method: "POST",

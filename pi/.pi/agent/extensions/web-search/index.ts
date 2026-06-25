@@ -4,17 +4,17 @@
  * A lean web_search tool inspired by oh-my-pi's design, trimmed to the
  * providers I use: Tavily, Brave, Perplexity, Exa.
  *
- * Layout (mirrors oh-my-pi's web/search structure, adapted for a pi extension):
+ * Layout:
  *   index.ts             - tool definition + registration (this file)
- *   types.ts             - unified SearchResponse / Provider / errors / fetch helper
- *   config.ts            - config file + env/op credential lookup
+ *   types.ts             - unified SearchResponse, Provider, CredentialSource, errors, fetch helper
+ *   credentials.ts       - resolveKey(): env vars -> shell command fallback
  *   format.ts            - formatForLLM()
- *   orchestrator.ts      - resolveChain() + executeSearch() fallback chain
- *   providers/*.ts       - one adapter per provider
+ *   orchestrator.ts      - executeSearch() fallback chain (cycles all providers)
+ *   providers/*.ts       - one adapter per provider (declares CredentialSource inline)
  *
- * Configuration: see config.ts. API keys come from env first
- * (TAVILY_API_KEY / BRAVE_API_KEY / PERPLEXITY_API_KEY|PPLX_API_KEY / EXA_API_KEY),
- * then 1Password op refs in ~/.pi/agent/web-search.json.
+ * Credentials: each provider declares envVars[] and an optional command string.
+ * The orchestrator tries them in order (tavily, brave, perplexity, exa), skipping
+ * providers whose credentials can't be resolved.
  */
 
 import { defineTool, type ExtensionAPI } from "@earendil-works/pi-coding-agent";
