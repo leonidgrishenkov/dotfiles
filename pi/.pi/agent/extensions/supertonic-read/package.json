@@ -1,0 +1,15 @@
+{
+  "name": "pi-supertonic-read",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "dependencies": {
+    "onnxruntime-node": "^1.19.2",
+    "fft.js": "^4.0.3"
+  }
+}
