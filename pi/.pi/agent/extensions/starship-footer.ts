@@ -87,6 +87,7 @@ export default function (pi: ExtensionAPI) {
   let thinkingLevel: string = "off";
   let lastRenderWidth = 120;
   let requestRender: (() => void) | undefined;
+  let currentCwd: string = process.cwd();
 
   async function refreshStarship(cwd: string, width: number) {
     starshipPrompt = await fetchStarshipPrompt(cwd, width);
@@ -95,6 +96,7 @@ export default function (pi: ExtensionAPI) {
 
   pi.on("session_start", async (_event, ctx) => {
     thinkingLevel = pi.getThinkingLevel();
+    currentCwd = ctx.cwd;
     refreshStarship(ctx.cwd, lastRenderWidth);
 
     ctx.ui.setFooter((tui, theme, footerData) => {
@@ -169,14 +171,18 @@ export default function (pi: ExtensionAPI) {
     });
   });
 
-  // Refresh starship after each agent turn (files may have changed, etc.)
-  pi.on("agent_end", (_event, ctx) => {
-    refreshStarship(ctx.cwd, lastRenderWidth);
-  });
+  // Refresh starship on these lifecycle events
+  for (const event of ["before_agent_start", "agent_start", "agent_end", "user_bash"] as const) {
+    pi.on(event, (_event, ctx) => {
+      currentCwd = ctx.cwd;
+      refreshStarship(ctx.cwd, lastRenderWidth);
+    });
+  }
 
   // Update thinking level immediately
   pi.on("thinking_level_select", async (event, _ctx) => {
     thinkingLevel = event.level;
     requestRender?.();
   });
+
 }
