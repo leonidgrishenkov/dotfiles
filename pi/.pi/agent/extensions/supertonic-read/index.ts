@@ -1,122 +1,144 @@
 /**
- * Pi Extension: Supertonic Read-Aloud
+ * Supertonic Read-Aloud
  *
- * Reads the last assistant model output aloud using Supertonic TTS.
+ * /read — compact the last assistant response via LLM, synthesize speech
+ *         with Supertonic TTS, and play it back.
  *
- * Commands:
- *   /read          — Read the last assistant response aloud
- *   /read-config   — Show or update TTS configuration
- *
- * Config: ~/.pi/agent/extensions/supertonic-read/config.json
+ * Pipeline:
+ *   1. Extract last assistant message
+ *   2. LLM compacts it (strip code/tables → pure prose) → temp .md file
+ *   3. Supertonic TTS synthesizes speech → temp .wav file
+ *   4. Play audio
+ *   5. Clean up temp files, flash final status
  */
 
 import type { ExtensionAPI, ExtensionCommandContext } from "@earendil-works/pi-coding-agent";
-import * as fs from "node:fs";
-import * as path from "node:path";
+import { complete } from "@earendil-works/pi-ai";
 import { execFile } from "node:child_process";
+import * as fs from "node:fs";
 import { tmpdir } from "node:os";
+import * as path from "node:path";
 
-import { TextToSpeech, loadTextToSpeech, loadVoiceStyle, type Style } from "./tts.ts";
+import { config } from "./config.ts";
+import { loadTextToSpeech, loadVoiceStyle, type Style, type TextToSpeech } from "./tts.ts";
 import { stripMarkdownForSpeech, writeWavFile } from "./utils.ts";
 
 // ============================================================
-// Config
+// Lazy TTS singleton
 // ============================================================
 
-interface ReadConfig {
-  assetsDir: string;
-  voice: string;
-  lang: string;
-  totalSteps: number;
-  speed: number;
-  maxLength: number;
-  autoPlay: boolean;
-}
+let _tts: TextToSpeech | null = null;
+let _style: Style | null = null;
+let _voice: string | null = null;
 
-const CONFIG_PATH = path.join(
-  path.dirname(new URL(import.meta.url).pathname),
-  "config.json",
-);
+async function getTts(): Promise<{ tts: TextToSpeech; style: Style }> {
+  if (_tts && _style && _voice === config.voice) return { tts: _tts, style: _style };
 
-function loadConfig(): ReadConfig {
-  const defaults: ReadConfig = {
-    assetsDir: "",
-    voice: "F1",
-    lang: "en",
-    totalSteps: 8,
-    speed: 1.05,
-    maxLength: 2000,
-    autoPlay: false,
-  };
+  const onnxDir = path.join(config.assetsDir, "onnx");
+  const voicePath = path.join(config.assetsDir, "voice_styles", `${config.voice}.json`);
 
-  try {
-    const raw = fs.readFileSync(CONFIG_PATH, "utf8");
-    return { ...defaults, ...JSON.parse(raw) };
-  } catch {
-    return defaults;
-  }
-}
+  if (!fs.existsSync(onnxDir))  throw new Error(`ONNX directory missing: ${onnxDir}`);
+  if (!fs.existsSync(voicePath)) throw new Error(`Voice style missing: ${voicePath}`);
 
-function saveConfig(cfg: ReadConfig): void {
-  fs.writeFileSync(CONFIG_PATH, JSON.stringify(cfg, null, 2) + "\n");
+  _tts    = await loadTextToSpeech(onnxDir);
+  _style  = loadVoiceStyle([voicePath]);
+  _voice  = config.voice;
+
+  return { tts: _tts, style: _style };
 }
 
 // ============================================================
-// Extract last assistant text from session
+// Extract last assistant text from the current branch
 // ============================================================
 
-type ContentBlock = {
-  type?: string;
-  text?: string;
-  name?: string;
-  arguments?: Record<string, unknown>;
-};
+function extractLastAssistantText(branch: any[]): { text: string; complete: boolean } | null {
+  for (let i = branch.length - 1; i >= 0; i--) {
+    const e = branch[i];
+    if (e?.type !== "message" || e?.message?.role !== "assistant") continue;
 
-function extractAssistantText(entries: any[]): string {
-  // Walk backwards through the branch looking for the last assistant message
-  for (let i = entries.length - 1; i >= 0; i--) {
-    const entry = entries[i];
-    if (
-      entry?.type === "message" &&
-      entry?.message?.role === "assistant" &&
-      entry?.message?.content
-    ) {
-      const content = entry.message.content;
-      const textParts: string[] = [];
+    const stopReason = e.message.stopReason;
+    const isDone = !stopReason || stopReason === "stop";
 
-      if (typeof content === "string") {
-        textParts.push(content);
-      } else if (Array.isArray(content)) {
-        for (const part of content) {
-          if (part && typeof part === "object" && (part as ContentBlock).type === "text") {
-            const t = (part as ContentBlock).text;
-            if (t) textParts.push(t);
-          }
+    const content = e.message.content;
+    const parts: string[] = [];
+
+    if (typeof content === "string") {
+      parts.push(content);
+    } else if (Array.isArray(content)) {
+      for (const p of content) {
+        if (p && typeof p === "object" && p.type === "text" && typeof p.text === "string") {
+          parts.push(p.text);
         }
       }
-
-      const combined = textParts.join("\n").trim();
-      if (combined.length > 0) return combined;
     }
+
+    const text = parts.join("\n").trim();
+    if (text.length > 0) return { text, complete: isDone };
   }
-  return "";
+  return null;
+}
+
+// ============================================================
+// LLM compaction — strip code / tables / noise into pure prose
+// ============================================================
+
+const COMPACT_SYSTEM = `You are a text-to-speech preprocessor.
+Given markdown text, produce clean, continuous prose suitable for reading aloud.
+
+Rules:
+- REMOVE all code blocks (fenced and inline)
+- REMOVE tables, converting key data into natural sentences only if essential
+- REMOVE bullet-point formatting — weave into fluent sentences
+- REMOVE image references, links (keep visible link text as plain words)
+- REMOVE blockquote markers
+- FIX headings into natural sentence transitions
+- PRESERVE all factual information, numbers, and substance
+- USE plain prose: no markdown, no formatting, no bullet points
+- Output ONLY the cleaned prose. No commentary, no preamble, no wrappers.`;
+
+async function compactViaLlm(
+  text: string,
+  ctx: ExtensionCommandContext,
+): Promise<string> {
+  if (!ctx.model) throw new Error("No model selected. Pick a model first.");
+
+  const auth = await ctx.modelRegistry.getApiKeyAndHeaders(ctx.model);
+  if (!auth.ok || !auth.apiKey) {
+    throw new Error(auth.ok ? `No API key for ${ctx.model.provider}` : auth.error);
+  }
+
+  const userMessage = {
+    role: "user" as const,
+    content: [{ type: "text" as const, text }],
+    timestamp: Date.now(),
+  };
+
+  const response = await complete(
+    ctx.model,
+    { systemPrompt: COMPACT_SYSTEM, messages: [userMessage] },
+    { apiKey: auth.apiKey, headers: auth.headers },
+  );
+
+  return response.content
+    .filter((c): c is { type: "text"; text: string } => c.type === "text")
+    .map((c) => c.text)
+    .join("\n")
+    .trim();
 }
 
 // ============================================================
 // Audio playback
 // ============================================================
 
-function playAudio(filePath: string): Promise<void> {
+function playWav(filePath: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    // macOS: use afplay; Linux: try paplay, aplay, or ffplay
-    const platform = process.platform;
     let cmd: string;
     let args: string[];
 
-    if (platform === "darwin") {
+    if (process.platform === "darwin") {
       cmd = "afplay";
       args = [filePath];
-    } else if (platform === "linux") {
+    } else if (process.platform === "linux") {
       cmd = "paplay";
       args = [filePath];
     } else {
@@ -124,52 +146,36 @@ function playAudio(filePath: string): Promise<void> {
       args = ["-nodisp", "-autoexit", filePath];
     }
 
-    const child = execFile(cmd, args, (error) => {
-      if (error) reject(error);
-      else resolve();
-    });
+    execFile(cmd, args, (err) => (err ? reject(err) : resolve()));
   });
 }
 
 // ============================================================
-// Lazy TTS singleton
+// Temp file helpers
 // ============================================================
 
-let ttsInstance: TextToSpeech | null = null;
-let ttsStyle: Style | null = null;
-let ttsConfig: ReadConfig | null = null;
+function tempPath(prefix: string, ext: string): string {
+  return path.join(tmpdir(), `pi-supertonic-${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`);
+}
 
-async function getTts(): Promise<{ tts: TextToSpeech; style: Style; cfg: ReadConfig }> {
-  const cfg = loadConfig();
+function rmSafe(p: string | undefined | null) {
+  if (p) try { fs.unlinkSync(p); } catch { /* noop */ }
+}
 
-  if (!cfg.assetsDir) {
-    throw new Error(
-      "Supertonic assets path not configured. " +
-      `Edit ${CONFIG_PATH} and set "assetsDir" to the path containing onnx/ and voice_styles/ directories.`,
-    );
-  }
+// ============================================================
+// Status helper (safe in all modes)
+// ============================================================
 
-  const onnxDir = path.join(cfg.assetsDir, "onnx");
-  const voiceStylePath = path.join(cfg.assetsDir, "voice_styles", `${cfg.voice}.json`);
+function status(ctx: ExtensionCommandContext, icon: string, msg: string) {
+  if (ctx.hasUI) ctx.ui.setStatus("supertonic-read", `${icon}  ${msg}`);
+}
 
-  if (!fs.existsSync(onnxDir)) {
-    throw new Error(`ONNX model directory not found: ${onnxDir}`);
-  }
-  if (!fs.existsSync(voiceStylePath)) {
-    throw new Error(`Voice style file not found: ${voiceStylePath}`);
-  }
+function clearStatus(ctx: ExtensionCommandContext) {
+  if (ctx.hasUI) ctx.ui.setStatus("supertonic-read", "");
+}
 
-  // Reload models only if config changed
-  const configKey = JSON.stringify({ assetsDir: cfg.assetsDir, voice: cfg.voice });
-  const prevKey = ttsConfig ? JSON.stringify({ assetsDir: ttsConfig.assetsDir, voice: ttsConfig.voice }) : "";
-
-  if (!ttsInstance || !ttsStyle || configKey !== prevKey) {
-    ttsInstance = await loadTextToSpeech(onnxDir);
-    ttsStyle = loadVoiceStyle([voiceStylePath]);
-    ttsConfig = cfg;
-  }
-
-  return { tts: ttsInstance, style: ttsStyle, cfg };
+function notify(ctx: ExtensionCommandContext, msg: string, level: "info" | "error" | "warning" = "info") {
+  if (ctx.hasUI) ctx.ui.notify(msg, level);
 }
 
 // ============================================================
@@ -177,200 +183,97 @@ async function getTts(): Promise<{ tts: TextToSpeech; style: Style; cfg: ReadCon
 // ============================================================
 
 export default function (pi: ExtensionAPI) {
-  // --- /read command ---
   pi.registerCommand("read", {
-    description: "Read the last assistant response aloud using Supertonic TTS",
+    description: "Compact the last assistant response and read it aloud (Supertonic TTS)",
+
     handler: async (_args, ctx) => {
+      const { icons } = config;
+
+      // ----- Extract -------------------------------------------------
       const branch = ctx.sessionManager.getBranch();
-      const rawText = extractAssistantText(branch);
+      const extracted = extractLastAssistantText(branch);
 
-      if (!rawText) {
-        if (ctx.hasUI) ctx.ui.notify("No assistant response found to read.", "warning");
+      if (!extracted) {
+        notify(ctx, "No assistant response found to read.", "warning");
+        return;
+      }
+      if (!extracted.complete) {
+        notify(ctx, "Last assistant response is incomplete. Wait for it to finish.", "warning");
         return;
       }
 
-      // Strip markdown for speech
-      let speechText = stripMarkdownForSpeech(rawText);
-
-      const cfg = loadConfig();
-      if (speechText.length > cfg.maxLength) {
-        speechText = speechText.slice(0, cfg.maxLength).trim();
-        // Try to end at a sentence boundary
-        const lastPeriod = speechText.lastIndexOf(". ");
-        if (lastPeriod > cfg.maxLength * 0.7) {
-          speechText = speechText.slice(0, lastPeriod + 1);
-        }
-      }
-
-      if (!speechText.trim()) {
-        if (ctx.hasUI) ctx.ui.notify("No speakable text after stripping markdown.", "warning");
-        return;
-      }
-
-      const wordCount = speechText.split(/\s+/).length;
-      if (ctx.hasUI) {
-        ctx.ui.setStatus(
-          "supertonic-read",
-          `🔊 Synthesizing ${wordCount} words with ${cfg.voice}...`,
-        );
-      }
+      let mdPath: string | undefined;
+      let wavPath: string | undefined;
 
       try {
-        const { tts, style } = await getTts();
+        // ----- Compact via LLM ---------------------------------------
+        status(ctx, icons.compact, "Compacting text...");
 
-        // Synthesize to temp WAV file
+        let compactedText: string;
+        try {
+          compactedText = await compactViaLlm(extracted.text, ctx);
+        } catch (err: any) {
+          status(ctx, icons.error, `LLM failed: ${err.message}`);
+          notify(ctx, `Compaction failed: ${err.message}`, "error");
+          clearStatus(ctx);
+          return;
+        }
+
+        if (!compactedText || compactedText.length < 8) {
+          // LLM returned nothing useful — fall back to local markdown strip
+          compactedText = stripMarkdownForSpeech(extracted.text);
+        }
+
+        if (!compactedText.trim()) {
+          notify(ctx, "No speakable text after compaction.", "warning");
+          clearStatus(ctx);
+          return;
+        }
+
+        // Write compacted text to temp .md
+        mdPath = tempPath("compact", "md");
+        fs.writeFileSync(mdPath, compactedText);
+
+        // ----- TTS synthesis -----------------------------------------
+        status(ctx, icons.synth, "Synthesizing speech...");
+
+        const { tts, style } = await getTts();
         const { wav, duration } = await tts.call(
-          speechText,
-          cfg.lang,
+          compactedText,
+          config.lang,
           style,
-          cfg.totalSteps,
-          cfg.speed,
+          config.totalSteps,
+          config.speed,
+          config.silenceDuration,
         );
 
         const wavLen = Math.floor(tts.sampleRate * duration[0]);
-        const wavOut = wav.slice(0, wavLen);
+        wavPath = tempPath("audio", "wav");
+        writeWavFile(wavPath, wav.slice(0, wavLen), tts.sampleRate);
 
-        const tmpFile = path.join(tmpdir(), `pi-supertonic-read-${Date.now()}.wav`);
-        writeWavFile(tmpFile, wavOut, tts.sampleRate);
+        // ----- Playback ----------------------------------------------
+        status(ctx, icons.play, `Playing (${duration[0].toFixed(1)}s)...`);
 
-        if (ctx.hasUI) {
-          ctx.ui.setStatus(
-            "supertonic-read",
-            `🔊 Playing ${duration[0].toFixed(1)}s of audio...`,
-          );
+        try {
+          await playWav(wavPath);
+        } catch (err: any) {
+          status(ctx, icons.error, `Playback failed: ${err.message}`);
+          notify(ctx, `Playback error: ${err.message}`, "error");
+          return;
         }
 
-        await playAudio(tmpFile);
+        // ----- Done --------------------------------------------------
+        const words = compactedText.split(/\s+/).length;
+        status(ctx, icons.done, `Read ${words} words (${duration[0].toFixed(1)}s)`);
+        setTimeout(() => clearStatus(ctx), 4_000);
 
-        if (ctx.hasUI) {
-          ctx.ui.setStatus("supertonic-read", "");
-          ctx.ui.notify(
-            `✅ Read ${wordCount} words (${duration[0].toFixed(1)}s, voice: ${cfg.voice})`,
-            "info",
-          );
-        }
-
-        // Cleanup temp file
-        try { fs.unlinkSync(tmpFile); } catch { /* ignore */ }
       } catch (err: any) {
-        if (ctx.hasUI) {
-          ctx.ui.setStatus("supertonic-read", "");
-          ctx.ui.notify(`TTS error: ${err.message}`, "error");
-        }
+        status(ctx, icons.error, `Error: ${err.message}`);
+        notify(ctx, `Supertonic read failed: ${err.message}`, "error");
+      } finally {
+        rmSafe(mdPath);
+        rmSafe(wavPath);
       }
     },
-  });
-
-  // --- /read-config command ---
-  pi.registerCommand("read-config", {
-    description: "Show or update Supertonic TTS configuration",
-    handler: async (args, ctx) => {
-      const cfg = loadConfig();
-
-      if (!args || args.trim() === "" || args.trim() === "show") {
-        const info = [
-          `Assets: ${cfg.assetsDir || "(not set)"}`,
-          `Voice: ${cfg.voice}`,
-          `Language: ${cfg.lang}`,
-          `Steps: ${cfg.totalSteps}`,
-          `Speed: ${cfg.speed}`,
-          `Max chars: ${cfg.maxLength}`,
-          `Auto-play: ${cfg.autoPlay}`,
-        ].join("\n");
-
-        if (ctx.hasUI) {
-          ctx.ui.notify(`Supertonic Read Config:\n${info}`, "info");
-        }
-
-        if (ctx.mode === "tui" && ctx.hasUI) {
-          const voices = ["M1", "M2", "M3", "M4", "M5", "F1", "F2", "F3", "F4", "F5"];
-          const choice = await ctx.ui.select(
-            "Change voice?",
-            ["(keep current)", ...voices],
-          );
-          if (choice && choice !== "(keep current)") {
-            cfg.voice = choice;
-            saveConfig(cfg);
-            // Reset cached TTS so next /read picks up the new voice
-            ttsInstance = null;
-            ttsStyle = null;
-            ctx.ui.notify(`Voice changed to ${choice}`, "info");
-          }
-        }
-        return;
-      }
-
-      // Parse key=value pairs, e.g. "voice=M2 speed=1.2"
-      const parsed: Record<string, string> = {};
-      for (const pair of args.trim().split(/\s+/)) {
-        const eq = pair.indexOf("=");
-        if (eq > 0) {
-          parsed[pair.slice(0, eq)] = pair.slice(eq + 1);
-        }
-      }
-
-      let changed = false;
-      if (parsed.assetsDir !== undefined) { cfg.assetsDir = parsed.assetsDir; changed = true; }
-      if (parsed.voice !== undefined) { cfg.voice = parsed.voice; changed = true; }
-      if (parsed.lang !== undefined) { cfg.lang = parsed.lang; changed = true; }
-      if (parsed.totalSteps !== undefined) {
-        cfg.totalSteps = Math.max(1, Math.min(20, parseInt(parsed.totalSteps) || 8));
-        changed = true;
-      }
-      if (parsed.speed !== undefined) {
-        cfg.speed = Math.max(0.5, Math.min(3.0, parseFloat(parsed.speed) || 1.05));
-        changed = true;
-      }
-      if (parsed.maxLength !== undefined) {
-        cfg.maxLength = Math.max(100, parseInt(parsed.maxLength) || 2000);
-        changed = true;
-      }
-      if (parsed.autoPlay !== undefined) {
-        cfg.autoPlay = parsed.autoPlay === "true";
-        changed = true;
-      }
-
-      if (changed) {
-        saveConfig(cfg);
-        ttsInstance = null;
-        ttsStyle = null;
-        if (ctx.hasUI) ctx.ui.notify("Config updated.", "info");
-      } else {
-        if (ctx.hasUI) ctx.ui.notify("No valid key=value pairs found.", "warning");
-      }
-    },
-  });
-
-  // --- Auto-play on agent_end (if enabled in config) ---
-  pi.on("agent_end", async (_event, ctx) => {
-    const cfg = loadConfig();
-    if (!cfg.autoPlay) return;
-
-    // Fire /read command logic
-    const branch = ctx.sessionManager.getBranch();
-    const rawText = extractAssistantText(branch);
-    if (!rawText) return;
-
-    let speechText = stripMarkdownForSpeech(rawText);
-    if (speechText.length > cfg.maxLength) {
-      speechText = speechText.slice(0, cfg.maxLength).trim();
-      const lastPeriod = speechText.lastIndexOf(". ");
-      if (lastPeriod > cfg.maxLength * 0.7) {
-        speechText = speechText.slice(0, lastPeriod + 1);
-      }
-    }
-    if (!speechText.trim()) return;
-
-    try {
-      const { tts, style } = await getTts();
-      const { wav, duration } = await tts.call(
-        speechText, cfg.lang, style, cfg.totalSteps, cfg.speed,
-      );
-      const wavLen = Math.floor(tts.sampleRate * duration[0]);
-      const tmpFile = path.join(tmpdir(), `pi-supertonic-read-${Date.now()}.wav`);
-      writeWavFile(tmpFile, wav.slice(0, wavLen), tts.sampleRate);
-      await playAudio(tmpFile);
-      try { fs.unlinkSync(tmpFile); } catch { /* ignore */ }
-    } catch { /* silent fail for auto-play */ }
   });
 }
