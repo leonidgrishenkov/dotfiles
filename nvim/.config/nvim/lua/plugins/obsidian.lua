@@ -1,13 +1,13 @@
 return {
     {
-        "epwalsh/obsidian.nvim",
-        version = "*", -- use latest release instead of latest commit
-        lazy = true,
-        ft = "markdown",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
+        "obsidian-nvim/obsidian.nvim",
+        version = "*", -- use latest release, remove to use latest commit
+        ---@module 'obsidian'
+        ---@type obsidian.config
         opts = {
+            -- Disable legacy :ObsidianBacklinks etc. commands; use :Obsidian backlinks
+            legacy_commands = false,
+
             workspaces = {
                 {
                     name = "main",
@@ -15,54 +15,60 @@ return {
                 },
             },
 
-            -- Optional: daily notes configuration.
+            -- Picker: snacks.picker (built-in adapter in the fork)
+            picker = {
+                name = "snacks.picker",
+                note_mappings = {
+                    insert_link = "<C-l>",
+                    new = "<C-n>",
+                },
+                tag_mappings = {
+                    tag_note = "<C-t>",
+                    insert_tag = "<C-l>",
+                },
+            },
+
+            -- Daily notes
             daily_notes = {
                 folder = "Daily",
                 date_format = "%Y-%m-%d",
             },
 
-            -- Completion disabled: using blink.cmp instead of nvim-cmp.
+            -- Completion is now provided via the built-in obsidian-ls LSP server;
+            -- no nvim-cmp needed.
             completion = {
-                nvim_cmp = false,
+                min_chars = 2,
             },
 
-            -- Where to put new notes created via :ObsidianNew.
+            -- Where to put new notes created via :Obsidian new
             notes_subdir = "Base",
 
-            -- Use wiki-style links: [[Note Title]].
-            preferred_link_style = "wiki",
-
-            -- Follow links with gf.
-            follow_url_func = function(url)
-                vim.ui.open(url)
-            end,
-
-            -- Image paste configuration.
-            attachments = {
-                img_folder = "Attachments",
+            -- Link style (replaces deprecated preferred_link_style)
+            link = {
+                style = "wiki",
             },
 
-            -- Templates configuration.
+            -- Image/attachment paste location (replaces deprecated attachments.img_folder)
+            attachments = {
+                folder = "Attachments",
+            },
+
+            -- Templates
             templates = {
                 folder = "Template",
                 date_format = "%Y-%m-%d",
                 time_format = "%H:%M",
             },
 
-            -- Disable frontmatter auto-generation if you manage it manually.
-            disable_frontmatter = false,
+            -- Frontmatter (replaces deprecated disable_frontmatter)
+            frontmatter = {
+                enabled = true,
+            },
 
-            -- UI tweaks: conceal brackets, render checkboxes, etc.
             ui = {
                 enable = true,
+                 ignore_conceal_warn = true,
                 update_debounce = 200,
-                checkboxes = {
-                    [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
-                    ["x"] = { char = "", hl_group = "ObsidianDone" },
-                    [">"] = { char = "", hl_group = "ObsidianRightArrow" },
-                    ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
-                    ["!"] = { char = "", hl_group = "ObsidianImportant" },
-                },
                 bullets = { char = "•", hl_group = "ObsidianBullet" },
                 external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
                 reference_text = { hl_group = "ObsidianRefText" },
@@ -70,6 +76,13 @@ return {
                 tags = { hl_group = "ObsidianTag" },
                 block_ids = { hl_group = "ObsidianBlockID" },
             },
+
+            -- Checkbox toggle order (replaces deprecated reliance on ui.checkboxes keys)
+            checkbox = {
+                order = { " ", "~", "!", ">", "x" },
+            },
+
+            -- URL opening uses vim.ui.open by default, no need to set follow_url_func
         },
     },
 }
