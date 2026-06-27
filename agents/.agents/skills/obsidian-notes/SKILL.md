@@ -24,38 +24,102 @@ Vault consists of these folders:
   place new images there.
 - `Excalidraw/` — Excalidraw diagram files (do not edit)
 
+## Obsidian CLI
+
+The `obsidian` CLI is the **primary tool** for all vault operations. Prefer it over raw file tools (`fd`, `rg`, `cat`)
+for searching, reading, creating, and managing notes. Run `obsidian help <command>` for details on any command.
+
+### Key commands reference
+
+| Task                              | Command                                                                                                                  |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Search vault content              | `obsidian search query="<text>"`                                                                                         |
+| Search with context               | `obsidian search:context query="<text>"`                                                                                 |
+| List files (optionally by folder) | `obsidian files [folder=<path>]`                                                                                         |
+| Read a note by name               | `obsidian read file="<name>"`                                                                                            |
+| Read a note by path               | `obsidian read path="<path>"`                                                                                            |
+| Create a note                     | `obsidian create name="<title>" path="Base/<title>.md" content="<text>"`                                                 |
+| Append to a note                  | `obsidian append file="<name>" content="<text>"`                                                                         |
+| Prepend to a note                 | `obsidian prepend file="<name>" content="<text>"`                                                                        |
+| Rename / move                     | `obsidian rename file="<name>" name="<new>"` / `obsidian move file="<name>" to="<folder>"`                               |
+| Delete a note                     | `obsidian delete file="<name>"`                                                                                          |
+| Show outgoing links               | `obsidian links file="<name>"`                                                                                           |
+| Show backlinks                    | `obsidian backlinks file="<name>"`                                                                                       |
+| List / query tags                 | `obsidian tags [counts] [sort=count]`                                                                                    |
+| Read / set properties             | `obsidian property:read name="<prop>" file="<name>"` / `obsidian property:set name="<prop>" value="<val>" file="<name>"` |
+| Outline (headings)                | `obsidian outline file="<name>"`                                                                                         |
+| Word count                        | `obsidian wordcount file="<name>"`                                                                                       |
+| Find orphans (no backlinks)       | `obsidian orphans`                                                                                                       |
+| Find dead ends (no outlinks)      | `obsidian deadends`                                                                                                      |
+| List unresolved links             | `obsidian unresolved`                                                                                                    |
+| Read daily note                   | `obsidian daily:read`                                                                                                    |
+| Append to daily note              | `obsidian daily:append content="<text>"`                                                                                 |
+| List tasks                        | `obsidian tasks [done\|todo]`                                                                                            |
+| Vault info                        | `obsidian vault`                                                                                                         |
+
+**Notes on CLI usage:**
+
+- `file=` resolves by name (like wikilinks); `path=` is the exact vault-relative path (e.g. `Base/My Note.md`).
+- Quote values containing spaces: `file="My Note"`.
+- Use `\n` for newlines and `\t` for tabs inside `content=` values.
+- Add `format=json` where available for machine-readable output.
+
+### Fallback to raw file tools
+
+Use `fd` / `rg` only when the CLI lacks the needed capability:
+
+- Regex or complex pattern matching (the CLI search is plain-text only)
+- Searching inside Excalidraw or other non-indexed files
+
+```bash
+# Fallback: regex search
+rg -i "pattern" --no-ignore -l ~/Filen/Obsidian/main-vault
+
+# Fallback: filename glob
+fd -i "substring" -e md --no-ignore ~/Filen/Obsidian/main-vault
+```
+
 ## Workflows
 
 ### Search for notes
 
-Always use `--no-ignore` to bypass foot `.gitignore` rules.
-
 ```bash
-# Search by filename (case-insensitive substring match)
-fd -i "git worktree" -e md --no-ignore  ~/Filen/Obsidian/main-vault
+# Search by content — returns matching file names
+obsidian search query="git worktree"
 
-# Search by content (returns filenames with matches)
-rg -i "keyword" --no-ignore -l  ~/Filen/Obsidian/main-vault
+# Search with surrounding context lines
+obsidian search:context query="git worktree"
+
+# Limit search to a specific folder
+obsidian search query="keyword" path="Base"
+
+# List files in a folder
+obsidian files folder="Base"
 ```
 
 ### Create new notes
 
-1. Create the file in `Base/` unless a different folder is clearly appropriate
-2. Keep new note filenames concise and descriptive
-3. Check whether a note on the topic already exists before creating one
-4. Update frontmatter fields
-5. Follow Note Format rules for note content
-6. Never modify files in `Template/`, `Attachments/`, or `Excalidraw/`
+1. Search first: `obsidian search query="<topic>"` to check whether a note already exists
+2. Create in `Base/` unless a different folder is clearly appropriate:
+   ```bash
+   obsidian create name="<Title>" path="Base/<Title>.md" content="<full note content>"
+   ```
+3. Keep filenames concise and descriptive
+4. Follow Note Format rules for note content (frontmatter, headings, linking, etc.)
+5. Never modify files in `Template/`, `Attachments/`, or `Excalidraw/`
 
 ### Managing notes
 
-1. Always read the note before editing it
-2. If you plan to delete/replace existing note or content in the note — ask for user approval
+1. Always read the note before editing: `obsidian read file="<name>"`
+2. Use `obsidian append` / `obsidian prepend` for adding content; use the `edit` tool for targeted replacements
+3. Use `obsidian property:set` to update frontmatter properties
+4. If you plan to delete/replace an existing note or substantial content — ask for user approval first
 
 ### After creating a note
 
-1. Search for existing related notes and add `[[wikilinks]]` where relevant
-2. Notify the user of the created note path
+1. Search for related notes: `obsidian search query="<keywords>"` and add `[[wikilinks]]` where relevant
+2. Verify the target of every wikilink exists: `obsidian read file="<target>"` (will fail if missing)
+3. Notify the user of the created note path
 
 ## Note format
 
