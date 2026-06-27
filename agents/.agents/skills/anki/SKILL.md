@@ -10,8 +10,15 @@ description: Inspect, query, and manipulate a local Anki flashcard collection us
 Always use `uv` to run scripts — it handles the `anki` dependency automatically:
 
 ```sh
-uv run --with anki python -c ''
+uv run --with anki python -c << 'PYEOF'
+from anki.collection import Collection
+...
+PYEOF
+```
 
+Or:
+
+```sh
 uv run --with anki ./your_script.py
 ```
 
