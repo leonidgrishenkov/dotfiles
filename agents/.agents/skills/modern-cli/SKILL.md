@@ -1,19 +1,21 @@
 ---
 name: modern-cli
-description: Preferred modern CLI alternatives for commono shell commands. Use whenever running file, text or code search, code refactoring etc.
+description:
+  Use when run Bash tool for text, files or code searching. Preferred modern CLI alternatives for common shell commands.
 ---
 
 # Modern CLI Tools
 
-When running shell commands, prefer these modern alternatives over legacy Unix tools. They are faster, more ergonomic, and produce better output.
+When running shell commands, prefer these modern alternatives over legacy Unix tools. They are faster, more ergonomic,
+and produce better output.
 
-| Instead of | Use | Why |
-|---|---|---|
-| `grep` / `grep -r` | `rg` (ripgrep) | Faster, respects `.gitignore`, recursive by default |
-| `find` | `fd` | Simpler syntax, respects `.gitignore`, colorized output |
-| `sed` | `sg run --rewrite` | AST-aware rewrites that don't break on comments or strings |
-| Text-based code search | `rg` for strings/text | Fast and reliable |
-| Structural code search | `sg` for syntax patterns | Understands code structure via AST |
+| Instead of             | Use                      | Why                                                        |
+| ---------------------- | ------------------------ | ---------------------------------------------------------- |
+| `grep` / `grep -r`     | `rg` (ripgrep)           | Faster, respects `.gitignore`, recursive by default        |
+| `find`                 | `fd`                     | Simpler syntax, respects `.gitignore`, colorized output    |
+| `sed`                  | `sg run --rewrite`       | AST-aware rewrites that don't break on comments or strings |
+| Text-based code search | `rg` for strings/text    | Fast and reliable                                          |
+| Structural code search | `sg` for syntax patterns | Understands code structure via AST                         |
 
 ## ripgrep (`rg`)
 
@@ -46,7 +48,8 @@ fd 'pattern' . --type f --exec wc -l  # pipe to other commands
 
 ## ast-grep (`sg`)
 
-Structural code search and rewrite. Parses language AST, so searches understand syntax rather than matching raw text. Always prefer over `sed`, `awk`, or `grep` for code refactoring tasks.
+Structural code search and rewrite. Parses language AST, so searches understand syntax rather than matching raw text.
+Always prefer over `sed`, `awk`, or `grep` for code refactoring tasks.
 
 ### Search
 
@@ -75,10 +78,10 @@ sg run -p 'console.log($$$A)' --rewrite 'logger.info($$$A)' --update-all
 
 ### Metavariable Patterns
 
-| Pattern | Meaning |
-|---------|---------|
-| `$VAR` | Single AST node (identifier, expression, statement) |
-| `$$VAR` | List of nodes at the same level (e.g., function arguments) |
+| Pattern  | Meaning                                                            |
+| -------- | ------------------------------------------------------------------ |
+| `$VAR`   | Single AST node (identifier, expression, statement)                |
+| `$$VAR`  | List of nodes at the same level (e.g., function arguments)         |
 | `$$$VAR` | List of nodes across levels (e.g., multiple statements in a block) |
 
 `sg` auto-detects language from file extensions, so `--lang` is rarely needed.
@@ -86,6 +89,7 @@ sg run -p 'console.log($$$A)' --rewrite 'logger.info($$$A)' --update-all
 ## General Guidelines
 
 - Prefer piping modern tools: `fd -e ts | xargs rg "pattern"` is fine.
-- When refactoring code (rename, restructure, migration patterns), always prefer `sg run --rewrite` over `sed` — AST-aware rewrites won't silently corrupt comments, strings, or partial matches.
+- When refactoring code (rename, restructure, migration patterns), always prefer `sg run --rewrite` over `sed` —
+  AST-aware rewrites won't silently corrupt comments, strings, or partial matches.
 - Use `rg` for text search, `fd` for file search, and `sg` when the edit requires understanding code structure.
 - All of these tools are faster and produce cleaner output than their legacy equivalents.
