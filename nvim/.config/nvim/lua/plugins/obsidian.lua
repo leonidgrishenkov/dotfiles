@@ -1,3 +1,5 @@
+-- BUG: none of pickers works for me
+-- haven't found a reason
 return {
     {
         "obsidian-nvim/obsidian.nvim",
