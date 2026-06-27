@@ -67,7 +67,7 @@ return {
 
             ui = {
                 enable = true,
-                 ignore_conceal_warn = true,
+                ignore_conceal_warn = true,
                 update_debounce = 200,
                 bullets = { char = "•", hl_group = "ObsidianBullet" },
                 external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
