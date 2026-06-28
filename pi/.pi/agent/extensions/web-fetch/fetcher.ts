@@ -7,7 +7,8 @@
  *
  * Security measures (following web_fetch.md best practices):
  *  - HTTPS upgrade by default
- *  - SSRF protection: block private IPs and localhost
+ *  - SSRF protection: DNS-aware private/reserved IP blocking (IPv4 + IPv6),
+ *    with every redirect hop re-validated (see ssrf-protection.ts)
  *  - Cross-host redirect detection and explicit notification
  *  - Content-length / size guard (5 MB)
  *  - Sensible timeouts (default 30 s, max 120 s)
@@ -25,17 +26,15 @@ import {
 	USER_AGENT_BROWSER,
 	USER_AGENT_HONEST,
 } from "./types.ts";
+import { fetchRemoteUrl, validateRemoteUrl } from "./ssrf-protection.ts";
 
 // ---------------------------------------------------------------------------
 // URL helpers
 // ---------------------------------------------------------------------------
 
-const PRIVATE_IPV4_RE =
-	/^(?:127\.|10\.|172\.(?:1[6-9]|2\d|3[01])\.|192\.168\.|169\.254\.|0\.)/;
-
 /**
  * Ensure the URL uses HTTPS. If the caller passed `http://`, upgrade it
- * unless the host is explicitly localhost/loopback (which we block anyway).
+ * (localhost/private hosts are rejected later by the SSRF guard).
  */
 function normalizeUrl(raw: string): URL {
 	if (!/^https?:\/\//i.test(raw)) {
@@ -46,25 +45,6 @@ function normalizeUrl(raw: string): URL {
 		);
 	}
 	return new URL(raw.replace(/^http:\/\//i, "https://"));
-}
-
-/** Reject private / loopback / link-local hosts to prevent SSRF. */
-function assertPublicHost(url: URL): void {
-	const host = url.hostname.toLowerCase();
-	if (
-		host === "localhost" ||
-		host === "[::1]" ||
-		host === "::1" ||
-		host.endsWith(".local") ||
-		host.endsWith(".localhost") ||
-		PRIVATE_IPV4_RE.test(host)
-	) {
-		throw new FetchError(
-			`Blocked request to private host: ${host}`,
-			undefined,
-			"web_fetch refuses to contact localhost or private IPs for security.",
-		);
-	}
 }
 
 // ---------------------------------------------------------------------------
@@ -90,20 +70,31 @@ interface DoFetchOptions {
 	signal?: AbortSignal;
 	userAgent: string;
 	accept: string;
+	allowRanges?: string[];
 }
 
-/** Single fetch attempt. Throws FetchError on network failures. */
+/**
+ * Single fetch attempt routed through the SSRF guard.
+ *
+ * `fetchRemoteUrl` validates the initial URL *and every redirect hop* against
+ * the private/reserved IP blocklist (resolving DNS each time), following
+ * redirects manually so an internal target can never be contacted. Throws
+ * `FetchError` on network, abort, or security failures.
+ */
 async function doFetch(url: string, opts: DoFetchOptions): Promise<Response> {
 	try {
-		return await fetch(url, {
-			signal: opts.signal,
-			redirect: "follow",
-			headers: {
-				"User-Agent": opts.userAgent,
-				Accept: opts.accept,
-				"Accept-Language": "en-US,en;q=0.9",
+		return await fetchRemoteUrl(
+			url,
+			{
+				signal: opts.signal,
+				headers: {
+					"User-Agent": opts.userAgent,
+					Accept: opts.accept,
+					"Accept-Language": "en-US,en;q=0.9",
+				},
 			},
-		});
+			{ allowRanges: opts.allowRanges },
+		);
 	} catch (err) {
 		if (opts.signal?.aborted) {
 			// Distinguish timeout abort from explicit abort (e.g. Esc key).
@@ -113,7 +104,16 @@ async function doFetch(url: string, opts: DoFetchOptions): Promise<Response> {
 			}
 			throw new FetchError("Aborted.");
 		}
-		throw new FetchError(`Network error: ${(err as Error).message}`);
+		const message = (err as Error).message;
+		// Surface SSRF guard rejections as a clear, non-retryable security error.
+		if (/^Blocked internal|^Only HTTP|^Failed to resolve|redirects fetching/i.test(message)) {
+			throw new FetchError(
+				`Blocked request: ${message}`,
+				undefined,
+				"web_fetch refuses to contact localhost, private, or reserved IP ranges for security.",
+			);
+		}
+		throw new FetchError(`Network error: ${message}`);
 	}
 }
 
@@ -145,7 +145,18 @@ export async function fetchUrl(params: FetchParams): Promise<FetchResult> {
 
 	// -- Validate & normalize URL -------------------------------------------
 	const originalUrl = normalizeUrl(params.url);
-	assertPublicHost(originalUrl);
+	// Pre-flight SSRF check (DNS-aware). The transport-level check in
+	// `fetchRemoteUrl` re-validates this plus every redirect hop, but doing it
+	// here first yields a clean security error before the abort timer starts.
+	try {
+		await validateRemoteUrl(originalUrl, { allowRanges: params.allowRanges });
+	} catch (err) {
+		throw new FetchError(
+			`Blocked request: ${(err as Error).message}`,
+			undefined,
+			"web_fetch refuses to contact localhost, private, or reserved IP ranges for security.",
+		);
+	}
 
 	// -- Build a timed-out abort controller that wraps the caller's signal ----
 	const controller = new AbortController();
@@ -162,6 +173,7 @@ export async function fetchUrl(params: FetchParams): Promise<FetchResult> {
 		signal: controller.signal,
 		userAgent: USER_AGENT_BROWSER,
 		accept,
+		allowRanges: params.allowRanges,
 	});
 
 	// Retry with honest UA when Cloudflare blocks the browser UA via
@@ -171,15 +183,17 @@ export async function fetchUrl(params: FetchParams): Promise<FetchResult> {
 			signal: controller.signal,
 			userAgent: USER_AGENT_HONEST,
 			accept,
+			allowRanges: params.allowRanges,
 		});
 	}
 
 	clearTimeout(timer);
 
 	// -- Resolve the actual final URL (after redirects) ----------------------
-	const finalUrl = new URL(response.url);
+	// Every hop was already SSRF-validated inside fetchRemoteUrl; here we only
+	// need the final URL to report cross-host redirects to the caller.
+	const finalUrl = new URL(response.url || originalUrl.toString());
 	const crossHost = originalUrl.host !== finalUrl.host;
-	assertPublicHost(finalUrl); // also guard the redirect target
 
 	// -- Size guard (Content-Length) ----------------------------------------
 	const contentLength = response.headers.get("content-length");

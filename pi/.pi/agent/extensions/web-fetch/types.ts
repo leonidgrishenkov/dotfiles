@@ -29,6 +29,11 @@ export interface FetchParams {
 	timeout?: number;
 	signal?: AbortSignal;
 	maxBytes?: number;
+	/**
+	 * Optional CIDR ranges to exempt from the SSRF guard (e.g. "198.18.0.0/15")
+	 * for users behind TUN/fake-IP proxies. Passed through to the SSRF module.
+	 */
+	allowRanges?: string[];
 }
 
 /** Thrown for HTTP, network, and security failures with actionable messages. */
