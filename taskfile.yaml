@@ -18,7 +18,6 @@ tasks:
       - uv generate-shell-completion zsh >! {{.COMPLETIONS_DIR}}/_uv
       - op completion zsh >! {{.COMPLETIONS_DIR}}/_op
       - kaf completion zsh >! {{.COMPLETIONS_DIR}}/_kaf
-      - opencode completion >! {{.COMPLETIONS_DIR}}/_opencode
 
   install-submodules:
     desc: Install all git submodules
