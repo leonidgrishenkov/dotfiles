@@ -44,10 +44,6 @@ tasks:
       vars: [BIN, CMD]
     cmd: if command -v {{.BIN}} >/dev/null; then {{.CMD}} > {{.COMPLETIONS_DIR}}/_{{.BIN}} ; fi
 
-  install-submodules:
-    desc: Install all git submodules
-    cmd: git submodule update --init --recursive
-
   stow-essential:
     desc: Run stow with essential entities
     cmds:
