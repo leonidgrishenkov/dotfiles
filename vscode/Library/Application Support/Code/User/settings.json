@@ -8,7 +8,7 @@
   "update.showReleaseNotes": false,
   // Extensions General Settings
   "extensions.ignoreRecommendations": true,
-  "extensions.autoUpdate": false,
+  "extensions.autoUpdate": "off",
   // SEARCH
   "search.showLineNumbers": true,
   "search.defaultViewMode": "tree",
