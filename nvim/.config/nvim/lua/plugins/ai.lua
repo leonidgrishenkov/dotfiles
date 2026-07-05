@@ -24,6 +24,7 @@ return {
     {
         "milanglacier/minuet-ai.nvim",
         event = "InsertEnter",
+        enabled = false,
         config = function()
             require("minuet").setup({
                 provider = "openai_compatible",
