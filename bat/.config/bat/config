@@ -4,9 +4,10 @@
 
 # Specify desired highlighting theme (e.g. "TwoDark"). Run `bat --list-themes`
 # for a list of all available themes
-# --theme="Catppuccin Frappe"
-# Bat can also use different themes based on system appearance:
---theme="auto:system"
+--theme="Catppuccin Frappe"
+# Bat can also use different themes based on system appearance.
+# WARN: but it's only supported on macos
+# --theme="auto:system"
 --theme-light="Catppuccin Latte"
 --theme-dark="Catppuccin Frappe"
 
