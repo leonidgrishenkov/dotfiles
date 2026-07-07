@@ -7,16 +7,10 @@
       "apiKey": "${OKKO_LITELLM_API_TOKEN}",
       "authHeader": true,
       "models": [
-        {
-          "id": "glm-5.1-fp8",
-          "name": "GLM-5.1-FP8"
-        },
-        {
-          "id": "gemma-4-31b-it",
-          "name": "Gemma-4-31B-IT"
-        }
+        { "id": "Expert", "name": "Okko Expert" },
+        { "id": "Instant", "name": "Okko Instant" },
+        { "id": "Multimodal", "name": "Okko Multimodal" }
       ]
     }
   }
 }
-
