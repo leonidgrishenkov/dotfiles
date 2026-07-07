@@ -7,6 +7,14 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent_servers": {
+    "pi-acp": {
+      "default_config_options": {
+        "model": "openrouter/qwen/qwen3.7-max"
+      },
+      "type": "registry"
+    }
+  },
   "proxy": "",
   "project_panel": {
     "dock": "right"

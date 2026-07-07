@@ -21,9 +21,4 @@ pi/.pi/agent/auth.json
 pi/.pi/agent/trust.json
 pi/.pi/agent/settings.json
 pi/.pi/agent/sessions/
-
-pi/.pi/agent/extensions/web-fetch/node_modules/
-pi/.pi/agent/extensions/mcp/node_modules/
-
-
-agents/.agents/skills/pdf/.venv/
+pi/.pi/pi-acp/

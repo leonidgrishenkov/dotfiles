@@ -32,9 +32,6 @@ source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highligh
 # Repo: https://github.com/zsh-users/zsh-completions
 export FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
 
-# === Plugin that reminds to use aliases ===
-source "$HOMEBREW_PREFIX/share/zsh-you-should-use/you-should-use.plugin.zsh"
-
 # Configure terminal title updates for Zellij to automatically detect
 # Zellij reads the terminal title and uses it for pane names
 function precmd() {
