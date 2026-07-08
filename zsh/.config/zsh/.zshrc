@@ -125,12 +125,6 @@ export PI_OFFLINE=1 # disables all startup network operations
 # https://jqlang.org/manual/#colors
 export JQ_COLORS="0;90:0;35:0;35:0;31:0;32:0;39:0;39:0;34"
 
-# === Openclaw ===
-# Source completions file
-if [ -f "$HOME/.openclaw/completions/openclaw.zsh" ]; then
-    source "$HOME/.openclaw/completions/openclaw.zsh"
-fi
-
 function command_not_found_handler() {
     print -P "%F{red} %fcommand not found: $1"
     return 127
