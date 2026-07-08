@@ -8,6 +8,11 @@ tasks:
     desc: Build or rebuild bat cache
     cmd: bat cache --build
 
+  cli-themes:
+    cmds:
+      - bat cache --build
+      - fast-theme XDG:catppuccin-frappe
+
   generate-extra-completions:
     desc: Generate extra completions for listed binaries
     vars:
