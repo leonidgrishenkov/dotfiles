@@ -15,7 +15,7 @@ zsh/.config/zsh/.zcompdump
 # exclude extra git config files which are mostly private
 git/.config/git/include/
 
-zsh/.config/zsh/conf/*.zsh
+zsh/.config/zsh/extra/*.zsh
 
 pi/.pi/agent/auth.json
 pi/.pi/agent/trust.json
