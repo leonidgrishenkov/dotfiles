@@ -15,27 +15,27 @@ tasks:
         sh: echo "$XDG_DATA_HOME/zsh/site-functions"
     cmds:
       - cmd: if [ ! -d {{.COMPLETIONS_DIR}} ]; then mkdir -p {{.COMPLETIONS_DIR}}; fi
-      - task: _gen-completion
+      - task: gen-completion
         vars:
           BIN: uv
           CMD: uv generate-shell-completion zsh
-      - task: _gen-completion
+      - task: gen-completion
         vars:
           BIN: op
           CMD: op completion zsh
           OUTPUT: "{{.COMPLETIONS_DIR}}/_op"
-      - task: _gen-completion
+      - task: gen-completion
         vars:
           BIN: kaf
           CMD: kaf completion zsh
           OUTPUT: "{{.COMPLETIONS_DIR}}/_kaf"
-      - task: _gen-completion
+      - task: gen-completion
         vars:
           BIN: doctl
           CMD: doctl completion zsh
           OUTPUT: "{{.COMPLETIONS_DIR}}/_doctl"
 
-  _gen-completion:
+  gen-completion:
     internal: true
     vars:
       COMPLETIONS_DIR:
@@ -56,4 +56,36 @@ tasks:
   atuin-sync:
     desc: Sync local atuin history with the server
     cmd: atuin sync
+
+  install-zsh-plugins:
+    desc: Install or update picked zsh plugins
+    vars:
+      PLUGINS_DIR:
+        sh: echo "$XDG_DATA_HOME"
+      PLUGINS:
+        sh: echo "zsh-vi-mode fast-syntax-highlighting zsh-autosuggestions zsh-completions"
+    cmds:
+      - for: { var: PLUGINS, as: REPO }
+        task: install-zsh-plugin
+        vars:
+          REPO_URL: "https://github.com/leonidgrishenkov/{{base .REPO}}.git"
+          PLUGIN_NAME: '{{base .REPO}}'
+          DEST_DIR: '{{.PLUGINS_DIR}}/{{base .REPO}}'
+
+  install-zsh-plugin:
+    internal: true
+    requires:
+      vars: [REPO_URL, PLUGIN_NAME, DEST_DIR]
+    cmds:
+      - cmd: mkdir -p {{.DEST_DIR}}
+      - cmd: |
+          if [ -d "{{.DEST_DIR}}/.git" ]; then
+            echo "task: Updating {{.PLUGIN_NAME}}"
+            git -C "{{.DEST_DIR}}" fetch origin HEAD --depth 1 --quiet
+            git -C "{{.DEST_DIR}}" reset --hard origin/HEAD --quiet
+          else
+            echo "task: Installing {{.PLUGIN_NAME}}"
+            rm -rf "{{.DEST_DIR}}"
+            git clone --depth 1 --quiet "{{.REPO_URL}}" "{{.DEST_DIR}}"
+          fi
 
