@@ -1,0 +1,14 @@
+# vim: set filetype=gitconfig:
+
+[user]
+	name = Leonid Grishenkov
+    email = l.grishenkov@okko.tv
+
+[commit]
+    gpgSign = false
+    verbose = true
+[tag]
+    gpgsign = false
+
+[url "okko-bitbucket-personal:"]
+    insteadOf = ssh://git@bitbucket.playteam.ru/

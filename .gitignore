@@ -12,9 +12,6 @@ zsh/.config/zsh/.zcompdump
 # sqlite db files
 *.sqlite
 
-# exclude extra git config files which are mostly private
-git/.config/git/include/
-
 zsh/.config/zsh/extra/*.zsh
 
 pi/.pi/agent/auth.json

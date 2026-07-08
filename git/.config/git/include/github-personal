@@ -1,0 +1,12 @@
+# vim: set filetype=gitconfig:
+[user]
+	name = Leonid Grishenkov
+    email = grishenkovleonid@proton.me
+[commit]
+    gpgSign = false
+    verbose = true
+[tag]
+    gpgsign = false
+[url "github-personal:leonidgrishenkov"]
+    insteadOf = https://github.com/leonidgrishenkov
+
