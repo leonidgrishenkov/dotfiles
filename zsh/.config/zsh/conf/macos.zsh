@@ -50,9 +50,6 @@ function preexec() {
     print -Pn "\e]2;$cmd | %~\a"
 }
 
-# === zoxide ===
-eval "$(zoxide init zsh)"
-
 # === Golang ===
 export GOPATH=$HOME/.go
 export GOBIN=$GOPATH/bin

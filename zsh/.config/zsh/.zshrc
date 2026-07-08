@@ -117,6 +117,9 @@ export DOCKER_CLI_HINTS=false # disable ads in CLI
 export ATUIN_NOBIND="true"
 eval "$(atuin init zsh)"
 
+# === zoxide ===
+eval "$(zoxide init zsh)"
+
 # === PI Coding Agent ===
 export PI_SKIP_VERSION_CHECK=1 # disables version check on startups
 export PI_OFFLINE=1 # disables all startup network operations
