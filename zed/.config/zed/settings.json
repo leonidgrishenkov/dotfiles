@@ -7,6 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "vim": {
+    "toggle_relative_line_numbers": true
+  },
+  "relative_line_numbers": "enabled",
+  "auto_update": false,
   "agent_servers": {
     "pi-acp": {
       "default_config_options": {
