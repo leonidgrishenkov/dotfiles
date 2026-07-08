@@ -2,16 +2,16 @@
 # vim: set filetype=sh:
 # vim: set ts=4 sw=4 et:
 
+export EDITOR="nvim"
+export VISUAL=$EDITOR
+export GIT_EDITOR=$EDITOR
+
 if [[ -d "$ZDOTDIR/conf" ]]; then
     files=($ZDOTDIR/conf/*.zsh(N))
     for file in $files; do
         source "$file"
     done
 fi
-
-export EDITOR="nvim"
-export VISUAL=$EDITOR
-export GIT_EDITOR=$EDITOR
 
 export FPATH="$FPATH:$XDG_DATA_HOME/zsh/site-functions"
 
