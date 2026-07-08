@@ -133,6 +133,22 @@ function command_not_found_handler() {
     return 127
 }
 
+# === VI mode ===
+# https://github.com/jeffreytse/zsh-vi-mode
+source $XDG_DATA_HOME/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+# === Autosuggestions ===
+# https://github.com/zsh-users/zsh-autosuggestions
+source $XDG_DATA_HOME/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# === Syntax Highlighting ===
+# https://github.com/zdharma-continuum/fast-syntax-highlighting
+source $XDG_DATA_HOME/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# === Additional ZSH completions ===
+# https://github.com/zsh-users/zsh-completions
+source $XDG_DATA_HOME/zsh-completions/zsh-completions.plugin.zsh
+
 # zsh-vi-mode overrides keybindings after it loads, including ^r binding for atuin. In order to avoid it here I use
 # zvm_after_init hook that zsh-vi-mode provides. This hook runs after zsh-vi-mode finishes setting up its
 # keybindings, so my custom bindings won't get overwritten.
