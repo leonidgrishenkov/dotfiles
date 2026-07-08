@@ -11,27 +11,6 @@ export HOMEBREW_BUNDLE_FILE="$DOTFILES_DIR/brew/.Brewfile" # path to bundle file
 
 export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
 
-# === VI mode ===
-# https://github.com/jeffreytse/zsh-vi-mode
-source "$HOMEBREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
-
-# === Autosuggestions ===
-# https://github.com/zsh-users/zsh-autosuggestions
-source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-
-# === Syntax Highlighting ===
-# 'fast-syntax-highlighting' has a better appearance but takes ~0.1 sec on startup.
-# Repo: https://github.com/zdharma-continuum/fast-syntax-highlighting
-source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-
-# 'zsh-syntax-highlighting' quite old plugin but loads much faster then 'fast-syntax-highlighting'.
-# Repo: https://github.com/zsh-users/zsh-syntax-highlighting
-# source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-# === Additional ZSH completions ===
-# Repo: https://github.com/zsh-users/zsh-completions
-export FPATH="$HOMEBREW_PREFIX/share/zsh-completions:$FPATH"
-
 # Configure terminal title updates for Zellij to automatically detect
 # Zellij reads the terminal title and uses it for pane names
 function precmd() {
