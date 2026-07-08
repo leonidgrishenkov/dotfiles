@@ -1,6 +1,8 @@
 # vim: set filetype=sh:
 # vim: set ts=4 sw=4 et:
 
+[[ $SYSTEM != "Darwin" ]] && return 0
+
 # === Homebrew ===
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -28,17 +30,6 @@ function preexec() {
     # %~ expands to current directory with ~ for home
     print -Pn "\e]2;$cmd | %~\a"
 }
-
-# === Golang ===
-export GOPATH=$HOME/.go
-export GOBIN=$GOPATH/bin
-export PATH="$PATH:$GOBIN"
-
-# === Rust ===
-export PATH="$PATH:$HOME/.cargo/bin"
-
-# === direnv ===
-eval "$(direnv hook zsh)"
 
 # === DataGrip ===
 # Run DataGrip from the shell.
@@ -85,3 +76,5 @@ export GPG_TTY=$(tty)
 if [[ -f "$XDG_CONFIG_HOME/op/plugins.sh" ]]; then
     source ~/.config/op/plugins.sh
 fi
+
+export DOTFILES_DIR="$HOME/Code/dotfiles"

@@ -2,28 +2,23 @@
 # vim: set filetype=sh:
 # vim: set ts=4 sw=4 et:
 
-source ~/.config/zsh/conf/utils.zsh
+if [[ -d "$ZDOTDIR/conf" ]]; then
+    files=($ZDOTDIR/conf/*.zsh(N))
+    for file in $files; do
+        source "$file"
+    done
+fi
 
 export EDITOR="nvim"
 export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
 
-if [[ $SYSTEM = "Darwin" ]]; then
-    source "$ZDOTDIR/conf/macos.zsh"
-elif [[ $SYSTEM = "Linux" ]]; then
-    source "$ZDOTDIR/conf/linux.zsh"
-fi
+export FPATH="$FPATH:$XDG_DATA_HOME/zsh/site-functions"
 
-source "$ZDOTDIR/conf/history.zsh"
-source "$ZDOTDIR/conf/aliases.zsh"
-source "$ZDOTDIR/conf/completion.zsh"
-
-if [[ -d "$ZDOTDIR/conf/extra" ]]; then
-    files=($ZDOTDIR/conf/extra/*.zsh(N))
-    for extra_file in $files; do
-        source "$extra_file"
-    done
-fi
+# === vivid ===
+# vivid provides themes for LS_COLORS.
+# https://github.com/sharkdp/vivid
+export LS_COLORS=$(vivid generate catppuccin-mocha)
 
 # === Rip Grep ===
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
@@ -32,18 +27,6 @@ export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
 # Set path to config file
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.zsh.toml"
 eval "$(starship init zsh)"
-
-# === zsh-vi-mode ===
-# Here are config options. For macos plugin sourced in ./conf/macos.zsh
-ZVM_SYSTEM_CLIPBOARD_ENABLED=true # Yank to system clipboard
-ZVM_VI_INSERT_ESCAPE_BINDKEY=jf
-ZVM_VI_EDITOR=$EDITOR # when invoking command line editing with 'vv'
-
-# === zsh-autosuggestions ===
-ZSH_AUTOSUGGEST_STRATEGY=(history completion) # https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#suggestion-strategy
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
-# more about autosuggest keymaps here: https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#key-bindings
-bindkey '^F' autosuggest-accept # Key to accept currently shown autosuggestion.
 
 # === YAZI ===
 # Use 'y' as shell command wrapper that provides the ability
@@ -59,11 +42,9 @@ function y() {
 
 # === bat / batcat ===
 # https://github.com/sharkdp/bat
-
 # Use bat to show man pages output.
 # https://github.com/sharkdp/bat#man
 export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
-
 # Use bat to show help pages output.
 # https://github.com/sharkdp/bat?tab=readme-ov-file#highlighting---help-messages
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
@@ -122,7 +103,7 @@ eval "$(zoxide init zsh)"
 
 # === PI Coding Agent ===
 export PI_SKIP_VERSION_CHECK=1 # disables version check on startups
-export PI_OFFLINE=1 # disables all startup network operations
+export PI_OFFLINE=1            # disables all startup network operations
 
 # === JQ ===
 # https://jqlang.org/manual/#colors
@@ -133,21 +114,16 @@ function command_not_found_handler() {
     return 127
 }
 
-# === VI mode ===
-# https://github.com/jeffreytse/zsh-vi-mode
-source $XDG_DATA_HOME/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# === Golang ===
+export GOPATH=$HOME/.go
+export GOBIN=$GOPATH/bin
+export PATH="$PATH:$GOBIN"
 
-# === Autosuggestions ===
-# https://github.com/zsh-users/zsh-autosuggestions
-source $XDG_DATA_HOME/zsh-autosuggestions/zsh-autosuggestions.zsh
+# === Rust ===
+export PATH="$PATH:$HOME/.cargo/bin"
 
-# === Syntax Highlighting ===
-# https://github.com/zdharma-continuum/fast-syntax-highlighting
-source $XDG_DATA_HOME/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-
-# === Additional ZSH completions ===
-# https://github.com/zsh-users/zsh-completions
-source $XDG_DATA_HOME/zsh-completions/zsh-completions.plugin.zsh
+# === direnv ===
+eval "$(direnv hook zsh)"
 
 # zsh-vi-mode overrides keybindings after it loads, including ^r binding for atuin. In order to avoid it here I use
 # zvm_after_init hook that zsh-vi-mode provides. This hook runs after zsh-vi-mode finishes setting up its
@@ -157,6 +133,13 @@ function zvm_after_init() {
     bindkey '^r' atuin-search
     bindkey -M vicmd '^r' atuin-search-vicmd
 }
+
+if [[ -d "$ZDOTDIR/extra" ]]; then
+    files=($ZDOTDIR/extra/*.zsh(N))
+    for file in $files; do
+        source "$file"
+    done
+fi
 
 autoload -Uz compinit
 compinit -i

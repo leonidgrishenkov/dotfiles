@@ -1,10 +1,6 @@
 # vim: set filetype=sh:
 # vim: set ts=4 sw=4 et:
 
-# vivid provides themes for LS_COLORS.
-# Repo: https://github.com/sharkdp/vivid
-export LS_COLORS=$(vivid generate catppuccin-mocha)
-
 zstyle ':completion:*' menu select
 # Use LS_COLORS for completion items.
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
