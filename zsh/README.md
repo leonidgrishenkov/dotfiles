@@ -17,6 +17,7 @@ zsh/
     │   ├── 03-aliases.zsh         # shell aliases
     │   ├── 04-plugins.zsh         # zsh-vi-mode, autosuggestions, syntax highlighting
     │   ├── 05-compinit.zsh        # compinit (must run after plugins source)
+    │   ├── 09-brew.zsh            # Homebrew shellenv (adds /opt/homebrew/bin to PATH)
     │   ├── 10-starship.zsh        # starship prompt init
     │   ├── 11-fzf.zsh             # fzf + catppuccin frappe theme
     │   ├── 12-atuin.zsh           # atuin history init
@@ -33,15 +34,15 @@ zsh/
 
 ## Load order
 
-Files in `conf.d/` are sourced in natural sort order (`*.zsh` glob).
-Numeric prefixes control dependency ordering:
+Files in `conf.d/` are sourced in natural sort order (`*.zsh` glob). Numeric prefixes control dependency ordering:
 
-| Range | Purpose |
-|---|---|
-| `00–05` | Core shell: env, history, completion, aliases, plugins, compinit |
+| Range   | Purpose                                                            |
+| ------- | ------------------------------------------------------------------ |
+| `00–05` | Core shell: env, history, completion, aliases, plugins, compinit   |
+| `09`    | Homebrew shellenv — must run before tool inits that depend on brew |
 | `10–19` | Tool integrations: starship, fzf, atuin, zoxide, direnv, bat, yazi |
-| `20–29` | Platform-specific: linux, macos |
-| `99` | Late keybinding fixes that must run after all plugins are loaded |
+| `20–29` | Platform-specific: linux, macos                                    |
+| `99`    | Late keybinding fixes that must run after all plugins are loaded   |
 
 ## Performance
 
