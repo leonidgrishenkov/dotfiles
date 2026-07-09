@@ -2,9 +2,11 @@ return {
     {
         "mason-org/mason.nvim",
         opts = {
-            ensure_installed = {
-                "yamlfmt",
+            firewall = {
+                enabled = true,
+                auto_managed = true,
             },
+            ensure_installed = {},
             ui = {
                 icons = {
                     package_installed = "✓",
