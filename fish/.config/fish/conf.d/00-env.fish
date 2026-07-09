@@ -1,9 +1,16 @@
 # vim: set filetype=fish:
 
+# === XDG directories ===
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+set -gx XDG_CACHE_HOME "$HOME/.cache"
+set -gx XDG_DATA_HOME "$HOME/.local/share"
+
 # === Editor ===
 set -gx EDITOR "nvim"
 set -gx VISUAL $EDITOR
 set -gx GIT_EDITOR $EDITOR
+
+set -gx DOTFILES_DIR "$HOME/Code/dotfiles"
 
 # === Rip Grep ===
 set -gx RIPGREP_CONFIG_PATH "$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
