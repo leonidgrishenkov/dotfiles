@@ -4,16 +4,13 @@
 version: "3"
 
 tasks:
-  bat-cache-build:
-    desc: Build or rebuild bat cache
-    cmd: bat cache --build
-
-  cli-themes:
+  zsh:cli-themes:
+    desc: Tell utils to use a particular theme.
     cmds:
       - bat cache --build
       - fast-theme XDG:catppuccin-frappe
 
-  generate-extra-completions:
+  zsh:gen-completions:
     desc: Generate extra completions for listed binaries
     vars:
       COMPLETIONS_DIR:
@@ -49,7 +46,7 @@ tasks:
       vars: [BIN, CMD]
     cmd: if command -v {{.BIN}} >/dev/null; then {{.CMD}} > {{.COMPLETIONS_DIR}}/_{{.BIN}} ; fi
 
-  stow-essential:
+  stow:essentials:
     desc: Run stow with essential entities
     cmds:
       - cmd: stow stow
@@ -58,11 +55,7 @@ tasks:
       - cmd: cat ./stow/linux-essential | xargs -I {} stow {}
         platforms: [linux]
 
-  atuin-sync:
-    desc: Sync local atuin history with the server
-    cmd: atuin sync
-
-  install-zsh-plugins:
+  zsh:install-plugins:
     desc: Install or update picked zsh plugins
     vars:
       PLUGINS_DIR:
@@ -91,4 +84,15 @@ tasks:
             rm -rf "{{.DEST_DIR}}"
             git clone --depth 1 --quiet "{{.REPO_URL}}" "{{.DEST_DIR}}"
           fi
+
+  pi:install:
+    desc: Install Pi extensions
+    cmds:
+      - pi install git:github.com/leonidgrishenkov/pi-extensions
+      - pi install git:github.com/leonidgrishenkov/agent-skills
+  pi:update:
+    desc: Update Pi extensions
+    cmds:
+      - pi update git:github.com/leonidgrishenkov/pi-extensions
+      - pi update git:github.com/leonidgrishenkov/agent-skills
 
