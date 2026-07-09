@@ -5,8 +5,8 @@
 add_newline = true
 
 format = """
-$directory\
 $shell\
+$directory\
 $hostname\
 $git_branch\
 $git_status\
@@ -121,6 +121,9 @@ disabled = false
 success_symbol = "[❯](fg:purple)"
 error_symbol = "[❯](fg:red)"
 vimcmd_symbol = "[❮](fg:purple)"
+vimcmd_replace_one_symbol = '[❮](bold purple)'
+vimcmd_replace_symbol = '[❮](bold purple)'
+vimcmd_visual_symbol = '[❮](bold yellow)'
 
 [directory]
 style = "fg:blue"
@@ -129,7 +132,7 @@ truncation_length = 10
 # Whether or not to truncate to the root of the git repo that you're currently in.
 truncate_to_repo = false
 truncation_symbol = "../"
-read_only = " 󰌾"
+read_only = "󰌾"
 repo_root_style = "fg:bold blue"
 
 [battery]
@@ -378,10 +381,11 @@ symbol = " "
 symbol = "󱃾 "
 
 [shell]
-fish_indicator = '󰈺 '
-bash_indicator = " "
-zsh_indicator = "z "
+fish_indicator = '󰈺'
+bash_indicator = ""
+zsh_indicator = ""
 powershell_indicator = '_'
+nu_indicator = ''
 unknown_indicator = ''
-style = 'cyan'
+style = 'green'
 disabled = false
