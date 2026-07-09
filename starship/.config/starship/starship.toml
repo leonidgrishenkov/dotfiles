@@ -7,6 +7,7 @@ add_newline = true
 format = """
 $shell\
 $directory\
+$container\
 $hostname\
 $git_branch\
 $git_status\
@@ -16,7 +17,6 @@ $rust\
 $golang \
 $python\
 $docker_context\
-$container\
 $direnv\
 $terraform\
 $jobs\
@@ -363,7 +363,7 @@ min_time = 30_000
 [container]
 # The container module displays a symbol and container name, if inside a container.
 format = 'in [$symbol $name]($style) '
-style = 'fg:lavender'
+style = 'fg:purple'
 
 [time]
 disabled = false
