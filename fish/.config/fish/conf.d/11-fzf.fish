@@ -1,5 +1,7 @@
 # vim: set filetype=fish:
 
+# https://github.com/junegunn/fzf#fuzzy-completion-for-fish
+
 # fzf shell integration
 fzf --fish | source
 
