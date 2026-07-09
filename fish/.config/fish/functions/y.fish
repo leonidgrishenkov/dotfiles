@@ -1,12 +1,10 @@
 # Yazi wrapper — change CWD on exit
 # https://yazi-rs.github.io/docs/quick-start#shell-wrapper
 function y
-    set -l tmp (mktemp -t "yazi-cwd.XXXXXX")
-    yazi $argv --cwd-file="$tmp"
-    set -l cwd (cat "$tmp" 2>/dev/null)
-    if test -n "$cwd"; and test "$cwd" != "$PWD"
-        builtin cd "$cwd"
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    command yazi $argv --cwd-file="$tmp"
+    if read -z cwd <"$tmp"; and [ "$cwd" != "$PWD" ]; and test -d "$cwd"
+        builtin cd -- "$cwd"
     end
-    rm -f "$tmp"
+    command rm -f -- "$tmp"
 end
-
