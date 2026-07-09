@@ -5,6 +5,10 @@ tmux/.config/tmux/plugins
 # lazygit state file
 lazygit/.config/lazygit/state.yml
 
+# fish runtime-generated files
+fish/.config/fish/fish_variables
+fish/.config/fish/conf.d/fish_frozen_theme.fish
+
 # zsh completions cache files
 zsh/.config/zsh/.zcompcache/*
 zsh/.config/zsh/.zcompdump
