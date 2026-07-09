@@ -77,4 +77,3 @@ if [[ -f "$XDG_CONFIG_HOME/op/plugins.sh" ]]; then
     source ~/.config/op/plugins.sh
 fi
 
-export DOTFILES_DIR="$HOME/Code/dotfiles"
