@@ -8,5 +8,5 @@ export GIT_EDITOR=$EDITOR
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # === Starship ===
-export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.bash.toml"
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 eval "$(starship init bash)"

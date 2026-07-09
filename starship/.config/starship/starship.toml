@@ -6,6 +6,7 @@ add_newline = true
 
 format = """
 $directory\
+$shell\
 $hostname\
 $git_branch\
 $git_status\
@@ -376,3 +377,11 @@ symbol = " "
 [kubernetes]
 symbol = "󱃾 "
 
+[shell]
+fish_indicator = '󰈺 '
+bash_indicator = " "
+zsh_indicator = "z "
+powershell_indicator = '_'
+unknown_indicator = ''
+style = 'cyan'
+disabled = false
