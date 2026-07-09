@@ -5,10 +5,8 @@ delta
 editorconfig
 fsh
 ghostty
-git
 glow
 ipython
-lazygit
 markdownlint-cli2
 nvim
 prettier
