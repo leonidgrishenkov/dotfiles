@@ -10,16 +10,6 @@
 --   <A-]>     next suggestion / manually invoke
 --   <A-[>     prev suggestion / manually invoke
 --   <A-e>     dismiss suggestion
---
--- Runtime commands:
---   :Minuet virtualtext toggle   -- enable/disable ghost text in current buffer
---   :Minuet change_provider       -- switch LLM provider
---   :Minuet change_model          -- switch model interactively
---
--- lazy.nvim plugin management:
---   :Lazy disable minuet-ai.nvim  -- prevent from loading at startup
---   :Lazy enable minuet-ai.nvim   -- re-enable loading
---   :Lazy clear minuet-ai.nvim    -- uninstall plugin
 return {
     {
         "milanglacier/minuet-ai.nvim",
