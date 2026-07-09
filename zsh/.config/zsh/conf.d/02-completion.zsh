@@ -1,6 +1,9 @@
 # vim: set filetype=sh:
 # vim: set ts=4 sw=4 et:
 
+# Add site-functions from XDG_DATA_HOME to completion search path
+export FPATH="$FPATH:$XDG_DATA_HOME/zsh/site-functions"
+
 zstyle ':completion:*' menu select
 # Use LS_COLORS for completion items.
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
