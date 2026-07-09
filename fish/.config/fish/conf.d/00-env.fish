@@ -5,6 +5,10 @@ set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx XDG_CACHE_HOME "$HOME/.cache"
 set -gx XDG_DATA_HOME "$HOME/.local/share"
 
+# === System info ===
+set -gx SYSTEM (uname -s)
+set -gx OSARCH (uname -m)
+
 # === Editor ===
 set -gx EDITOR "nvim"
 set -gx VISUAL $EDITOR
