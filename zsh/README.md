@@ -28,7 +28,7 @@ zsh/
     │   ├── 20-linux.zsh           # linux-specific (mise)
     │   ├── 21-macos.zsh           # brew, gpg, 1password, orbstack, etc.
     │   └── 99-keyfixes.zsh        # zvm_after_init hook (atuin keybinds)
-    └── extra/
+    └── extra.d/
         └── .gitkeep               # user/machine-specific overrides
 ```
 
