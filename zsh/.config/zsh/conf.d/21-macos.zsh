@@ -3,17 +3,7 @@
 
 [[ $SYSTEM != "Darwin" ]] && return 0
 
-# === Homebrew ===
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-export HOMEBREW_NO_ENV_HINTS=1 # Don't show hints for env vatialbes
-export HOMEBREW_NO_AUTO_UPDATE=1
-export HOMEBREW_NO_ANALYTICS=1                             # disables statistics that brew collects
-export HOMEBREW_BUNDLE_FILE="$DOTFILES_DIR/brew/.Brewfile" # path to bundle file
-
-export HOMEBREW_CACHE="$XDG_CACHE_HOME/homebrew"
-
-# Configure terminal title updates for Zellij to automatically detect
+# === Terminal title === updates for Zellij to automatically detect
 # Zellij reads the terminal title and uses it for pane names
 function precmd() {
     # Set terminal title to current directory when prompt is displayed

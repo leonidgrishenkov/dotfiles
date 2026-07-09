@@ -5,13 +5,6 @@ export EDITOR="nvim"
 export VISUAL=$EDITOR
 export GIT_EDITOR=$EDITOR
 
-export DOTFILES_DIR="$HOME/Code/dotfiles"
-
-# === vivid ===
-# vivid provides themes for LS_COLORS.
-# https://github.com/sharkdp/vivid
-export LS_COLORS=$(vivid generate catppuccin-mocha)
-
 # === Rip Grep ===
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
 
