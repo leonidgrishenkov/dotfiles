@@ -362,8 +362,8 @@ min_time = 30_000
 
 [container]
 # The container module displays a symbol and container name, if inside a container.
-format = '[$symbol $name]($style) '
-style = 'red dimmed'
+format = 'in [$symbol $name]($style) '
+style = 'fg:lavender'
 
 [time]
 disabled = false
