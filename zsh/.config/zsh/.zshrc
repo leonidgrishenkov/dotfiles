@@ -11,8 +11,8 @@ if [[ -d "$ZDOTDIR/conf.d" ]]; then
 fi
 
 # Source extra overrides (user-specific, machine-specific, etc.)
-if [[ -d "$ZDOTDIR/extra" ]]; then
-    files=($ZDOTDIR/extra/*.zsh(N))
+if [[ -d "$ZDOTDIR/extra.d" ]]; then
+    files=($ZDOTDIR/extra.d/*.zsh(N))
     for file in $files; do
         source "$file"
     done
