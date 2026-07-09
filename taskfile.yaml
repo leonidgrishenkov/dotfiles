@@ -80,9 +80,11 @@ tasks:
           if [ -d "{{.DEST_DIR}}/.git" ]; then
             git -C "{{.DEST_DIR}}" fetch origin HEAD --depth 1 --quiet
             git -C "{{.DEST_DIR}}" reset --hard origin/HEAD --quiet
+            echo "task: {{.PLUGIN_NAME}} updated"
           else
             rm -rf "{{.DEST_DIR}}"
             git clone --depth 1 --quiet "{{.REPO_URL}}" "{{.DEST_DIR}}"
+            echo "task: {{.PLUGIN_NAME}} installed"
           fi
 
   pi:install:
