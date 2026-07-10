@@ -76,3 +76,5 @@ if test -d "$op_used_items"
 end
 # Completions for op itself
 op completion fish | source
+
+alias tldr="tldr --config-path=$HOME/.config/tealdeer/config.toml"
