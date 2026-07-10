@@ -1,6 +1,0 @@
-{
-  "provider": "openrouter",
-  "apiKey": "$OPENROUTER_API_KEY",
-  "model": "anthropic/claude-opus-4.6"
-}
-
