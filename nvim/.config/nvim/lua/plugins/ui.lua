@@ -40,7 +40,8 @@ return {
                 icons = {
                     diagnostics = icons.diagnostics,
                     git = {
-                        ignored =" ",
+                        ignored = icons.git.ignored,
+                        modified = icons.git.modified,
                     },
                 },
                 sources = {

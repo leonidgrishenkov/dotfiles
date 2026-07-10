@@ -11,6 +11,7 @@ M.git = {
     added = " ",
     modified = " ",
     removed = " ",
+    ignored = " ",
 }
 
 return M

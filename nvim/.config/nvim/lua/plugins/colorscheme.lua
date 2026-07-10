@@ -68,6 +68,9 @@ return {
                     TabLineSel = { bg = colors.pink },
                     CmpBorder = { fg = colors.surface2 },
 
+                    -- Snacks picker – disable italic on git-modified file names
+                    SnacksPickerGitStatusModified = { fg = colors.yellow, style = {} },
+
                     -- Blink.cmp specific groups
                     BlinkCmpMenu = { bg = colors.none },
                     BlinkCmpMenuBorder = { bg = colors.none },
