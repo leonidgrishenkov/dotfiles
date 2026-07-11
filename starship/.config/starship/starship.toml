@@ -128,7 +128,7 @@ vimcmd_visual_symbol = '[❮](bold yellow)'
 [directory]
 style = "fg:blue"
 format = "[ $path ]($style)"
-truncation_length = 10
+truncation_length = 3
 # Whether or not to truncate to the root of the git repo that you're currently in.
 truncate_to_repo = false
 truncation_symbol = "../"
