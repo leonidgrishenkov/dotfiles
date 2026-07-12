@@ -3,10 +3,14 @@
 version: "3"
 
 tasks:
-  my-ip-info:
+  ip:get-info:
     desc: Show full json returned by ifconfig.me
     cmd: curl -s ifconfig.me/all.json | jq {{ .CLI_ARGS }}
 
-  my-ip:
+  ip:get:
     desc: Show only my IP
     cmd: curl -s ifconfig.me/ip
+
+  ping:
+    desc: Ping google.com
+    cmd: ping -c 10 google.com
