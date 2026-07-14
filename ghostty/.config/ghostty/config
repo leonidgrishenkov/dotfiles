@@ -89,3 +89,5 @@ split-divider-color=#EBA0AC
 
 # Additional commad palette items
 command-palette-entry = title:"Quick terminal",description:"Toggle quick terminal",action:toggle_quick_terminal
+
+clipboard-read = allow
