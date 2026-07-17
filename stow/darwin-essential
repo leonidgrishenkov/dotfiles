@@ -24,7 +24,6 @@ nvim
 opencode
 pi
 prettier
-ripgrep
 ruff
 sqlfluff
 sqlite
