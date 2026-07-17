@@ -220,7 +220,7 @@ symbol = " "
 
 [docker_context]
 symbol = " "
-format = "[$symbol$context]($style) "
+format = "via [$symbol$context]($style) "
 style = "fg:blue"
 
 [elixir]
@@ -239,8 +239,6 @@ symbol = " "
 symbol = "󰊢 "
 style = "fg:peach"
 only_attached = true
-truncation_symbol = ".."
-format = '[$symbol$branch(:$remote_branch)]($style) '
 
 [git_status]
 style = 'fg:maroon'
@@ -318,7 +316,7 @@ symbol = " "
 
 [python]
 symbol = " "
-format = "[${symbol}${pyenv_prefix}(${version} )(\\[$virtualenv\\] )]($style)"
+format = "via [${symbol}${pyenv_prefix}(${version} )(\\[$virtualenv\\] )]($style)"
 style = 'fg:yellow'
 
 [rlang]
@@ -364,7 +362,7 @@ min_time = 30_000
 
 [container]
 # The container module displays a symbol and container name, if inside a container.
-format = '[$symbol $name]($style) '
+format = 'in [$symbol $name]($style) '
 style = 'fg:purple'
 
 [time]
