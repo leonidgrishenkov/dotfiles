@@ -1,7 +1,3 @@
-### Configs directory specific ###
-# tmux plugins
-tmux/.config/tmux/plugins
-
 # lazygit state file
 lazygit/.config/lazygit/state.yml
 
@@ -23,3 +19,11 @@ pi/.pi/agent/trust.json
 pi/.pi/agent/settings.json
 pi/.pi/agent/sessions/
 pi/.pi/pi-acp/
+
+.DS_Store
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+node_modules/
