@@ -220,7 +220,7 @@ symbol = " "
 
 [docker_context]
 symbol = " "
-format = "via [$symbol$context]($style) "
+format = "[$symbol$context]($style) "
 style = "fg:blue"
 
 [elixir]
@@ -239,6 +239,9 @@ symbol = " "
 symbol = "󰊢 "
 style = "fg:peach"
 only_attached = true
+truncation_symbol = "~"
+truncation_length = 20
+format = 'on [$symbol$branch(:$remote_branch)]($style) '
 
 [git_status]
 style = 'fg:maroon'
@@ -298,6 +301,7 @@ format = "[$symbol$state( \\($name\\))]($style) "
 
 [nodejs]
 symbol = " "
+format = '[$symbol($version )]($style)'
 
 [ocaml]
 symbol = " "
@@ -316,7 +320,7 @@ symbol = " "
 
 [python]
 symbol = " "
-format = "via [${symbol}${pyenv_prefix}(${version} )(\\[$virtualenv\\] )]($style)"
+format = "[${symbol}${pyenv_prefix}(${version} )(\\[$virtualenv\\] )]($style)"
 style = 'fg:yellow'
 
 [rlang]
@@ -328,6 +332,7 @@ symbol = " "
 [rust]
 symbol = " "
 style = "fg:red"
+format = '[$symbol($version )]($style)'
 
 [scala]
 symbol = " "
