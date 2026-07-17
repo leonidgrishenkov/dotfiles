@@ -18,6 +18,33 @@ gui:
   showCommandLog: false
   showBottomLine: false
   showPanelJumps: false
+  theme:
+    activeBorderColor:
+      - "#b7bdf8"
+      - bold
+    inactiveBorderColor:
+      - "#6e738d"
+    searchingActiveBorderColor:
+      - "#8bd5ca"
+      - bold
+    optionsTextColor:
+      - "#8aadf4"
+    selectedLineBgColor:
+      - "#363a4f"
+    inactiveViewSelectedLineBgColor:
+      - "#494d64"
+    cherryPickedCommitFgColor:
+      - "#c6a0f6"
+    cherryPickedCommitBgColor:
+      - "#363a4f"
+    markedBaseCommitFgColor:
+      - "#c6a0f6"
+    markedBaseCommitBgColor:
+      - "#eed49f"
+    unstagedChangesColor:
+      - "#ed8796"
+    defaultFgColor:
+      - "#cad3f5"
 git:
   pagers:
     - colorArg: always
