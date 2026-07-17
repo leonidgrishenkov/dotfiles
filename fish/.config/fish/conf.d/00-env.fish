@@ -16,9 +16,6 @@ set -gx GIT_EDITOR $EDITOR
 
 set -gx DOTFILES_DIR "$HOME/Code/dotfiles"
 
-# === Rip Grep ===
-set -gx RIPGREP_CONFIG_PATH "$XDG_CONFIG_HOME/ripgrep/.ripgreprc"
-
 # === Python ===
 set -gx IPYTHONDIR "$XDG_CONFIG_HOME/ipython"
 
