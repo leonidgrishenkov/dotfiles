@@ -251,7 +251,7 @@ format = '([$all_status$ahead_behind]($style) )'
 tag_symbol = '  '
 
 [golang]
-symbol = ""
+symbol = " "
 format = "[$symbol($version )]($style)"
 style = 'fg:cyan'
 
