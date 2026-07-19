@@ -251,7 +251,7 @@ format = '([$all_status$ahead_behind]($style) )'
 tag_symbol = '  '
 
 [golang]
-symbol = " "
+symbol = ""
 format = "[$symbol($version )]($style)"
 style = 'fg:cyan'
 
@@ -369,6 +369,7 @@ min_time = 30_000
 # The container module displays a symbol and container name, if inside a container.
 format = 'in [$symbol $name]($style) '
 style = 'fg:purple'
+symbol = ""
 
 [time]
 disabled = false
