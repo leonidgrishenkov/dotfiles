@@ -20,7 +20,7 @@
     "defaultMode": "default"
   },
   "alwaysThinkingEnabled": false,
+  "effortLevel": "low",
   "editorMode": "vim",
-  "preferredNotifChannel": "ghostty",
-  "effortLevel": "medium"
+  "preferredNotifChannel": "ghostty"
 }
