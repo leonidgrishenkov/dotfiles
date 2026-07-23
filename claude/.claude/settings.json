@@ -22,5 +22,8 @@
   "alwaysThinkingEnabled": false,
   "effortLevel": "low",
   "editorMode": "vim",
-  "preferredNotifChannel": "ghostty"
+  "preferredNotifChannel": "ghostty",
+  "remoteControlAtStartup": false,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true
 }
