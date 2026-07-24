@@ -17,6 +17,7 @@ zsh/.config/zsh/extra/*.zsh
 pi/.pi/agent/auth.json
 pi/.pi/agent/trust.json
 pi/.pi/agent/settings.json
+pi/.pi/agent/skills/
 pi/.pi/agent/sessions/
 pi/.pi/pi-acp/
 
