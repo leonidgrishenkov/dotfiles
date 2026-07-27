@@ -1,0 +1,12 @@
+# vim: set filetype=gitconfig:
+[user]
+	name = Леонид Гришенков
+    email = l.grishenkov@life-pay.ru
+[commit]
+    gpgSign = false
+    verbose = true
+[tag]
+    gpgsign = false
+[url "fortis-gitlab:l.grishenkov"]
+    insteadOf = ssh://git@gitlab.life-pay.ru:33322/
+
