@@ -7,6 +7,6 @@
     verbose = true
 [tag]
     gpgsign = false
-[url "fortis-gitlab:l.grishenkov"]
+[url "fortis-gitlab:"]
     insteadOf = ssh://git@gitlab.life-pay.ru:33322/
 

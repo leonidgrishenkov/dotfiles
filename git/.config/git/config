@@ -39,3 +39,6 @@
 
 [includeIf "hasconfig:remote.*.url:ssh://git@bitbucket.playteam.ru/**"]
     path = ~/.config/git/include/okko-bitbucket
+
+[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.life-pay.ru:33322/**"]
+    path = ~/.config/git/include/fortis-gitlab
