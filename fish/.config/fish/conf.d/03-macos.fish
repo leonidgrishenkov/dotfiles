@@ -78,3 +78,6 @@ end
 op completion fish | source
 
 alias tldr="tldr --config-path=$HOME/.config/tealdeer/config.toml"
+
+# Apple's native containers
+abbr --add c container
