@@ -46,6 +46,7 @@ gui:
     defaultFgColor:
       - "#cad3f5"
 git:
+  autoFetch: false
   pagers:
     - colorArg: always
       pager: |
