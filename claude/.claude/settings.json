@@ -19,8 +19,8 @@
     ],
     "defaultMode": "default"
   },
-  "alwaysThinkingEnabled": false,
-  "effortLevel": "low",
+  "effortLevel": "high",
+  "tui": "fullscreen",
   "editorMode": "vim",
   "preferredNotifChannel": "ghostty",
   "remoteControlAtStartup": false,
