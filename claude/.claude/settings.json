@@ -25,5 +25,9 @@
   "preferredNotifChannel": "ghostty",
   "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "statusLine": {
+    "type": "command",
+    "command": "starship statusline claude-code"
+  }
 }

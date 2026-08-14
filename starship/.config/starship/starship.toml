@@ -395,3 +395,52 @@ nu_indicator = ''
 unknown_indicator = ''
 style = 'green'
 disabled = false
+
+# === Claude integration ===
+[profiles]
+claude-code = """
+$directory\
+$container\
+$git_branch\
+$git_status\
+$nodejs\
+$rust\
+$golang \
+$python\
+$claude_model\
+$claude_context\
+$claude_cost
+"""
+
+[claude_model]
+format = "via [$symbol$model]($style) "
+symbol = " "
+style = "blue"
+
+[claude_context]
+format = "[$gauge $percentage $input_tokens $output_tokens]($style) "
+gauge_width = 10
+disabled = false
+
+[[claude_context.display]]
+threshold = 0
+style = "dimmed green"
+
+[[claude_context.display]]
+threshold = 50
+style = "yellow"
+
+[[claude_context.display]]
+threshold = 75
+style = "orange"
+
+[[claude_context.display]]
+threshold = 90
+style = "red"
+
+[claude_cost]
+format = "[$symbol$cost]($style) "
+symbol = " "
+style = "green"
+disabled = false
+
