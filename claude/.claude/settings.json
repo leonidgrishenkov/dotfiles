@@ -19,8 +19,14 @@
     ],
     "defaultMode": "default"
   },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.mjs",
+    "hideVimModeIndicator": true
+  },
   "effortLevel": "high",
   "tui": "fullscreen",
+  "theme": "dark",
   "editorMode": "vim",
   "preferredNotifChannel": "ghostty",
   "remoteControlAtStartup": false,
