@@ -17,7 +17,11 @@
       "Read(**/secrets)",
       "Read(**/secrets/**)"
     ],
-    "defaultMode": "default"
+    "defaultMode": "auto"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "starship statusline claude-code"
   },
   "effortLevel": "high",
   "tui": "fullscreen",
@@ -25,9 +29,5 @@
   "preferredNotifChannel": "ghostty",
   "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true,
-  "statusLine": {
-    "type": "command",
-    "command": "starship statusline claude-code"
-  }
+  "agentPushNotifEnabled": true
 }
