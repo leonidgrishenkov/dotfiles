@@ -1,0 +1,11 @@
+# vim: set filetype=gitconfig:
+[user]
+	name = Leonid Grishenkov
+    email = l.grishenkov@chillgaming.net
+[commit]
+    gpgSign = false
+    verbose = true
+[tag]
+    gpgsign = false
+[url "chillbase-gitlab:"]
+    insteadOf = git@gitlab.chillgaming.org:
