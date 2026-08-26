@@ -42,3 +42,6 @@
 
 [includeIf "hasconfig:remote.*.url:ssh://git@gitlab.life-pay.ru:33322/**"]
     path = ~/.config/git/include/fortis-gitlab
+
+[includeIf "hasconfig:remote.*.url:git@chillbase-gitlab:*/**"]
+    path = ~/.config/git/include/chillbase-gitlab
