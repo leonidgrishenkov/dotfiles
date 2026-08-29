@@ -14,3 +14,18 @@ tasks:
   ping:
     desc: Ping google.com
     cmd: ping -c 10 google.com
+
+  verify-dmg:
+    desc: Verify signature and notarization of a dmg
+    summary: |
+      Usage: task verify-dmg DMG=~/Downloads/Some.dmg
+    requires:
+      vars: [DMG]
+    cmds:
+      - cmd: |
+          hdiutil attach {{ .DMG }} -nobrowse -readonly -mountpoint /tmp/mnt
+          codesign --verify --deep --strict --verbose=2 /tmp/mnt/*.app
+          spctl -a -t execute -vv /tmp/mnt/*.app
+          stapler validate /tmp/mnt/*.app
+          hdiutil detach /tmp/mnt
+        platforms: [darwin]
