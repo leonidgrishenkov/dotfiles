@@ -28,4 +28,3 @@ tasks:
           spctl -a -t execute -vv /tmp/mnt/*.app
           stapler validate /tmp/mnt/*.app
           hdiutil detach /tmp/mnt
-        platforms: [darwin]
