@@ -3,6 +3,9 @@
 
 version: "3"
 
+vars:
+  BREWFILE: "{{.ROOT_DIR}}/brew/.Brewfile"
+
 tasks:
   zsh:cli-themes:
     desc: Tell utils to use a particular theme.
@@ -99,3 +102,55 @@ tasks:
   nvim:install:
     desc: Install locked lazyvim plugins
     cmd: nvim --headless "+Lazy! restore" +qa
+
+  brew:dump:
+    desc: Overwrite the Brewfile with this machine's Homebrew state
+    platforms: [darwin]
+    preconditions:
+      - sh: command -v brew >/dev/null
+        msg: homebrew is not installed
+    cmd: brew bundle dump --force --file {{.BREWFILE}}
+
+  brew:install:
+    desc: Install everything listed in the Brewfile
+    platforms: [darwin]
+    preconditions:
+      - sh: command -v brew >/dev/null
+        msg: homebrew is not installed
+      - sh: test -f {{.BREWFILE}}
+        msg: "no Brewfile at {{.BREWFILE}}"
+    cmd: brew bundle install --file {{.BREWFILE}}
+
+  brew:uninstall:
+    desc: Uninstall packages that are NOT listed in the Brewfile (destructive)
+    platforms: [darwin]
+    preconditions:
+      - sh: test -f {{.BREWFILE}}
+        msg: "no Brewfile at {{.BREWFILE}}"
+    cmds:
+      - cmd: |
+          brew bundle cleanup --file {{.BREWFILE}}
+          printf '\nUninstall everything listed above? [y/N] '
+          read -r reply
+          case "$reply" in
+            [yY]*) brew bundle cleanup --file {{.BREWFILE}} --force ;;
+            *) echo "Aborted, nothing removed." ;;
+          esac
+
+  brew:trust:
+    desc: Trust the third-party taps declared in the Brewfile (run once per machine)
+    platforms: [darwin]
+    preconditions:
+      - sh: test -f {{.BREWFILE}}
+        msg: "no Brewfile at {{.BREWFILE}}"
+    cmds:
+      - cmd: |
+          taps=$(grep '^tap "' {{.BREWFILE}} | sed 's/^tap "//;s/".*//')
+          echo "Homebrew will be allowed to load code from these taps:"
+          echo "$taps" | sed 's/^/  /'
+          printf '\nTrust all of them? [y/N] '
+          read -r reply
+          case "$reply" in
+            [yY]*) echo "$taps" | xargs -I {} brew trust --tap {} ;;
+            *) echo "Aborted, nothing trusted." ;;
+          esac
