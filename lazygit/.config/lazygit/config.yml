@@ -47,9 +47,9 @@ gui:
       - "#cad3f5"
 git:
   autoFetch: false
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: |
+      command: |
         delta --no-gitconfig --paging=never \
           --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}" \
           --line-numbers \
