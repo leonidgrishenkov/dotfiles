@@ -2,8 +2,8 @@ tap "amir20/dtop", trusted: true
 tap "birdayz/kaf", trusted: true
 tap "bro3886/tap", "https://github.com/BRO3886/homebrew-tap", trusted: true
 tap "domcyrus/rustnet", trusted: true
-tap "go-task/tap"
-tap "gromgit/brewtils"
+tap "go-task/tap", trusted: true
+tap "gromgit/brewtils", trusted: true
 tap "lusingander/tap", trusted: true
 tap "theboredteam/boring-notch", "https://github.com/TheBoredTeam/homebrew-boring-notch", trusted: true
 tap "tlipinski/tap", trusted: true
@@ -45,6 +45,8 @@ brew "bitwarden-cli"
 brew "btop"
 # Core application library for C
 brew "glib"
+# TIFF library and utilities
+brew "libtiff"
 # OpenType text shaping engine
 brew "harfbuzz"
 # Versatile and fast Unicode/ASCII/ANSI graphics renderer
