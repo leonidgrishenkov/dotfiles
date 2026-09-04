@@ -4,7 +4,7 @@
 version: "3"
 
 vars:
-  BREWFILE: "{{.ROOT_DIR}}/brew/.Brewfile"
+  BREWFILE: "{{.ROOT_DIR}}/homebrew/.Brewfile"
 
 tasks:
   zsh:cli-themes:

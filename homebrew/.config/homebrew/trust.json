@@ -1,0 +1,21 @@
+{
+  "trustedtaps": [
+    "amir20/dtop",
+    "birdayz/kaf",
+    "bro3886/tap",
+    "domcyrus/rustnet",
+    "go-task/tap",
+    "gromgit/brewtils",
+    "lusingander/tap",
+    "theboredteam/boring-notch",
+    "tlipinski/tap"
+  ],
+  "trustedcasks": [
+    "go-task/tap/go-task",
+    "thdxg/tap/macterm"
+  ],
+  "trustedformulae": [
+    "gromgit/brewtils/taproom",
+    "steipete/tap/remindctl"
+  ]
+}

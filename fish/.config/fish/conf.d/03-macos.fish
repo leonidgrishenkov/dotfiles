@@ -15,7 +15,7 @@ set -gx INFOPATH "/opt/homebrew/share/info:$INFOPATH"
 set -gx HOMEBREW_NO_ENV_HINTS 1
 set -gx HOMEBREW_NO_AUTO_UPDATE 1
 set -gx HOMEBREW_NO_ANALYTICS 1
-set -gx HOMEBREW_BUNDLE_FILE "$DOTFILES_DIR/brew/.Brewfile"
+set -gx HOMEBREW_BUNDLE_FILE "$DOTFILES_DIR/homebrew/.Brewfile"
 
 # === Terminal title ===
 # Zellij reads the terminal title and uses it for pane names.

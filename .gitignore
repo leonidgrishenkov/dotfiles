@@ -28,3 +28,6 @@ __pycache__/
 *$py.class
 
 node_modules/
+
+# homebrew runtime lock (appears if stow folds the whole dir)
+homebrew/.config/homebrew/trust.json.lock

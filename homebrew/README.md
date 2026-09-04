@@ -12,7 +12,7 @@ brew tap homebrew/bundle
 Dump brewfile overwriting existing one:
 
 ```sh
-brew bundle dump --force --file $DOTFILES_DIR/brew/.Brewfile
+brew bundle dump --force --file $DOTFILES_DIR/homebrew/.Brewfile
 ```
 
 # Install from file
@@ -20,7 +20,7 @@ brew bundle dump --force --file $DOTFILES_DIR/brew/.Brewfile
 Install deps from brewfile:
 
 ```sh
-brew bundle install --file $DOTFILES_DIR/brew/.Brewfile
+brew bundle install --file $DOTFILES_DIR/homebrew/.Brewfile
 ```
 
 # Check missing dependencies
@@ -28,7 +28,7 @@ brew bundle install --file $DOTFILES_DIR/brew/.Brewfile
 In order to only check if any of dependencies are missing:
 
 ```sh
-brew bundle check --file $DOTFILES_DIR/brew/.Brewfile
+brew bundle check --file $DOTFILES_DIR/homebrew/.Brewfile
 ```
 
 It will return 1 zero code if any of them are missing.
@@ -36,6 +36,6 @@ It will return 1 zero code if any of them are missing.
 Mode detailed output:
 
 ```sh
-brew bundle check --file $DOTFILES_DIR/brew/.Brewfile --verbose
+brew bundle check --file $DOTFILES_DIR/homebrew/.Brewfile --verbose
 ```
 
