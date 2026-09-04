@@ -7,86 +7,16 @@ vars:
   BREWFILE: "{{.ROOT_DIR}}/homebrew/.Brewfile"
 
 tasks:
-  zsh:cli-themes:
-    desc: Tell utils to use a particular theme.
-    cmds:
-      - bat cache --build
-      - fast-theme XDG:catppuccin-frappe
-
-  zsh:gen-completions:
-    desc: Generate extra completions for listed binaries
-    vars:
-      COMPLETIONS_DIR:
-        sh: echo "$XDG_DATA_HOME/zsh/site-functions"
-    cmds:
-      - cmd: if [ ! -d {{.COMPLETIONS_DIR}} ]; then mkdir -p {{.COMPLETIONS_DIR}}; fi
-      - task: gen-completion
-        vars:
-          BIN: uv
-          CMD: uv generate-shell-completion zsh
-      - task: gen-completion
-        vars:
-          BIN: op
-          CMD: op completion zsh
-          OUTPUT: "{{.COMPLETIONS_DIR}}/_op"
-      - task: gen-completion
-        vars:
-          BIN: kaf
-          CMD: kaf completion zsh
-          OUTPUT: "{{.COMPLETIONS_DIR}}/_kaf"
-      - task: gen-completion
-        vars:
-          BIN: doctl
-          CMD: doctl completion zsh
-          OUTPUT: "{{.COMPLETIONS_DIR}}/_doctl"
-
-  gen-completion:
-    internal: true
-    vars:
-      COMPLETIONS_DIR:
-        sh: echo "$XDG_DATA_HOME/zsh/site-functions"
-    requires:
-      vars: [BIN, CMD]
-    cmd: if command -v {{.BIN}} >/dev/null; then {{.CMD}} > {{.COMPLETIONS_DIR}}/_{{.BIN}} ; fi
-
   stow:essentials:
     desc: Run stow with essential entities
     cmds:
       - cmd: stow stow
       - cmd: cat ./stow/darwin-essential | xargs -I {} stow {}
-        platforms: [darwin]
+        platforms:
+          - darwin
       - cmd: cat ./stow/linux-essential | xargs -I {} stow {}
-        platforms: [linux]
-
-  zsh:install-plugins:
-    desc: Install or update picked zsh plugins
-    vars:
-      PLUGINS_DIR:
-        sh: echo "$XDG_DATA_HOME"
-      PLUGINS:
-        sh: echo "zsh-vi-mode fast-syntax-highlighting zsh-autosuggestions zsh-completions"
-    cmds:
-      - for: { var: PLUGINS, as: REPO }
-        task: install-zsh-plugin
-        vars:
-          REPO_URL: "https://github.com/leonidgrishenkov/{{base .REPO}}.git"
-          PLUGIN_NAME: '{{base .REPO}}'
-          DEST_DIR: '{{.PLUGINS_DIR}}/{{base .REPO}}'
-
-  install-zsh-plugin:
-    internal: true
-    requires:
-      vars: [REPO_URL, PLUGIN_NAME, DEST_DIR]
-    cmds:
-      - cmd: mkdir -p {{.DEST_DIR}}
-      - cmd: |
-          if [ -d "{{.DEST_DIR}}/.git" ]; then
-            git -C "{{.DEST_DIR}}" fetch origin HEAD --depth 1 --quiet
-            git -C "{{.DEST_DIR}}" reset --hard origin/HEAD --quiet
-          else
-            rm -rf "{{.DEST_DIR}}"
-            git clone --depth 1 --quiet "{{.REPO_URL}}" "{{.DEST_DIR}}"
-          fi
+        platforms:
+          - linux
 
   pi:install:
     desc: Install Pi extensions
@@ -105,7 +35,8 @@ tasks:
 
   brew:dump:
     desc: Overwrite the Brewfile with this machine's Homebrew state
-    platforms: [darwin]
+    platforms:
+      - darwin
     preconditions:
       - sh: command -v brew >/dev/null
         msg: homebrew is not installed
@@ -113,7 +44,8 @@ tasks:
 
   brew:install:
     desc: Install everything listed in the Brewfile
-    platforms: [darwin]
+    platforms:
+      - darwin
     preconditions:
       - sh: command -v brew >/dev/null
         msg: homebrew is not installed
@@ -123,7 +55,8 @@ tasks:
 
   brew:check:
     desc: Check wether everything listed in the Brewfile is installed or not
-    platforms: [darwin]
+    platforms:
+      - darwin
     preconditions:
       - sh: command -v brew >/dev/null
         msg: homebrew is not installed
@@ -133,7 +66,8 @@ tasks:
 
   brew:uninstall:
     desc: Uninstall packages that are NOT listed in the Brewfile (destructive)
-    platforms: [darwin]
+    platforms:
+      - darwin
     preconditions:
       - sh: test -f {{.BREWFILE}}
         msg: "no Brewfile at {{.BREWFILE}}"
@@ -149,7 +83,8 @@ tasks:
 
   brew:trust:
     desc: Trust the third-party taps declared in the Brewfile (run once per machine)
-    platforms: [darwin]
+    platforms:
+      - darwin
     preconditions:
       - sh: test -f {{.BREWFILE}}
         msg: "no Brewfile at {{.BREWFILE}}"
