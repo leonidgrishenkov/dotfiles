@@ -121,6 +121,16 @@ tasks:
         msg: "no Brewfile at {{.BREWFILE}}"
     cmd: brew bundle install --file {{.BREWFILE}}
 
+  brew:check:
+    desc: Check wether everything listed in the Brewfile is installed or not
+    platforms: [darwin]
+    preconditions:
+      - sh: command -v brew >/dev/null
+        msg: homebrew is not installed
+      - sh: test -f {{.BREWFILE}}
+        msg: "no Brewfile at {{.BREWFILE}}"
+    cmd: brew bundle check --file {{.BREWFILE}} --verbose
+
   brew:uninstall:
     desc: Uninstall packages that are NOT listed in the Brewfile (destructive)
     platforms: [darwin]
