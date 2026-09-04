@@ -1,23 +1,12 @@
 tap "amir20/dtop", trusted: true
-tap "anomalyco/tap"
-tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git"
-tap "birdayz/kaf"
+tap "birdayz/kaf", trusted: true
 tap "bro3886/tap", "https://github.com/BRO3886/homebrew-tap", trusted: true
-tap "derailed/k9s"
-tap "domcyrus/rustnet"
-tap "felixkratz/formulae"
+tap "domcyrus/rustnet", trusted: true
 tap "go-task/tap"
 tap "gromgit/brewtils"
-tap "hashicorp/tap"
-tap "lusingander/tap"
-tap "nikitabobko/tap"
-tap "noahgorstein/tap"
-tap "reyamira/tap", "https://github.com/reyamira/homebrew-tap.git"
-tap "steipete/tap"
-tap "thdxg/tap", trusted: { casks: ["macterm"] }
+tap "lusingander/tap", trusted: true
 tap "theboredteam/boring-notch", "https://github.com/TheBoredTeam/homebrew-boring-notch", trusted: true
-tap "tlipinski/tap"
-tap "xykong/tap"
+tap "tlipinski/tap", trusted: true
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
 # Mozilla CA certificate store
@@ -232,8 +221,17 @@ brew "yq"
 brew "zip"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+brew "birdayz/kaf/kaf"
 # Fast, native macOS Calendar CLI built on go-eventkit
 brew "bro3886/tap/ical"
+# High-performance, cross-platform network monitoring tool with TUI
+brew "domcyrus/rustnet/rustnet"
+# Interactive TUI for Homebrew
+brew "gromgit/brewtils/taproom", trusted: true
+# TUI application for AWS S3 written in Rust using ratatui
+brew "lusingander/tap/stu"
+# Interactive TUI pipeline editor built for rapid iteration
+brew "tlipinski/tap/rura"
 # Command-line interface for 1Password
 cask "1password-cli"
 # View, print, and comment on PDF documents
