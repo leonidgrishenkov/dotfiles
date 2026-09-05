@@ -81,8 +81,6 @@ brew "git"
 brew "git-delta"
 # Render markdown on the CLI
 brew "glow"
-# Command-line option parsing utility
-brew "gnu-getopt"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # GNU Transport Layer Security (TLS) Library
@@ -93,8 +91,8 @@ brew "gnupg"
 brew "go"
 # Task is a task runner/build tool that aims to be simpler and easier to use
 brew "go-task", link: false
-# Google Suite CLI
-brew "gogcli"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
 # Slightly more awesome Standard Unix Password Manager for Teams
 brew "gopass"
 # Kubernetes package manager
@@ -195,8 +193,8 @@ brew "terragrunt"
 brew "tfenv"
 # Parser generator tool
 brew "tree-sitter-cli"
-# Validating, recursive, caching DNS resolver
-brew "unbound"
+# Language for application scale JavaScript development
+brew "typescript"
 # Extraction utility for .zip compressed archives
 brew "unzip"
 # Extremely fast Python package installer and resolver, written in Rust
@@ -234,13 +232,17 @@ brew "gromgit/brewtils/taproom", trusted: true
 brew "lusingander/tap/stu"
 # Interactive TUI pipeline editor built for rapid iteration
 brew "tlipinski/tap/rura"
+# Password manager that keeps all passwords secure behind one password
+cask "1password"
 # Command-line interface for 1Password
 cask "1password-cli"
 # View, print, and comment on PDF documents
 cask "adobe-acrobat-reader"
 # Memory training application
 cask "anki"
-# Not so boring notch That Rocks 🎸🎶 
+# Desktop password and login vault
+cask "bitwarden"
+# Not so boring notch That Rocks 🎸🎶
 cask "theboredteam/boring-notch/boring-notch"
 # Web browser focusing on privacy
 cask "brave-browser"
@@ -278,6 +280,8 @@ cask "iina"
 cask "obsidian"
 # Replacement for Docker Desktop
 cask "orbstack"
+# Control your tools with a few keystrokes
+cask "raycast"
 # Text translation application
 cask "reverso"
 # Team communication and collaboration software
@@ -349,7 +353,6 @@ vscode "tamasfe.even-better-toml"
 vscode "usernamehw.errorlens"
 vscode "vscodevim.vim"
 vscode "yzhang.markdown-all-in-one"
-cargo "basalt-tui"
 uv "ansible-core"
 uv "ipython"
 uv "nano-pdf"
