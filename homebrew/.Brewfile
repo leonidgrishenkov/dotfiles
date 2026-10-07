@@ -91,8 +91,6 @@ brew "gnupg"
 brew "go"
 # Task is a task runner/build tool that aims to be simpler and easier to use
 brew "go-task", link: false
-# Validating, recursive, caching DNS resolver
-brew "unbound"
 # Slightly more awesome Standard Unix Password Manager for Teams
 brew "gopass"
 # Kubernetes package manager
@@ -195,6 +193,8 @@ brew "tfenv"
 brew "tree-sitter-cli"
 # Language for application scale JavaScript development
 brew "typescript"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
 # Extraction utility for .zip compressed archives
 brew "unzip"
 # Extremely fast Python package installer and resolver, written in Rust
@@ -242,12 +242,10 @@ cask "adobe-acrobat-reader"
 cask "anki"
 # Desktop password and login vault
 cask "bitwarden"
-# Not so boring notch That Rocks 🎸🎶
+# Not so boring notch That Rocks
 cask "theboredteam/boring-notch/boring-notch"
 # Web browser focusing on privacy
 cask "brave-browser"
-# OpenAI's official ChatGPT desktop app
-cask "chatgpt"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
@@ -268,6 +266,8 @@ cask "font-fira-code-nerd-font"
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-meslo-lg-nerd-font"
+# Set of tools to manage resources and applications hosted on Google Cloud
+cask "gcloud-cli"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # A fast, cross-platform build tool inspired by Make, designed for modern workflows.
@@ -290,8 +290,6 @@ cask "slack"
 cask "visual-studio-code"
 # CLI for Yandex Cloud
 cask "yandex-cloud-cli"
-# Multiplayer code editor
-cask "zed"
 # Gecko based web browser
 cask "zen"
 # Video communication and virtual meeting platform
