@@ -79,6 +79,8 @@ brew "gh"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Open-source GitLab command-line tool
+brew "glab"
 # Render markdown on the CLI
 brew "glow"
 # GNU implementation of the famous stream editor
