@@ -5,6 +5,7 @@ tap "domcyrus/rustnet", trusted: true
 tap "go-task/tap", trusted: true
 tap "gromgit/brewtils", trusted: true
 tap "lusingander/tap", trusted: true
+tap "steipete/tap"
 tap "theboredteam/boring-notch", "https://github.com/TheBoredTeam/homebrew-boring-notch", trusted: true
 tap "tlipinski/tap", trusted: true
 # Static checker for GitHub Actions workflow files
@@ -232,6 +233,8 @@ brew "domcyrus/rustnet/rustnet"
 brew "gromgit/brewtils/taproom", trusted: true
 # TUI application for AWS S3 written in Rust using ratatui
 brew "lusingander/tap/stu"
+# Fast CLI for Apple Reminders
+brew "steipete/tap/remindctl", trusted: true
 # Interactive TUI pipeline editor built for rapid iteration
 brew "tlipinski/tap/rura"
 # Password manager that keeps all passwords secure behind one password
@@ -288,6 +291,8 @@ cask "raycast"
 cask "reverso"
 # Team communication and collaboration software
 cask "slack"
+# Dictation tool including LLM reformatting
+cask "superwhisper"
 # Open-source code editor
 cask "visual-studio-code"
 # CLI for Yandex Cloud
