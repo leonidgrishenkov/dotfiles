@@ -24,7 +24,26 @@
     "type": "command",
     "command": "starship statusline claude-code"
   },
+  "enabledPlugins": {
+    "superwhisper@superwhisper": false
+  },
+  "extraKnownMarketplaces": {
+    "superwhisper": {
+      "source": {
+        "source": "github",
+        "repo": "superultrainc/superwhisper-claude-code"
+      }
+    }
+  },
   "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    },
+    "claude-opus-5": {
+      "effortLevel": "medium"
+    }
+  },
   "tui": "fullscreen",
   "editorMode": "vim",
   "preferredNotifChannel": "ghostty",
