@@ -8,6 +8,10 @@ abbr --add g git
 abbr --add v $VISUAL
 abbr --add gp gopass
 abbr --add l lazygit
+abbr --add c claude
+abbr --add ch claude --model haiku
+abbr --add cs claude --model sonnet
+abbr --add cf claude --model fable
 
 # Include hidden/ignore files by default
 abbr --add rg "rg -."
