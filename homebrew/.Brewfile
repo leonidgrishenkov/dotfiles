@@ -1,6 +1,7 @@
 tap "amir20/dtop", trusted: true
 tap "birdayz/kaf", trusted: true
 tap "bro3886/tap", "https://github.com/BRO3886/homebrew-tap", trusted: true
+tap "docker/tap", trusted: true
 tap "domcyrus/rustnet", trusted: true
 tap "go-task/tap", trusted: true
 tap "gromgit/brewtils", trusted: true
@@ -295,8 +296,6 @@ cask "slack"
 cask "superwhisper"
 # Open-source code editor
 cask "visual-studio-code"
-# CLI for Yandex Cloud
-cask "yandex-cloud-cli"
 # Gecko based web browser
 cask "zen"
 # Video communication and virtual meeting platform
