@@ -15,6 +15,15 @@ fzf --fish | source
 # Shift+Tab: fuzzy completion with file/dir preview
 set -gx FZF_COMPLETION_OPTS "--preview '_fzf_preview {}'"
 
+# Shift+Tab after these commands: recursive file search (same as Ctrl+T)
+# instead of fish's one-level path completion.
+# fzf calls _fzf_complete_<cmd> when it exists.
+for cmd in nvim vim bat
+    function _fzf_complete_$cmd
+        fzf-file-widget
+    end
+end
+
 # Catppuccin frappe theme (transparent background)
 set -gx FZF_DEFAULT_OPTS "\
 --color=fg:#C6D0F5,header:#E78284,info:#CA9EE6,pointer:#F2D5CF \
@@ -25,9 +34,9 @@ set -gx FZF_DEFAULT_OPTS "\
 --border=rounded"
 
 # Ctrl+T: search files under last token as root dir
-set -gx FZF_CTRL_T_COMMAND "fd --type f -H -E .git \$dir"
+set -gx FZF_CTRL_T_COMMAND "fd --type f -H -E .git . \$dir"
 set -gx FZF_CTRL_T_OPTS "--preview '_fzf_preview {}'"
 
 # Alt+C: cd into directory
-set -gx FZF_ALT_C_COMMAND "fd --type d -H -E .git \$dir"
+set -gx FZF_ALT_C_COMMAND "fd --type d -H -E .git . \$dir"
 set -gx FZF_ALT_C_OPTS "--preview '_fzf_preview {}'"
