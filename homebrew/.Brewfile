@@ -129,6 +129,8 @@ brew "luarocks"
 brew "make"
 # Mac App Store command-line interface
 brew "mas"
+# Polyglot runtime manager (asdf rust clone)
+brew "mise"
 # Simple tool to make locally trusted development certificates
 brew "mkcert"
 # Deep clean and optimize your Mac
@@ -250,8 +252,6 @@ cask "anki"
 cask "bitwarden"
 # Not so boring notch That Rocks
 cask "theboredteam/boring-notch/boring-notch"
-# Web browser focusing on privacy
-cask "brave-browser"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
@@ -303,6 +303,8 @@ cask "zoom"
 mas "AmneziaWG", id: 6478942365
 mas "Bitwarden", id: 1352778147
 mas "DuckDuckGo", id: 663592361
+mas "Endel", id: 1346247457
+mas "Flow", id: 1423210932
 mas "Gestimer", id: 6447125648
 mas "Happ", id: 6746188973
 mas "Hidden Bar", id: 1452453066
@@ -312,7 +314,6 @@ mas "Microsoft Outlook", id: 985367838
 mas "Microsoft PowerPoint", id: 462062816
 mas "Microsoft Word", id: 462054704
 mas "Numbers", id: 409203825
-mas "Outline", id: 1356178125
 mas "Pages", id: 409201541
 mas "Telegram", id: 747648890
 mas "Toggl Track", id: 1291898086
@@ -357,8 +358,4 @@ vscode "tamasfe.even-better-toml"
 vscode "usernamehw.errorlens"
 vscode "vscodevim.vim"
 vscode "yzhang.markdown-all-in-one"
-uv "ansible-core"
-uv "ipython"
-uv "nano-pdf"
-uv "pygments"
 npm "@earendil-works/pi-coding-agent"
