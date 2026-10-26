@@ -5,6 +5,7 @@ tap "docker/tap", trusted: true
 tap "domcyrus/rustnet", trusted: true
 tap "go-task/tap", trusted: true
 tap "gromgit/brewtils", trusted: true
+tap "jnsahaj/lumen"
 tap "lusingander/tap", trusted: true
 tap "stablyai/orca"
 tap "steipete/tap"
@@ -235,6 +236,8 @@ brew "bro3886/tap/ical"
 brew "domcyrus/rustnet/rustnet"
 # Interactive TUI for Homebrew
 brew "gromgit/brewtils/taproom", trusted: true
+# lumen is a command-line tool that can show pretty diff, generate commit messages with AI, summarise diffs / commits, and more without requiring an API key.
+brew "jnsahaj/lumen/lumen", trusted: true
 # TUI application for AWS S3 written in Rust using ratatui
 brew "lusingander/tap/stu"
 # Fast CLI for Apple Reminders
