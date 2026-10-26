@@ -6,6 +6,7 @@ tap "domcyrus/rustnet", trusted: true
 tap "go-task/tap", trusted: true
 tap "gromgit/brewtils", trusted: true
 tap "lusingander/tap", trusted: true
+tap "stablyai/orca"
 tap "steipete/tap"
 tap "theboredteam/boring-notch", "https://github.com/TheBoredTeam/homebrew-boring-notch", trusted: true
 tap "tlipinski/tap", trusted: true
@@ -260,6 +261,8 @@ cask "claude-code"
 cask "cleanshot"
 # Column-oriented database management system
 cask "clickhouse"
+# Ghostty-based terminal with vertical tabs and notifications for AI coding agents
+cask "cmux"
 # Window peeking utility app
 cask "dockdoor"
 # A terminal-based Docker container monitoring tool
@@ -286,6 +289,8 @@ cask "iina"
 cask "obsidian"
 # Replacement for Docker Desktop
 cask "orbstack"
+# IDE for orchestrating AI coding agents across terminals and worktrees
+cask "stablyai/orca/orca", trusted: true
 # Control your tools with a few keystrokes
 cask "raycast"
 # Text translation application
