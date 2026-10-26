@@ -19,6 +19,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "opus",
   "hooks": {
     "PostToolUse": [
       {
@@ -45,7 +46,6 @@
       }
     ]
   },
-  "model": "opus",
   "statusLine": {
     "type": "command",
     "command": "starship statusline claude-code"
@@ -74,6 +74,7 @@
     }
   },
   "tui": "fullscreen",
+  "theme": "dark",
   "editorMode": "vim",
   "preferredNotifChannel": "ghostty",
   "remoteControlAtStartup": false,
