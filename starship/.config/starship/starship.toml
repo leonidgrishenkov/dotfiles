@@ -372,7 +372,7 @@ style = 'fg:purple'
 symbol = ""
 
 [time]
-disabled = false
+disabled = true
 style = 'fg:blue'
 
 [jobs]
