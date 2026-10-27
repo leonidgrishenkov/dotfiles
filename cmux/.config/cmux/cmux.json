@@ -475,4 +475,67 @@
   //       ]
   //     }
   //   },
+
+  "actions": {
+    "devcr": {
+      "type": "command",
+      "title": "devcr Shell",
+      "subtitle": "Open a shell in the devcr container",
+      "command": "docker exec -it -e TERM_PROGRAM=ghostty devcr fish",
+      "icon": { "type": "symbol", "name": "shippingbox" }
+    },
+    "claude-plan": {
+      "type": "agent",
+      "agent": "claude",
+      "args": "--permission-mode plan",
+      "title": "Claude (Plan)",
+      "subtitle": "Start Claude Code in plan mode"
+    }
+  },
+
+  "ui": {
+    "surfaceTabBar": {
+      // Replaces the default buttons, so the built-in ones are listed explicitly
+      "buttons": [
+        "cmux.newTerminal",
+        "cmux.newBrowser",
+        "cmux.splitRight",
+        "cmux.splitDown",
+        { "action": "devcr", "title": "devcr" }
+      ]
+    }
+  },
+  "shortcuts": {
+    "bindings": {
+      "toggleFullScreen": {
+        "first": {
+          "command": false,
+          "control": false,
+          "key": "",
+          "option": false,
+          "shift": false
+        }
+      },
+      "commandPalette": {
+        "first": {
+          "command": true,
+          "control": false,
+          "key": "p",
+          "keyCode": 35,
+          "option": false,
+          "shift": false
+        }
+      },
+      "goToWorkspace": {
+        "first": {
+          "command": true,
+          "control": false,
+          "key": "m",
+          "keyCode": 46,
+          "option": false,
+          "shift": false
+        }
+      }
+    }
+  }
 }
