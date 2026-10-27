@@ -20,11 +20,11 @@ $docker_context\
 $direnv\
 $terraform\
 $jobs\
+$status\
 $line_break\
 $character"""
 
 right_format = """
-$status\
 $cmd_duration\
 $time
 """
