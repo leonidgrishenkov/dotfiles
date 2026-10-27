@@ -360,6 +360,7 @@ loaded_msg = " loaded"
 unloaded_msg = "󰉐 not-loaded"
 
 [cmd_duration]
+disabled = true
 format = 'took [$duration]($style) '
 style = "rg:rosewater"
 # Shortest duration to show time for (in milliseconds).
