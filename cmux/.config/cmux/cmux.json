@@ -496,6 +496,12 @@
       "feed": { "enabled": true }
     }
   },
+  "remoteTmux": {
+    "beta": {
+      // Mirror remote tmux sessions as cmux workspaces, tabs and splits (`cmux ssh-tmux <host>`)
+      "enabled": true
+    }
+  },
 
   "actions": {
     "devcr": {
