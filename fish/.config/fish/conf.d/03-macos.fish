@@ -41,16 +41,6 @@ end
 # Find docker-related executables installed by Docker Desktop.
 fish_add_path /Applications/Docker.app/Contents/Resources/bin
 
-abbr -a yccl "yc compute instance list"
-
-# YC completions are quite expensive to load on each shell startup,
-# so load them manually when necessary.
-function enable-yc
-    echo "Loading yc completions"
-    yc completion fish | source
-    echo "Done. yc completions loaded."
-end
-
 # === Obsidian ===
 # To be able to use obsidian CLI
 fish_add_path /Applications/Obsidian.app/Contents/MacOS
