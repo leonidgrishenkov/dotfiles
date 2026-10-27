@@ -486,6 +486,17 @@
     "openPortLinksInCmuxBrowser": false
   },
 
+  "automation": {
+    // Name workspaces after the agent conversation (runs `claude -p` / `pi --print`)
+    "workspaceAutoNaming": true
+  },
+  "rightSidebar": {
+    "beta": {
+      // Answer agent permission prompts, plans and questions from the right sidebar (ctrl+4)
+      "feed": { "enabled": true }
+    }
+  },
+
   "actions": {
     "devcr": {
       "type": "command",
