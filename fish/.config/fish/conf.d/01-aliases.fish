@@ -3,6 +3,7 @@
 # === Shortcuts (expand inline via abbr) ===
 abbr --add k kubectl
 abbr --add d docker
+abbr --add dv docker exec -it -e TERM_PROGRAM=ghostty devcr fish
 abbr --add t terragrunt
 abbr --add g git
 abbr --add v $VISUAL
