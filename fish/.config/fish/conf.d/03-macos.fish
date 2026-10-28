@@ -17,6 +17,14 @@ set -gx HOMEBREW_NO_AUTO_UPDATE 1
 set -gx HOMEBREW_NO_ANALYTICS 1
 set -gx HOMEBREW_BUNDLE_FILE "$DOTFILES_DIR/homebrew/.Brewfile"
 
+# === Mise ===
+# Use mise only for [env]: ignore [tools] in every mise.toml, so it never
+# installs, activates or warns about tool versions. Tools come from Homebrew.
+# Homebrew's vendor_conf.d/mise-activate.fish runs `mise activate` after this file.
+set -gx MISE_ENABLE_TOOLS ""
+# Keep ~/.local/share/mise/shims off PATH.
+set -gx MISE_ACTIVATE_SHIMS 0
+
 # === Terminal title ===
 # Zellij reads the terminal title and uses it for pane names.
 # fish calls fish_title automatically: $argv[1] is the running command
