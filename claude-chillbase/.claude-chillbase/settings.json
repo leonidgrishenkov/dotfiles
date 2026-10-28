@@ -46,6 +46,10 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "starship statusline claude-code"
+  },
   "effortLevel": "high",
   "modelSettings": {
     "claude-opus-5-5": {
