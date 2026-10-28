@@ -538,5 +538,8 @@
       "goToWorkspace": "cmd+m",
       "toggleFullScreen": ""
     }
+  },
+  "sleepyMode": {
+    "showClock": false
   }
 }
