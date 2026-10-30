@@ -48,70 +48,70 @@
   //     "newWorkspacePlacement" : "afterCurrent"
   //   },
 
-  //   "terminal" : {
-  //     "rendererRealization" : {
-  //       "maxWarmRenderers" : 1,
-  //       "enabled" : true,
-  //       "idleSeconds" : 5
-  //     },
-  //     "copyOnSelect" : false,
-  //     "textBoxMaxLines" : 10,
-  //     "scrollSpeed" : 1,
-  //     "sessionContentMaxWidth" : false,
-  //     "autoResumeAgentSessions" : true,
-  //     "textBoxDefaultSubmitAction" : "text-entry",
-  //     "resumeCommands" : [
-  // 
-  //     ],
-  //     "focusTextBoxOnNewTerminals" : false,
-  //     "agentHibernation" : {
-  //       "maxLiveTerminals" : 12,
-  //       "enabled" : false,
-  //       "idleSeconds" : 5
-  //     },
-  //     "textBoxSubmitActions" : [
-  //       {
-  //         "id" : "claude",
-  //         "assetName" : "AgentIcons\/Claude",
-  //         "systemImage" : "sparkle",
-  //         "kind" : "commandTemplate",
-  //         "commandTemplate" : "claude --dangerously-skip-permissions -- {{prompt}}",
-  //         "title" : "Claude Dangerous",
-  //         "backgroundColorHex" : "#F6D5C8"
-  //       },
-  //       {
-  //         "title" : "Codex --yolo",
-  //         "id" : "codex",
-  //         "systemImage" : "sparkles",
-  //         "commandTemplate" : "codex --yolo -- {{prompt}}",
-  //         "assetName" : "AgentIcons\/Codex",
-  //         "backgroundColorHex" : "#8FDBFF",
-  //         "kind" : "commandTemplate"
-  //       },
-  //       {
-  //         "assetName" : "AgentIcons\/OpenCode",
-  //         "kind" : "commandTemplate",
-  //         "systemImage" : "curlybraces",
-  //         "id" : "opencode",
-  //         "backgroundColorHex" : "#B5E48C",
-  //         "commandTemplate" : "opencode --prompt {{prompt}}",
-  //         "title" : "OpenCode"
-  //       },
-  //       {
-  //         "backgroundColorHex" : "#D0B3FF",
-  //         "title" : "Pi",
-  //         "id" : "pi",
-  //         "systemImage" : "brain.head.profile",
-  //         "assetName" : "AgentIcons\/Pi",
-  //         "commandTemplate" : "pi -- {{prompt}}",
-  //         "kind" : "commandTemplate"
-  //       }
-  //     ],
-  //     "adaptiveDefaultTheme" : true,
-  //     "showScrollBar" : true,
-  //     "showTextBoxOnNewTerminals" : false,
-  //     "sessionContentAlignment" : "center"
-  //   },
+  "terminal": {
+    //     "rendererRealization" : {
+    //       "maxWarmRenderers" : 1,
+    //       "enabled" : true,
+    //       "idleSeconds" : 5
+    //     },
+    //     "copyOnSelect" : false,
+    //     "textBoxMaxLines" : 10,
+    //     "scrollSpeed" : 1,
+    //     "sessionContentMaxWidth" : false,
+    //     "autoResumeAgentSessions" : true,
+    //     "textBoxDefaultSubmitAction" : "text-entry",
+    //     "resumeCommands" : [
+    //
+    //     ],
+    "focusTextBoxOnNewTerminals": false,
+    "agentHibernation": {
+      "maxLiveTerminals": 12,
+      "enabled": true,
+      "idleSeconds": 300
+    }
+    //     "textBoxSubmitActions" : [
+    //       {
+    //         "id" : "claude",
+    //         "assetName" : "AgentIcons\/Claude",
+    //         "systemImage" : "sparkle",
+    //         "kind" : "commandTemplate",
+    //         "commandTemplate" : "claude --dangerously-skip-permissions -- {{prompt}}",
+    //         "title" : "Claude Dangerous",
+    //         "backgroundColorHex" : "#F6D5C8"
+    //       },
+    //       {
+    //         "title" : "Codex --yolo",
+    //         "id" : "codex",
+    //         "systemImage" : "sparkles",
+    //         "commandTemplate" : "codex --yolo -- {{prompt}}",
+    //         "assetName" : "AgentIcons\/Codex",
+    //         "backgroundColorHex" : "#8FDBFF",
+    //         "kind" : "commandTemplate"
+    //       },
+    //       {
+    //         "assetName" : "AgentIcons\/OpenCode",
+    //         "kind" : "commandTemplate",
+    //         "systemImage" : "curlybraces",
+    //         "id" : "opencode",
+    //         "backgroundColorHex" : "#B5E48C",
+    //         "commandTemplate" : "opencode --prompt {{prompt}}",
+    //         "title" : "OpenCode"
+    //       },
+    //       {
+    //         "backgroundColorHex" : "#D0B3FF",
+    //         "title" : "Pi",
+    //         "id" : "pi",
+    //         "systemImage" : "brain.head.profile",
+    //         "assetName" : "AgentIcons\/Pi",
+    //         "commandTemplate" : "pi -- {{prompt}}",
+    //         "kind" : "commandTemplate"
+    //       }
+    //     ],
+    //     "adaptiveDefaultTheme" : true,
+    //     "showScrollBar" : true,
+    //     "showTextBoxOnNewTerminals" : false,
+    //     "sessionContentAlignment" : "center"
+  },
 
   //   "notifications" : {
   //     "showInMenuBar" : true,
@@ -121,11 +121,11 @@
   //     "dockBadge" : true,
   //     "paneFlash" : true,
   //     "soundOverrides" : {
-  // 
+  //
   //     },
   //     "paneFlashOnTyping" : true,
   //     "hooks" : [
-  // 
+  //
   //     ],
   //     "paneFlashColor" : null,
   //     "paneFlashThemeColor" : false,
@@ -168,7 +168,7 @@
   //     "showNotificationMessage" : true,
   //     "showAgentUsage" : false,
   //     "compactStatusIcons" : {
-  // 
+  //
   //     },
   //     "showBranchDirectory" : true,
   //     "pathLastSegmentOnly" : false,
@@ -243,13 +243,13 @@
   //     "interceptTerminalOpenCommandInCmuxBrowser" : true,
   //     "hiddenWebViewMemoryBudgetMB" : 2048,
   //     "hostsToOpenInEmbeddedBrowser" : [
-  // 
+  //
   //     ],
   //     "reactGrabVersion" : "0.1.29",
   //     "defaultSearchEngine" : "google",
   //     "customSearchEngineURLTemplate" : "https:\/\/www.google.com\/search?q={query}",
   //     "urlsToAlwaysOpenExternally" : [
-  // 
+  //
   //     ],
   //     "autoRestoreUnloadedPages" : true,
   //     "openTerminalLinksInCmuxBrowser" : true,
@@ -487,8 +487,8 @@
   },
 
   "automation": {
-    // Name workspaces after the agent conversation (runs `claude -p` / `pi --print`)
-    "workspaceAutoNaming": true
+    // Do not rename workspaces and tabs after the agent conversation
+    "workspaceAutoNaming": false
   },
   "rightSidebar": {
     "beta": {
@@ -540,6 +540,7 @@
     }
   },
   "sleepyMode": {
-    "showClock": false
+    "showClock": false,
+    "glow": "cmux"
   }
 }
