@@ -76,3 +76,7 @@ end
 op completion fish | source
 
 alias tldr="tldr --config-path=$HOME/.config/tealdeer/config.toml"
+
+# === Claude ===
+# Set a particular shell for Claude
+set -Ux CLAUDE_CODE_SHELL /opt/homebrew/bin/bash
