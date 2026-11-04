@@ -12,6 +12,7 @@ abbr --add c claude
 abbr --add ch claude --model haiku
 abbr --add cs claude --model sonnet
 abbr --add cf claude --model fable
+abbr --add cr claude --resume
 
 # === Git ===
 abbr --add g git
