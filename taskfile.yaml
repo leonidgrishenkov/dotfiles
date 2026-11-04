@@ -40,7 +40,7 @@ tasks:
     preconditions:
       - sh: command -v brew >/dev/null
         msg: homebrew is not installed
-    cmd: brew bundle dump --force --file {{.BREWFILE}}
+    cmd: brew bundle dump --force --no-uv --file {{.BREWFILE}}
 
   brew:install:
     desc: Install everything listed in the Brewfile
