@@ -7,6 +7,7 @@ tap "go-task/tap", trusted: true
 tap "gromgit/brewtils", trusted: true
 tap "jnsahaj/lumen"
 tap "lusingander/tap", trusted: true
+tap "nvidia/openshell"
 tap "stablyai/orca"
 tap "steipete/tap"
 tap "theboredteam/boring-notch", "https://github.com/TheBoredTeam/homebrew-boring-notch", trusted: true
@@ -240,6 +241,8 @@ brew "gromgit/brewtils/taproom", trusted: true
 brew "jnsahaj/lumen/lumen", trusted: true
 # TUI application for AWS S3 written in Rust using ratatui
 brew "lusingander/tap/stu"
+# Safe, private runtime for autonomous AI agents
+brew "nvidia/openshell/openshell", trusted: true
 # Fast CLI for Apple Reminders
 brew "steipete/tap/remindctl", trusted: true
 # Interactive TUI pipeline editor built for rapid iteration
@@ -286,6 +289,8 @@ cask "ghostty"
 cask "go-task/tap/go-task", trusted: true
 # Speech to text application
 cask "handy"
+# Chromium-based web browser
+cask "helium-browser"
 # Free and open-source media player
 cask "iina"
 # Knowledge base that works on top of a local folder of plain text Markdown files
@@ -298,10 +303,14 @@ cask "stablyai/orca/orca", trusted: true
 cask "raycast"
 # Text translation application
 cask "reverso"
+# Build, run, and govern agents across the software development lifecycle
+cask "docker/tap/sbx", trusted: true
 # Team communication and collaboration software
 cask "slack"
 # Dictation tool including LLM reformatting
 cask "superwhisper"
+# Agentic development environment
+cask "thinkrail"
 # Open-source code editor
 cask "visual-studio-code"
 # Gecko based web browser
@@ -309,7 +318,6 @@ cask "zen"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "AmneziaWG", id: 6478942365
-mas "Bitwarden", id: 1352778147
 mas "DuckDuckGo", id: 663592361
 mas "Endel", id: 1346247457
 mas "Flow", id: 1423210932
