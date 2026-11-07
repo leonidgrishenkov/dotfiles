@@ -7,7 +7,6 @@ tap "go-task/tap", trusted: true
 tap "gromgit/brewtils", trusted: true
 tap "jnsahaj/lumen"
 tap "lusingander/tap", trusted: true
-tap "nvidia/openshell"
 tap "stablyai/orca"
 tap "steipete/tap"
 tap "theboredteam/boring-notch", "https://github.com/TheBoredTeam/homebrew-boring-notch", trusted: true
@@ -241,8 +240,6 @@ brew "gromgit/brewtils/taproom", trusted: true
 brew "jnsahaj/lumen/lumen", trusted: true
 # TUI application for AWS S3 written in Rust using ratatui
 brew "lusingander/tap/stu"
-# Safe, private runtime for autonomous AI agents
-brew "nvidia/openshell/openshell", trusted: true
 # Fast CLI for Apple Reminders
 brew "steipete/tap/remindctl", trusted: true
 # Interactive TUI pipeline editor built for rapid iteration
