@@ -84,9 +84,12 @@
       "effortLevel": "xhigh"
     }
   },
+  "awaySummaryEnabled": false,
   "tui": "fullscreen",
+  "timeFormat": "12-hour",
   "theme": "dark",
   "editorMode": "vim",
+  "verbose": false,
   "preferredNotifChannel": "ghostty",
   "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": true,
