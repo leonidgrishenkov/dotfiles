@@ -68,5 +68,8 @@
   "preferredNotifChannel": "ghostty",
   "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "timeFormat": "12-hour",
+  "awaySummaryEnabled": false,
+  "verbose": false
 }
