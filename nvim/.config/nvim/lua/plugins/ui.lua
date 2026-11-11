@@ -48,6 +48,21 @@ return {
                     explorer = {
                         hidden = true, -- show dotfiles in explorer
                         ignored = true, -- show gitignore files in explorer
+                        actions = {
+                            -- Same as the built-in `explorer_yank` (`y`), but yanks `~/…` instead of `/Users/<me>/…`
+                            explorer_yank = function(picker)
+                                local files = {} ---@type string[]
+                                if vim.fn.mode():find("^[vV]") then
+                                    picker.list:select()
+                                end
+                                for _, item in ipairs(picker:selected({ fallback = true })) do
+                                    table.insert(files, vim.fn.fnamemodify(Snacks.picker.util.path(item), ":~"))
+                                end
+                                picker.list:set_selected() -- clear selection
+                                vim.fn.setreg(vim.v.register or "+", table.concat(files, "\n"), "l")
+                                Snacks.notify.info("Yanked " .. #files .. " files")
+                            end,
+                        },
                     },
                     files = {
                         hidden = true, -- show dotfiles in finder
