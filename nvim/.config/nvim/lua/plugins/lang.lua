@@ -53,5 +53,23 @@ return {
             return opts
         end,
     },
-    { "MeanderingProgrammer/render-markdown.nvim", enabled = false },
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        enabled = true,
+        ft = { "markdown" },
+        opts = {
+            heading = {
+                -- Remove background highlight from headings, keep only colored text
+                backgrounds = {},
+            },
+            code = {
+                -- Remove background from code blocks
+                disable_background = true,
+                -- Draw no colored bar around the language name above code blocks
+                highlight_border = false,
+                -- Leave inline code to treesitter: hidden backticks, colored text, no background
+                inline = false,
+            },
+        },
+    },
 }
