@@ -58,6 +58,10 @@ return {
         enabled = true,
         ft = { "markdown" },
         opts = {
+            sign = {
+                -- Don't show any signs in the signcolumn
+                enabled = false,
+            },
             heading = {
                 -- Remove background highlight from headings, keep only colored text
                 backgrounds = {},
