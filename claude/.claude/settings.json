@@ -93,5 +93,19 @@
   "preferredNotifChannel": "ghostty",
   "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "skillOverrides": {
+    "rex": "user-invocable-only",
+    "personal-anki": "user-invocable-only",
+    "personal-commit-push": "on",
+    "personal-macos-pim": "user-invocable-only",
+    "personal-obsidian-notes": "user-invocable-only",
+    "personal-pdf": "user-invocable-only",
+    "personal-python": "user-invocable-only",
+    "personal-uv-python": "user-invocable-only"
+  },
+  "deniedMcpServers": [
+    { "serverName": "claude.ai Firecrawl" },
+    { "serverName": "claude.ai Context7" }
+  ]
 }
