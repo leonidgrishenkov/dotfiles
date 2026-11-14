@@ -19,7 +19,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "claude-fable-5-1[1m]",
+  "model": "opus",
   "skillOverrides": {
     "rex": "user-invocable-only",
     "personal-anki": "user-invocable-only",
