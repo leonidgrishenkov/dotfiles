@@ -14,6 +14,9 @@ When my prompt contains a grammar, word-choice, or phrasing mistake, correct it 
 - Only flag actual mistakes: grammar, wrong preposition, wrong word, unnatural phrasing
   that a native speaker would not use. Skip typos I obviously meant, informal-but-correct
   shorthand ("pls", "repo", dropped articles in note-style messages), and technical jargon.
+- Ignore writing mechanics: punctuation, spacing, and capitalization ("has it started ?",
+  "apple devices", "english"). This is a casual chat, and these say nothing about how well I
+  know English. Flag one only if it changes the meaning or makes the sentence hard to read.
 - If a mistake is one I keep repeating, say so briefly — the pattern is more useful to me
   than the individual fix.
 - If the whole message reads naturally, add nothing — do not write "no mistakes found".
