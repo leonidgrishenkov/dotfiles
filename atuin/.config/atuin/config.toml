@@ -31,3 +31,7 @@ sync_address = "https://do-personal-ams3-1.tail372fc0.ts.net/atuin"
 
 [theme]
 name = "frappe/catppuccin-frappe-lavender"
+
+[daemon]
+enabled = true
+sync_frequency = 2400
