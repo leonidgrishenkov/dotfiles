@@ -3,13 +3,11 @@ name: lint
 
 on:
   pull_request:
-  push:
-    branches: [main]
 
 permissions: {}
 
 concurrency:
-  group: lint-${{ github.event.pull_request.number || github.ref }}
+  group: lint-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 # Tool versions come from mise.toml.
