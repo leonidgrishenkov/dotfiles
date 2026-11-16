@@ -1,6 +1,6 @@
 # vim: set filetype=gitconfig:
 [user]
-	signingkey = 0891E1E67C715BD933FC89D624D2E2133FF807DB
+	signingkey = 0891E1E67C715BD933FC89D624D2E2133FF807DB # gitleaks:allow (public key fingerprint)
 [commit]
 	gpgsign = true
 [tag]
