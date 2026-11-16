@@ -10,3 +10,5 @@
 [url "github-personal:leonidgrishenkov"]
     insteadOf = https://github.com/leonidgrishenkov
 
+[includeIf "onbranch:main"]
+    path = ~/.config/git/include/sign-main
