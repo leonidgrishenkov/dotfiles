@@ -3,10 +3,19 @@
 
 version: "3"
 
+includes:
+  gh:
+    taskfile: ./.github/taskfile.yaml
+
 vars:
   BREWFILE: "{{.ROOT_DIR}}/homebrew/.Brewfile"
 
 tasks:
+  default:
+    desc: List available tasks
+    silent: true
+    cmd: task --list
+
   stow:essentials:
     desc: Run stow with essential entities
     cmds:
