@@ -31,3 +31,19 @@ Config root: `nvim/.config/nvim/lua/`
 ## Rules
 
 Do not run `stow` or symlink-management commands. Edit the source files directly; the user manages syncing manually.
+
+## Git workflow
+
+Always make changes in a separate git worktree on a new branch, so the main checkout and `main` stay untouched.
+
+- Before the first file edit, create a new worktree on a new branch from `main`. Use the built-in worktree tool when
+  one is available; otherwise run `git worktree add <path> -b <branch>`.
+- Name the branch after the change in Conventional Commits style, `<type>/<short-slug>`: for example
+  `feat/atuin-daemon` or `fix/nvim-heading-indent`.
+- If the session is already in a worktree on a non-`main` branch for the same task, keep working there instead of
+  creating another one.
+- Never commit to `main` and never push to it — no `git push origin main`, no force-push, no pushing while `HEAD` is on
+  `main`. Push only the task branch.
+- Do not merge the branch or remove the worktree yourself. When you finish, tell the user the worktree path and the
+  branch name so they can review and merge.
+- Read-only tasks (answering questions, reviewing code, running read-only commands) do not need a worktree.
