@@ -65,6 +65,8 @@ return {
             heading = {
                 -- Remove background highlight from headings, keep only colored text
                 backgrounds = {},
+                -- Conceal '#'s and put the icon at the start of the line instead of padding it with spaces
+                position = "inline",
             },
             code = {
                 -- Remove background from code blocks
