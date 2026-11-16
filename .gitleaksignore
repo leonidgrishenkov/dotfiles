@@ -1,0 +1,7 @@
+# Findings in git history that existed when the gitleaks workflow was added.
+# Each line is a fingerprint (commit:file:rule:line), not the secret.
+# New findings fail CI; add a fingerprint here only after handling the leak.
+
+# False positives: shift+cmd+enter shortcuts in VS Code keybindings, not secrets.
+3fce000bded01754afac8823fc6ba340f519b91f:vscode/Library/Application Support/Code/User/keybindings.json:generic-api-key:158
+3fce000bded01754afac8823fc6ba340f519b91f:vscode/Library/Application Support/Code/User/keybindings.json:generic-api-key:517
