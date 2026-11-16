@@ -1,0 +1,31 @@
+---
+name: lint
+
+on:
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: lint-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+# Tool versions come from mise.toml.
+jobs:
+  gitleaks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # scan the whole history; known findings are in .gitleaksignore
+          persist-credentials: false
+
+      - uses: jdx/mise-action@08ae2a091c038e1e05ec6f5115dc5c69d5a2a6b8 # v5.1.2
+        with:
+          install_args: gitleaks
+
+      - name: Scan for secrets
+        run: gitleaks git . --redact --no-banner --verbose
