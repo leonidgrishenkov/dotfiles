@@ -34,3 +34,6 @@ homebrew/.config/homebrew/trust.json.lock
 
 # cmux settings write lock (appears if stow folds the whole dir)
 cmux/.config/cmux/*.cmux-write.lock
+
+# Claude Code worktrees for agent branches
+/.claude/worktrees/

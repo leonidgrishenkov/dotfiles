@@ -1,0 +1,79 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+vars:
+  RULESETS_DIR: "{{.TASKFILE_DIR}}/rulesets"
+  # gh fills in {owner} and {repo} from the current git remote
+  RULESETS_API: repos/{owner}/{repo}/rulesets
+
+tasks:
+  rulesets:apply:
+    desc: Create or update the GitHub rulesets defined in .github/rulesets
+    preconditions:
+      - sh: gh auth status >/dev/null 2>&1
+        msg: gh is not installed or not logged in
+      - sh: command -v jq >/dev/null
+        msg: jq is not installed
+    cmds:
+      - cmd: |
+          for file in {{.RULESETS_DIR}}/*.json; do
+            name=$(jq -r .name "$file")
+            id=$(gh api {{.RULESETS_API}} --jq ".[] | select(.name == \"$name\") | .id")
+            if [ -n "$id" ]; then
+              gh api --method PUT "{{.RULESETS_API}}/$id" --input "$file" --silent
+              echo "Updated ruleset '$name' ($id)"
+            else
+              gh api --method POST {{.RULESETS_API}} --input "$file" --silent
+              echo "Created ruleset '$name'"
+            fi
+          done
+
+  rulesets:delete:
+    desc: Delete the GitHub rulesets defined in .github/rulesets from the repository (destructive)
+    preconditions:
+      - sh: gh auth status >/dev/null 2>&1
+        msg: gh is not installed or not logged in
+      - sh: command -v jq >/dev/null
+        msg: jq is not installed
+    cmds:
+      - cmd: |
+          ids=""
+          for file in {{.RULESETS_DIR}}/*.json; do
+            name=$(jq -r .name "$file")
+            id=$(gh api {{.RULESETS_API}} --jq ".[] | select(.name == \"$name\") | .id")
+            if [ -n "$id" ]; then
+              ids="$ids $id"
+              echo "  $name ($id)"
+            fi
+          done
+          if [ -z "$ids" ]; then
+            echo "None of the local rulesets exist on GitHub, nothing to delete."
+            exit 0
+          fi
+          printf '\nDelete the rulesets listed above from GitHub? [y/N] '
+          read -r reply
+          case "$reply" in
+            [yY]*)
+              for id in $ids; do
+                gh api --method DELETE "{{.RULESETS_API}}/$id" --silent
+              done
+              echo "Deleted."
+              ;;
+            *) echo "Aborted, nothing deleted." ;;
+          esac
+
+  rulesets:list:
+    desc: List the rulesets configured on GitHub
+    preconditions:
+      - sh: gh auth status >/dev/null 2>&1
+        msg: gh is not installed or not logged in
+    cmd: gh ruleset list
+
+  rulesets:check:
+    desc: Show the rules that apply to a branch (the current one, or one passed after --)
+    preconditions:
+      - sh: gh auth status >/dev/null 2>&1
+        msg: gh is not installed or not logged in
+    cmd: gh ruleset check {{.CLI_ARGS}}
