@@ -5,3 +5,6 @@
 # False positives: shift+cmd+enter shortcuts in VS Code keybindings, not secrets.
 3fce000bded01754afac8823fc6ba340f519b91f:vscode/Library/Application Support/Code/User/keybindings.json:generic-api-key:158
 3fce000bded01754afac8823fc6ba340f519b91f:vscode/Library/Application Support/Code/User/keybindings.json:generic-api-key:517
+
+# False positive: GPG public key fingerprint in git signing config, not a secret.
+7d52dc9ef0eecb4c7fd41328f97385d8c84f12e9:git/.config/git/include/sign-main:generic-api-key:3
