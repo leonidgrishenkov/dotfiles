@@ -1,1 +1,0 @@
-../../../claude/.claude/hooks/atuin-record.sh
