@@ -34,7 +34,7 @@ name = "frappe/catppuccin-frappe-lavender"
 
 [daemon]
 enabled = true
-sync_frequency = 600 # seconds
+sync_frequency = 1200 # seconds
 
 [threads]
 capture = true
