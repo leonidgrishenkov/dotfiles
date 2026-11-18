@@ -13,6 +13,8 @@ tap "theboredteam/boring-notch", "https://github.com/TheBoredTeam/homebrew-borin
 tap "tlipinski/tap", trusted: true
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
+# Simple, modern, secure file encryption
+brew "age"
 # Mozilla CA certificate store
 brew "ca-certificates"
 # C parser in Python
@@ -26,7 +28,7 @@ brew "xz"
 # Automate deployment, configuration, and upgrading
 brew "ansible"
 # Improved shell history for zsh, bash, fish and nushell
-brew "atuin"
+brew "atuin", restart_service: :changed
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Terminal bandwidth utilization tool
@@ -266,6 +268,8 @@ cask "cleanshot"
 cask "clickhouse"
 # Ghostty-based terminal with vertical tabs and notifications for AI coding agents
 cask "cmux"
+# Voice and text chat software
+cask "discord"
 # Window peeking utility app
 cask "dockdoor"
 # A terminal-based Docker container monitoring tool
@@ -306,8 +310,6 @@ cask "docker/tap/sbx", trusted: true
 cask "slack"
 # Dictation tool including LLM reformatting
 cask "superwhisper"
-# Agentic development environment
-cask "thinkrail"
 # Open-source code editor
 cask "visual-studio-code"
 # Gecko based web browser
@@ -332,7 +334,6 @@ mas "Telegram", id: 747648890
 mas "Toggl Track", id: 1291898086
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
-vscode "aaron-bond.better-comments"
 vscode "arcticicestudio.nord-visual-studio-code"
 vscode "britesnow.vscode-toggle-quotes"
 vscode "catppuccin.catppuccin-vsc"
